@@ -3,6 +3,7 @@ import 'package:yakapp/login.dart';
 import 'splash.dart';
 import 'regist.dart';
 import 'bind_exchange.dart';
+import 'assets.dart';
 
 void main() {
   runApp(const MyApp());
@@ -34,7 +35,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 
   int currentIndex = 0;
-  List tabPages = [ LoginPage(), RegistPage(), BindExchangePage()];
+  List tabPages = [ AssetsPage(), RegistPage(), BindExchangePage()];
 
   void onTabSelected(index){
      setState(() {
@@ -48,6 +49,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body:
         this.tabPages[currentIndex],
+
         bottomNavigationBar:BottomNavigationBar(
 
           currentIndex: this.currentIndex,
