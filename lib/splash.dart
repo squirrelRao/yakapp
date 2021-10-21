@@ -16,14 +16,16 @@ class SplashState extends State<SplashPage> {
     return MaterialApp(
         theme: ThemeData.dark(),
         home: Scaffold(
-        body: ConstrainedBox(
-        constraints: BoxConstraints.expand(),
-        child: Stack(fit: StackFit.expand,
-        alignment: Alignment.center,
-        children: <Widget>[
-          Image.network(this.splash_image,fit:BoxFit.fill)
-    ])
-    ))
+          body: ConstrainedBox(
+            constraints: BoxConstraints.expand(),
+            child: Stack(fit: StackFit.expand,
+            alignment: Alignment.center,
+            children: <Widget>[
+              Image.network(this.splash_image,fit:BoxFit.fill)
+             ]
+            )
+          )
+        )
     );
   }
 }

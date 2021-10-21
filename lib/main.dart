@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:yakapp/login.dart';
 import 'splash.dart';
+import 'regist.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +19,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       //home: const MyHomePage(title: 'Yak'),
-      home:SplashPage()
+      home:RegistPage()
     );
   }
 }
