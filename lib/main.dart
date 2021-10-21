@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:yakapp/login.dart';
 import 'splash.dart';
 import 'regist.dart';
+import 'bind_exchange.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,63 +15,64 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Yak',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
       //home: const MyHomePage(title: 'Yak'),
-      home:RegistPage()
+      home:HomePage()
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
+class HomePage extends StatefulWidget {
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+class _HomePageState extends State<HomePage> {
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+  int currentIndex = 0;
+  List tabPages = [ LoginPage(), RegistPage(), BindExchangePage()];
+
+  void onTabSelected(index){
+     setState(() {
+       currentIndex = index;
+     });
   }
 
   @override
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar: AppBar(
+      body:
+        this.tabPages[currentIndex],
+        bottomNavigationBar:BottomNavigationBar(
 
-        title: Text(widget.title),
-      ),
-      body: Center(
-
-        child: Column(
-
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+          currentIndex: this.currentIndex,
+          iconSize: 30,
+          type: BottomNavigationBarType.fixed,
+          onTap: (index){
+            onTabSelected(index);
+          },
+          items:[
+            BottomNavigationBarItem(
+              icon:Icon(Icons.home),
+              label:"资产"
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+            BottomNavigationBarItem(
+              icon:Icon(Icons.category),
+              label:"交易"
             ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+            BottomNavigationBarItem(
+                icon:Icon(Icons.settings),
+                label:"我的"
+            ),
+          ]
+        ) ,
+
+
     );
   }
 }

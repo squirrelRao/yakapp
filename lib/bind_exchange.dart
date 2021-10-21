@@ -1,14 +1,14 @@
 
 import 'package:flutter/material.dart';
 
-class RegistPage extends StatefulWidget{
+class BindExchangePage extends StatefulWidget{
 
 
   @override
-  State createState()  => RegistState();
+  State createState()  => BindExchangeState();
 }
 
-class RegistState extends State<RegistPage>{
+class BindExchangeState extends State<BindExchangePage>{
 
   final _formKey = new GlobalKey<FormState>();
   var _userID;
@@ -24,9 +24,9 @@ class RegistState extends State<RegistPage>{
         style: TextStyle(fontSize: 20),
         decoration: new InputDecoration(
             border: InputBorder.none,
-            hintText: '请输入手机号',
+            hintText: '请输入API-KEY',
             icon: new Icon(
-              Icons.phone,
+              Icons.lock,
               color: Colors.teal,
             )),
         onSaved: (value) => _userID = value!.trim(),
@@ -44,7 +44,7 @@ class RegistState extends State<RegistPage>{
         style: TextStyle(fontSize: 20),
         decoration: new InputDecoration(
             border: InputBorder.none,
-            hintText: '请输入密码',
+            hintText: '请输入API-SECRET',
             icon: new Icon(
               Icons.lock,
               color: Colors.teal,
@@ -54,25 +54,6 @@ class RegistState extends State<RegistPage>{
     );
   }
 
-  Widget _showPasswordConfirmInput() {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(15.0, 10.0, 0.0, 0.0),
-      child: new TextFormField(
-        maxLines: 1,
-        obscureText: true,
-        autofocus: false,
-        style: TextStyle(fontSize: 20),
-        decoration: new InputDecoration(
-            border: InputBorder.none,
-            hintText: '请再次输入密码',
-            icon: new Icon(
-              Icons.lock,
-              color: Colors.teal,
-            )),
-        onSaved: (value) => _password = value!.trim(),
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +63,7 @@ class RegistState extends State<RegistPage>{
       home: Scaffold(
 
           appBar:AppBar(
-            title: const Text('注册账户'),
+            title: const Text('绑 定'),
           ),
 
           body: ListView(
@@ -105,8 +86,7 @@ class RegistState extends State<RegistPage>{
                     child: Column(
                       children: <Widget>[
                         _showPhoneInput(),
-                        _showPasswordInput(),
-                        _showPasswordConfirmInput()
+                        _showPasswordInput()
                       ]
                     )
                   )
@@ -119,7 +99,7 @@ class RegistState extends State<RegistPage>{
                 height: 70,
                 padding: const EdgeInsets.fromLTRB(35, 30, 35, 0),
                 child: TextButton(
-                  child: Text('注 册'),
+                  child: Text('绑 定'),
                   style: ButtonStyle(
                     textStyle: MaterialStateProperty.all(TextStyle(fontSize: 16)),
                     backgroundColor: MaterialStateProperty.all(Colors.blue),

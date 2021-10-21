@@ -1,6 +1,5 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 
 class LoginPage extends StatefulWidget{
 
@@ -63,9 +62,8 @@ class LoginState extends State<LoginPage>{
 
       home: Scaffold(
 
-          appBar:CupertinoNavigationBar(
-            backgroundColor: Colors.white,
-            middle: const Text('登录'),
+          appBar:AppBar(
+            title: const Text('登录'),
           ),
 
           body: ListView(
