@@ -6,6 +6,8 @@ import 'bind_exchange.dart';
 import 'assets.dart';
 import 'transaction.dart';
 import 'user_center.dart';
+import 'ror_setting.dart';
+import 'modify_passwd.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,7 +24,6 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      //home: const MyHomePage(title: 'Yak'),
       home:HomePage()
     );
   }
