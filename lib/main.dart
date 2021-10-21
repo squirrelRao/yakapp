@@ -4,6 +4,8 @@ import 'splash.dart';
 import 'regist.dart';
 import 'bind_exchange.dart';
 import 'assets.dart';
+import 'transaction.dart';
+import 'user_center.dart';
 
 void main() {
   runApp(const MyApp());
@@ -35,7 +37,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 
   int currentIndex = 0;
-  List tabPages = [ AssetsPage(), RegistPage(), BindExchangePage()];
+  List tabPages = [ AssetsPage(), TransactionsPage(), UserCenterPage()];
 
   void onTabSelected(index){
      setState(() {
