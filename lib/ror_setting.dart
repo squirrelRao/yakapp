@@ -59,6 +59,8 @@ class RorSettingState extends State<RorSettingPage>{
 
           appBar:AppBar(
             title: const Text('收益率目标设定'),
+            backgroundColor: Colors.teal
+
           ),
 
           body: ListView(

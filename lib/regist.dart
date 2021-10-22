@@ -85,6 +85,7 @@ class RegistState extends State<RegistPage>{
 
           appBar:AppBar(
             title: const Text('注册账户'),
+            backgroundColor: Colors.teal,
             leading: IconButton(
                 icon:Icon(Icons.arrow_back_ios,color:Colors.white),
               onPressed: (){
@@ -129,7 +130,7 @@ class RegistState extends State<RegistPage>{
                 height: 70,
                 padding: const EdgeInsets.fromLTRB(35, 30, 35, 0),
                 child: TextButton(
-                  child: Text('注 册'),
+                  child: Text('提交，进入下一步'),
                   style: ButtonStyle(
                     textStyle: MaterialStateProperty.all(TextStyle(fontSize: 16)),
                     backgroundColor: MaterialStateProperty.all(Colors.teal),

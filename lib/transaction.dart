@@ -21,6 +21,8 @@ class TransactionsState extends State<TransactionsPage>{
 
             appBar: AppBar(
               title: const Text('交易记录'),
+              backgroundColor: Colors.teal,
+
             ),
             body: ListView(
               scrollDirection: Axis.vertical,

@@ -1,5 +1,7 @@
 
 import 'package:flutter/material.dart';
+import 'package:yakapp/main.dart';
+import 'package:yakapp/user_center.dart';
 
 class ModifyPasswdPage extends StatefulWidget{
 
@@ -83,6 +85,13 @@ class ModifyPasswdState extends State<ModifyPasswdPage>{
 
           appBar:AppBar(
             title: const Text('修改密码'),
+              backgroundColor: Colors.teal,
+              leading: IconButton(
+                icon:Icon(Icons.arrow_back_ios,color:Colors.white),
+                onPressed: (){
+                  Navigator.pop(context);
+                },
+              )
           ),
 
           body: ListView(
@@ -122,7 +131,7 @@ class ModifyPasswdState extends State<ModifyPasswdPage>{
                   child: Text('提 交'),
                   style: ButtonStyle(
                     textStyle: MaterialStateProperty.all(TextStyle(fontSize: 16)),
-                    backgroundColor: MaterialStateProperty.all(Colors.blue),
+                    backgroundColor: MaterialStateProperty.all(Colors.teal),
                     foregroundColor: MaterialStateProperty.all(Colors.white)
                 ),
                   onPressed: () {

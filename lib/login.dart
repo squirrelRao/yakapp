@@ -1,5 +1,7 @@
 
 import 'package:flutter/material.dart';
+import 'package:yakapp/main.dart';
+import 'package:yakapp/user_center.dart';
 import 'regist.dart';
 
 class LoginPage extends StatefulWidget{
@@ -65,6 +67,8 @@ class LoginState extends State<LoginPage>{
 
           appBar:AppBar(
             title: const Text('登录账户'),
+            backgroundColor: Colors.teal
+
           ),
 
           body: ListView(
@@ -118,9 +122,12 @@ class LoginState extends State<LoginPage>{
                     backgroundColor: MaterialStateProperty.all(Colors.teal),
                     foregroundColor: MaterialStateProperty.all(Colors.white)
                 ),
-                  onPressed: () {
-                    //_onLogin();
-                  },
+                    onPressed: () {
+                      Navigator.pop(context);
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (content){return HomePage();})
+                      );
+                    }
                 ),
               )
 

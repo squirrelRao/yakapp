@@ -22,6 +22,7 @@ class AssetsState extends State<AssetsPage>{
 
             appBar: AppBar(
               title: const Text('资产'),
+              backgroundColor: Colors.teal,
             ),
             body: ListView(
               scrollDirection: Axis.vertical,

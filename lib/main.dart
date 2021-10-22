@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:yakapp/login.dart';
-import 'splash.dart';
-import 'regist.dart';
-import 'bind_exchange.dart';
 import 'assets.dart';
 import 'transaction.dart';
 import 'user_center.dart';
-import 'ror_setting.dart';
-import 'modify_passwd.dart';
+import 'common_util.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -19,8 +16,12 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+
+    LogUtil.init(bool.fromEnvironment("dart.vm.product"));
+
     return MaterialApp(
       title: 'Yak',
+
       theme: ThemeData(
         primarySwatch: Colors.teal,
       ),
@@ -41,6 +42,7 @@ class _HomePageState extends State<HomePage> {
   List tabPages = [ AssetsPage(), TransactionsPage(), UserCenterPage()];
 
   void onTabSelected(index){
+
      setState(() {
        currentIndex = index;
      });
@@ -48,6 +50,15 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+
+    dynamic args = ModalRoute.of(context)!.settings.arguments;
+    if( args != null && args["page_index"] != null){
+      this.currentIndex = args["page_index"];
+      LogUtil.i(args);
+      args = null;
+    }else{
+      LogUtil.i("no args to home page");
+    }
 
     return Scaffold(
       body:

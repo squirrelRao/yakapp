@@ -64,7 +64,8 @@ class BindExchangeState extends State<BindExchangePage>{
       home: Scaffold(
 
           appBar:AppBar(
-            title: const Text('绑 定'),
+            title: const Text('注册账户-绑定'),
+              backgroundColor: Colors.teal,
               leading: IconButton(
                 icon:Icon(Icons.arrow_back_ios,color:Colors.white),
                 onPressed: (){
@@ -109,10 +110,10 @@ class BindExchangeState extends State<BindExchangePage>{
                 height: 70,
                 padding: const EdgeInsets.fromLTRB(35, 30, 35, 0),
                 child: TextButton(
-                  child: Text('绑 定'),
+                  child: Text('提交绑定'),
                   style: ButtonStyle(
                     textStyle: MaterialStateProperty.all(TextStyle(fontSize: 16)),
-                    backgroundColor: MaterialStateProperty.all(Colors.blue),
+                    backgroundColor: MaterialStateProperty.all(Colors.teal),
                     foregroundColor: MaterialStateProperty.all(Colors.white)
                 ),
                   onPressed: () {

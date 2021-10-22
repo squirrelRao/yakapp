@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:yakapp/login.dart';
+import 'package:yakapp/modify_passwd.dart';
 
 class UserCenterPage extends StatefulWidget{
 
@@ -20,6 +22,7 @@ class UserCenterState extends State<UserCenterPage>{
 
             appBar: AppBar(
               title: const Text('个人中心'),
+              backgroundColor: Colors.teal,
             ),
             body: ListView(
               scrollDirection: Axis.vertical,
@@ -49,29 +52,46 @@ class UserCenterState extends State<UserCenterPage>{
                   leading: Icon(Icons.wallet_giftcard),
                   title: Text("交易所钱包"),
                   subtitle: Text("已绑定"),
-                  trailing: Icon(Icons.arrow_forward_ios_rounded),
-
+                  trailing: IconButton(
+                    icon:Icon(Icons.arrow_forward_ios_rounded),
+                    onPressed: (){}
+                    )
                 ),
                 ListTile(
 
                   leading: Icon(Icons.password_outlined),
                   title: Text("修改密码"),
-                  trailing: Icon(Icons.arrow_forward_ios_rounded),
-
+                  onTap: (){
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (content){return ModifyPasswdPage();}));
+                  },
+                  trailing: IconButton(
+                    icon:Icon(Icons.arrow_forward_ios_rounded),
+                      onPressed: () {
+                        Navigator.pop(context);
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (content){return ModifyPasswdPage();}));
+                      })
                 ),
                 ListTile(
                   leading: Icon(Icons.admin_panel_settings),
                   title: Text("通用设置"),
-                  trailing: Icon(Icons.arrow_forward_ios_rounded),
+                  trailing:IconButton(icon:Icon(Icons.arrow_forward_ios_rounded),
+                      onPressed: (){})
                 ),
                 ListTile(
                   leading: Icon(Icons.info_outline),
                   title: Text("关于"),
-                  trailing: Icon(Icons.arrow_forward_ios_rounded),
+                  trailing: IconButton(icon:Icon(Icons.arrow_forward_ios_rounded),
+                    onPressed: (){})
                 ),
                 ListTile(
                   title: Text("退出登录",style: TextStyle(color: Colors.red)),
-                )
+                    onTap: (){
+                        Navigator.pop(context);
+                        Navigator.push(context,MaterialPageRoute(builder: (content){return LoginPage();}));
+                      },
+                ),
               ]
             )
 
