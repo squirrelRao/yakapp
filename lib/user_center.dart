@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:yakapp/bind_exchange.dart';
 import 'package:yakapp/login.dart';
+import 'package:yakapp/modify_bind.dart';
 import 'package:yakapp/modify_passwd.dart';
 
 class UserCenterPage extends StatefulWidget{
@@ -52,9 +54,16 @@ class UserCenterState extends State<UserCenterPage>{
                   leading: Icon(Icons.wallet_giftcard),
                   title: Text("交易所钱包"),
                   subtitle: Text("已绑定"),
+                  onTap: (){
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (content){return ModifyBindPage();}));
+                  },
                   trailing: IconButton(
                     icon:Icon(Icons.arrow_forward_ios_rounded),
-                    onPressed: (){}
+                    onPressed: (){
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (content){return BindExchangePage();}));
+                    }
                     )
                 ),
                 ListTile(
@@ -68,7 +77,6 @@ class UserCenterState extends State<UserCenterPage>{
                   trailing: IconButton(
                     icon:Icon(Icons.arrow_forward_ios_rounded),
                       onPressed: () {
-                        Navigator.pop(context);
                         Navigator.push(context,
                             MaterialPageRoute(builder: (content){return ModifyPasswdPage();}));
                       })
@@ -83,7 +91,29 @@ class UserCenterState extends State<UserCenterPage>{
                   leading: Icon(Icons.info_outline),
                   title: Text("关于"),
                   trailing: IconButton(icon:Icon(Icons.arrow_forward_ios_rounded),
-                    onPressed: (){})
+                    onPressed: (){
+
+                        showDialog(context: context, builder: (BuildContext context){
+
+                          return  SimpleDialog(
+                            title: Text("关于Yak"),
+                            children: [
+
+                              SimpleDialogOption(
+                                child:Text("版本: v1.0")
+                              ),
+                              SimpleDialogOption(
+                                  child:Text("联系: hqraop@163.com")
+                              ),
+                              SimpleDialogOption(
+                                  child:Text("作者: squirrelRao")
+                              )
+                            ],
+                          );
+
+                        });
+
+                    })
                 ),
                 ListTile(
                   title: Text("退出登录",style: TextStyle(color: Colors.red)),

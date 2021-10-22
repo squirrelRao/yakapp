@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:yakapp/login.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:yakapp/splash.dart';
 import 'assets.dart';
 import 'transaction.dart';
 import 'user_center.dart';
@@ -18,6 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
 
     LogUtil.init(bool.fromEnvironment("dart.vm.product"));
+    requestPermission();
 
     return MaterialApp(
       title: 'Yak',
@@ -25,8 +27,27 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.teal,
       ),
-      home:LoginPage()
+      home:SplashPage()
     );
+  }
+
+  Future requestPermission() async {
+
+    // startCountdownTimer();
+
+
+    // 申请存储结果
+    if (await Permission.storage.request().isGranted) {
+
+    //  startCountdownTimer();
+
+    }
+    //else {
+    //
+    //   Fluttertoast.showToast(msg: "需要存储权限才能使用");
+    //   SystemNavigator.pop();
+    // }
+
   }
 }
 
