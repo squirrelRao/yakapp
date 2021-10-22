@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'regist.dart';
 
 class LoginPage extends StatefulWidget{
 
@@ -63,7 +64,7 @@ class LoginState extends State<LoginPage>{
       home: Scaffold(
 
           appBar:AppBar(
-            title: const Text('登录'),
+            title: const Text('登录账户'),
           ),
 
           body: ListView(
@@ -96,13 +97,25 @@ class LoginState extends State<LoginPage>{
 
             ),
               Container(
+                alignment: Alignment.centerRight,
+                padding: const EdgeInsets.fromLTRB(35, 10, 35, 0),
+                child: TextButton(
+                    child:Text("还没有账号?",style: TextStyle(fontSize: 14,color:Colors.teal)),
+                    onPressed: (){
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (content){return RegistPage();})
+                      );
+                    },
+                ),
+              ),
+              Container(
                 height: 70,
                 padding: const EdgeInsets.fromLTRB(35, 30, 35, 0),
                 child: TextButton(
-                  child: Text('登录'),
+                  child: Text('登 录'),
                   style: ButtonStyle(
                     textStyle: MaterialStateProperty.all(TextStyle(fontSize: 16)),
-                    backgroundColor: MaterialStateProperty.all(Colors.blue),
+                    backgroundColor: MaterialStateProperty.all(Colors.teal),
                     foregroundColor: MaterialStateProperty.all(Colors.white)
                 ),
                   onPressed: () {

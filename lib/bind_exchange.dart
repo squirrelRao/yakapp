@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:yakapp/login.dart';
 
 class BindExchangePage extends StatefulWidget{
 
@@ -64,6 +65,15 @@ class BindExchangeState extends State<BindExchangePage>{
 
           appBar:AppBar(
             title: const Text('绑 定'),
+              leading: IconButton(
+                icon:Icon(Icons.arrow_back_ios,color:Colors.white),
+                onPressed: (){
+                  Navigator.pop(context);
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (content){return LoginPage();})
+                  );
+                },
+              )
           ),
 
           body: ListView(

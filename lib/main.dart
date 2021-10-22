@@ -22,9 +22,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Yak',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.teal,
       ),
-      home:HomePage()
+      home:LoginPage()
     );
   }
 }

@@ -1,5 +1,7 @@
 
 import 'package:flutter/material.dart';
+import 'package:yakapp/bind_exchange.dart';
+import 'package:yakapp/login.dart';
 
 class RegistPage extends StatefulWidget{
 
@@ -83,6 +85,14 @@ class RegistState extends State<RegistPage>{
 
           appBar:AppBar(
             title: const Text('注册账户'),
+            leading: IconButton(
+                icon:Icon(Icons.arrow_back_ios,color:Colors.white),
+              onPressed: (){
+                Navigator.pop(context,
+                    MaterialPageRoute(builder: (content){return LoginPage();})
+                );
+              },
+            ),
           ),
 
           body: ListView(
@@ -122,11 +132,14 @@ class RegistState extends State<RegistPage>{
                   child: Text('注 册'),
                   style: ButtonStyle(
                     textStyle: MaterialStateProperty.all(TextStyle(fontSize: 16)),
-                    backgroundColor: MaterialStateProperty.all(Colors.blue),
+                    backgroundColor: MaterialStateProperty.all(Colors.teal),
                     foregroundColor: MaterialStateProperty.all(Colors.white)
                 ),
                   onPressed: () {
-                    //_onLogin();
+                    Navigator.pop(context);
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (content){return BindExchangePage();})
+                    );
                   },
                 ),
               )
