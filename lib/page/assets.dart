@@ -16,9 +16,7 @@ class AssetsState extends State<AssetsPage>{
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-
-        home: Scaffold(
+    return Scaffold(
 
             appBar: AppBar(
               title: const Text('资产'),
@@ -28,7 +26,6 @@ class AssetsState extends State<AssetsPage>{
               scrollDirection: Axis.vertical,
               children: this.assets,
             )
-        )
     );
   }
 }

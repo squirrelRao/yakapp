@@ -71,9 +71,7 @@ class BindExchangeState extends State<BindExchangePage>{
   @override
   Widget build(BuildContext context) {
 
-    return MaterialApp(
-
-      home: Scaffold(
+    return Scaffold(
 
           appBar:AppBar(
             title: const Text('注册账户-绑定'),
@@ -135,7 +133,6 @@ class BindExchangeState extends State<BindExchangePage>{
           ],
 
         )
-      )
 
     );
   }

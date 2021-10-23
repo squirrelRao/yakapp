@@ -79,9 +79,7 @@ class ModifyPasswdState extends State<ModifyPasswdPage>{
   @override
   Widget build(BuildContext context) {
 
-    return MaterialApp(
-
-      home: Scaffold(
+    return Scaffold(
 
           appBar:AppBar(
             title: const Text('修改密码'),
@@ -143,7 +141,6 @@ class ModifyPasswdState extends State<ModifyPasswdPage>{
           ],
 
         )
-      )
 
     );
   }

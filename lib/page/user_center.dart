@@ -42,9 +42,7 @@ class UserCenterState extends State<UserCenterPage> {
   @override
   Widget build(BuildContext context) {
 
-    return MaterialApp(
-
-        home: Scaffold(
+    return Scaffold(
 
             appBar: AppBar(
               title: const Text('个人中心'),
@@ -132,8 +130,6 @@ class UserCenterState extends State<UserCenterPage> {
                 ),
               ]
             )
-
-        )
 
     );
   }

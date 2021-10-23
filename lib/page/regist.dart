@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:yakapp/page/bind_exchange.dart';
 import 'package:yakapp/page/login.dart';
 import 'package:yakapp/util/net_util.dart';
@@ -80,7 +81,6 @@ class RegistState extends State<RegistPage>{
 
           phone = value.trim();
         },
-        onTap: (){_formKey.currentState!.reset();},
           validator: (value){
               if(value!.trim()==""){
               return "手机号不能为空";
@@ -113,8 +113,6 @@ class RegistState extends State<RegistPage>{
 
                 password = value.trim();
           },
-        onTap: (){_formKey.currentState!.reset();},
-
         validator: (value){
 
           if(value!.trim() == "" || value == null){
@@ -146,8 +144,6 @@ class RegistState extends State<RegistPage>{
           passwordConfirmed = value.trim();
 
         },
-          onTap: (){_formKey.currentState!.reset();},
-
           validator: (value){
              if(value!.trim() == "" || value == null){
                return "密码不能为空";
@@ -165,9 +161,7 @@ class RegistState extends State<RegistPage>{
   @override
   Widget build(BuildContext context) {
 
-    return MaterialApp(
-
-      home: Scaffold(
+    return Scaffold(
 
           appBar:AppBar(
             title: const Text('注册账户'),
@@ -210,7 +204,7 @@ class RegistState extends State<RegistPage>{
                 height: 70,
                 padding: const EdgeInsets.fromLTRB(35, 30, 35, 0),
                 child: TextButton(
-                  child: Text('提交，进入下一步'),
+                  child: Text('注 册'),
                   style: ButtonStyle(
                     textStyle: MaterialStateProperty.all(TextStyle(fontSize: 16)),
                     backgroundColor: MaterialStateProperty.all(Colors.teal),
@@ -220,10 +214,23 @@ class RegistState extends State<RegistPage>{
 
                     if(!_formKey.currentState!.validate()){
 
-                      showAfterRegistDialog(context);
-
+                      return;
                     }
-                    // NetClient.instance.post(Configs.registApi, {})
+
+                    NetClient.instance.post(Configs.registApi, {"phone":phone,"passwd":password},
+                        (data){
+
+                              if(data["rc"] == 0){
+
+                                showAfterRegistDialog(context);
+
+                              }else{
+
+                                Fluttertoast.showToast(msg: data["msg"]);
+
+                              }
+                        });
+
 
 
                   },
@@ -233,7 +240,6 @@ class RegistState extends State<RegistPage>{
           ],
 
         )
-      )
 
     );
   }

@@ -23,45 +23,42 @@ class SplashState extends State<SplashPage> {
   Future<bool> getUserStatus() async {
 
     SharedPreferences prefs =  await SharedPreferences.getInstance();
-
-    int islogin = prefs.get("user_id") == null ? 0 : 1;
-    if(islogin == 0) {
-      islogin = new Random().nextInt(2);
-    }
-    if(islogin == 0){
+    String? userId = prefs.getString("userid");
+    if(userId == null || userId.trim() == ""){
       return false;
     }
-    prefs.setString("user_id", "1");
+
     return true;
 
   }
 
-  void startCountdownTimer() async {
+  void startCountdownTimer() {
 
     const oneSec = const Duration(seconds: 1);
 
-    _timer = Timer.periodic(oneSec, (timer){
+    _timer = Timer.periodic(oneSec, (timer) async{
 
 
-           var isGetUser = getUserStatus();
            if(_countdownTime < 1){
 
              timer.cancel();
+             bool isGetUser = await getUserStatus();
 
              setState(() {
 
+               Widget page;
+
+               if(!isGetUser) {
+                 page = LoginPage();
+
+               }else{
+                 page = HomePage();
+
+               }
                Navigator.pop(context);
 
-               if(isGetUser == false){
-                 Navigator.push(context,
-                     MaterialPageRoute(builder: (content){return LoginPage();})
-                 );
-               }else{
-                 Navigator.push(context,
-                     MaterialPageRoute(builder: (content){return HomePage();})
-                 );
-
-             }});
+               Navigator.push(context, MaterialPageRoute(builder: (content){return page;}));
+               });
 
            }else{
              _countdownTime--;
@@ -79,21 +76,15 @@ class SplashState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
-
     startCountdownTimer();
 
-    return MaterialApp(
-        theme: ThemeData.dark(),
-        home: Scaffold(
-          body: ConstrainedBox(
-            constraints: BoxConstraints.expand(),
-            child: Stack(fit: StackFit.expand,
+    return ConstrainedBox(
+        constraints: BoxConstraints.expand(),
+        child: Stack(fit: StackFit.expand,
             alignment: Alignment.center,
             children: <Widget>[
-              Image.network(this.splash_image,fit:BoxFit.fill)
-             ]
-            )
-          )
+              Image.network(this.splash_image, fit: BoxFit.fill)
+            ]
         )
     );
   }

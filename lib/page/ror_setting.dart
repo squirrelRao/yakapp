@@ -53,9 +53,7 @@ class RorSettingState extends State<RorSettingPage>{
   @override
   Widget build(BuildContext context) {
 
-    return MaterialApp(
-
-      home: Scaffold(
+    return Scaffold(
 
           appBar:AppBar(
             title: const Text('收益率目标设定'),
@@ -112,7 +110,6 @@ class RorSettingState extends State<RorSettingPage>{
           ],
 
         )
-      )
 
     );
   }

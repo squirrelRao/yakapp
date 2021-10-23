@@ -60,9 +60,7 @@ class LoginState extends State<LoginPage>{
   @override
   Widget build(BuildContext context) {
 
-    return MaterialApp(
-
-      home: Scaffold(
+    return  Scaffold(
 
           appBar:AppBar(
             title: const Text('登录账户'),
@@ -133,7 +131,6 @@ class LoginState extends State<LoginPage>{
           ],
 
         )
-      )
 
     );
   }

@@ -48,7 +48,7 @@ class NetClient {
       }
   }
 
-  void post(url, param) async {
+  void post(url, param, Function function) async {
 
     var response = await dio.post(url, queryParameters: param);
 
@@ -58,7 +58,7 @@ class NetClient {
 
         Map data = new Map<String, dynamic>.from(response.data);
         LogUtil.i(data);
-
+        function.call(data);
 
       }else{
         LogUtil.e(response);

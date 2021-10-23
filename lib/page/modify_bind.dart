@@ -59,9 +59,7 @@ class ModifyBindState extends State<ModifyBindPage>{
   @override
   Widget build(BuildContext context) {
 
-    return MaterialApp(
-
-      home: Scaffold(
+    return  Scaffold(
 
           appBar:AppBar(
             title: const Text('更新交易所绑定信息'),
@@ -121,8 +119,7 @@ class ModifyBindState extends State<ModifyBindPage>{
 
           ],
 
-        )
-      )
+          )
 
     );
   }

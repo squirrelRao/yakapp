@@ -15,9 +15,7 @@ class TransactionsState extends State<TransactionsPage>{
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-
-        home: Scaffold(
+    return Scaffold(
 
             appBar: AppBar(
               title: const Text('交易记录'),
@@ -28,7 +26,6 @@ class TransactionsState extends State<TransactionsPage>{
               scrollDirection: Axis.vertical,
               children: this.transactions,
             )
-        )
     );
   }
 }
