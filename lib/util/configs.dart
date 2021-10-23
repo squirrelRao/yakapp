@@ -6,6 +6,7 @@ class Configs {
   static const String registApi = baseUrl +"/v1/regist";
   static const String checkRegistApi = baseUrl + "/v1/regist/check/phone";
   static const String loginApi = baseUrl +"/v1/login";
+  static const String getBindInfo = baseUrl + "/v1/bind/info";
   static const String bindApi = baseUrl +"/v1/regist";
   static const String modifyPasswordApi = baseUrl +"/v1/regist";
   static const String getAssetsApi = baseUrl +"/v1/regist";
