@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:yakapp/splash.dart';
-import 'assets.dart';
-import 'transaction.dart';
-import 'user_center.dart';
-import 'common_util.dart';
+import 'package:yakapp/page/splash.dart';
+import 'page/assets.dart';
+import 'page/transaction.dart';
+import 'page/user_center.dart';
+import 'util/common_util.dart';
 
 
 void main() {

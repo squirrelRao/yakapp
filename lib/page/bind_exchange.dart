@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:yakapp/login.dart';
+import 'package:yakapp/page/login.dart';
 
 class BindExchangePage extends StatefulWidget{
 

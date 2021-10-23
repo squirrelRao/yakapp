@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:yakapp/main.dart';
-import 'package:yakapp/user_center.dart';
+import 'package:yakapp/page/user_center.dart';
 
 class ModifyPasswdPage extends StatefulWidget{
 

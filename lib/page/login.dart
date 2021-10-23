@@ -1,15 +1,17 @@
 
 import 'package:flutter/material.dart';
-import 'package:yakapp/login.dart';
+import 'package:yakapp/main.dart';
+import 'package:yakapp/page/user_center.dart';
+import 'regist.dart';
 
-class ModifyBindPage extends StatefulWidget{
+class LoginPage extends StatefulWidget{
 
 
   @override
-  State createState()  => ModifyBindState();
+  State createState()  => LoginState();
 }
 
-class ModifyBindState extends State<ModifyBindPage>{
+class LoginState extends State<LoginPage>{
 
   final _formKey = new GlobalKey<FormState>();
   var _userID;
@@ -25,9 +27,9 @@ class ModifyBindState extends State<ModifyBindPage>{
         style: TextStyle(fontSize: 20),
         decoration: new InputDecoration(
             border: InputBorder.none,
-            hintText: '请输入API-KEY',
+            hintText: '请输入手机号',
             icon: new Icon(
-              Icons.lock,
+              Icons.phone,
               color: Colors.teal,
             )),
         onSaved: (value) => _userID = value!.trim(),
@@ -45,7 +47,7 @@ class ModifyBindState extends State<ModifyBindPage>{
         style: TextStyle(fontSize: 20),
         decoration: new InputDecoration(
             border: InputBorder.none,
-            hintText: '请输入API-SECRET',
+            hintText: '请输入密码',
             icon: new Icon(
               Icons.lock,
               color: Colors.teal,
@@ -64,14 +66,9 @@ class ModifyBindState extends State<ModifyBindPage>{
       home: Scaffold(
 
           appBar:AppBar(
-            title: const Text('更新交易所绑定信息'),
-              backgroundColor: Colors.teal,
-              leading: IconButton(
-                icon:Icon(Icons.arrow_back_ios,color:Colors.white),
-                onPressed: (){
-                 Navigator.pop(context);
-                },
-              )
+            title: const Text('登录账户'),
+            backgroundColor: Colors.teal
+
           ),
 
           body: ListView(
@@ -104,18 +101,33 @@ class ModifyBindState extends State<ModifyBindPage>{
 
             ),
               Container(
+                alignment: Alignment.centerRight,
+                padding: const EdgeInsets.fromLTRB(35, 10, 35, 0),
+                child: TextButton(
+                    child:Text("还没有账号?",style: TextStyle(fontSize: 14,color:Colors.teal)),
+                    onPressed: (){
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (content){return RegistPage();})
+                      );
+                    },
+                ),
+              ),
+              Container(
                 height: 70,
                 padding: const EdgeInsets.fromLTRB(35, 30, 35, 0),
                 child: TextButton(
-                  child: Text('提交更新'),
+                  child: Text('登 录'),
                   style: ButtonStyle(
                     textStyle: MaterialStateProperty.all(TextStyle(fontSize: 16)),
                     backgroundColor: MaterialStateProperty.all(Colors.teal),
                     foregroundColor: MaterialStateProperty.all(Colors.white)
                 ),
-                  onPressed: () {
-                    //_onLogin();
-                  },
+                    onPressed: () {
+                      Navigator.pop(context);
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (content){return HomePage();})
+                      );
+                    }
                 ),
               )
 

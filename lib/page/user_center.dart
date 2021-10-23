@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:yakapp/bind_exchange.dart';
-import 'package:yakapp/login.dart';
-import 'package:yakapp/modify_bind.dart';
-import 'package:yakapp/modify_passwd.dart';
+import 'package:yakapp/page/bind_exchange.dart';
+import 'package:yakapp/page/login.dart';
+import 'package:yakapp/page/modify_bind.dart';
+import 'package:yakapp/page/modify_passwd.dart';
 
 class UserCenterPage extends StatefulWidget{
 

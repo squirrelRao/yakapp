@@ -3,7 +3,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:yakapp/login.dart';
+import 'package:yakapp/page/login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -22,17 +22,17 @@ class SplashState extends State<SplashPage> {
 
   Future<bool> getUserStatus() async {
 
-    // SharedPreferences prefs =  await SharedPreferences.getInstance();
+    SharedPreferences prefs =  await SharedPreferences.getInstance();
 
-    // int islogin = prefs.get("user_id") == null ? 0 : 1;
-    int islogin = 0;
+    int islogin = prefs.get("user_id") == null ? 0 : 1;
+    // int islogin = 0;
     if(islogin == 0) {
       islogin = new Random().nextInt(2);
     }
     if(islogin == 0){
       return false;
     }
-    // prefs.setString("user_id", "1");
+    prefs.setString("user_id", "1");
     return true;
 
   }
@@ -43,27 +43,31 @@ class SplashState extends State<SplashPage> {
 
     _timer = Timer.periodic(oneSec, (timer){
 
-      setState(() {
 
            var isGetUser = getUserStatus();
            if(_countdownTime < 1){
 
              timer.cancel();
-             Navigator.pop(context);
-             if(isGetUser == false){
+
+             setState(() {
+
+               Navigator.pop(context);
+
+               if(isGetUser == false){
                  Navigator.push(context,
                      MaterialPageRoute(builder: (content){return LoginPage();})
                  );
-             }else{
-               Navigator.push(context,
-                   MaterialPageRoute(builder: (content){return HomePage();})
-               );
-             }
+               }else{
+                 Navigator.push(context,
+                     MaterialPageRoute(builder: (content){return HomePage();})
+                 );
+
+             }});
+
            }else{
              _countdownTime--;
            }
       });
-    });
   }
 
   @override

@@ -1,16 +1,15 @@
 
 import 'package:flutter/material.dart';
-import 'package:yakapp/bind_exchange.dart';
-import 'package:yakapp/login.dart';
+import 'package:yakapp/page/login.dart';
 
-class RegistPage extends StatefulWidget{
+class ModifyBindPage extends StatefulWidget{
 
 
   @override
-  State createState()  => RegistState();
+  State createState()  => ModifyBindState();
 }
 
-class RegistState extends State<RegistPage>{
+class ModifyBindState extends State<ModifyBindPage>{
 
   final _formKey = new GlobalKey<FormState>();
   var _userID;
@@ -26,9 +25,9 @@ class RegistState extends State<RegistPage>{
         style: TextStyle(fontSize: 20),
         decoration: new InputDecoration(
             border: InputBorder.none,
-            hintText: '请输入手机号',
+            hintText: '请输入API-KEY',
             icon: new Icon(
-              Icons.phone,
+              Icons.lock,
               color: Colors.teal,
             )),
         onSaved: (value) => _userID = value!.trim(),
@@ -46,7 +45,7 @@ class RegistState extends State<RegistPage>{
         style: TextStyle(fontSize: 20),
         decoration: new InputDecoration(
             border: InputBorder.none,
-            hintText: '请输入密码',
+            hintText: '请输入API-SECRET',
             icon: new Icon(
               Icons.lock,
               color: Colors.teal,
@@ -56,25 +55,6 @@ class RegistState extends State<RegistPage>{
     );
   }
 
-  Widget _showPasswordConfirmInput() {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(15.0, 10.0, 0.0, 0.0),
-      child: new TextFormField(
-        maxLines: 1,
-        obscureText: true,
-        autofocus: false,
-        style: TextStyle(fontSize: 20),
-        decoration: new InputDecoration(
-            border: InputBorder.none,
-            hintText: '请再次输入密码',
-            icon: new Icon(
-              Icons.lock,
-              color: Colors.teal,
-            )),
-        onSaved: (value) => _password = value!.trim(),
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -84,16 +64,14 @@ class RegistState extends State<RegistPage>{
       home: Scaffold(
 
           appBar:AppBar(
-            title: const Text('注册账户'),
-            backgroundColor: Colors.teal,
-            leading: IconButton(
+            title: const Text('更新交易所绑定信息'),
+              backgroundColor: Colors.teal,
+              leading: IconButton(
                 icon:Icon(Icons.arrow_back_ios,color:Colors.white),
-              onPressed: (){
-                Navigator.pop(context,
-                    MaterialPageRoute(builder: (content){return LoginPage();})
-                );
-              },
-            ),
+                onPressed: (){
+                 Navigator.pop(context);
+                },
+              )
           ),
 
           body: ListView(
@@ -116,8 +94,7 @@ class RegistState extends State<RegistPage>{
                     child: Column(
                       children: <Widget>[
                         _showPhoneInput(),
-                        _showPasswordInput(),
-                        _showPasswordConfirmInput()
+                        _showPasswordInput()
                       ]
                     )
                   )
@@ -130,17 +107,14 @@ class RegistState extends State<RegistPage>{
                 height: 70,
                 padding: const EdgeInsets.fromLTRB(35, 30, 35, 0),
                 child: TextButton(
-                  child: Text('提交，进入下一步'),
+                  child: Text('提交更新'),
                   style: ButtonStyle(
                     textStyle: MaterialStateProperty.all(TextStyle(fontSize: 16)),
                     backgroundColor: MaterialStateProperty.all(Colors.teal),
                     foregroundColor: MaterialStateProperty.all(Colors.white)
                 ),
                   onPressed: () {
-                    Navigator.pop(context);
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (content){return BindExchangePage();})
-                    );
+                    //_onLogin();
                   },
                 ),
               )

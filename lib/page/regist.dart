@@ -1,17 +1,16 @@
 
 import 'package:flutter/material.dart';
-import 'package:yakapp/main.dart';
-import 'package:yakapp/user_center.dart';
-import 'regist.dart';
+import 'package:yakapp/page/bind_exchange.dart';
+import 'package:yakapp/page/login.dart';
 
-class LoginPage extends StatefulWidget{
+class RegistPage extends StatefulWidget{
 
 
   @override
-  State createState()  => LoginState();
+  State createState()  => RegistState();
 }
 
-class LoginState extends State<LoginPage>{
+class RegistState extends State<RegistPage>{
 
   final _formKey = new GlobalKey<FormState>();
   var _userID;
@@ -57,6 +56,25 @@ class LoginState extends State<LoginPage>{
     );
   }
 
+  Widget _showPasswordConfirmInput() {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(15.0, 10.0, 0.0, 0.0),
+      child: new TextFormField(
+        maxLines: 1,
+        obscureText: true,
+        autofocus: false,
+        style: TextStyle(fontSize: 20),
+        decoration: new InputDecoration(
+            border: InputBorder.none,
+            hintText: '请再次输入密码',
+            icon: new Icon(
+              Icons.lock,
+              color: Colors.teal,
+            )),
+        onSaved: (value) => _password = value!.trim(),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,9 +84,16 @@ class LoginState extends State<LoginPage>{
       home: Scaffold(
 
           appBar:AppBar(
-            title: const Text('登录账户'),
-            backgroundColor: Colors.teal
-
+            title: const Text('注册账户'),
+            backgroundColor: Colors.teal,
+            leading: IconButton(
+                icon:Icon(Icons.arrow_back_ios,color:Colors.white),
+              onPressed: (){
+                Navigator.pop(context,
+                    MaterialPageRoute(builder: (content){return LoginPage();})
+                );
+              },
+            ),
           ),
 
           body: ListView(
@@ -91,7 +116,8 @@ class LoginState extends State<LoginPage>{
                     child: Column(
                       children: <Widget>[
                         _showPhoneInput(),
-                        _showPasswordInput()
+                        _showPasswordInput(),
+                        _showPasswordConfirmInput()
                       ]
                     )
                   )
@@ -101,33 +127,21 @@ class LoginState extends State<LoginPage>{
 
             ),
               Container(
-                alignment: Alignment.centerRight,
-                padding: const EdgeInsets.fromLTRB(35, 10, 35, 0),
-                child: TextButton(
-                    child:Text("还没有账号?",style: TextStyle(fontSize: 14,color:Colors.teal)),
-                    onPressed: (){
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (content){return RegistPage();})
-                      );
-                    },
-                ),
-              ),
-              Container(
                 height: 70,
                 padding: const EdgeInsets.fromLTRB(35, 30, 35, 0),
                 child: TextButton(
-                  child: Text('登 录'),
+                  child: Text('提交，进入下一步'),
                   style: ButtonStyle(
                     textStyle: MaterialStateProperty.all(TextStyle(fontSize: 16)),
                     backgroundColor: MaterialStateProperty.all(Colors.teal),
                     foregroundColor: MaterialStateProperty.all(Colors.white)
                 ),
-                    onPressed: () {
-                      Navigator.pop(context);
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (content){return HomePage();})
-                      );
-                    }
+                  onPressed: () {
+                    Navigator.pop(context);
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (content){return BindExchangePage();})
+                    );
+                  },
                 ),
               )
 
