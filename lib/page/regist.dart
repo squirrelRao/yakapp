@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:yakapp/page/bind_exchange.dart';
 import 'package:yakapp/page/login.dart';
+import 'package:yakapp/util/net_util.dart';
+import 'package:yakapp/util/configs.dart';
 
 class RegistPage extends StatefulWidget{
 
@@ -13,12 +15,14 @@ class RegistPage extends StatefulWidget{
 class RegistState extends State<RegistPage>{
 
   final _formKey = new GlobalKey<FormState>();
-  var _userID;
-  var _password;
+  var phone ="";
+  var password = "";
+  var passwordConfirmed = "";
+  var tip = "";
 
   Widget _showPhoneInput() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(15.0, 10.0, 0.0, 0.0),
+      padding: const EdgeInsets.fromLTRB(15.0, 5.0, 0.0, 0.0),
       child: new TextFormField(
         maxLines: 1,
         keyboardType: TextInputType.phone,
@@ -31,14 +35,27 @@ class RegistState extends State<RegistPage>{
               Icons.phone,
               color: Colors.teal,
             )),
-        onSaved: (value) => _userID = value!.trim(),
-      ),
-    );
+        onFieldSubmitted: (value) {
+
+          phone = value.trim();
+        },
+        onTap: (){_formKey.currentState!.reset();},
+          validator: (value){
+              if(value!.trim()==""){
+              return "手机号不能为空";
+              }
+              if(!RegExp(r'^\d{11}$').hasMatch(value)){
+              return "请输入11位合法手机号";
+              }
+
+              return null;
+        },
+        ));
   }
 
   Widget _showPasswordInput() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(15.0, 10.0, 0.0, 0.0),
+      padding: const EdgeInsets.fromLTRB(15.0, 5.0, 0.0, 0.0),
       child: new TextFormField(
         maxLines: 1,
         obscureText: true,
@@ -51,14 +68,25 @@ class RegistState extends State<RegistPage>{
               Icons.lock,
               color: Colors.teal,
             )),
-        onSaved: (value) => _password = value!.trim(),
+        onFieldSubmitted: (value){
+
+                password = value.trim();
+          },
+        onTap: (){_formKey.currentState!.reset();},
+
+        validator: (value){
+
+          if(value!.trim() == "" || value == null){
+            return "密码不能为空";
+          }
+        },
       ),
     );
   }
 
   Widget _showPasswordConfirmInput() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(15.0, 10.0, 0.0, 0.0),
+      padding: const EdgeInsets.fromLTRB(15.0, 5.0, 0.0, 10.0),
       child: new TextFormField(
         maxLines: 1,
         obscureText: true,
@@ -71,7 +99,24 @@ class RegistState extends State<RegistPage>{
               Icons.lock,
               color: Colors.teal,
             )),
-        onSaved: (value) => _password = value!.trim(),
+
+        onFieldSubmitted: (value){
+
+          passwordConfirmed = value.trim();
+
+        },
+          onTap: (){_formKey.currentState!.reset();},
+
+          validator: (value){
+             if(value!.trim() == "" || value == null){
+               return "密码不能为空";
+             }
+
+            if(value != password){
+              return "两次输入的密码不一致";
+            }
+            return null;
+        }
       ),
     );
   }
@@ -89,9 +134,11 @@ class RegistState extends State<RegistPage>{
             leading: IconButton(
                 icon:Icon(Icons.arrow_back_ios,color:Colors.white),
               onPressed: (){
-                Navigator.pop(context,
-                    MaterialPageRoute(builder: (content){return LoginPage();})
-                );
+
+                    Navigator.pop(context,
+                        MaterialPageRoute(builder: (content){return LoginPage();})
+                    );
+
               },
             ),
           ),
@@ -99,19 +146,12 @@ class RegistState extends State<RegistPage>{
           body: ListView(
 
             children: <Widget>[
-
-              Container(
-                padding: const EdgeInsets.only(top: 30),
-                height: 160,
-                child: Image(image: AssetImage('images/logo.png')),
-              ),
-
               Form(
 
                 key : _formKey,
                 child: Container(
 
-                  padding: const EdgeInsets.fromLTRB(25, 50, 25, 0),
+                  padding: const EdgeInsets.fromLTRB(25, 30, 25, 0),
                   child: Card(
                     child: Column(
                       children: <Widget>[
@@ -137,10 +177,17 @@ class RegistState extends State<RegistPage>{
                     foregroundColor: MaterialStateProperty.all(Colors.white)
                 ),
                   onPressed: () {
-                    Navigator.pop(context);
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (content){return BindExchangePage();})
-                    );
+
+                    if(!_formKey.currentState!.validate()){
+
+                      Navigator.pop(context);
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (content){return BindExchangePage();})
+                      );
+                    }
+                    // NetClient.instance.post(Configs.registApi, {})
+
+
                   },
                 ),
               )

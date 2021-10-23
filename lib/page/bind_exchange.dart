@@ -12,12 +12,12 @@ class BindExchangePage extends StatefulWidget{
 class BindExchangeState extends State<BindExchangePage>{
 
   final _formKey = new GlobalKey<FormState>();
-  var _userID;
-  var _password;
+  var key ="";
+  var secret="";
 
-  Widget _showPhoneInput() {
+  Widget showKeyInput() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(15.0, 10.0, 0.0, 0.0),
+      padding: const EdgeInsets.fromLTRB(15.0, 5.0, 0.0, 0.0),
       child: new TextFormField(
         maxLines: 1,
         keyboardType: TextInputType.phone,
@@ -30,14 +30,20 @@ class BindExchangeState extends State<BindExchangePage>{
               Icons.lock,
               color: Colors.teal,
             )),
-        onSaved: (value) => _userID = value!.trim(),
+        onFieldSubmitted: (value) => key = value.trim(),
+        onTap: (){_formKey.currentState!.reset();},
+        validator: (value){
+          if(value!.trim()==""){
+            return "key不能为空";
+          }
+        },
       ),
     );
   }
 
-  Widget _showPasswordInput() {
+  Widget showSecretInput() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(15.0, 10.0, 0.0, 0.0),
+      padding: const EdgeInsets.fromLTRB(15.0, 5.0, 0.0, 10.0),
       child: new TextFormField(
         maxLines: 1,
         obscureText: true,
@@ -50,7 +56,13 @@ class BindExchangeState extends State<BindExchangePage>{
               Icons.lock,
               color: Colors.teal,
             )),
-        onSaved: (value) => _password = value!.trim(),
+        onFieldSubmitted: (value) => secret = value.trim(),
+        onTap: (){_formKey.currentState!.reset();},
+        validator: (value){
+          if(value!.trim()==""){
+            return "secret不能为空";
+          }
+        },
       ),
     );
   }
@@ -81,23 +93,17 @@ class BindExchangeState extends State<BindExchangePage>{
 
             children: <Widget>[
 
-              Container(
-                padding: const EdgeInsets.only(top: 30),
-                height: 160,
-                child: Image(image: AssetImage('images/logo.png')),
-              ),
-
               Form(
 
                 key : _formKey,
                 child: Container(
 
-                  padding: const EdgeInsets.fromLTRB(25, 50, 25, 0),
+                  padding: const EdgeInsets.fromLTRB(25, 30, 25, 0),
                   child: Card(
                     child: Column(
                       children: <Widget>[
-                        _showPhoneInput(),
-                        _showPasswordInput()
+                        showKeyInput(),
+                        showSecretInput()
                       ]
                     )
                   )
@@ -108,16 +114,20 @@ class BindExchangeState extends State<BindExchangePage>{
             ),
               Container(
                 height: 70,
-                padding: const EdgeInsets.fromLTRB(35, 30, 35, 0),
+                padding: const EdgeInsets.fromLTRB(25, 30, 25, 0),
                 child: TextButton(
-                  child: Text('提交绑定'),
+                  child: Text('提交，完成注册'),
                   style: ButtonStyle(
                     textStyle: MaterialStateProperty.all(TextStyle(fontSize: 16)),
                     backgroundColor: MaterialStateProperty.all(Colors.teal),
                     foregroundColor: MaterialStateProperty.all(Colors.white)
                 ),
                   onPressed: () {
-                    //_onLogin();
+
+                    if(!_formKey.currentState!.validate()){
+
+
+                    }
                   },
                 ),
               )
