@@ -8,7 +8,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-import 'package:yakapp/main.dart';class SplashPage extends StatefulWidget {
+import 'package:yakapp/main.dart';
+import 'package:yakapp/util/common_util.dart';class SplashPage extends StatefulWidget {
   @override
   State createState() => SplashState();
 }
@@ -23,7 +24,7 @@ class SplashState extends State<SplashPage> {
   Future<bool> getUserStatus() async {
 
     SharedPreferences prefs =  await SharedPreferences.getInstance();
-    String? userId = prefs.getString("userid");
+    var userId = prefs.getString("uid");
     if(userId == null || userId.trim() == ""){
       return false;
     }

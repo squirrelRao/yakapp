@@ -19,10 +19,11 @@ class RegistState extends State<RegistPage>{
   var phone ="";
   var password = "";
   var passwordConfirmed = "";
+  var registed = false;
 
 
   //after regist dialog
-  showAfterRegistDialog(BuildContext context) {
+  showAfterRegistDialog(BuildContext context,String userId) {
 
     showDialog(
         context: context,
@@ -65,9 +66,10 @@ class RegistState extends State<RegistPage>{
   Widget _showPhoneInput() {
     return Padding(
       padding: const EdgeInsets.fromLTRB(15.0, 5.0, 0.0, 0.0),
-      child: new TextFormField(
+      child: TextFormField(
         maxLines: 1,
         keyboardType: TextInputType.phone,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
         autofocus: false,
         style: TextStyle(fontSize: 20),
         decoration: new InputDecoration(
@@ -77,16 +79,37 @@ class RegistState extends State<RegistPage>{
               Icons.phone,
               color: Colors.teal,
             )),
-        onFieldSubmitted: (value) {
-
-          phone = value.trim();
+        onSaved: (value) {
+          phone = value!.trim();
         },
-          validator: (value){
+        onChanged: (value) async {
+
+          if(value.length == 11){
+
+            (NetClient()).post(Configs.checkRegistApi, {"phone":value}, (data){
+              if(data["rc"] != 0){
+                setState(() {
+                  registed = true;
+                });
+              }else{
+                setState(() {
+                  registed = false;
+                });
+              }
+            });
+          }
+
+        },
+          validator: (value) {
               if(value!.trim()==""){
               return "手机号不能为空";
               }
               if(!RegExp(r'^\d{11}$').hasMatch(value)){
               return "请输入11位合法手机号";
+              }
+
+              if(registed){
+                return "该手机号已注册";
               }
 
               return null;
@@ -100,6 +123,7 @@ class RegistState extends State<RegistPage>{
       child: new TextFormField(
         maxLines: 1,
         obscureText: true,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
         autofocus: false,
         style: TextStyle(fontSize: 20),
         decoration: new InputDecoration(
@@ -109,9 +133,9 @@ class RegistState extends State<RegistPage>{
               Icons.lock,
               color: Colors.teal,
             )),
-        onFieldSubmitted: (value){
+        onSaved: (value){
 
-                password = value.trim();
+                password = value!.trim();
           },
         validator: (value){
 
@@ -129,7 +153,8 @@ class RegistState extends State<RegistPage>{
       child: new TextFormField(
         maxLines: 1,
         obscureText: true,
-        autofocus: false,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          autofocus: false,
         style: TextStyle(fontSize: 20),
         decoration: new InputDecoration(
             border: InputBorder.none,
@@ -139,9 +164,9 @@ class RegistState extends State<RegistPage>{
               color: Colors.teal,
             )),
 
-        onFieldSubmitted: (value){
+        onSaved: (value){
 
-          passwordConfirmed = value.trim();
+          passwordConfirmed = value!.trim();
 
         },
           validator: (value){
@@ -149,7 +174,7 @@ class RegistState extends State<RegistPage>{
                return "密码不能为空";
              }
 
-            if(value != password){
+            if(passwordConfirmed != password){
               return "两次输入的密码不一致";
             }
             return null;
@@ -216,13 +241,13 @@ class RegistState extends State<RegistPage>{
 
                       return;
                     }
-
-                    NetClient.instance.post(Configs.registApi, {"phone":phone,"passwd":password},
+                    _formKey.currentState!.save();
+                    NetClient().post(Configs.registApi, {"phone":phone,"passwd":password},
                         (data){
 
                               if(data["rc"] == 0){
 
-                                showAfterRegistDialog(context);
+                                showAfterRegistDialog(context,data["data"]["user_id"]);
 
                               }else{
 

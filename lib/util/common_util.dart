@@ -1,3 +1,5 @@
+import 'package:shared_preferences/shared_preferences.dart';
+
 class LogUtil {
 
   static bool debuggable = false; //是否是debug模式,true: log v 不输出.

@@ -5,27 +5,17 @@ import 'common_util.dart';
 
 class NetClient {
 
-  Dio dio = Dio();
   String contentType = "application/json";
+  late Dio dio;
 
-  static late NetClient instance ;
+  NetClient(){
 
-  factory NetClient() => getInstance();
-
-  static NetClient getInstance(){
-
-    if(instance == null){
-      instance = NetClient._internal();
-    }
-    return instance;
-  }
-  NetClient._internal(){
-
+    dio = Dio();
     dio.options.connectTimeout = 5000;
     dio.options.contentType = contentType;
   }
 
-  void get(url) async {
+   get(url, Function function) async {
 
           var response = await dio.get(url);
 
@@ -35,6 +25,7 @@ class NetClient {
 
               Map data = new Map<String, dynamic>.from(response.data);
               LogUtil.i(data);
+              return function.call(data);
 
 
             }else{
@@ -48,9 +39,9 @@ class NetClient {
       }
   }
 
-  void post(url, param, Function function) async {
+    post(url, param, Function function) async {
 
-    var response = await dio.post(url, queryParameters: param);
+    var response = await dio.post(url, data: param);
 
     try{
 
