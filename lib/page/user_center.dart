@@ -12,8 +12,27 @@ class UserCenterPage extends StatefulWidget{
 
 }
 
-class UserCenterState extends State<UserCenterPage>{
+class UserCenterState extends State<UserCenterPage> {
 
+
+  SimpleDialog showAboutDialog(BuildContext context) {
+
+    return SimpleDialog(
+      title: Text("关于Yak"),
+      children: [
+
+        SimpleDialogOption(
+            child: Text("v1.0")
+        ),
+        SimpleDialogOption(
+            child: Text("hqraop@163.com")
+        ),
+        SimpleDialogOption(
+            child: Text("by squirrelRao @2021")
+        )
+      ],
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -90,28 +109,12 @@ class UserCenterState extends State<UserCenterPage>{
                 ListTile(
                   leading: Icon(Icons.info_outline),
                   title: Text("关于"),
+                  onTap: (){
+                    showAboutDialog(context);
+                  },
                   trailing: IconButton(icon:Icon(Icons.arrow_forward_ios_rounded),
                     onPressed: (){
-
-                        showDialog(context: context, builder: (BuildContext context){
-
-                          return  SimpleDialog(
-                            title: Text("关于Yak"),
-                            children: [
-
-                              SimpleDialogOption(
-                                child:Text("版本: v1.0")
-                              ),
-                              SimpleDialogOption(
-                                  child:Text("联系: hqraop@163.com")
-                              ),
-                              SimpleDialogOption(
-                                  child:Text("作者: squirrelRao")
-                              )
-                            ],
-                          );
-
-                        });
+                      showAboutDialog(context);
 
                     })
                 ),
