@@ -15,23 +15,28 @@ class UserCenterPage extends StatefulWidget{
 class UserCenterState extends State<UserCenterPage> {
 
 
-  SimpleDialog showAboutDialog(BuildContext context) {
+  showAboutDialog(BuildContext context) {
 
-    return SimpleDialog(
-      title: Text("关于Yak"),
-      children: [
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
 
-        SimpleDialogOption(
-            child: Text("v1.0")
-        ),
-        SimpleDialogOption(
-            child: Text("hqraop@163.com")
-        ),
-        SimpleDialogOption(
-            child: Text("by squirrelRao @2021")
-        )
-      ],
-    );
+              return SimpleDialog(
+                title: Text("Yak"),
+                children: [
+
+                  SimpleDialogOption(
+                      child: Text("v1.0")
+                  ),
+                  SimpleDialogOption(
+                      child: Text("hqraop@163.com")
+                  ),
+                  SimpleDialogOption(
+                      child: Text("by squirrelRao @2021")
+                  )
+                ],
+              );
+    });
   }
 
   @override
