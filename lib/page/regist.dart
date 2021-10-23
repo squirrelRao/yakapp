@@ -18,7 +18,48 @@ class RegistState extends State<RegistPage>{
   var phone ="";
   var password = "";
   var passwordConfirmed = "";
-  var tip = "";
+
+
+  //after regist dialog
+  showAfterRegistDialog(BuildContext context) {
+
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+
+          return SimpleDialog(
+            title: Text("账号注册成功！"),
+            children: [
+
+              SimpleDialogOption(
+                  child: Text("绑定交易所账号 >",style: TextStyle(color: Colors.teal,fontSize:18)),
+                  onPressed: (){
+                    Navigator.pop(context);
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (content){return BindExchangePage();})
+                    );
+                  },
+              ),
+              SimpleDialogOption(
+                child: Text("稍后绑定...",style: TextStyle(fontSize: 18,color: Colors.teal)),
+                onPressed: (){
+                  Navigator.pop(context);
+                  Navigator.pop(context,
+                      MaterialPageRoute(builder: (content){return LoginPage();})
+                  );
+                },
+              ),
+              Container(
+                alignment: Alignment.center,
+                padding: const EdgeInsets.fromLTRB(0.0, 10, 0, 10),
+                child: Text("提示: 不绑定交易所账号将无法使用相关服务",style: TextStyle(color: Colors.grey,fontSize: 13))
+                ,
+              )
+            ],
+          );
+        });
+  }
 
   Widget _showPhoneInput() {
     return Padding(
@@ -135,10 +176,9 @@ class RegistState extends State<RegistPage>{
                 icon:Icon(Icons.arrow_back_ios,color:Colors.white),
               onPressed: (){
 
-                    Navigator.pop(context,
-                        MaterialPageRoute(builder: (content){return LoginPage();})
-                    );
-
+                Navigator.pop(context,
+                    MaterialPageRoute(builder: (content){return LoginPage();})
+                );
               },
             ),
           ),
@@ -180,10 +220,8 @@ class RegistState extends State<RegistPage>{
 
                     if(!_formKey.currentState!.validate()){
 
-                      Navigator.pop(context);
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (content){return BindExchangePage();})
-                      );
+                      showAfterRegistDialog(context);
+
                     }
                     // NetClient.instance.post(Configs.registApi, {})
 
