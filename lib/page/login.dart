@@ -1,7 +1,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:yakapp/main.dart';
-import 'package:yakapp/page/user_center.dart';
 import 'regist.dart';
 
 class LoginPage extends StatefulWidget{

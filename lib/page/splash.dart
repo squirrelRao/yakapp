@@ -25,7 +25,6 @@ class SplashState extends State<SplashPage> {
     SharedPreferences prefs =  await SharedPreferences.getInstance();
 
     int islogin = prefs.get("user_id") == null ? 0 : 1;
-    // int islogin = 0;
     if(islogin == 0) {
       islogin = new Random().nextInt(2);
     }
