@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yakapp/page/bind_exchange.dart';
 import 'package:yakapp/page/login.dart';
 import 'package:yakapp/page/modify_bind.dart';
@@ -14,6 +15,8 @@ class UserCenterPage extends StatefulWidget{
 
 class UserCenterState extends State<UserCenterPage> {
 
+  String bindStatus = "未绑定";
+  String userName = "";
 
   showAboutDialog(BuildContext context) {
 
@@ -37,6 +40,30 @@ class UserCenterState extends State<UserCenterPage> {
                 ],
               );
     });
+  }
+
+  void updateUserInfoDisplay() async {
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var name = prefs.getString("name")!;
+    var bind = prefs.getInt("isBind")!;
+
+    setState(() {
+
+      userName = name;
+      if(bind == 1){
+        bindStatus = "已绑定";
+      }else{
+        bindStatus = "未绑定";
+      }
+    });
+
+  }
+
+  @override
+  void initState(){
+    updateUserInfoDisplay();
+
   }
 
   @override
@@ -63,7 +90,7 @@ class UserCenterState extends State<UserCenterPage> {
                               height: 100,
                               alignment: Alignment.center,
                               child: Text(
-                                "134****3248",
+                                userName,
                                 style: TextStyle(fontSize: 20.0),
                               ),
                             )
@@ -75,7 +102,7 @@ class UserCenterState extends State<UserCenterPage> {
 
                   leading: Icon(Icons.wallet_giftcard),
                   title: Text("交易所钱包"),
-                  subtitle: Text("已绑定"),
+                  subtitle: Text(bindStatus),
                   onTap: (){
                     Navigator.push(context,
                         MaterialPageRoute(builder: (content){return ModifyBindPage();}));
@@ -123,7 +150,9 @@ class UserCenterState extends State<UserCenterPage> {
                 ),
                 ListTile(
                   title: Text("退出登录",style: TextStyle(color: Colors.red)),
-                    onTap: (){
+                    onTap: () async {
+                        SharedPreferences prefs =  await SharedPreferences.getInstance();
+                        prefs.clear();
                         Navigator.pop(context);
                         Navigator.push(context,MaterialPageRoute(builder: (content){return LoginPage();}));
                       },

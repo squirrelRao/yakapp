@@ -56,6 +56,7 @@ class SplashState extends State<SplashPage> {
                  page = HomePage();
 
                }
+               timer.cancel();
                Navigator.pop(context);
 
                Navigator.push(context, MaterialPageRoute(builder: (content){return page;}));

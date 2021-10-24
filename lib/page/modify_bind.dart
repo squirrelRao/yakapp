@@ -1,6 +1,11 @@
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yakapp/page/login.dart';
+import 'package:yakapp/util/configs.dart';
+import 'package:yakapp/util/net_util.dart';
+import 'package:yakapp/util/common_util.dart';
 
 class ModifyBindPage extends StatefulWidget{
 
@@ -12,62 +17,118 @@ class ModifyBindPage extends StatefulWidget{
 class ModifyBindState extends State<ModifyBindPage>{
 
   final _formKey = new GlobalKey<FormState>();
-  var _userID;
-  var _password;
+  var key ="";
+  var secret="";
 
-  Widget _showPhoneInput() {
+  Widget showKeyInput() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(15.0, 10.0, 0.0, 0.0),
+      padding: const EdgeInsets.fromLTRB(15.0, 5.0, 0.0, 0.0),
       child: new TextFormField(
-        maxLines: 1,
-        keyboardType: TextInputType.phone,
-        autofocus: false,
-        style: TextStyle(fontSize: 20),
+        maxLines: 2,
+        keyboardType: TextInputType.text,
+        autofocus: true,
+        style: TextStyle(fontSize: 16),
         decoration: new InputDecoration(
             border: InputBorder.none,
-            hintText: '请输入API-KEY',
+            hintText: '请填写账号对应的key',
             icon: new Icon(
               Icons.lock,
               color: Colors.teal,
             )),
-        onSaved: (value) => _userID = value!.trim(),
+        onSaved: (value) => key = value!.trim(),
+        validator: (value){
+          if(value!.trim()==""){
+            return "key不能为空";
+          }
+        },
       ),
     );
   }
 
-  Widget _showPasswordInput() {
+  Widget showSecretInput() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(15.0, 10.0, 0.0, 0.0),
+      padding: const EdgeInsets.fromLTRB(15.0, 5.0, 0.0, 10.0),
       child: new TextFormField(
-        maxLines: 1,
-        obscureText: true,
+        maxLines: 2,
         autofocus: false,
-        style: TextStyle(fontSize: 20),
+        keyboardType: TextInputType.text,
+        style: TextStyle(fontSize: 16),
         decoration: new InputDecoration(
             border: InputBorder.none,
-            hintText: '请输入API-SECRET',
+            hintText: '请填写账号对应的secret',
             icon: new Icon(
               Icons.lock,
               color: Colors.teal,
             )),
-        onSaved: (value) => _password = value!.trim(),
+        onSaved: (value) => secret = value!.trim(),
+        validator: (value){
+          if(value!.trim()==""){
+            return "secret不能为空";
+          }
+        },
       ),
     );
   }
 
+  void queryBindInfo() async {
+
+    SharedPreferences prefs =  await SharedPreferences.getInstance();
+    String? userId = prefs.getString("uid");
+    (NetClient()).post(Configs.getBindInfo, {"uid":userId}, (data){
+
+      if(data["rc"] == 0 && data["data"] != ""){
+
+        setState(() {
+          key = data["api_key"];
+          secret = data["api_secret"];
+        });
+      }else{
+        setState(() {
+          key = "";
+          secret = "";
+        });
+      }
+
+    });
+
+  }
+
+  void bindExchange(key,secret) async {
+
+    SharedPreferences prefs =  await SharedPreferences.getInstance();
+    String? userId = prefs.getString("uid");
+    (NetClient()).post(Configs.bindApi,{"user_id":userId,"key":key,"secret":secret}
+    , (data){
+
+          if(data["rc"] == 0){
+
+            Fluttertoast.showToast(msg: "交易所绑定成功");
+
+          }
+
+        });
+  }
+
+  @override
+  void initState(){
+    super.initState();
+    queryBindInfo();
+
+  }
 
   @override
   Widget build(BuildContext context) {
 
-    return  Scaffold(
+
+    return Scaffold(
 
           appBar:AppBar(
-            title: const Text('更新交易所绑定信息'),
+            title: const Text('更新交易所账号'),
               backgroundColor: Colors.teal,
               leading: IconButton(
                 icon:Icon(Icons.arrow_back_ios,color:Colors.white),
-                onPressed: (){
-                 Navigator.pop(context);
+                onPressed: () async {
+                    Navigator.pop(context);
                 },
               )
           ),
@@ -76,23 +137,17 @@ class ModifyBindState extends State<ModifyBindPage>{
 
             children: <Widget>[
 
-              Container(
-                padding: const EdgeInsets.only(top: 30),
-                height: 160,
-                child: Image(image: AssetImage('images/logo.png')),
-              ),
-
               Form(
 
                 key : _formKey,
                 child: Container(
 
-                  padding: const EdgeInsets.fromLTRB(25, 50, 25, 0),
+                  padding: const EdgeInsets.fromLTRB(25, 30, 25, 0),
                   child: Card(
                     child: Column(
                       children: <Widget>[
-                        _showPhoneInput(),
-                        _showPasswordInput()
+                        showKeyInput(),
+                        showSecretInput()
                       ]
                     )
                   )
@@ -103,24 +158,30 @@ class ModifyBindState extends State<ModifyBindPage>{
             ),
               Container(
                 height: 70,
-                padding: const EdgeInsets.fromLTRB(35, 30, 35, 0),
+                padding: const EdgeInsets.fromLTRB(25, 30, 25, 0),
                 child: TextButton(
-                  child: Text('提交更新'),
+                  child: Text('提 交'),
                   style: ButtonStyle(
                     textStyle: MaterialStateProperty.all(TextStyle(fontSize: 16)),
                     backgroundColor: MaterialStateProperty.all(Colors.teal),
                     foregroundColor: MaterialStateProperty.all(Colors.white)
                 ),
                   onPressed: () {
-                    //_onLogin();
+
+                    if(!_formKey.currentState!.validate()){
+
+                       return;
+                    }
+
+                    _formKey.currentState!.save();
+                    bindExchange(key,secret);
                   },
                 ),
               )
 
           ],
 
-          )
-
+        )
     );
   }
 

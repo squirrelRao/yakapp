@@ -181,7 +181,7 @@ class LoginState extends State<LoginPage>{
                             SharedPreferences prefs = await SharedPreferences.getInstance();
                             prefs.setString("uid",data["data"]["user_id"]);
                             prefs.setString("name", data["data"]["name"]);
-
+                            prefs.setInt("isBind", data["data"]["bind"]);
                             Navigator.pop(context);
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (content){return HomePage();})

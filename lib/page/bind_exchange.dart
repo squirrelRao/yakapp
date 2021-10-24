@@ -1,6 +1,11 @@
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yakapp/page/login.dart';
+import 'package:yakapp/util/configs.dart';
+import 'package:yakapp/util/net_util.dart';
+import 'package:yakapp/util/common_util.dart';
 
 class BindExchangePage extends StatefulWidget{
 
@@ -19,19 +24,18 @@ class BindExchangeState extends State<BindExchangePage>{
     return Padding(
       padding: const EdgeInsets.fromLTRB(15.0, 5.0, 0.0, 0.0),
       child: new TextFormField(
-        maxLines: 1,
-        keyboardType: TextInputType.phone,
-        autofocus: false,
-        style: TextStyle(fontSize: 20),
+        maxLines: 2,
+        keyboardType: TextInputType.text,
+        autofocus: true,
+        style: TextStyle(fontSize: 16),
         decoration: new InputDecoration(
             border: InputBorder.none,
-            hintText: '请输入API-KEY',
+            hintText: '请填写账号对应的key',
             icon: new Icon(
               Icons.lock,
               color: Colors.teal,
             )),
-        onFieldSubmitted: (value) => key = value.trim(),
-        onTap: (){_formKey.currentState!.reset();},
+        onSaved: (value) => key = value!.trim(),
         validator: (value){
           if(value!.trim()==""){
             return "key不能为空";
@@ -45,19 +49,19 @@ class BindExchangeState extends State<BindExchangePage>{
     return Padding(
       padding: const EdgeInsets.fromLTRB(15.0, 5.0, 0.0, 10.0),
       child: new TextFormField(
-        maxLines: 1,
-        obscureText: true,
+        maxLines: 2,
+        keyboardType: TextInputType.text,
+        obscureText: false,
         autofocus: false,
-        style: TextStyle(fontSize: 20),
+        style: TextStyle(fontSize: 16),
         decoration: new InputDecoration(
             border: InputBorder.none,
-            hintText: '请输入API-SECRET',
+            hintText: '请填写账号对应的secret',
             icon: new Icon(
               Icons.lock,
               color: Colors.teal,
             )),
-        onFieldSubmitted: (value) => secret = value.trim(),
-        onTap: (){_formKey.currentState!.reset();},
+        onSaved: (value) => secret = value!.trim(),
         validator: (value){
           if(value!.trim()==""){
             return "secret不能为空";
@@ -67,6 +71,21 @@ class BindExchangeState extends State<BindExchangePage>{
     );
   }
 
+  void bindExchange(key,secret) async {
+
+    SharedPreferences prefs =  await SharedPreferences.getInstance();
+    String? userId = prefs.getString("uid");
+    (NetClient()).post(Configs.bindApi,{"user_id":userId,"key":key,"secret":secret}
+    , (data){
+
+          if(data["rc"] == 0){
+
+            Fluttertoast.showToast(msg: "交易所绑定成功");
+
+          }
+
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -74,15 +93,17 @@ class BindExchangeState extends State<BindExchangePage>{
     return Scaffold(
 
           appBar:AppBar(
-            title: const Text('注册账户-绑定'),
+            title: const Text('绑定交易所账号'),
               backgroundColor: Colors.teal,
               leading: IconButton(
                 icon:Icon(Icons.arrow_back_ios,color:Colors.white),
-                onPressed: (){
-                  Navigator.pop(context);
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (content){return LoginPage();})
-                  );
+                onPressed: () async {
+                    Navigator.pop(context);
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (content) {
+                          return LoginPage();
+                        })
+                    );
                 },
               )
           ),
@@ -114,7 +135,7 @@ class BindExchangeState extends State<BindExchangePage>{
                 height: 70,
                 padding: const EdgeInsets.fromLTRB(25, 30, 25, 0),
                 child: TextButton(
-                  child: Text('提交，完成注册'),
+                  child: Text('提 交'),
                   style: ButtonStyle(
                     textStyle: MaterialStateProperty.all(TextStyle(fontSize: 16)),
                     backgroundColor: MaterialStateProperty.all(Colors.teal),
@@ -124,8 +145,11 @@ class BindExchangeState extends State<BindExchangePage>{
 
                     if(!_formKey.currentState!.validate()){
 
-
+                       return;
                     }
+
+                    _formKey.currentState!.save();
+                    bindExchange(key,secret);
                   },
                 ),
               )
@@ -133,7 +157,6 @@ class BindExchangeState extends State<BindExchangePage>{
           ],
 
         )
-
     );
   }
 
