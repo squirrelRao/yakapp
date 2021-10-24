@@ -104,6 +104,9 @@ class ModifyBindState extends State<ModifyBindPage>{
 
             Fluttertoast.showToast(msg: "交易所绑定成功");
 
+          }else{
+            Fluttertoast.showToast(msg: "绑定失败，请检查key和secret是否正确！");
+
           }
 
         });
@@ -112,7 +115,8 @@ class ModifyBindState extends State<ModifyBindPage>{
   @override
   void initState(){
     super.initState();
-    queryBindInfo();
+
+    WidgetsBinding.instance!.addPostFrameCallback( (timestamp)=> queryBindInfo());
 
   }
 
