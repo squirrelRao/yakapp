@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yakapp/page/bind_exchange.dart';
 import 'package:yakapp/page/login.dart';
 import 'package:yakapp/util/net_util.dart';
@@ -39,7 +40,7 @@ class RegistState extends State<RegistPage>{
                   onPressed: (){
                     Navigator.pop(context);
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (content){return BindExchangePage();})
+                        MaterialPageRoute(builder: (content){return BindExchangePage(uid:userId);})
                     );
                   },
               ),
@@ -243,7 +244,7 @@ class RegistState extends State<RegistPage>{
                     }
                     _formKey.currentState!.save();
                     NetClient().post(Configs.registApi, {"phone":phone,"passwd":password},
-                        (data){
+                        (data) {
 
                               if(data["rc"] == 0){
 

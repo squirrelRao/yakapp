@@ -10,8 +10,12 @@ import 'package:yakapp/util/common_util.dart';
 class BindExchangePage extends StatefulWidget{
 
 
+  BindExchangePage({Key? key, uid}): super(key: key);
+
+  String uid = "";
+
   @override
-  State createState()  => BindExchangeState();
+  State createState()  => BindExchangeState(uid);
 }
 
 class BindExchangeState extends State<BindExchangePage>{
@@ -19,6 +23,9 @@ class BindExchangeState extends State<BindExchangePage>{
   final _formKey = new GlobalKey<FormState>();
   var key ="";
   var secret="";
+  var uid = "";
+
+  BindExchangeState(String uid);
 
   Widget showKeyInput() {
     return Padding(
@@ -73,14 +80,21 @@ class BindExchangeState extends State<BindExchangePage>{
 
   void bindExchange(key,secret) async {
 
-    SharedPreferences prefs =  await SharedPreferences.getInstance();
-    String? userId = prefs.getString("uid");
-    (NetClient()).post(Configs.bindApi,{"user_id":userId,"key":key,"secret":secret}
+    (NetClient()).post(Configs.bindApi,{"user_id":uid,"key":key,"secret":secret}
     , (data){
 
           if(data["rc"] == 0){
 
-            Fluttertoast.showToast(msg: "交易所绑定成功");
+            Fluttertoast.showToast(msg: "交易所绑定成功，请登录");
+            Navigator.pop(context);
+            Navigator.push(context,
+                MaterialPageRoute(builder: (content) {
+                  return LoginPage();
+                })
+            );
+
+          }else{
+            Fluttertoast.showToast(msg: "绑定失败，请检查key和secret是否正确！");
 
           }
 
