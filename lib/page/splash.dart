@@ -1,25 +1,17 @@
 import 'dart:async';
-import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:yakapp/page/login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:yakapp/main.dart';
-import 'package:yakapp/util/common_util.dart';class SplashPage extends StatefulWidget {
+
+class SplashPage extends StatefulWidget {
   @override
   State createState() => SplashState();
 }
 
 class SplashState extends State<SplashPage> {
-  var splash_image = "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1093264713,2279663012&fm=26&gp=0.jpg";
-  var _countdownTime = 2;
-  late Timer _timer;
-
-
 
   Future<bool> getUserStatus() async {
 
@@ -28,66 +20,50 @@ class SplashState extends State<SplashPage> {
     if(userId == null || userId.trim() == ""){
       return false;
     }
-
     return true;
-
   }
 
-  void startCountdownTimer() {
 
-    const oneSec = const Duration(seconds: 1);
-
-    _timer = Timer.periodic(oneSec, (timer) async{
+  void toMainPage(timestamp) async {
 
 
-           if(_countdownTime < 1){
+          bool isGetUser = await getUserStatus();
 
-             timer.cancel();
-             bool isGetUser = await getUserStatus();
+          setState(() {
 
-             setState(() {
+          Widget page;
 
-               Widget page;
+          if(!isGetUser) {
+          page = LoginPage();
 
-               if(!isGetUser) {
-                 page = LoginPage();
+          }else{
+          page = HomePage();
 
-               }else{
-                 page = HomePage();
+          }
 
-               }
-               timer.cancel();
-               Navigator.pop(context);
+          Future.delayed(Duration(seconds: 3),(){
+            Navigator.pop(context);
+            Navigator.push(context, MaterialPageRoute(builder: (content){return page;}));
+          });
+          });
 
-               Navigator.push(context, MaterialPageRoute(builder: (content){return page;}));
-               });
-
-           }else{
-             _countdownTime--;
-           }
-      });
   }
 
   @override
-  void dispose() {
-    super.dispose();
-    if (_timer != null) {
-      _timer.cancel();
-    }
+  void initState(){
+    super.initState();
+
+    WidgetsBinding.instance!.addPostFrameCallback(toMainPage);
+
   }
+
+
 
   @override
   Widget build(BuildContext context) {
-    startCountdownTimer();
 
-    return ConstrainedBox(
-        constraints: BoxConstraints.expand(),
-        child: Stack(fit: StackFit.expand,
-            alignment: Alignment.center,
-            children: <Widget>[
-              Image.network(this.splash_image, fit: BoxFit.fill)
-            ]
-        )
+    return Container(
+        child: Image.asset("images/splash.jpg",fit:BoxFit.cover)
     );
   }
 }

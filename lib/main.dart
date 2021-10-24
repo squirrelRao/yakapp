@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:yakapp/page/splash.dart';
 import 'page/assets.dart';
@@ -42,11 +44,11 @@ class MyApp extends StatelessWidget {
     //  startCountdownTimer();
 
     }
-    //else {
-    //
-    //   Fluttertoast.showToast(msg: "需要存储权限才能使用");
-    //   SystemNavigator.pop();
-    // }
+    else {
+
+      Fluttertoast.showToast(msg: "需要存储权限才能使用");
+      SystemNavigator.pop();
+    }
 
   }
 }
