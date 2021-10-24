@@ -41,7 +41,7 @@ class SplashState extends State<SplashPage> {
 
           }
 
-          Future.delayed(Duration(seconds: 3),(){
+          Future.delayed(Duration(seconds: 2),(){
             Navigator.pop(context);
             Navigator.push(context, MaterialPageRoute(builder: (content){return page;}));
           });
