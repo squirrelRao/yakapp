@@ -62,7 +62,9 @@ class UserCenterState extends State<UserCenterPage> {
 
   @override
   void initState(){
-    updateUserInfoDisplay();
+    super.initState();
+
+    WidgetsBinding.instance!.addPostFrameCallback( (timestamp)=> updateUserInfoDisplay());
 
   }
 

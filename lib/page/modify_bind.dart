@@ -19,14 +19,17 @@ class ModifyBindState extends State<ModifyBindPage>{
   final _formKey = new GlobalKey<FormState>();
   var key ="";
   var secret="";
+  TextEditingController keyController = new TextEditingController(text: '');
+  TextEditingController secretController = new TextEditingController(text: '');
 
   Widget showKeyInput() {
     return Padding(
       padding: const EdgeInsets.fromLTRB(15.0, 5.0, 0.0, 0.0),
       child: new TextFormField(
-        maxLines: 2,
+        maxLines: 4,
         keyboardType: TextInputType.text,
         autofocus: true,
+        controller: keyController,
         style: TextStyle(fontSize: 16),
         decoration: new InputDecoration(
             border: InputBorder.none,
@@ -49,8 +52,9 @@ class ModifyBindState extends State<ModifyBindPage>{
     return Padding(
       padding: const EdgeInsets.fromLTRB(15.0, 5.0, 0.0, 10.0),
       child: new TextFormField(
-        maxLines: 2,
+        maxLines: 4,
         autofocus: false,
+        controller: secretController,
         keyboardType: TextInputType.text,
         style: TextStyle(fontSize: 16),
         decoration: new InputDecoration(
@@ -79,13 +83,20 @@ class ModifyBindState extends State<ModifyBindPage>{
       if(data["rc"] == 0 && data["data"] != ""){
 
         setState(() {
-          key = data["api_key"];
-          secret = data["api_secret"];
+          key = data["data"]["api_key"];
+          secret = data["data"]["api_secret"];
+          keyController.text = key;
+          secretController.text = secret;
+          prefs.setInt("isBind", 1);
+
         });
       }else{
         setState(() {
           key = "";
           secret = "";
+          keyController.text = key;
+          secretController.text = secret;
+          prefs.setInt("isBind", 0);
         });
       }
 
@@ -102,7 +113,7 @@ class ModifyBindState extends State<ModifyBindPage>{
 
           if(data["rc"] == 0){
 
-            Fluttertoast.showToast(msg: "交易所绑定成功");
+            Fluttertoast.showToast(msg: "交易所账号更新成功");
 
           }else{
             Fluttertoast.showToast(msg: "绑定失败，请检查key和secret是否正确！");
@@ -117,7 +128,6 @@ class ModifyBindState extends State<ModifyBindPage>{
     super.initState();
 
     WidgetsBinding.instance!.addPostFrameCallback( (timestamp)=> queryBindInfo());
-
   }
 
   @override
