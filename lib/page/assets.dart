@@ -3,6 +3,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yakapp/util/configs.dart';
 import 'package:yakapp/util/net_util.dart';
 
+import 'asset_setting.dart';
+import 'common_setting.dart';
+
 class AssetsPage extends StatefulWidget{
 
 
@@ -55,7 +58,9 @@ class AssetsState extends State<AssetsPage>{
       datas["ror_touch"] = "仅提醒";
     }
 
-    return Card(
+    return GestureDetector(
+
+      child:Card(
 
         elevation: 1,
         margin: const EdgeInsets.all(4.0),
@@ -171,6 +176,12 @@ class AssetsState extends State<AssetsPage>{
         )
 
 
+    ),
+    onTap: (){
+      setState(() {
+        Navigator.push(context, MaterialPageRoute(builder: (content){return CommonSettingPage();}));
+      });
+    },
     );
   }
 
@@ -182,7 +193,8 @@ class AssetsState extends State<AssetsPage>{
       item["ror"] = 0.0;
     }
 
-    return Card(
+    return GestureDetector(
+        child:Card(
 
         elevation: 1,
         margin: const EdgeInsets.all(4.0),
@@ -344,6 +356,12 @@ class AssetsState extends State<AssetsPage>{
         )
 
 
+    ),
+      onTap: (){
+          setState(() {
+            Navigator.push(context, MaterialPageRoute(builder: (content){return AssetSettingPage(item["asset"]);}));
+          });
+      },
     );
   }
 
