@@ -12,7 +12,8 @@ class AssetsPage extends StatefulWidget{
 
 class AssetsState extends State<AssetsPage>{
 
-  dynamic datas;
+  late Map datas;
+  int listCount = 0;
 
   void getUserAssets() async {
 
@@ -24,9 +25,13 @@ class AssetsState extends State<AssetsPage>{
 
     ((NetClient()).post(Configs.getAssetsApi, {"user_id":uid}, (data){
 
-            setState(() {
-                datas = data;
-            });
+
+              if(data["rc"] == 0) {
+                listCount = data["data"]["snapshots"].length + 1;
+                datas = data["data"];
+              }
+
+              setState(() {});
     }));
 
   }
@@ -41,6 +46,307 @@ class AssetsState extends State<AssetsPage>{
 
   }
 
+  //build asset summary
+  Widget buildAssetSummary(){
+
+    if(datas["ror_touch"] == "auto"){
+      datas["ror_touch"] = "自动卖出并提醒";
+    }else if(datas["ror_touch"] == "remind"){
+      datas["ror_touch"] = "仅提醒";
+    }
+
+    return Card(
+
+        elevation: 1,
+        margin: const EdgeInsets.all(4.0),
+        color: Colors.white60,
+        child:Column(
+          children: [
+            Row(
+              children: [
+                Expanded(
+                    child:(
+                        Column(
+                            children: [
+                              SizedBox(height: 10),
+                              Text(
+                                  "总资产",
+                                  style: TextStyle(fontSize: 15.0)
+                              ),
+                              Text(
+                                  datas["accumulates_free"].toString()+" "+datas["price_unit"],
+                                  style: TextStyle(fontSize: 15.0)
+                              )
+                            ])
+                    )),
+                Expanded(
+                    child:(
+                        Column(
+                            children: [
+                              SizedBox(height: 10),
+                              Text(
+                                  "收益累计范围",
+                                  style: TextStyle(fontSize: 15.0)
+                              ),
+                              Text(
+                                  datas["ror_duration"].toString()+"天",
+                                  style: TextStyle(fontSize: 15.0)
+                              )
+                            ])
+                    ))
+              ],
+            ),
+            SizedBox(height: 10),
+            Row(
+                children: [
+                  Expanded(
+                      child:(
+                          Column(
+                              children: [
+                                Text(
+                                    "累计收益",
+                                    style: TextStyle(fontSize: 15.0)
+                                ),
+                                Text(
+                                    datas["accumulates_return"].toString()+" "+datas["price_unit"],
+                                    style: TextStyle(fontSize: 15.0)
+                                )
+                              ])
+                      )),
+                  Expanded(
+                      child:(
+                          Column(
+                              children: [
+                                Text(
+                                    "累计收益率",
+                                    style: TextStyle(fontSize: 15.0)
+                                ),
+                                Text(
+                                    datas["accumulates_ror"].toString()+"%",
+                                    style: TextStyle(fontSize: 15.0)
+                                )
+                              ])
+                      )),
+
+                ]
+
+            ),
+            SizedBox(height: 10),
+            Row(
+                children: [
+                  Expanded(
+                      child:(
+                          Column(
+                              children: [
+                                Text(
+                                    "满足目标止损",
+                                    style: TextStyle(fontSize: 15.0)
+                                ),
+                                Text(
+                                    datas["ror_touch"],
+                                    style: TextStyle(fontSize: 15.0)
+                                )
+                              ])
+                      )),
+                  Expanded(
+                      child:(
+                          Column(
+                              children: [
+                                Text(
+                                    "更新时间",
+                                    style: TextStyle(fontSize: 15.0)
+                                ),
+                                Text(
+                                    datas["update_time_str"],
+                                    style: TextStyle(fontSize: 15.0)
+                                )
+                              ])
+                      )),
+                ]
+
+            ),
+            SizedBox(height: 10),
+
+          ]
+        )
+
+
+    );
+  }
+
+  //build asset summary
+  Widget buildAssetDetail(index){
+
+    var item  = datas["snapshots"][index];
+    if(item["ror"]==-0.0){
+      item["ror"] = 0.0;
+    }
+
+    return Card(
+
+        elevation: 1,
+        margin: const EdgeInsets.all(4.0),
+        color: Colors.white60,
+        child:Column(
+            children: [
+              Row(
+                children: [
+                  Expanded(
+                      child:(
+                          Column(
+                              children: [
+                                SizedBox(height: 10),
+                                Text(
+                                    "币种",
+                                    style: TextStyle(fontSize: 15.0)
+                                ),
+                                Text(
+                                    item["asset"],
+                                    style: TextStyle(fontSize: 15.0)
+                                )
+                              ])
+                      )),
+                  Expanded(
+                      child:(
+                          Column(
+                              children: [
+                                SizedBox(height: 10),
+                                Text(
+                                    "可用",
+                                    style: TextStyle(fontSize: 15.0)
+                                ),
+                                Text(
+                                    item["free"].toString(),
+                                    style: TextStyle(fontSize: 15.0)
+                                )
+                              ])
+                      )),
+
+
+                  Expanded(
+                      child:(
+                          Column(
+                              children: [
+                                SizedBox(height: 10),
+                                Text(
+                                    "冻结",
+                                    style: TextStyle(fontSize: 15.0)
+                                ),
+                                Text(
+                                    item["locked"].toString(),
+                                    style: TextStyle(fontSize: 15.0)
+                                )
+                              ])
+                      )),
+
+                ],
+              ),
+              SizedBox(height: 10),
+              Row(
+                  children: [
+                    Expanded(
+                        child:(
+                            Column(
+                                children: [
+                                  Text(
+                                      "累计收益率",
+                                      style: TextStyle(fontSize: 15.0)
+                                  ),
+                                  Text(
+                                      item["return"].toString()+"%",
+                                      style: TextStyle(fontSize: 15.0)
+                                  )
+                                ])
+                        )),
+                    Expanded(
+                        child:(
+                            Column(
+                                children: [
+                                  Text(
+                                      "目标收益率",
+                                      style: TextStyle(fontSize: 15.0)
+                                  ),
+                                  Text(
+                                      item["target_ror"].toString()+"%",
+                                      style: TextStyle(fontSize: 15.0)
+                                  )
+                                ])
+                        )),
+                    Expanded(
+                        child:(
+                            Column(
+                                children: [
+                                  Text(
+                                      "止损收益率",
+                                      style: TextStyle(fontSize: 15.0)
+                                  ),
+                                  Text(
+                                      item["lowest_ror"].toString()+"%",
+                                      style: TextStyle(fontSize: 15.0)
+                                  )
+                                ])
+                        )),
+
+                  ]
+
+              ),
+              SizedBox(height: 10),
+              Row(
+                  children: [
+                    Expanded(
+                        child:(
+                            Column(
+                                children: [
+                                  Text(
+                                      "累计收益",
+                                      style: TextStyle(fontSize: 15.0)
+                                  ),
+                                  Text(
+                                      item["return"].toString(),
+                                      style: TextStyle(fontSize: 15.0)
+                                  )
+                                ])
+                        )),
+                    Expanded(
+                        child:(
+                            Column(
+                                children: [
+                                  Text(
+                                      "目标达成卖出",
+                                      style: TextStyle(fontSize: 15.0)
+                                  ),
+                                  Text(
+                                      item["t_sell"].toString()+"%",
+                                      style: TextStyle(fontSize: 15.0)
+                                  )
+                                ])
+                        )),
+                    Expanded(
+                        child:(
+                            Column(
+                                children: [
+                                  Text(
+                                      "止损触发卖出",
+                                      style: TextStyle(fontSize: 15.0)
+                                  ),
+                                  Text(
+                                      item["l_sell"].toString()+"%",
+                                      style: TextStyle(fontSize: 15.0)
+                                  )
+                                ])
+                        )),
+
+                  ]
+
+              ),
+              SizedBox(height: 10),
+            ]
+        )
+
+
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,33 +356,18 @@ class AssetsState extends State<AssetsPage>{
               backgroundColor: Colors.teal,
             ),
             body: ListView.builder(
-                itemCount: datas.length,
+                itemCount: listCount,
                 itemBuilder: (BuildContext context,int index) {
-
 
                     if(index == 0){
 
-                      var total_ror = datas["accumulates_ror"];
-                      var total_return = datas["accumulates_ror_return"];
-                      var total_free = datas["accumulates_ror_free"];
-                      var price_unit = datas["price_unit"];
-                      var ror_duration = datas["ror_duration"];
-                      return AssetsSummary(total_ror, total_return, total_free, price_unit, ror_duration);
+                      return buildAssetSummary();
+
 
                     }else{
 
-                      dynamic data = datas[index];
 
-                      var name = data["asset"];
-                      var free = data["free"];
-                      var price = data["price"];
-                      var ror = data["ror"];
-                      var ror_return = data["return"];
-                      var target_ror=data["target_ror"];
-                      var lowest_ror=data["lowest_ror"];
-                      var price_unit = data["price_unit"];
-                      return AssetItem(name,free,price,ror,ror_return,target_ror,lowest_ror,price_unit);
-
+                      return buildAssetDetail(index-1);
 
                     }
 
@@ -88,181 +379,5 @@ class AssetsState extends State<AssetsPage>{
   }
 }
 
-
-class AssetItem extends StatefulWidget{
-
-  AssetItem(name,free,price,ror,ror_return,target_ror,lowest_ror,price_unit);
-
-
-  var name;
-  var free;
-  var price;
-  var ror;
-  var ror_return;
-  var target_ror="-";
-  var lowest_ror="-";
-  var price_unit;
-
-
-  @override
-  State createState()=> AssetState(name,free,price,ror,ror_return,target_ror,lowest_ror,price_unit);
-}
-
-class AssetState extends State<AssetItem>{
-
-  AssetState(name,free,price,ror,ror_return,target_ror,lowest_ror,price_unit);
-  
-  var name;
-  var free;
-  var price;
-  var ror;
-  var ror_return;
-  var target_ror="-";
-  var lowest_ror="-";
-  var price_unit;
-
-  @override
-  Widget build(BuildContext context) {
-
-    return Center(
-
-          child: Card(
-          elevation: 1,
-          margin: const EdgeInsets.all(4.0),
-          color: Colors.white60,
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  Expanded(child: AssetData("币种:",name))
-                  ],
-              ),
-              Row(
-                children: [
-                  Expanded(child:AssetData("持仓:",free)),
-                  Expanded(child:AssetData("价格",price+price_unit)),
-                  Expanded(child:AssetData("收益:",ror_return+price_unit))
-                ],
-              ),
-              Row(
-                children: [
-                  Expanded(child:AssetData("收益率:",ror)),
-                  Expanded(child:AssetData("目标收益:",target_ror)),
-                  Expanded(child:AssetData("止损收益:",lowest_ror))
-                ],
-              )
-
-            ],
-
-          )
-
-        ),
-    );
-  }
-}
-
-
-class AssetData extends StatefulWidget{
-
-  String title = "";
-  String value = "";
-
-  AssetData(title,value, {Key? key}) : super(key: key){
-    this.title = title;
-    this.value = value;
-  }
-
-  @override
-  State<StatefulWidget> createState() => AssetDataState(title,value);
-
-}
-
-class AssetDataState extends State<AssetData>{
-
-  String title = "";
-  String value = "";
-
-
-  AssetDataState(this.title, this.value);
-
-  @override
-  Widget build(BuildContext context) {
-
-    return Column(
-
-      children: [
-            Container(
-              child: Text(
-                title,
-                style: TextStyle(fontSize: 15.0),
-              ),
-            ),
-            Container(
-              child: Text(
-                value,
-                style: TextStyle(fontSize: 15.0),
-              ),
-            )
-      ],
-    );
-  }
-}
-
-class AssetsSummary extends StatefulWidget{
-
-  AssetsSummary(this.total_ror,this.total_return,this.total_free,this.price_unit,this.ror_duration);
-
-  var total_ror;
-  var total_return;
-  var total_free;
-  var price_unit;
-  var ror_duration;
-
-  @override
-  State<StatefulWidget> createState() => AssetsSummaryState(total_ror,total_return,total_free,ror_duration,price_unit);
-}
-
-class AssetsSummaryState extends State<AssetsSummary>{
-
-  AssetsSummaryState(this.total_ror,this.total_return,this.total_free,ror_duration,price_unit);
-
-  var total_ror;
-  var total_return;
-  var total_free;
-  var ror_duration;
-  var price_unit;
-
-
-  @override
-  Widget build(BuildContext context) {
-
-    return Center(
-
-      child: Card(
-
-          elevation: 1,
-          margin: const EdgeInsets.all(4.0),
-          color: Colors.white60,
-          child:Row(
-
-            children: [
-              Row(
-                children: [
-                  Expanded(child: AssetData("总资产:",total_ror+price_unit)),
-                  Expanded(child: AssetData("累计收益:",total_return+price_unit)),
-                  Expanded(child: AssetData("累计收益率:",total_free)),
-                  Expanded(child: AssetData("收益天数:",ror_duration))
-                ],
-              ),
-              ],
-            )
-
-          ),
-         );
-
-  }
-
-
-}
 
 
