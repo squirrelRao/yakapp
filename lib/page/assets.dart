@@ -53,9 +53,11 @@ class AssetsState extends State<AssetsPage>{
   Widget buildAssetSummary(){
 
     if(datas["ror_touch"] == "auto"){
-      datas["ror_touch"] = "自动卖出并提醒";
-    }else if(datas["ror_touch"] == "remind"){
-      datas["ror_touch"] = "仅提醒";
+      datas["ror_touch"] = "自动卖出";
+    }else if(datas["ror_touch"] == "notify"){
+      datas["ror_touch"] = "发送提醒";
+    }else{
+      datas["ror_touch"] = "不执行";
     }
 
     return GestureDetector(
@@ -90,7 +92,7 @@ class AssetsState extends State<AssetsPage>{
                             children: [
                               SizedBox(height: 10),
                               Text(
-                                  "收益累计范围",
+                                  "收益周期",
                                   style: TextStyle(fontSize: 15.0)
                               ),
                               Text(
@@ -144,7 +146,7 @@ class AssetsState extends State<AssetsPage>{
                           Column(
                               children: [
                                 Text(
-                                    "满足目标止损",
+                                    "盈损智能",
                                     style: TextStyle(fontSize: 15.0)
                                 ),
                                 Text(
@@ -373,7 +375,17 @@ class AssetsState extends State<AssetsPage>{
               title: const Text('资产'),
               backgroundColor: Colors.teal,
             ),
-            body: ListView.builder(
+            body:
+            RefreshIndicator(
+
+            onRefresh: () async {
+
+              listCount = 0;
+              datas.clear();
+              getUserAssets();
+
+            },
+            child:ListView.builder(
                 itemCount: listCount,
                 itemBuilder: (BuildContext context,int index) {
 
@@ -392,6 +404,7 @@ class AssetsState extends State<AssetsPage>{
 
 
             })
+            )
 
     );
   }
