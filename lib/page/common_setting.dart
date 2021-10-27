@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yakapp/util/configs.dart';
@@ -7,6 +8,7 @@ import 'package:yakapp/util/net_util.dart';
 
 class CommonSettingPage extends StatefulWidget{
 
+  CommonSettingPage();
 
   @override
   State createState()  => CommonSettingState();
@@ -14,87 +16,134 @@ class CommonSettingPage extends StatefulWidget{
 
 class CommonSettingState extends State<CommonSettingPage>{
 
-  final _formKey = new GlobalKey<FormState>();
-  var key ="";
-  var secret="";
-  TextEditingController keyController = new TextEditingController(text: '');
-  TextEditingController secretController = new TextEditingController(text: '');
+  CommonSettingState();
 
-  Widget showKeyInput() {
+  var ror_touch = "auto";
+  var ror_duration = 7.0;
+
+  final _formKey = new GlobalKey<FormState>();
+
+  TextEditingController durationController = new TextEditingController(text: "");
+
+
+  Widget showDurationInput() {
     return Padding(
       padding: const EdgeInsets.fromLTRB(15.0, 5.0, 0.0, 0.0),
       child: new TextFormField(
         maxLines: 1,
-        keyboardType: TextInputType.text,
-        autofocus: true,
-        controller: keyController,
+        keyboardType: TextInputType.number,
+        inputFormatters: [
+          LengthLimitingTextInputFormatter(3),
+          FilteringTextInputFormatter.allow(RegExp("[0-9]"))
+        ],
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        controller: durationController,
         style: TextStyle(fontSize: 16),
         decoration: new InputDecoration(
             border: InputBorder.none,
-            hintText: '请填写账号对应的key',
+            hintText: '',
+            labelText: "收益累计周期 (推荐: 7或30天)",
             icon: new Icon(
-              Icons.lock,
+              Icons.arrow_forward,
               color: Colors.teal,
             )),
-        onSaved: (value) => key = value!.trim(),
+        onSaved: (value) => ror_duration = double.parse(value!.trim()),
+        onTap: (){
+          durationController.text="";
+        },
         validator: (value){
           if(value!.trim()==""){
-            return "key不能为空";
+            return "不能为空";
+          }
+
+          if(double.parse(value) < 1 || double.parse(value) > 365){
+            return "范围为1到365";
           }
         },
       ),
     );
   }
 
-  Widget showSecretInput() {
+
+  Widget showActionInput() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(15.0, 5.0, 0.0, 10.0),
-      child: new TextFormField(
-        maxLines: 1,
-        autofocus: false,
-        controller: secretController,
-        keyboardType: TextInputType.text,
-        style: TextStyle(fontSize: 16),
-        decoration: new InputDecoration(
-            border: InputBorder.none,
-            hintText: '请填写账号对应的secret',
-            icon: new Icon(
-              Icons.lock,
-              color: Colors.teal,
-            )),
-        onSaved: (value) => secret = value!.trim(),
-        validator: (value){
-          if(value!.trim()==""){
-            return "secret不能为空";
-          }
-        },
-      ),
+      padding: const EdgeInsets.fromLTRB(15.0, 5.0, 0.0, 0.0),
+      child:Column(children: [
+        Row(
+          children:[
+            SizedBox(width: 0),
+            Text("当目标收益达成或触发止损时:")
+          ],
+        ),
+      Column(
+        children: <Widget>[
+          Row(children:[
+          Radio(
+            // 按钮的值
+            value: "auto",
+            // 改变事件
+            onChanged: (value){
+              setState(() {
+                ror_touch = value.toString();
+              });
+            },
+            // 按钮组的值
+            groupValue:ror_touch,
+          ),
+          Text("自动卖出设定比例并发送提醒",style: TextStyle(fontSize: 13))
+    ]),
+          Row(children:[
+          Radio(
+            value:"notify",
+            onChanged: (value){
+              setState(() {
+                ror_touch = value.toString();
+              });
+            },
+            groupValue:ror_touch,
+          ),
+          Text("只发送提醒",style: TextStyle(fontSize: 13))
+  ]),
+           Row(
+               children:[
+               Radio(
+              value:"non",
+              onChanged: (value){
+                setState(() {
+                  ror_touch = value.toString();
+                });
+              },
+            groupValue: ror_touch,
+          ),
+          Text("不执行任何操作",style: TextStyle(fontSize: 13))
+           ])
+        ],
+      )
+    ]),
     );
   }
 
-  void queryBindInfo() async {
+
+  void queryUserInfo() async {
 
     SharedPreferences prefs =  await SharedPreferences.getInstance();
     String? userId = prefs.getString("uid");
-    (NetClient()).post(Configs.getBindInfo, {"uid":userId}, (data){
+    (NetClient()).post(Configs.getUserInfo, {"user_id":userId}, (data){
 
       if(data["rc"] == 0 && data["data"] != ""){
+        data = data["data"];
 
         setState(() {
-          key = data["data"]["api_key"];
-          secret = data["data"]["api_secret"];
-          keyController.text = key;
-          secretController.text = secret;
-          prefs.setInt("isBind", 1);
+
+          durationController.text = data["ror_duration"].toString();
+          ror_touch = data["ror_touch"];
+
 
         });
       }else{
         setState(() {
-          key = "";
-          secret = "";
-          keyController.text = key;
-          secretController.text = secret;
-          prefs.setInt("isBind", 0);
+
+
         });
       }
 
@@ -102,19 +151,20 @@ class CommonSettingState extends State<CommonSettingPage>{
 
   }
 
-  void bindExchange(key,secret) async {
+  void submitConfig(ror_duration,ror_touch) async {
 
     SharedPreferences prefs =  await SharedPreferences.getInstance();
     String? userId = prefs.getString("uid");
-    (NetClient()).post(Configs.bindApi,{"user_id":userId,"key":key,"secret":secret}
-    , (data){
+    (NetClient()).post(Configs.updateUserConfigApi,
+        {"user_id":userId,"ror_duration":ror_duration,"ror_touch":ror_touch},
+            (data){
 
           if(data["rc"] == 0){
 
-            Fluttertoast.showToast(msg: "交易所账号更新成功");
+            Fluttertoast.showToast(msg: "更新成功");
 
           }else{
-            Fluttertoast.showToast(msg: "绑定失败，请检查key和secret是否正确！");
+            Fluttertoast.showToast(msg: "更新失败，请重新登录后再设置");
 
           }
 
@@ -125,7 +175,7 @@ class CommonSettingState extends State<CommonSettingPage>{
   void initState(){
     super.initState();
 
-    WidgetsBinding.instance!.addPostFrameCallback( (timestamp)=> queryBindInfo());
+    WidgetsBinding.instance!.addPostFrameCallback( (timestamp)=> queryUserInfo());
   }
 
   @override
@@ -135,7 +185,7 @@ class CommonSettingState extends State<CommonSettingPage>{
     return Scaffold(
 
           appBar:AppBar(
-            title: const Text('通用配置'),
+            title: const Text('收益设置'),
               backgroundColor: Colors.teal,
               leading: IconButton(
                 icon:Icon(Icons.arrow_back_ios,color:Colors.white),
@@ -158,8 +208,9 @@ class CommonSettingState extends State<CommonSettingPage>{
                   child: Card(
                     child: Column(
                       children: <Widget>[
-                        showKeyInput(),
-                        showSecretInput()
+                        showDurationInput(),
+                        showActionInput(),
+                        SizedBox(height: 10)
                       ]
                     )
                   )
@@ -186,7 +237,7 @@ class CommonSettingState extends State<CommonSettingPage>{
                     }
 
                     _formKey.currentState!.save();
-                    bindExchange(key,secret);
+                    submitConfig(ror_duration,ror_touch);
                   },
                 ),
               )

@@ -9,8 +9,10 @@ class Configs {
   static const String getBindInfo = baseUrl + "/v1/bind/info";
   static const String bindApi = baseUrl +"/v1/bind_exchange";
   static const String getAssetsApi = baseUrl +"/v1/assets/detail";
-  static const String updateAssetRorConfigApi = baseUrl +"/v1/regist";
-  static const String getOrderApi = baseUrl +"/v1/regist";
+  static const String getUserInfo = baseUrl + "/v1/get/user";
+  static const String getAssetConfigApi = baseUrl + "/v1/query/asset/config";
+  static const String updateAssetConfigApi = baseUrl +"/v1/asset/config";
+  static const String updateUserConfigApi = baseUrl +"/v1/user/config";
   static const String checkSystemStatusApi = baseUrl +"/v1/regist";
   static const String checkUserStatusApi = baseUrl +"/v1/regist";
   static const String modifyPasswordApi = baseUrl +"/v1/regist";

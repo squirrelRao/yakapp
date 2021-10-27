@@ -359,7 +359,7 @@ class AssetsState extends State<AssetsPage>{
     ),
       onTap: (){
           setState(() {
-            Navigator.push(context, MaterialPageRoute(builder: (content){return AssetSettingPage(item["asset"]);}));
+            Navigator.push(context, MaterialPageRoute(builder: (content){return AssetSettingPage(asset : item["asset"]);}));
           });
       },
     );
