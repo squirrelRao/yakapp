@@ -25,6 +25,7 @@ class AssetSettingState extends State<AssetSettingPage>{
   var t_sell;
   var loweset_ror;
   var l_sell;
+  var title = "盈损设置";
 
   final _formKey = new GlobalKey<FormState>();
 
@@ -195,6 +196,7 @@ class AssetSettingState extends State<AssetSettingPage>{
 
         setState(() {
           this.asset = asset;
+          this.title = this.asset + "盈损设置";
           trController.text = data["target_ror"].toString();
           tsController.text = data["t_sell"].toString();
           lrController.text = data["lowest_ror"].toString();
@@ -250,7 +252,7 @@ class AssetSettingState extends State<AssetSettingPage>{
     return Scaffold(
 
           appBar:AppBar(
-            title: const Text('目标止损设置'),
+            title:  Text(title),
               backgroundColor: Colors.teal,
               leading: IconButton(
                 icon:Icon(Icons.arrow_back_ios,color:Colors.white),
@@ -275,8 +277,8 @@ class AssetSettingState extends State<AssetSettingPage>{
                       children: <Widget>[
                         showCoin(),
                         showTargetRorInput(),
-                        showLowestRorInput(),
                         showTsellInput(),
+                        showLowestRorInput(),
                         showLsellInput(),
                         SizedBox(height: 10)
                       ]

@@ -26,7 +26,8 @@ class ModifyPasswdState extends State<ModifyPasswdPage>{
         style: TextStyle(fontSize: 20),
         decoration: new InputDecoration(
             border: InputBorder.none,
-            hintText: '请输入原密码',
+            hintText: '',
+            labelText: "原密码",
             icon: new Icon(
               Icons.lock,
               color: Colors.teal,
@@ -46,7 +47,8 @@ class ModifyPasswdState extends State<ModifyPasswdPage>{
         style: TextStyle(fontSize: 20),
         decoration: new InputDecoration(
             border: InputBorder.none,
-            hintText: '请输入新密码',
+            hintText: '',
+            labelText: "新密码",
             icon: new Icon(
               Icons.lock,
               color: Colors.teal,
@@ -66,7 +68,8 @@ class ModifyPasswdState extends State<ModifyPasswdPage>{
         style: TextStyle(fontSize: 20),
         decoration: new InputDecoration(
             border: InputBorder.none,
-            hintText: '请再次输入新密码',
+            hintText: '',
+            labelText: "新密码确认",
             icon: new Icon(
               Icons.lock,
               color: Colors.teal,

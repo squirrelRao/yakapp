@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yakapp/page/bind_exchange.dart';
+import 'package:yakapp/page/common_setting.dart';
 import 'package:yakapp/page/login.dart';
 import 'package:yakapp/page/modify_bind.dart';
 import 'package:yakapp/page/modify_passwd.dart';
@@ -133,10 +134,17 @@ class UserCenterState extends State<UserCenterPage> {
                       })
                 ),
                 ListTile(
-                  leading: Icon(Icons.admin_panel_settings),
-                  title: Text("通用设置"),
+                  leading: Icon(Icons.monetization_on_outlined),
+                  title: Text("收益设置"),
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (content){return CommonSettingPage();}));
+                  },
                   trailing:IconButton(icon:Icon(Icons.arrow_forward_ios_rounded),
-                      onPressed: (){})
+                      onPressed: (){
+
+                        Navigator.push(context, MaterialPageRoute(builder: (content){return CommonSettingPage();}));
+
+                      })
                 ),
                 ListTile(
                   leading: Icon(Icons.info_outline),

@@ -37,7 +37,8 @@ class BindExchangeState extends State<BindExchangePage>{
         style: TextStyle(fontSize: 16),
         decoration: new InputDecoration(
             border: InputBorder.none,
-            hintText: '请填写账号对应的key',
+            hintText: '',
+            labelText: "交易所账号对应的key",
             icon: new Icon(
               Icons.lock,
               color: Colors.teal,
@@ -63,7 +64,8 @@ class BindExchangeState extends State<BindExchangePage>{
         style: TextStyle(fontSize: 16),
         decoration: new InputDecoration(
             border: InputBorder.none,
-            hintText: '请填写账号对应的secret',
+            hintText: '',
+            labelText: "交易所账号对应的secret",
             icon: new Icon(
               Icons.lock,
               color: Colors.teal,

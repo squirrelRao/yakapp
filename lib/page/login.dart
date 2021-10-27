@@ -33,7 +33,8 @@ class LoginState extends State<LoginPage>{
           style: TextStyle(fontSize: 20),
           decoration: new InputDecoration(
               border: InputBorder.none,
-              hintText: '请输入手机号',
+              hintText: '',
+              labelText: "手机号",
               icon: new Icon(
                 Icons.phone,
                 color: Colors.teal,
@@ -87,7 +88,8 @@ class LoginState extends State<LoginPage>{
         style: TextStyle(fontSize: 20),
         decoration: new InputDecoration(
             border: InputBorder.none,
-            hintText: '请输入密码',
+            hintText: '',
+            labelText: "密码",
             icon: new Icon(
               Icons.lock,
               color: Colors.teal,
