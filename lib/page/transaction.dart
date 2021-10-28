@@ -139,7 +139,6 @@ class TransactionState extends State<TransactionPage>{
                         child:(
                             Column(
                                 children: [
-                                  SizedBox(height: 10),
                                   Text(
                                       "价格",
                                       style: TextStyle(fontSize: 15.0)
