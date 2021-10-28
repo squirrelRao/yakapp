@@ -3,8 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:yakapp/page/splash.dart';
+import 'package:yakapp/page/transaction.dart';
 import 'page/assets.dart';
-import 'page/transaction.dart';
 import 'page/user_center.dart';
 import 'util/common_util.dart';
 
@@ -62,7 +62,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 
   int currentIndex = 0;
-  List tabPages = [ AssetsPage(), TransactionsPage(), UserCenterPage()];
+  List tabPages = [ AssetsPage(), TransactionPage(), UserCenterPage()];
 
   void onTabSelected(index){
 
