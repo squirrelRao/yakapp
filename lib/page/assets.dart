@@ -267,7 +267,7 @@ class AssetsState extends State<AssetsPage>{
                                       style: TextStyle(fontSize: 15.0)
                                   ),
                                   Text(
-                                      item["return"].toString()+"%",
+                                      item["ror"].toString()+"%",
                                       style: TextStyle(fontSize: 15.0)
                                   )
                                 ])
