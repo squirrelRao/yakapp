@@ -19,6 +19,7 @@ class CommonSettingState extends State<CommonSettingPage>{
   CommonSettingState();
 
   var ror_touch = "auto";
+  var l_ror_touch = "auto";
   var ror_duration = 7.0;
 
   final _formKey = new GlobalKey<FormState>();
@@ -72,7 +73,7 @@ class CommonSettingState extends State<CommonSettingPage>{
         Row(
           children:[
             SizedBox(width: 0),
-            Text("当目标收益达成或触发止损时:")
+            Text("目标收益达成时:")
           ],
         ),
       Column(
@@ -124,6 +125,64 @@ class CommonSettingState extends State<CommonSettingPage>{
   }
 
 
+  Widget showLActionInput() {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(15.0, 5.0, 0.0, 0.0),
+      child:Column(children: [
+        Row(
+          children:[
+            SizedBox(width: 0),
+            Text("最低收益达成时:")
+          ],
+        ),
+        Column(
+          children: <Widget>[
+            Row(children:[
+              Radio(
+                // 按钮的值
+                value: "auto",
+                // 改变事件
+                onChanged: (value){
+                  setState(() {
+                    l_ror_touch = value.toString();
+                  });
+                },
+                // 按钮组的值
+                groupValue:l_ror_touch,
+              ),
+              Text("自动卖出设定比例并发送提醒",style: TextStyle(fontSize: 13))
+            ]),
+            Row(children:[
+              Radio(
+                value:"notify",
+                onChanged: (value){
+                  setState(() {
+                    l_ror_touch = value.toString();
+                  });
+                },
+                groupValue:l_ror_touch,
+              ),
+              Text("只发送提醒",style: TextStyle(fontSize: 13))
+            ]),
+            Row(
+                children:[
+                  Radio(
+                    value:"non",
+                    onChanged: (value){
+                      setState(() {
+                        l_ror_touch = value.toString();
+                      });
+                    },
+                    groupValue: l_ror_touch,
+                  ),
+                  Text("不执行任何操作",style: TextStyle(fontSize: 13))
+                ])
+          ],
+        )
+      ]),
+    );
+  }
+
   void queryUserInfo() async {
 
     SharedPreferences prefs =  await SharedPreferences.getInstance();
@@ -151,12 +210,12 @@ class CommonSettingState extends State<CommonSettingPage>{
 
   }
 
-  void submitConfig(ror_duration,ror_touch) async {
+  void submitConfig(ror_duration,ror_touch,l_ror_touch) async {
 
     SharedPreferences prefs =  await SharedPreferences.getInstance();
     String? userId = prefs.getString("uid");
     (NetClient()).post(Configs.updateUserConfigApi,
-        {"user_id":userId,"ror_duration":ror_duration,"ror_touch":ror_touch},
+        {"user_id":userId,"ror_duration":ror_duration,"ror_touch":ror_touch,"l_ror_touch":l_ror_touch},
             (data){
 
           if(data["rc"] == 0){
@@ -210,6 +269,7 @@ class CommonSettingState extends State<CommonSettingPage>{
                       children: <Widget>[
                         showDurationInput(),
                         showActionInput(),
+                        showLActionInput(),
                         SizedBox(height: 10)
                       ]
                     )
@@ -237,7 +297,7 @@ class CommonSettingState extends State<CommonSettingPage>{
                     }
 
                     _formKey.currentState!.save();
-                    submitConfig(ror_duration,ror_touch);
+                    submitConfig(ror_duration,ror_touch,l_ror_touch);
                   },
                 ),
               )

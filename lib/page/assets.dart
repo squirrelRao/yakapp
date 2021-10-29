@@ -17,6 +17,7 @@ class AssetsState extends State<AssetsPage>{
 
   late Map datas;
   int listCount = 0;
+  var upate_time = "";
 
   void getUserAssets() async {
 
@@ -30,9 +31,30 @@ class AssetsState extends State<AssetsPage>{
 
 
               if(data["rc"] == 0) {
+
+                upate_time = "数据时间:"+data["data"]["update_time_str"];
                 listCount = data["data"]["snapshots"].length + 1;
                 datas = data["data"];
+
+                if(datas["ror_touch"] == "auto"){
+                  datas["ror_touch"] = "自动卖出";
+                }else if(datas["ror_touch"] == "notify"){
+                  datas["ror_touch"] = "发送提醒";
+                }else{
+                  datas["ror_touch"] = "不执行";
+                }
+
+                if(datas["l_ror_touch"] == "auto"){
+                  datas["l_ror_touch"] = "自动卖出";
+                }else if(datas["l_ror_touch"] == "notify"){
+                  datas["l_ror_touch"] = "发送提醒";
+                }else{
+                  datas["l_ror_touch"] = "不执行";
+                }
+
               }
+
+
 
               setState(() {});
     }));
@@ -52,13 +74,6 @@ class AssetsState extends State<AssetsPage>{
   //build asset summary
   Widget buildAssetSummary(){
 
-    if(datas["ror_touch"] == "auto"){
-      datas["ror_touch"] = "自动卖出";
-    }else if(datas["ror_touch"] == "notify"){
-      datas["ror_touch"] = "发送提醒";
-    }else{
-      datas["ror_touch"] = "不执行";
-    }
 
     return GestureDetector(
 
@@ -146,7 +161,7 @@ class AssetsState extends State<AssetsPage>{
                           Column(
                               children: [
                                 Text(
-                                    "盈损智能",
+                                    "目标收益达成",
                                     style: TextStyle(fontSize: 15.0)
                                 ),
                                 Text(
@@ -160,11 +175,11 @@ class AssetsState extends State<AssetsPage>{
                           Column(
                               children: [
                                 Text(
-                                    "更新时间",
+                                    "最低收益达成",
                                     style: TextStyle(fontSize: 15.0)
                                 ),
                                 Text(
-                                    datas["update_time_str"],
+                                    datas["l_ror_touch"],
                                     style: TextStyle(fontSize: 15.0)
                                 )
                               ])
@@ -374,6 +389,15 @@ class AssetsState extends State<AssetsPage>{
             appBar: AppBar(
               title: const Text('资产'),
               backgroundColor: Colors.teal,
+              actions: [
+                // Center(
+                 Container(
+                  child:  Text(upate_time,style: TextStyle(fontSize: 13)),
+                  padding: const EdgeInsets.fromLTRB(0,0,5,10.0),
+                  alignment: Alignment.bottomCenter,
+               // )
+                )
+              ],
             ),
             body:
             RefreshIndicator(
