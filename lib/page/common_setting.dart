@@ -18,8 +18,8 @@ class CommonSettingState extends State<CommonSettingPage>{
 
   CommonSettingState();
 
-  var ror_touch = "auto";
-  var l_ror_touch = "auto";
+  var ror_touch = "notify";
+  var l_ror_touch = "notify";
   var ror_duration = 7.0;
 
   final _formKey = new GlobalKey<FormState>();
@@ -81,7 +81,7 @@ class CommonSettingState extends State<CommonSettingPage>{
           Row(children:[
           Radio(
             // 按钮的值
-            value: "auto",
+            value: "auto_limit",
             // 改变事件
             onChanged: (value){
               setState(() {
@@ -91,8 +91,23 @@ class CommonSettingState extends State<CommonSettingPage>{
             // 按钮组的值
             groupValue:ror_touch,
           ),
-          Text("自动卖出设定比例并发送提醒",style: TextStyle(fontSize: 13))
+          Text("限价自动卖出",style: TextStyle(fontSize: 13))
     ]),
+          Row(children:[
+            Radio(
+              // 按钮的值
+              value: "auto_market",
+              // 改变事件
+              onChanged: (value){
+                setState(() {
+                  ror_touch = value.toString();
+                });
+              },
+              // 按钮组的值
+              groupValue:ror_touch,
+            ),
+            Text("市价自动卖出",style: TextStyle(fontSize: 13))
+          ]),
           Row(children:[
           Radio(
             value:"notify",
@@ -103,7 +118,7 @@ class CommonSettingState extends State<CommonSettingPage>{
             },
             groupValue:ror_touch,
           ),
-          Text("只发送提醒",style: TextStyle(fontSize: 13))
+          Text("发送提醒",style: TextStyle(fontSize: 13))
   ]),
            Row(
                children:[
@@ -124,7 +139,6 @@ class CommonSettingState extends State<CommonSettingPage>{
     );
   }
 
-
   Widget showLActionInput() {
     return Padding(
       padding: const EdgeInsets.fromLTRB(15.0, 5.0, 0.0, 0.0),
@@ -140,7 +154,7 @@ class CommonSettingState extends State<CommonSettingPage>{
             Row(children:[
               Radio(
                 // 按钮的值
-                value: "auto",
+                value: "auto_limit",
                 // 改变事件
                 onChanged: (value){
                   setState(() {
@@ -150,7 +164,19 @@ class CommonSettingState extends State<CommonSettingPage>{
                 // 按钮组的值
                 groupValue:l_ror_touch,
               ),
-              Text("自动卖出设定比例并发送提醒",style: TextStyle(fontSize: 13))
+              Text("限价自动卖出",style: TextStyle(fontSize: 13))
+            ]),
+            Row(children:[
+              Radio(
+                value:"auto_market",
+                onChanged: (value){
+                  setState(() {
+                    l_ror_touch = value.toString();
+                  });
+                },
+                groupValue:l_ror_touch,
+              ),
+              Text("市价自动卖出",style: TextStyle(fontSize: 13))
             ]),
             Row(children:[
               Radio(
@@ -162,7 +188,7 @@ class CommonSettingState extends State<CommonSettingPage>{
                 },
                 groupValue:l_ror_touch,
               ),
-              Text("只发送提醒",style: TextStyle(fontSize: 13))
+              Text("发送提醒",style: TextStyle(fontSize: 13))
             ]),
             Row(
                 children:[
@@ -196,6 +222,7 @@ class CommonSettingState extends State<CommonSettingPage>{
 
           durationController.text = data["ror_duration"].toString();
           ror_touch = data["ror_touch"];
+          l_ror_touch = data["l_ror_touch"];
 
 
         });

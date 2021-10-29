@@ -36,16 +36,20 @@ class AssetsState extends State<AssetsPage>{
                 listCount = data["data"]["snapshots"].length + 1;
                 datas = data["data"];
 
-                if(datas["ror_touch"] == "auto"){
-                  datas["ror_touch"] = "自动卖出";
+                if(datas["ror_touch"] == "auto_limit"){
+                  datas["ror_touch"] = "限价卖出";
+                }else if(datas["ror_touch"] == "auto_market") {
+                  datas["ror_touch"] = "市价卖出";
                 }else if(datas["ror_touch"] == "notify"){
                   datas["ror_touch"] = "发送提醒";
                 }else{
                   datas["ror_touch"] = "不执行";
                 }
 
-                if(datas["l_ror_touch"] == "auto"){
-                  datas["l_ror_touch"] = "自动卖出";
+                if(datas["l_ror_touch"] == "auto_limit"){
+                  datas["l_ror_touch"] = "限价卖出";
+                } else if(datas["l_ror_touch"] == "auto_market"){
+                  datas["l_ror_touch"] = "市价卖出";
                 }else if(datas["l_ror_touch"] == "notify"){
                   datas["l_ror_touch"] = "发送提醒";
                 }else{
