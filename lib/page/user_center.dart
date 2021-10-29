@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:yakapp/page/ModifyPasswordPage.dart';
 import 'package:yakapp/page/bind_exchange.dart';
 import 'package:yakapp/page/common_setting.dart';
 import 'package:yakapp/page/login.dart';
 import 'package:yakapp/page/modify_bind.dart';
-import 'package:yakapp/page/modify_passwd.dart';
 
 class UserCenterPage extends StatefulWidget{
 
@@ -124,13 +124,13 @@ class UserCenterState extends State<UserCenterPage> {
                   title: Text("修改密码"),
                   onTap: (){
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (content){return ModifyPasswdPage();}));
+                        MaterialPageRoute(builder: (content){return ModifyPasswordPage();}));
                   },
                   trailing: IconButton(
                     icon:Icon(Icons.arrow_forward_ios_rounded),
                       onPressed: () {
                         Navigator.push(context,
-                            MaterialPageRoute(builder: (content){return ModifyPasswdPage();}));
+                            MaterialPageRoute(builder: (content){return ModifyPasswordPage();}));
                       })
                 ),
                 ListTile(
