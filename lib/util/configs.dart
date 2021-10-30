@@ -15,6 +15,7 @@ class Configs {
   static const String updateUserConfigApi = baseUrl +"/v1/user/config";
   static const String getUserTransactionsApi = baseUrl +"/v1/query/order";
   static const String modifyPasswordApi = baseUrl +"/v1/passwd/update";
+  static const String getNoticeApi = baseUrl +"/v1/notice/get";
 
 
   static const String checkSystemStatusApi = baseUrl +"/v1/regist";

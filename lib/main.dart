@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:yakapp/page/notice.dart';
 import 'package:yakapp/page/splash.dart';
 import 'package:yakapp/page/transaction.dart';
 import 'page/assets.dart';
@@ -62,7 +63,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 
   int currentIndex = 0;
-  List tabPages = [ AssetsPage(), TransactionPage(), UserCenterPage()];
+  List tabPages = [ AssetsPage(), TransactionPage(), NoticePage(),UserCenterPage()];
 
   void onTabSelected(index){
 
@@ -101,8 +102,12 @@ class _HomePageState extends State<HomePage> {
               label:"资产"
             ),
             BottomNavigationBarItem(
-              icon:Icon(Icons.category),
-              label:"交易"
+                icon:Icon(Icons.addchart_rounded),
+                label:"新币"
+            ),
+            BottomNavigationBarItem(
+                icon:Icon(Icons.category),
+                label:"交易"
             ),
             BottomNavigationBarItem(
                 icon:Icon(Icons.settings),
