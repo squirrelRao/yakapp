@@ -63,7 +63,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 
   int currentIndex = 0;
-  List tabPages = [ AssetsPage(), TransactionPage(), NoticePage(),UserCenterPage()];
+  List tabPages = [ AssetsPage(), NoticePage(),TransactionPage(),UserCenterPage()];
 
   void onTabSelected(index){
 
