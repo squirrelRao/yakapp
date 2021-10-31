@@ -21,7 +21,7 @@ class CreatePreOrderState extends State<CreatePreOrderPage>{
   CreatePreOrderState({required this.asset, required this.open_time}){
 
     this.asset = asset;
-    this.title = "创建"+asset+"伏击订单";
+    this.title = asset+"预购订单设置";
     this.open_time = open_time;
   }
   var open_time;
@@ -247,20 +247,17 @@ class CreatePreOrderState extends State<CreatePreOrderPage>{
 
     SharedPreferences prefs =  await SharedPreferences.getInstance();
     String? userId = prefs.getString("uid");
-    (NetClient()).post(Configs.getAssetConfigApi, {"user_id":userId,"asset":asset}, (data){
+    (NetClient()).post(Configs.getPreBuyOrderApi, {"user_id":userId,"asset":asset}, (data){
 
       if(data["rc"] == 0 && data["data"] != ""){
         data = data["data"];
 
         setState(() {
-          this.asset = asset;
-          this.title = this.asset + "伏击订单";
           trController.text = data["target_ror"].toString();
           tsController.text = data["t_sell"].toString();
           lrController.text = data["lowest_ror"].toString();
           lsController.text = data["l_sell"].toString();
-          buyCountController.text = data["l_sell"].toString();
-
+          buyCountController.text = data["buy_count"].toString();
 
         });
       }else{
@@ -279,15 +276,25 @@ class CreatePreOrderState extends State<CreatePreOrderPage>{
 
   }
 
-  void submitConfig(target_ror,t_sell,lowest_ror,l_sell) async {
+  void submitPreBuyOrder(asset,buy_count,open_time,target_ror,t_sell,lowest_ror,l_sell) async {
 
     SharedPreferences prefs =  await SharedPreferences.getInstance();
     String? userId = prefs.getString("uid");
-    (NetClient()).post(Configs.updateAssetConfigApi,
-        {"user_id":userId,"asset":asset,"target_ror":target_ror,"t_sell":t_sell,"lowest_ror":lowest_ror,"l_sell":l_sell},
+
+    open_time = open_time.toString().replaceAll("年", "-").replaceAll("月", "-").replaceAll("日", " ");
+    open_time += ":00";
+
+    (NetClient()).post(Configs.updatePreBuyOrderApi ,
+        {"user_id":userId,"asset":asset,"buy_count":buy_count,"buy_time":open_time,"target_ror":target_ror,"t_sell":t_sell,"lowest_ror":lowest_ror,"l_sell":l_sell},
             (data){
 
           if(data["rc"] == 0){
+
+            if(buy_count == 0){
+              setState(() {
+                buyCountController.text = "0";
+              });
+            }
 
             Fluttertoast.showToast(msg: "更新成功");
 
@@ -303,7 +310,7 @@ class CreatePreOrderState extends State<CreatePreOrderPage>{
   void initState(){
     super.initState();
 
-    // WidgetsBinding.instance!.addPostFrameCallback( (timestamp)=> queryPreOrderInfo());
+    WidgetsBinding.instance!.addPostFrameCallback( (timestamp)=> queryPreOrderInfo());
   }
 
   @override
@@ -355,27 +362,46 @@ class CreatePreOrderState extends State<CreatePreOrderPage>{
               Container(
                 height: 70,
                 padding: const EdgeInsets.fromLTRB(25, 30, 25, 0),
-                child: TextButton(
-                  child: Text('提 交'),
-                  style: ButtonStyle(
-                    textStyle: MaterialStateProperty.all(TextStyle(fontSize: 16)),
-                    backgroundColor: MaterialStateProperty.all(Colors.teal),
-                    foregroundColor: MaterialStateProperty.all(Colors.white)
-                ),
-                  onPressed: () {
+                child: Row(
+                  children:[
+                    Expanded(
+                    child:TextButton(
+                      child: Text('撤销预购'),
+                      style: ButtonStyle(
+                          textStyle: MaterialStateProperty.all(TextStyle(fontSize: 16)),
+                          backgroundColor: MaterialStateProperty.all(Colors.white),
+                          foregroundColor: MaterialStateProperty.all(Colors.blueGrey)
+                      ),
+                      onPressed: () {
 
-                    if(!_formKey.currentState!.validate()){
+                        submitPreBuyOrder(asset,0,open_time,0,0,0,0);
+                      },
+                    )),
+                    SizedBox(width: 20),
+                    Expanded(
+                    child:TextButton(
+                      child: Text('提交预购'),
+                      style: ButtonStyle(
+                          textStyle: MaterialStateProperty.all(TextStyle(fontSize: 12)),
+                          backgroundColor: MaterialStateProperty.all(Colors.teal),
+                          foregroundColor: MaterialStateProperty.all(Colors.white)
+                      ),
+                      onPressed: () {
 
-                       return;
-                    }
+                        if(!_formKey.currentState!.validate()){
 
-                    _formKey.currentState!.save();
-                    submitConfig(target_ror,t_sell,loweset_ror,l_sell);
-                  },
-                ),
-              )
+                          return;
+                        }
 
-          ],
+                        _formKey.currentState!.save();
+                        buy_count = 0;
+                        submitPreBuyOrder(asset,buy_count,open_time,target_ror,t_sell,loweset_ror,l_sell);
+                      },
+                    ),
+                    )]
+                )
+                )
+            ],
 
         )
     );

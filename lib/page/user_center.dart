@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:yakapp/page/ModifyPasswordPage.dart';
+import 'package:yakapp/page/modify_password_page.dart';
 import 'package:yakapp/page/bind_exchange.dart';
 import 'package:yakapp/page/common_setting.dart';
 import 'package:yakapp/page/login.dart';
