@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:jpush_flutter/jpush_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:yakapp/page/notice.dart';
 import 'package:yakapp/page/splash.dart';
@@ -61,6 +62,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
 
   int currentIndex = 0;
   List tabPages = [ AssetsPage(), NoticePage(),TransactionPage(),UserCenterPage()];

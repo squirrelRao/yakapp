@@ -21,6 +21,7 @@ class RegistState extends State<RegistPage>{
   var password = "";
   var passwordConfirmed = "";
   var registed = false;
+  var mail = "";
 
 
   //after regist dialog
@@ -116,6 +117,42 @@ class RegistState extends State<RegistPage>{
 
               return null;
         },
+        ));
+  }
+
+  Widget _showMailInput() {
+    return Padding(
+        padding: const EdgeInsets.fromLTRB(15.0, 5.0, 0.0, 0.0),
+        child: TextFormField(
+          maxLines: 1,
+          keyboardType: TextInputType.text,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
+          autofocus: false,
+          style: TextStyle(fontSize: 20),
+          decoration: new InputDecoration(
+              border: InputBorder.none,
+              hintText: '',
+              labelText: "邮箱",
+              icon: new Icon(
+                Icons.alternate_email,
+                color: Colors.teal,
+              )),
+          onSaved: (value) {
+            mail = value!.trim();
+          },
+          onChanged: (value) async {
+
+          },
+          validator: (value) {
+            if(value!.trim()==""){
+              return "邮箱不能为空";
+            }
+            if(!RegExp(r'^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$').hasMatch(value)){
+              return "请输入合法邮箱地址";
+            }
+
+            return null;
+          },
         ));
   }
 
@@ -219,6 +256,7 @@ class RegistState extends State<RegistPage>{
                     child: Column(
                       children: <Widget>[
                         _showPhoneInput(),
+                        _showMailInput(),
                         _showPasswordInput(),
                         _showPasswordConfirmInput()
                       ]
@@ -246,7 +284,7 @@ class RegistState extends State<RegistPage>{
                       return;
                     }
                     _formKey.currentState!.save();
-                    NetClient().post(Configs.registApi, {"phone":phone,"passwd":password},
+                    NetClient().post(Configs.registApi, {"phone":phone,"passwd":password,"mail":mail},
                         (data) {
 
                               if(data["rc"] == 0){

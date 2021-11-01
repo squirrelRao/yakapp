@@ -21,6 +21,7 @@ class CommonSettingState extends State<CommonSettingPage>{
   var ror_touch = "notify";
   var l_ror_touch = "notify";
   var ror_duration = 7.0;
+  bool new_coin_notify = true;
 
   final _formKey = new GlobalKey<FormState>();
 
@@ -209,6 +210,29 @@ class CommonSettingState extends State<CommonSettingPage>{
     );
   }
 
+  Widget showNewCoinNotifySwitch(){
+
+    return Padding(
+        padding: const EdgeInsets.fromLTRB(15.0, 5.0, 0.0, 0.0),
+        child:Column(children:[
+        Row(
+          children:[
+            SizedBox(width: 0),
+            Text("新币上市提醒:"),
+            Switch(
+                value: new_coin_notify,
+                onChanged: (value) {
+                  setState(() {
+                    new_coin_notify = value;
+                  });
+                })
+          ],
+        ),
+        ])
+    );
+
+  }
+
   void queryUserInfo() async {
 
     SharedPreferences prefs =  await SharedPreferences.getInstance();
@@ -223,7 +247,11 @@ class CommonSettingState extends State<CommonSettingPage>{
           durationController.text = data["ror_duration"].toString();
           ror_touch = data["ror_touch"];
           l_ror_touch = data["l_ror_touch"];
-
+          if(data["new_coin_notify"]==1){
+              new_coin_notify = true;
+          }else{
+              new_coin_notify = false;
+          }
 
         });
       }else{
@@ -241,8 +269,14 @@ class CommonSettingState extends State<CommonSettingPage>{
 
     SharedPreferences prefs =  await SharedPreferences.getInstance();
     String? userId = prefs.getString("uid");
+
+    var isNotifyNewCoin = 1;
+    if(new_coin_notify == false){
+      isNotifyNewCoin = 0;
+    }
+
     (NetClient()).post(Configs.updateUserConfigApi,
-        {"user_id":userId,"ror_duration":ror_duration,"ror_touch":ror_touch,"l_ror_touch":l_ror_touch},
+        {"user_id":userId,"ror_duration":ror_duration,"ror_touch":ror_touch,"l_ror_touch":l_ror_touch,"new_coin_notify":isNotifyNewCoin},
             (data){
 
           if(data["rc"] == 0){
@@ -297,6 +331,7 @@ class CommonSettingState extends State<CommonSettingPage>{
                         showDurationInput(),
                         showActionInput(),
                         showLActionInput(),
+                        showNewCoinNotifySwitch(),
                         SizedBox(height: 10)
                       ]
                     )
