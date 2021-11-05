@@ -18,8 +18,9 @@ class NoticeState extends State<NoticePage>{
 
   void getNotices() async {
 
-
-    ((NetClient()).post(Configs.getNoticeApi, {}, (data){
+    SharedPreferences prefs =  await SharedPreferences.getInstance();
+    String? userId = prefs.getString("uid");
+    ((NetClient()).post(Configs.getNoticeApi, {"user_id":userId}, (data){
 
 
       if(data["rc"] == 0) {
@@ -27,7 +28,7 @@ class NoticeState extends State<NoticePage>{
         datas = data["data"];
 
         for(var i in datas){
-          i["pre_order_status"] = "已创建";
+          i["pre_order_status"] = i["pre_order_status"] == 0 ? "未预购" : "已预购";
           var symbols = "";
           for(var item in i["symbols"]){
             if(item.toString().contains("USDT")){
@@ -139,7 +140,7 @@ class NoticeState extends State<NoticePage>{
                             Column(
                                 children: [
                                   Text(
-                                      "伏击订单",
+                                      "预购订单",
                                       style: TextStyle(fontSize: 15.0)
                                   ),
                                   Text(
