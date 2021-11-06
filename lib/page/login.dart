@@ -32,7 +32,7 @@ class LoginState extends State<LoginPage>{
 
               children: [
                 Icon(Icons.phone_rounded,
-                color:Colors.teal),
+                color:Color(0xd33094FE)),
                 Text("手机号",style:TextStyle(fontSize: 18))
               ],
             ),
@@ -103,7 +103,7 @@ class LoginState extends State<LoginPage>{
 
         children: [
           Icon(Icons.lock,
-              color:Colors.teal),
+              color:Color(0xd33094FE)),
           Text("密码",style:TextStyle(fontSize: 18))
         ],
       ),
@@ -185,7 +185,7 @@ class LoginState extends State<LoginPage>{
                   child: Text('登 录'),
                   style: ButtonStyle(
                     textStyle: MaterialStateProperty.all(TextStyle(fontSize: 16)),
-                    backgroundColor: MaterialStateProperty.all(Colors.teal),
+                    backgroundColor: MaterialStateProperty.all(Color(0xd33094FE)),
                     foregroundColor: MaterialStateProperty.all(Colors.white),
                       shape: MaterialStateProperty.all(
                           RoundedRectangleBorder(
