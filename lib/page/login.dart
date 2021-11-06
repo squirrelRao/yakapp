@@ -226,7 +226,7 @@ class LoginState extends State<LoginPage>{
                 alignment: Alignment.centerRight,
                 padding: const EdgeInsets.fromLTRB(35, 10, 35, 0),
                 child: TextButton(
-                  child:Text("注册账号",style: TextStyle(fontSize: 14,color:Colors.teal)),
+                  child:Text("注册账号",style: TextStyle(fontSize: 14,color:Colors.grey)),
                   onPressed: (){
                     Navigator.push(context,
                         MaterialPageRoute(builder: (content){return RegistPage();})
