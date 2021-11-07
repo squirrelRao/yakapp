@@ -35,12 +35,15 @@ class TransactionState extends State<TransactionPage>{
 
           item["symbol"] = item["symbol"].replaceAll("USDT","");
           if(item["type"] == "LIMIT"){
-            item["type"] = "限价卖出";
+            item["type"] = "卖出";
             item["price"] = item["price"].toString()+" USDT";
+            item["type_color"] = Colors.redAccent;
 
           }else if(item["type"] == "MARKET"){
-            item["type"] = "市价卖出";
+            item["type"] = "卖出";
             item["price"] = "市场最新价";
+            item["type_color"] = Colors.redAccent;
+
           }
 
           item["origQty"] = item["origQty"].toString()+" "+item["symbol"].replaceAll("USDT","");
@@ -80,24 +83,31 @@ class TransactionState extends State<TransactionPage>{
         child:Card(
 
         elevation: 1,
-        margin: const EdgeInsets.all(4.0),
-        color: Colors.white60,
+        margin: const EdgeInsets.all(10.0),
+        color: Colors.white,
         child:Column(
             children: [
               Row(
                 children: [
                   Expanded(
                       child:(
-                          Column(
+                          Row(
                               children: [
-                                SizedBox(height: 10),
-                                Text(
-                                    "交易对",
-                                    style: TextStyle(fontSize: 15.0)
-                                ),
+                                Card(
+                                    color: item["type_color"],
+                                    elevation: 0,
+                                    margin: EdgeInsets.only(top: 0.0,bottom: 0.0,left: 10.0,right: 10.0),
+                                child:
+                                    Padding(
+                                        padding: EdgeInsets.fromLTRB(8, 4, 8, 4),
+                                        child:Text(
+                                    item["type"],
+                                    style: TextStyle(fontSize: 12.0,color: Colors.white)
+                                )
+                                )),
                                 Text(
                                     item["symbol"]+"/USDT",
-                                    style: TextStyle(fontSize: 15.0)
+                                    style: TextStyle(fontSize: 16.0)
                                 )
                               ])
                       )),
@@ -107,18 +117,20 @@ class TransactionState extends State<TransactionPage>{
                               children: [
                                 SizedBox(height: 10),
                                 Text(
-                                    "类型",
-                                    style: TextStyle(fontSize: 15.0)
+                                    "订单时间",
+                                    style: TextStyle(fontSize: 13.0,color:Colors.grey)
                                 ),
                                 Text(
-                                    item["type"],
-                                    style: TextStyle(fontSize: 15.0)
+                                    item["update_time_sr"],
+                                    style: TextStyle(fontSize: 16.0)
                                 )
                               ])
                       )),
                 ],
               ),
-              SizedBox(height: 10),
+              SizedBox(height: 20),
+              Divider(height: 1.0,indent: 10,endIndent: 10,color: Colors.grey),
+              SizedBox(height: 20),
               Row(
                   children: [
                     Expanded(
@@ -126,12 +138,12 @@ class TransactionState extends State<TransactionPage>{
                             Column(
                                 children: [
                                   Text(
-                                      "数量",
-                                      style: TextStyle(fontSize: 15.0)
+                                      item["origQty"].toString(),
+                                      style: TextStyle(fontSize: 16.0)
                                   ),
                                   Text(
-                                      item["origQty"].toString(),
-                                      style: TextStyle(fontSize: 15.0)
+                                      "数量",
+                                      style: TextStyle(fontSize: 13.0)
                                   )
                                 ])
                         )),
@@ -140,54 +152,33 @@ class TransactionState extends State<TransactionPage>{
                             Column(
                                 children: [
                                   Text(
-                                      "价格",
-                                      style: TextStyle(fontSize: 15.0)
+                                      item["price"].toString(),
+                                      style: TextStyle(fontSize: 16.0)
                                   ),
                                   Text(
-                                      item["price"].toString(),
-                                      style: TextStyle(fontSize: 15.0)
+                                      "价格",
+                                      style: TextStyle(fontSize: 13.0)
                                   )
                                 ])
                         )),
-
+                    Expanded(
+                        child:(
+                            Column(
+                                children: [
+                                  Text(
+                                      item["status_str"].toString(),
+                                      style: TextStyle(fontSize: 16.0)
+                                  ),
+                                  Text(
+                                      "状态",
+                                      style: TextStyle(fontSize: 13.0)
+                                  )
+                                ])
+                        )),
                   ]
 
               ),
-              SizedBox(height: 10),
-              Row(
-                children: [
-                  Expanded(
-                      child:(
-                          Column(
-                              children: [
-                                Text(
-                                    "订单状态",
-                                    style: TextStyle(fontSize: 15.0)
-                                ),
-                                Text(
-                                    item["status_str"].toString(),
-                                    style: TextStyle(fontSize: 15.0)
-                                )
-                              ])
-                      )),
-                  Expanded(
-                      child:(
-                          Column(
-                              children: [
-                                Text(
-                                    "下单时间",
-                                    style: TextStyle(fontSize: 15.0)
-                                ),
-                                Text(
-                                    item["update_time_sr"],
-                                    style: TextStyle(fontSize: 15.0)
-                                )
-                              ])
-                      )),
-                ],
-
-              ),
-              SizedBox(height: 10),
+              SizedBox(height: 30),
             ]
         )
 
@@ -206,8 +197,9 @@ class TransactionState extends State<TransactionPage>{
     return Scaffold(
 
             appBar: AppBar(
-              title: const Text('交易'),
-              backgroundColor: Colors.teal,
+              title: const Text('交易',style:TextStyle(color:Colors.black)),
+              backgroundColor: Colors.white70,
+              elevation: 0  ,
             ),
             body:
             RefreshIndicator(
