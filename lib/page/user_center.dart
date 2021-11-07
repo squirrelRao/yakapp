@@ -73,37 +73,43 @@ class UserCenterState extends State<UserCenterPage> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-
-            appBar: AppBar(
-              title: const Text('个人中心'),
-              backgroundColor: Colors.teal,
-            ),
             body: ListView(
               scrollDirection: Axis.vertical,
               children: [
 
-                Card(
-                    elevation: 1,
-                    margin: const EdgeInsets.all(4.0),
-                    color: Colors.white60,
-                    child:Row(
+               Row(
                       children: [
+                        // Expanded(
+                        //     child: Container(
+                        //       height: 100,
+                        //       alignment: Alignment.center,
+                        //       child: Image.asset('images/default_avatar.jpeg'),
+                        //     )
+                        // ),
                         Expanded(
                             child: Container(
-                              height: 100,
-                              alignment: Alignment.center,
-                              child: Text(
+                              height: 90,
+                              alignment: Alignment.centerLeft,
+                              child: Padding(
+                                padding: const EdgeInsets.fromLTRB(30, 30, 0, 0),
+                                child:Text(
                                 userName,
                                 style: TextStyle(fontSize: 20.0),
                               ),
-                            )
+                              ))
                         )
                       ],
-                    )
                 ),
-                ListTile(
+                 Padding(
+                  padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                  child:Card(
 
-                  leading: Icon(Icons.wallet_giftcard),
+                child:Column(
+
+                 children:[
+                 ListTile(
+
+                  leading: Icon(Icons.wallet_giftcard,color: Color(0xd33094FE)),
                   title: Text("交易所钱包"),
                   subtitle: Text(bindStatus),
                   onTap: (){
@@ -111,7 +117,7 @@ class UserCenterState extends State<UserCenterPage> {
                         MaterialPageRoute(builder: (content){return ModifyBindPage();}));
                   },
                   trailing: IconButton(
-                    icon:Icon(Icons.arrow_forward_ios_rounded),
+                    icon:Icon(Icons.keyboard_arrow_right),
                     onPressed: (){
                       Navigator.push(context,
                           MaterialPageRoute(builder: (content){return BindExchangePage();}));
@@ -120,26 +126,26 @@ class UserCenterState extends State<UserCenterPage> {
                 ),
                 ListTile(
 
-                  leading: Icon(Icons.password_outlined),
+                  leading: Icon(Icons.password_outlined,color: Color(0xd33094FE)),
                   title: Text("修改密码"),
                   onTap: (){
                     Navigator.push(context,
                         MaterialPageRoute(builder: (content){return ModifyPasswordPage();}));
                   },
                   trailing: IconButton(
-                    icon:Icon(Icons.arrow_forward_ios_rounded),
+                    icon:Icon(Icons.keyboard_arrow_right),
                       onPressed: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (content){return ModifyPasswordPage();}));
                       })
                 ),
                 ListTile(
-                  leading: Icon(Icons.monetization_on_outlined),
+                  leading: Icon(Icons.monetization_on_outlined,color: Color(0xd33094FE)),
                   title: Text("收益设置"),
                   onTap: (){
                     Navigator.push(context, MaterialPageRoute(builder: (content){return CommonSettingPage();}));
                   },
-                  trailing:IconButton(icon:Icon(Icons.arrow_forward_ios_rounded),
+                  trailing:IconButton(icon:Icon(Icons.keyboard_arrow_right),
                       onPressed: (){
 
                         Navigator.push(context, MaterialPageRoute(builder: (content){return CommonSettingPage();}));
@@ -147,29 +153,42 @@ class UserCenterState extends State<UserCenterPage> {
                       })
                 ),
                 ListTile(
-                  leading: Icon(Icons.info_outline),
+                  leading: Icon(Icons.info_outline,color: Color(0xd33094FE)),
                   title: Text("关于"),
                   onTap: (){
                     showAboutDialog(context);
                   },
-                  trailing: IconButton(icon:Icon(Icons.arrow_forward_ios_rounded),
+                  trailing: IconButton(icon:Icon(Icons.keyboard_arrow_right),
                     onPressed: (){
                       showAboutDialog(context);
 
                     })
-                ),
-                ListTile(
-                  title: Text("退出登录",style: TextStyle(color: Colors.red)),
-                    onTap: () async {
+                )]
+    ))),
+                Container(
+                  height: 60,
+                  padding: const EdgeInsets.fromLTRB(65, 20, 65, 0),
+                  child: TextButton(
+                      child: Text('退出登录'),
+                      onPressed: () async {
                         SharedPreferences prefs =  await SharedPreferences.getInstance();
                         prefs.clear();
                         Navigator.pop(context);
                         Navigator.push(context,MaterialPageRoute(builder: (content){return LoginPage();}));
                       },
-                ),
-              ]
-            )
+                      style: ButtonStyle(
+                          textStyle: MaterialStateProperty.all(TextStyle(fontSize: 16)),
+                          backgroundColor: MaterialStateProperty.all(Color(0x4fD3D3D3)),
+                          foregroundColor: MaterialStateProperty.all(Colors.black26),
+                          shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                  borderRadius:
+                                  BorderRadius.circular(
+                                      40)))
+                      ))),
+                ]
 
+            )
     );
   }
 
