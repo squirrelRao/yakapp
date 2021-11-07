@@ -61,14 +61,24 @@ class CreatePreOrderState extends State<CreatePreOrderPage>{
   Widget showOpenTime() {
     return Padding(
       padding: const EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0),
-      child: new Text(open_time+"以最新市价买入",style:TextStyle(fontSize: 14.5,color:Colors.teal)),
+      child: new Text(open_time+"以最新市价买入",style:TextStyle(fontSize: 14.5,color:Color(0xd33094FE))),
     );
   }
 
   Widget showBuyCountInput() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(15.0, 5.0, 0.0, 0.0),
-      child: new TextFormField(
+      padding: const EdgeInsets.fromLTRB(15.0, 5.0, 15.0, 0.0),
+      child: Column(
+          children:[
+          SizedBox(height: 10),
+      Row(
+
+        children: [
+          Text("购买个数",style:TextStyle(fontSize: 18))
+        ],
+      ),
+      SizedBox(height: 10),
+      new TextFormField(
         maxLines: 1,
         keyboardType: TextInputType.number,
         inputFormatters: [
@@ -79,13 +89,17 @@ class CreatePreOrderState extends State<CreatePreOrderPage>{
         controller: buyCountController,
         style: TextStyle(fontSize: 16),
         decoration: new InputDecoration(
-            border: InputBorder.none,
-            hintText: '',
-            labelText: "购买个数",
-            icon: new Icon(
-              Icons.arrow_forward,
-              color: Colors.teal,
-            )),
+          hintText: "",
+          labelText: "",
+          border:OutlineInputBorder(
+              borderRadius: BorderRadius.circular(24),
+              borderSide: BorderSide.none
+          ),
+          ///设置内容内边距
+          contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+          filled: true,
+          fillColor: Color(0x4fD3D3D3),
+        ),
         onSaved: (value) => buy_count = double.parse(value!.trim()),
         validator: (value){
           if(value!.trim()==""){
@@ -97,13 +111,23 @@ class CreatePreOrderState extends State<CreatePreOrderPage>{
           }
         },
       ),
-    );
+    ]));
   }
 
   Widget showTargetRorInput() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(15.0, 5.0, 0.0, 0.0),
-      child: new TextFormField(
+      padding: const EdgeInsets.fromLTRB(15.0, 5.0, 15.0, 0.0),
+      child: Column(
+          children:[
+          SizedBox(height: 10),
+      Row(
+
+        children: [
+          Text("目标收益率(%)",style:TextStyle(fontSize: 18))
+        ],
+      ),
+      SizedBox(height: 10),
+      new TextFormField(
         maxLines: 1,
         keyboardType: TextInputType.number,
         inputFormatters: [
@@ -113,14 +137,18 @@ class CreatePreOrderState extends State<CreatePreOrderPage>{
         autovalidateMode: AutovalidateMode.onUserInteraction,
         controller: trController,
         style: TextStyle(fontSize: 16),
-        decoration: new InputDecoration(
-            border: InputBorder.none,
-            hintText: '',
-            labelText: "目标收益率(%)",
-            icon: new Icon(
-              Icons.arrow_forward,
-              color: Colors.teal,
-            )),
+          decoration: new InputDecoration(
+            hintText: "",
+            labelText: "",
+            border:OutlineInputBorder(
+                borderRadius: BorderRadius.circular(24),
+                borderSide: BorderSide.none
+            ),
+            ///设置内容内边距
+            contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+            filled: true,
+            fillColor: Color(0x4fD3D3D3),
+          ),
         onSaved: (value) => target_ror = double.parse(value!.trim()),
         validator: (value){
           if(value!.trim()==""){
@@ -132,14 +160,23 @@ class CreatePreOrderState extends State<CreatePreOrderPage>{
           }
         },
       ),
-    );
+    ]));
   }
-
 
   Widget showLowestRorInput() {
     return Padding(
       padding: const EdgeInsets.fromLTRB(15.0, 5.0, 0.0, 0.0),
-      child: new TextFormField(
+      child: Column(
+          children:[
+          SizedBox(height: 10),
+      Row(
+
+        children: [
+          Text("止损收益率(%)",style:TextStyle(fontSize: 18))
+        ],
+      ),
+      SizedBox(height: 10),
+      new TextFormField(
         maxLines: 1,
         keyboardType: TextInputType.number,
         inputFormatters: [
@@ -150,13 +187,17 @@ class CreatePreOrderState extends State<CreatePreOrderPage>{
         controller: lrController,
         style: TextStyle(fontSize: 16),
         decoration: new InputDecoration(
-            border: InputBorder.none,
-            hintText: '',
-            labelText: "止损收益率(%)",
-            icon: new Icon(
-              Icons.arrow_forward,
-              color: Colors.teal,
-            )),
+          hintText: "",
+          labelText: "",
+          border:OutlineInputBorder(
+              borderRadius: BorderRadius.circular(24),
+              borderSide: BorderSide.none
+          ),
+          ///设置内容内边距
+          contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+          filled: true,
+          fillColor: Color(0x4fD3D3D3),
+        ),
         onSaved: (value) => loweset_ror = double.parse(value!.trim()),
         validator: (value){
           if(value!.trim()==""){
@@ -168,13 +209,23 @@ class CreatePreOrderState extends State<CreatePreOrderPage>{
           }
         },
       ),
-    );
+    ]));
   }
 
   Widget showTsellInput() {
     return Padding(
       padding: const EdgeInsets.fromLTRB(15.0, 5.0, 0.0, 0.0),
-      child: new TextFormField(
+      child: Column(
+          children:[
+          SizedBox(height: 10),
+      Row(
+
+        children: [
+          Text("目标达成卖出比例(%)",style:TextStyle(fontSize: 18))
+        ],
+      ),
+      SizedBox(height: 10),
+      new TextFormField(
         maxLines: 1,
         keyboardType: TextInputType.number,
         inputFormatters: [
@@ -185,13 +236,17 @@ class CreatePreOrderState extends State<CreatePreOrderPage>{
         controller: tsController,
         style: TextStyle(fontSize: 16),
         decoration: new InputDecoration(
-            border: InputBorder.none,
-            hintText: '',
-            labelText: "目标达成卖出比例(%)",
-            icon: new Icon(
-              Icons.arrow_forward,
-              color: Colors.teal,
-            )),
+          hintText: "",
+          labelText: "",
+          border:OutlineInputBorder(
+              borderRadius: BorderRadius.circular(24),
+              borderSide: BorderSide.none
+          ),
+          ///设置内容内边距
+          contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+          filled: true,
+          fillColor: Color(0x4fD3D3D3),
+        ),
         onSaved: (value) => t_sell = double.parse(value!.trim()),
         validator: (value){
           if(value!.trim()==""){
@@ -203,14 +258,24 @@ class CreatePreOrderState extends State<CreatePreOrderPage>{
           }
         },
       ),
-    );
+    ]));
   }
 
 
   Widget showLsellInput() {
     return Padding(
       padding: const EdgeInsets.fromLTRB(15.0, 5.0, 0.0, 0.0),
-      child: new TextFormField(
+      child:  Column(
+          children:[
+            SizedBox(height: 10),
+        Row(
+
+          children: [
+            Text("止损触发卖出比例(%)",style:TextStyle(fontSize: 18))
+          ],
+        ),
+        SizedBox(height: 10),
+    new TextFormField(
         maxLines: 1,
         keyboardType: TextInputType.number,
         inputFormatters: [
@@ -220,14 +285,18 @@ class CreatePreOrderState extends State<CreatePreOrderPage>{
         autovalidateMode: AutovalidateMode.onUserInteraction,
         controller: lsController,
         style: TextStyle(fontSize: 16),
-        decoration: new InputDecoration(
-            border: InputBorder.none,
-            hintText: '',
-            labelText: "止损触发卖出比例(%)",
-            icon: new Icon(
-              Icons.arrow_forward,
-              color: Colors.teal,
-            )),
+    decoration: new InputDecoration(
+    hintText: "",
+    labelText: "",
+    border:OutlineInputBorder(
+    borderRadius: BorderRadius.circular(24),
+    borderSide: BorderSide.none
+    ),
+    ///设置内容内边距
+    contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+    filled: true,
+    fillColor: Color(0x4fD3D3D3),
+    ),
         onSaved: (value) => l_sell = double.parse(value!.trim()),
         validator: (value){
           if(value!.trim()==""){
@@ -239,7 +308,7 @@ class CreatePreOrderState extends State<CreatePreOrderPage>{
           }
         },
       ),
-    );
+    ]));
   }
 
 
@@ -320,10 +389,12 @@ class CreatePreOrderState extends State<CreatePreOrderPage>{
     return Scaffold(
 
           appBar:AppBar(
-            title:  Text(title),
-              backgroundColor: Colors.teal,
+            title:  Text(title,style:TextStyle(color:Colors.black)),
+              backgroundColor: Colors.white70,
+              elevation: 0,
+              centerTitle: true,
               leading: IconButton(
-                icon:Icon(Icons.arrow_back_ios,color:Colors.white),
+                icon:Icon(Icons.arrow_back_ios,color:Colors.black),
                 onPressed: () async {
                     Navigator.pop(context);
                 },
@@ -339,20 +410,18 @@ class CreatePreOrderState extends State<CreatePreOrderPage>{
                 key : _formKey,
                 child: Container(
 
-                  padding: const EdgeInsets.fromLTRB(25, 30, 25, 0),
-                  child: Card(
-                    child: Column(
+                  padding: const EdgeInsets.fromLTRB(25, 10, 25, 0),
+                  child:Column(
                       children: <Widget>[
-                        showSymbol(),
+                        // showSymbol(),
                         showBuyCountInput(),
                         showTargetRorInput(),
                         showTsellInput(),
                         showLowestRorInput(),
                         showLsellInput(),
                         showOpenTime(),
-                        SizedBox(height: 10)
+                        SizedBox(height: 5)
                       ]
-                    )
                   )
 
                 )
@@ -383,7 +452,7 @@ class CreatePreOrderState extends State<CreatePreOrderPage>{
                       child: Text('提交预购'),
                       style: ButtonStyle(
                           textStyle: MaterialStateProperty.all(TextStyle(fontSize: 12)),
-                          backgroundColor: MaterialStateProperty.all(Colors.teal),
+                          backgroundColor: MaterialStateProperty.all(Color(0xd33094FE)),
                           foregroundColor: MaterialStateProperty.all(Colors.white)
                       ),
                       onPressed: () {
