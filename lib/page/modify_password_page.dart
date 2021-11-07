@@ -23,21 +23,36 @@ class ModifyPasswordState extends State<ModifyPasswordPage>{
 
   Widget _showOldPasswordInput() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(15.0, 5.0, 0.0, 0.0),
-      child: new TextFormField(
+      padding: const EdgeInsets.fromLTRB(15.0, 5.0, 15.0, 0.0),
+      child: Column(
+          children:[
+          SizedBox(height: 10),
+      Row(
+
+        children: [
+          Icon(Icons.lock,
+              color:Color(0xd33094FE)),
+          Text("旧密码",style:TextStyle(fontSize: 18))
+        ],
+      ),
+      new TextFormField(
         maxLines: 1,
         obscureText: true,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         autofocus: false,
         style: TextStyle(fontSize: 20),
         decoration: new InputDecoration(
-            border: InputBorder.none,
-            hintText: '',
-            labelText: "旧密码",
-            icon: new Icon(
-              Icons.lock,
-              color: Colors.teal,
-            )),
+          hintText: "",
+          labelText: "",
+          border:OutlineInputBorder(
+              borderRadius: BorderRadius.circular(24),
+              borderSide: BorderSide.none
+          ),
+          ///设置内容内边距
+          contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+          filled: true,
+          fillColor: Color(0x4fD3D3D3),
+        ),
         onSaved: (value){
 
           oldPassword = value!.trim();
@@ -49,26 +64,42 @@ class ModifyPasswordState extends State<ModifyPasswordPage>{
           }
         },
       ),
-    );
+    ]));
   }
 
   Widget _showNewPasswordInput() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(15.0, 5.0, 0.0, 0.0),
-      child: new TextFormField(
+      padding: const EdgeInsets.fromLTRB(15.0, 5.0, 15.0, 0.0),
+      child:
+      Column(
+          children:[
+          SizedBox(height: 10),
+      Row(
+
+        children: [
+          Icon(Icons.lock,
+              color:Color(0xd33094FE)),
+          Text("新密码",style:TextStyle(fontSize: 18))
+        ],
+      ),
+      new TextFormField(
         maxLines: 1,
         obscureText: true,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         autofocus: false,
         style: TextStyle(fontSize: 20),
         decoration: new InputDecoration(
-            border: InputBorder.none,
-            hintText: '',
-            labelText: "新密码",
-            icon: new Icon(
-              Icons.lock,
-              color: Colors.teal,
-            )),
+          hintText: "",
+          labelText: "",
+          border:OutlineInputBorder(
+              borderRadius: BorderRadius.circular(24),
+              borderSide: BorderSide.none
+          ),
+          ///设置内容内边距
+          contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+          filled: true,
+          fillColor: Color(0x4fD3D3D3),
+        ),
         onSaved: (value){
 
           newPassword = value!.trim();
@@ -80,28 +111,42 @@ class ModifyPasswordState extends State<ModifyPasswordPage>{
           }
         },
       ),
-    );
+    ]));
   }
 
 
   Widget _showPasswordConfirmInput() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(15.0, 5.0, 0.0, 10.0),
-      child: new TextFormField(
+      padding: const EdgeInsets.fromLTRB(15.0, 5.0, 15.0, 10.0),
+      child: Column(
+          children:[
+          SizedBox(height: 10),
+        Row(
+
+          children: [
+            Icon(Icons.lock,
+                color:Color(0xd33094FE)),
+            Text("密码确认",style:TextStyle(fontSize: 18))
+          ],
+        ),
+      new TextFormField(
         maxLines: 1,
         obscureText: true,
           autovalidateMode: AutovalidateMode.onUserInteraction,
           autofocus: false,
         style: TextStyle(fontSize: 20),
-        decoration: new InputDecoration(
-            border: InputBorder.none,
-            hintText: '',
-            labelText: "新密码确认",
-            icon: new Icon(
-              Icons.lock,
-              color: Colors.teal,
-            )),
-
+          decoration: new InputDecoration(
+            hintText: "",
+            labelText: "",
+            border:OutlineInputBorder(
+                borderRadius: BorderRadius.circular(24),
+                borderSide: BorderSide.none
+            ),
+            ///设置内容内边距
+            contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+            filled: true,
+            fillColor: Color(0x4fD3D3D3),
+          ),
         onSaved: (value){
 
           passwordConfirmed = value!.trim();
@@ -118,7 +163,7 @@ class ModifyPasswordState extends State<ModifyPasswordPage>{
             return null;
         }
       ),
-    );
+    ]) );
   }
 
   @override
@@ -127,10 +172,12 @@ class ModifyPasswordState extends State<ModifyPasswordPage>{
     return Scaffold(
 
           appBar:AppBar(
-            title: const Text('修改密码'),
-            backgroundColor: Colors.teal,
+            title: const Text('修改密码',style: TextStyle(color: Colors.black)),
+            centerTitle: true,
+            backgroundColor: Colors.white70,
+            elevation: 0,
             leading: IconButton(
-                icon:Icon(Icons.arrow_back_ios,color:Colors.white),
+                icon:Icon(Icons.arrow_back_ios,color:Colors.black),
               onPressed: (){
 
                 Navigator.pop(context);
@@ -147,30 +194,32 @@ class ModifyPasswordState extends State<ModifyPasswordPage>{
                 child: Container(
 
                   padding: const EdgeInsets.fromLTRB(25, 30, 25, 0),
-                  child: Card(
-                    child: Column(
+                  child: Column(
                       children: <Widget>[
+                        SizedBox(height: 20),
                         _showOldPasswordInput(),
                         _showNewPasswordInput(),
-                        _showPasswordConfirmInput()
+                        _showPasswordConfirmInput(),
+                        SizedBox(height: 20)
                       ]
                     )
                   )
-
-                )
-
-
             ),
               Container(
                 height: 70,
                 padding: const EdgeInsets.fromLTRB(35, 30, 35, 0),
                 child: TextButton(
-                  child: Text('修改密码'),
+                  child: Text('确认修改'),
                   style: ButtonStyle(
-                    textStyle: MaterialStateProperty.all(TextStyle(fontSize: 16)),
-                    backgroundColor: MaterialStateProperty.all(Colors.teal),
-                    foregroundColor: MaterialStateProperty.all(Colors.white)
-                ),
+                      textStyle: MaterialStateProperty.all(TextStyle(fontSize: 16)),
+                      backgroundColor: MaterialStateProperty.all(Color(0xd33094FE)),
+                      foregroundColor: MaterialStateProperty.all(Colors.white),
+                      shape: MaterialStateProperty.all(
+                          RoundedRectangleBorder(
+                              borderRadius:
+                              BorderRadius.circular(
+                                  40)))
+                  ),
                   onPressed: () async {
 
                     if(!_formKey.currentState!.validate()){

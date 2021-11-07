@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yakapp/main.dart';
+import 'package:yakapp/page/bind_exchange.dart';
 import 'package:yakapp/util/common_util.dart';
 import 'package:yakapp/util/configs.dart';
 import 'package:yakapp/util/net_util.dart';
@@ -230,6 +231,7 @@ class LoginState extends State<LoginPage>{
                   onPressed: (){
                     Navigator.push(context,
                         MaterialPageRoute(builder: (content){return RegistPage();})
+                        // MaterialPageRoute(builder: (content){return BindExchangePage();})
                     );
                   },
                 ),

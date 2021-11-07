@@ -28,34 +28,57 @@ class BindExchangeState extends State<BindExchangePage>{
   BindExchangeState(String uid);
 
   Widget showKeyInput() {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(15.0, 5.0, 0.0, 0.0),
-      child: new TextFormField(
+    return Card(
+        child:Padding(
+      padding: const EdgeInsets.fromLTRB(15.0, 0.0, 0.0, 0.0),
+      child:  Column(
+        children:[
+        SizedBox(height: 10),
+        Row(
+
+          children: [
+            Icon(Icons.lock,
+                color:Color(0xd33094FE)),
+            Text("交易所账号对应的key",style:TextStyle(fontSize: 18))
+          ],
+        ),
+        Padding(padding: const EdgeInsets.fromLTRB(18.0, 0.0, 18.0, 0.0),
+          child:new TextFormField(
         maxLines: 2,
         keyboardType: TextInputType.text,
-        autofocus: true,
+        autofocus: false,
         style: TextStyle(fontSize: 16),
         decoration: new InputDecoration(
             border: InputBorder.none,
             hintText: '',
-            labelText: "交易所账号对应的key",
-            icon: new Icon(
-              Icons.lock,
-              color: Colors.teal,
-            )),
+            labelText: "",
+            ),
         onSaved: (value) => key = value!.trim(),
         validator: (value){
           if(value!.trim()==""){
             return "key不能为空";
           }
         },
-      ),
-    );
+      )),
+    ])));
   }
 
   Widget showSecretInput() {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(15.0, 5.0, 0.0, 10.0),
+    return Card(
+        child:Padding(
+        padding: const EdgeInsets.fromLTRB(15.0, 0.0, 0.0, 0.0),
+    child:  Column(
+    children:[
+    SizedBox(height: 10),
+    Row(
+
+    children: [
+    Icon(Icons.lock,
+    color:Color(0xd33094FE)),
+    Text("交易所账号对应的key",style:TextStyle(fontSize: 18))
+    ],
+    ),
+    Padding(padding: const EdgeInsets.fromLTRB(18.0, 0.0, 18.0, 0.0),
       child: new TextFormField(
         maxLines: 2,
         keyboardType: TextInputType.text,
@@ -65,19 +88,16 @@ class BindExchangeState extends State<BindExchangePage>{
         decoration: new InputDecoration(
             border: InputBorder.none,
             hintText: '',
-            labelText: "交易所账号对应的secret",
-            icon: new Icon(
-              Icons.lock,
-              color: Colors.teal,
-            )),
+            labelText: "",
+            ),
         onSaved: (value) => secret = value!.trim(),
         validator: (value){
           if(value!.trim()==""){
             return "secret不能为空";
           }
         },
-      ),
-    );
+      )),
+    ])));
   }
 
   void bindExchange(key,secret) async {
@@ -109,10 +129,12 @@ class BindExchangeState extends State<BindExchangePage>{
     return Scaffold(
 
           appBar:AppBar(
-            title: const Text('绑定交易所账号'),
-              backgroundColor: Colors.teal,
+            title: const Text('绑定交易所账号',style: TextStyle(color: Colors.black)),
+              centerTitle: true,
+              elevation: 0,
+              backgroundColor: Colors.white70,
               leading: IconButton(
-                icon:Icon(Icons.arrow_back_ios,color:Colors.white),
+                icon:Icon(Icons.arrow_back_ios,color:Colors.black),
                 onPressed: () async {
                     Navigator.pop(context);
                     Navigator.push(context,
@@ -134,15 +156,15 @@ class BindExchangeState extends State<BindExchangePage>{
                 child: Container(
 
                   padding: const EdgeInsets.fromLTRB(25, 30, 25, 0),
-                  child: Card(
-                    child: Column(
+                  child:  Column(
                       children: <Widget>[
+                        SizedBox(height: 10),
                         showKeyInput(),
-                        showSecretInput()
+                        SizedBox(height: 10),
+                        showSecretInput(),
+                        SizedBox(height: 10)
                       ]
                     )
-                  )
-
                 )
 
 
@@ -153,10 +175,15 @@ class BindExchangeState extends State<BindExchangePage>{
                 child: TextButton(
                   child: Text('提 交'),
                   style: ButtonStyle(
-                    textStyle: MaterialStateProperty.all(TextStyle(fontSize: 16)),
-                    backgroundColor: MaterialStateProperty.all(Colors.teal),
-                    foregroundColor: MaterialStateProperty.all(Colors.white)
-                ),
+                      textStyle: MaterialStateProperty.all(TextStyle(fontSize: 16)),
+                      backgroundColor: MaterialStateProperty.all(Color(0xd33094FE)),
+                      foregroundColor: MaterialStateProperty.all(Colors.white),
+                      shape: MaterialStateProperty.all(
+                          RoundedRectangleBorder(
+                              borderRadius:
+                              BorderRadius.circular(
+                                  40)))
+                  ),
                   onPressed: () {
 
                     if(!_formKey.currentState!.validate()){

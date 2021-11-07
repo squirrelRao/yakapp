@@ -23,37 +23,63 @@ class ModifyBindState extends State<ModifyBindPage>{
   TextEditingController secretController = new TextEditingController(text: '');
 
   Widget showKeyInput() {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(15.0, 5.0, 0.0, 0.0),
-      child: new TextFormField(
-        maxLines: 4,
+    return Card(
+
+        child:Padding(
+      padding: const EdgeInsets.fromLTRB(15.0, 0.0, 0.0, 0.0),
+      child: Column(
+          children:[
+          SizedBox(height: 10),
+      Row(
+
+        children: [
+          Icon(Icons.lock,
+              color:Color(0xd33094FE)),
+          Text("交易所账号对应的key",style:TextStyle(fontSize: 18))
+        ],
+      ),
+        Padding(padding: const EdgeInsets.fromLTRB(18.0, 0.0, 18.0, 0.0),
+            child:
+      new TextFormField(
+        maxLines: 3,
         keyboardType: TextInputType.text,
-        autofocus: true,
+        autofocus: false,
         controller: keyController,
         style: TextStyle(fontSize: 16),
         decoration: new InputDecoration(
             border: InputBorder.none,
             hintText: '',
-            labelText: "交易所账号对应的key",
-            icon: new Icon(
-              Icons.lock,
-              color: Colors.teal,
-            )),
+            labelText: "",
+            ),
         onSaved: (value) => key = value!.trim(),
         validator: (value){
           if(value!.trim()==""){
             return "key不能为空";
           }
         },
-      ),
-    );
+      )),
+    ])));
   }
 
   Widget showSecretInput() {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(15.0, 5.0, 0.0, 10.0),
-      child: new TextFormField(
-        maxLines: 4,
+    return Card(
+        child:Padding(
+      padding: const EdgeInsets.fromLTRB(15.0, 5.0, 0.0, 0.0),
+      child: Column(
+          children:[
+          SizedBox(height: 10),
+      Row(
+
+        children: [
+          Icon(Icons.lock,
+              color:Color(0xd33094FE)),
+          Text("交易所账号对应的secret",style:TextStyle(fontSize: 18))
+        ],
+      ),
+      Padding(padding: const EdgeInsets.fromLTRB(18.0, 0.0, 18.0, 0),
+      child:
+      new TextFormField(
+        maxLines: 3,
         autofocus: false,
         controller: secretController,
         keyboardType: TextInputType.text,
@@ -61,19 +87,16 @@ class ModifyBindState extends State<ModifyBindPage>{
         decoration: new InputDecoration(
             border: InputBorder.none,
             hintText: '',
-            labelText: "交易所账号对应的secret",
-            icon: new Icon(
-              Icons.lock,
-              color: Colors.teal,
-            )),
+            labelText: "",
+            ),
         onSaved: (value) => secret = value!.trim(),
         validator: (value){
           if(value!.trim()==""){
             return "secret不能为空";
           }
         },
-      ),
-    );
+      )),
+    ])));
   }
 
   void queryBindInfo() async {
@@ -139,10 +162,12 @@ class ModifyBindState extends State<ModifyBindPage>{
     return Scaffold(
 
           appBar:AppBar(
-            title: const Text('更新交易所账号'),
-              backgroundColor: Colors.teal,
+            title: const Text('更新交易所账号',style: TextStyle(color: Colors.black)),
+              centerTitle: true,
+              elevation: 0,
+              backgroundColor: Colors.white70,
               leading: IconButton(
-                icon:Icon(Icons.arrow_back_ios,color:Colors.white),
+                icon:Icon(Icons.arrow_back_ios,color:Colors.black),
                 onPressed: () async {
                     Navigator.pop(context);
                 },
@@ -159,15 +184,15 @@ class ModifyBindState extends State<ModifyBindPage>{
                 child: Container(
 
                   padding: const EdgeInsets.fromLTRB(25, 30, 25, 0),
-                  child: Card(
-                    child: Column(
+                  child:  Column(
                       children: <Widget>[
+                        SizedBox(height: 10),
                         showKeyInput(),
-                        showSecretInput()
+                        SizedBox(height: 10),
+                        showSecretInput(),
+                        SizedBox(height: 10)
                       ]
                     )
-                  )
-
                 )
 
 
@@ -178,10 +203,15 @@ class ModifyBindState extends State<ModifyBindPage>{
                 child: TextButton(
                   child: Text('提 交'),
                   style: ButtonStyle(
-                    textStyle: MaterialStateProperty.all(TextStyle(fontSize: 16)),
-                    backgroundColor: MaterialStateProperty.all(Colors.teal),
-                    foregroundColor: MaterialStateProperty.all(Colors.white)
-                ),
+                      textStyle: MaterialStateProperty.all(TextStyle(fontSize: 16)),
+                      backgroundColor: MaterialStateProperty.all(Color(0xd33094FE)),
+                      foregroundColor: MaterialStateProperty.all(Colors.white),
+                      shape: MaterialStateProperty.all(
+                          RoundedRectangleBorder(
+                              borderRadius:
+                              BorderRadius.circular(
+                                  40)))
+                  ),
                   onPressed: () {
 
                     if(!_formKey.currentState!.validate()){
