@@ -68,101 +68,117 @@ class NoticeState extends State<NoticePage>{
 
     var item  = datas[index];
 
-
-    return GestureDetector(
+    var top_margin = 10.0;
+    if(index == 0){
+      top_margin = 24.0;
+    }
+    Widget card = GestureDetector(
         child:Card(
         elevation: 1,
-        margin: const EdgeInsets.all(4.0),
-        color: Colors.white60,
+        margin: EdgeInsets.only(top: top_margin,left:25,right: 25),
+        shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(20.0))),
+        color: Colors.white,
         child:Column(
             children: [
+              Padding( padding: EdgeInsets.only(left:10,top:10),
+              child:
               Row(
+                  children: [
+                          Icon(Icons.info_outlined,color:Color(0xd33094FE)
+                          ),
+                          Text(
+                              "新币信息",
+                              style: TextStyle(fontSize: 15.0)
+                          )
+                  ])),
+
+              Padding( padding: EdgeInsets.only(left:30,top:5),
+               child:Row(
                 children: [
-                  Expanded(
-                      child:(
-                          Column(
-                              children: [
-                                SizedBox(height: 10),
-                                Text(
-                                    "新币信息",
-                                    style: TextStyle(fontSize: 15.0)
-                                ),
                                 Text(
                                     item["title"],
-                                    style: TextStyle(fontSize: 15.0)
+                                    style: TextStyle(fontSize: 15.0,fontWeight: FontWeight.w500)
                                 )
                               ])
-                      )
-              )
-                ]),
-              SizedBox(height: 10),
-              Row(
+                ),
+            Padding( padding: EdgeInsets.only(left:30,top:15,right:10),
+              child:Row(
                   children: [
-                    Expanded(
-                        child:(
+                                  Expanded(
+                                  child:Text(
+                                      "交易对:"+item["symbols"].toString(),
+                                      maxLines:2,
+                                      style: TextStyle(fontSize: 14.0)
+                                  ))
+                                ])
+
+              ),
+            Padding( padding: EdgeInsets.only(left:30,top:15),
+            child:Row(
+                  children: [
                             Column(
                                 children: [
+                                  Text(
+                                      item["open_time"],
+                                      style: TextStyle(fontSize: 13.0)
+                                  ),
                                   Text(
                                       "上线时间",
-                                      style: TextStyle(fontSize: 15.0)
-                                  ),
-                                  Text(
-                                      item["open_time"].toString(),
-                                      style: TextStyle(fontSize: 15.0)
+                                      style: TextStyle(fontSize: 11.0)
                                   )
-                                ])
-                        ))
-
-              ]),
-              SizedBox(height: 10),
-              Row(
-                children: [
-                  Expanded(
-                      child:(
-                          Column(
-                              children: [
-                                Text(
-                                    "支持交易对",
-                                    style: TextStyle(fontSize: 15.0)
-                                ),
-                                Text(
-                                    item["symbols"].toString(),
-                                    style: TextStyle(fontSize: 15.0)
-                                )
-                              ])
-                      ))
-              ]),
-              SizedBox(height: 10),
-              Row(
-                  children: [
+                                ]),
                     Expanded(
                         child:(
                             Column(
                                 children: [
                                   Text(
-                                      "预购订单",
-                                      style: TextStyle(fontSize: 15.0)
+                                    item["pre_order_status"].toString(),
+                                      style: TextStyle(fontSize: 13.0)
                                   ),
                                   Text(
-                                      item["pre_order_status"].toString(),
-                                      style: TextStyle(fontSize: 15.0)
+                                      "预购",
+                                      style: TextStyle(fontSize: 11.0)
                                   )
                                 ])
                         ))
-                  ]),
+                  ])),
               SizedBox(height: 10),
 
             ]
         )
-
-
-    ),
+        ),
       onTap: (){
           setState(() {
             Navigator.push(context, MaterialPageRoute(builder: (content){return CreatePreOrderPage(asset : item["asset"], open_time: item["open_time"]);}));
           });
       },
     );
+
+
+    if(index == 0){
+
+      return Stack(
+        children: [
+          Positioned(
+          child:Container(
+            height: 70,
+              decoration: BoxDecoration(
+                color: Color(0xd33094FE),
+                  borderRadius:BorderRadius.only(bottomLeft: Radius.circular(14),
+                      bottomRight: Radius.circular(14))
+              )
+             )),
+             card
+        ],
+      );
+
+    }else{
+
+      return card;
+    }
+
+
   }
 
   @override
@@ -170,8 +186,9 @@ class NoticeState extends State<NoticePage>{
     return Scaffold(
 
             appBar: AppBar(
-              title: const Text('新币'),
-              backgroundColor: Colors.teal,
+              title: const Text('新币',style:TextStyle(color:Colors.white)),
+              backgroundColor: Color(0xd33094FE),
+              elevation: 0,
             ),
             body:
             RefreshIndicator(
