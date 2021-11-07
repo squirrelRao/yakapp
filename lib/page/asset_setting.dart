@@ -44,8 +44,18 @@ class AssetSettingState extends State<AssetSettingPage>{
 
   Widget showTargetRorInput() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(15.0, 5.0, 0.0, 0.0),
-      child: new TextFormField(
+      padding: const EdgeInsets.fromLTRB(15.0, 5.0, 15.0, 0.0),
+      child: Column(
+          children:[
+          SizedBox(height: 10),
+      Row(
+
+        children: [
+          Text("目标收益率(%)",style:TextStyle(fontSize: 18))
+        ],
+      ),
+      SizedBox(height: 10),
+      new TextFormField(
         maxLines: 1,
         keyboardType: TextInputType.number,
         inputFormatters: [
@@ -56,13 +66,17 @@ class AssetSettingState extends State<AssetSettingPage>{
         controller: trController,
         style: TextStyle(fontSize: 16),
         decoration: new InputDecoration(
-            border: InputBorder.none,
-            hintText: '',
-            labelText: "目标收益率(%)",
-            icon: new Icon(
-              Icons.arrow_forward,
-              color: Colors.teal,
-            )),
+          hintText: "",
+          labelText: "",
+          border:OutlineInputBorder(
+              borderRadius: BorderRadius.circular(24),
+              borderSide: BorderSide.none
+          ),
+          ///设置内容内边距
+          contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+          filled: true,
+          fillColor: Color(0x4fD3D3D3),
+        ),
         onSaved: (value) => target_ror = double.parse(value!.trim()),
         validator: (value){
           if(value!.trim()==""){
@@ -74,14 +88,24 @@ class AssetSettingState extends State<AssetSettingPage>{
           }
         },
       ),
-    );
+    ]));
   }
 
 
   Widget showLowestRorInput() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(15.0, 5.0, 0.0, 0.0),
-      child: new TextFormField(
+      padding: const EdgeInsets.fromLTRB(15.0, 5.0, 15.0, 0.0),
+      child: Column(
+      children:[
+      SizedBox(height: 10),
+      Row(
+
+      children: [
+      Text("止损收益率(%)",style:TextStyle(fontSize: 18))
+      ],
+      ),
+      SizedBox(height: 10),
+    new TextFormField(
         maxLines: 1,
         keyboardType: TextInputType.number,
         inputFormatters: [
@@ -91,14 +115,18 @@ class AssetSettingState extends State<AssetSettingPage>{
         autovalidateMode: AutovalidateMode.onUserInteraction,
         controller: lrController,
         style: TextStyle(fontSize: 16),
-        decoration: new InputDecoration(
-            border: InputBorder.none,
-            hintText: '',
-            labelText: "止损收益率(%)",
-            icon: new Icon(
-              Icons.arrow_forward,
-              color: Colors.teal,
-            )),
+      decoration: new InputDecoration(
+        hintText: "",
+        labelText: "",
+        border:OutlineInputBorder(
+            borderRadius: BorderRadius.circular(24),
+            borderSide: BorderSide.none
+        ),
+        ///设置内容内边距
+        contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+        filled: true,
+        fillColor: Color(0x4fD3D3D3),
+      ),
         onSaved: (value) => loweset_ror = double.parse(value!.trim()),
         validator: (value){
           if(value!.trim()==""){
@@ -110,13 +138,23 @@ class AssetSettingState extends State<AssetSettingPage>{
           }
         },
       ),
-    );
+    ]));
   }
 
   Widget showTsellInput() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(15.0, 5.0, 0.0, 0.0),
-      child: new TextFormField(
+      padding: const EdgeInsets.fromLTRB(15.0, 5.0, 15.0, 0.0),
+      child: Column(
+          children:[
+          SizedBox(height: 10),
+      Row(
+
+        children: [
+          Text("目标达成卖出比例(%)",style:TextStyle(fontSize: 18))
+        ],
+      ),
+      SizedBox(height: 10),
+      new TextFormField(
         maxLines: 1,
         keyboardType: TextInputType.number,
         inputFormatters: [
@@ -127,13 +165,17 @@ class AssetSettingState extends State<AssetSettingPage>{
         controller: tsController,
         style: TextStyle(fontSize: 16),
         decoration: new InputDecoration(
-            border: InputBorder.none,
-            hintText: '',
-            labelText: "目标达成卖出比例(%)",
-            icon: new Icon(
-              Icons.arrow_forward,
-              color: Colors.teal,
-            )),
+          hintText: "",
+          labelText: "",
+          border:OutlineInputBorder(
+              borderRadius: BorderRadius.circular(24),
+              borderSide: BorderSide.none
+          ),
+          ///设置内容内边距
+          contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+          filled: true,
+          fillColor: Color(0x4fD3D3D3),
+        ),
         onSaved: (value) => t_sell = double.parse(value!.trim()),
         validator: (value){
           if(value!.trim()==""){
@@ -145,14 +187,24 @@ class AssetSettingState extends State<AssetSettingPage>{
           }
         },
       ),
-    );
+    ]));
   }
 
 
   Widget showLsellInput() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(15.0, 5.0, 0.0, 0.0),
-      child: new TextFormField(
+      padding: const EdgeInsets.fromLTRB(15.0, 5.0, 15.0, 0.0),
+      child: Column(
+          children:[
+          SizedBox(height: 10),
+      Row(
+
+        children: [
+          Text("止损触发卖出比例(%)",style:TextStyle(fontSize: 18))
+        ],
+      ),
+      SizedBox(height: 10),
+      new TextFormField(
         maxLines: 1,
         keyboardType: TextInputType.number,
         inputFormatters: [
@@ -163,13 +215,17 @@ class AssetSettingState extends State<AssetSettingPage>{
         controller: lsController,
         style: TextStyle(fontSize: 16),
         decoration: new InputDecoration(
-            border: InputBorder.none,
-            hintText: '',
-            labelText: "止损触发卖出比例(%)",
-            icon: new Icon(
-              Icons.arrow_forward,
-              color: Colors.teal,
-            )),
+          hintText: "",
+          labelText: "",
+          border:OutlineInputBorder(
+              borderRadius: BorderRadius.circular(24),
+              borderSide: BorderSide.none
+          ),
+          ///设置内容内边距
+          contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+          filled: true,
+          fillColor: Color(0x4fD3D3D3),
+        ),
         onSaved: (value) => l_sell = double.parse(value!.trim()),
         validator: (value){
           if(value!.trim()==""){
@@ -181,7 +237,7 @@ class AssetSettingState extends State<AssetSettingPage>{
           }
         },
       ),
-    );
+    ]));
   }
 
 
@@ -252,10 +308,12 @@ class AssetSettingState extends State<AssetSettingPage>{
     return Scaffold(
 
           appBar:AppBar(
-            title:  Text(title),
-              backgroundColor: Colors.teal,
+            title:  Text(title,style:TextStyle(color: Colors.black)),
+              backgroundColor: Colors.white70,
+              elevation: 0,
+              centerTitle: true,
               leading: IconButton(
-                icon:Icon(Icons.arrow_back_ios,color:Colors.white),
+                icon:Icon(Icons.arrow_back_ios,color:Colors.black),
                 onPressed: () async {
                     Navigator.pop(context);
                 },
@@ -272,10 +330,9 @@ class AssetSettingState extends State<AssetSettingPage>{
                 child: Container(
 
                   padding: const EdgeInsets.fromLTRB(25, 30, 25, 0),
-                  child: Card(
-                    child: Column(
+                  child:  Column(
                       children: <Widget>[
-                        showCoin(),
+                        // showCoin(),
                         showTargetRorInput(),
                         showTsellInput(),
                         showLowestRorInput(),
@@ -284,10 +341,6 @@ class AssetSettingState extends State<AssetSettingPage>{
                       ]
                     )
                   )
-
-                )
-
-
             ),
               Container(
                 height: 70,
@@ -295,10 +348,15 @@ class AssetSettingState extends State<AssetSettingPage>{
                 child: TextButton(
                   child: Text('提 交'),
                   style: ButtonStyle(
-                    textStyle: MaterialStateProperty.all(TextStyle(fontSize: 16)),
-                    backgroundColor: MaterialStateProperty.all(Colors.teal),
-                    foregroundColor: MaterialStateProperty.all(Colors.white)
-                ),
+                      textStyle: MaterialStateProperty.all(TextStyle(fontSize: 16)),
+                      backgroundColor: MaterialStateProperty.all(Color(0xd33094FE)),
+                      foregroundColor: MaterialStateProperty.all(Colors.white),
+                      shape: MaterialStateProperty.all(
+                          RoundedRectangleBorder(
+                              borderRadius:
+                              BorderRadius.circular(
+                                  40)))
+                  ),
                   onPressed: () {
 
                     if(!_formKey.currentState!.validate()){

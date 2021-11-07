@@ -30,8 +30,18 @@ class CommonSettingState extends State<CommonSettingPage>{
 
   Widget showDurationInput() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(15.0, 5.0, 0.0, 0.0),
-      child: new TextFormField(
+      padding: const EdgeInsets.fromLTRB(15.0, 5.0, 15.0, 0.0),
+      child: Column(
+          children:[
+          SizedBox(height: 10),
+      Row(
+
+        children: [
+          Text("收益累计周期 (推荐: 7或30天)")
+        ],
+      ),
+      SizedBox(height: 10),
+      new TextFormField(
         maxLines: 1,
         keyboardType: TextInputType.number,
         inputFormatters: [
@@ -42,13 +52,17 @@ class CommonSettingState extends State<CommonSettingPage>{
         controller: durationController,
         style: TextStyle(fontSize: 16),
         decoration: new InputDecoration(
-            border: InputBorder.none,
-            hintText: '',
-            labelText: "收益累计周期 (推荐: 7或30天)",
-            icon: new Icon(
-              Icons.arrow_forward,
-              color: Colors.teal,
-            )),
+          hintText: "",
+          labelText: "",
+          border:OutlineInputBorder(
+              borderRadius: BorderRadius.circular(24),
+              borderSide: BorderSide.none
+          ),
+          ///设置内容内边距
+          contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+          filled: true,
+          fillColor: Color(0x4fD3D3D3),
+        ),
         onSaved: (value) => ror_duration = double.parse(value!.trim()),
         onTap: (){
           durationController.text="";
@@ -63,13 +77,13 @@ class CommonSettingState extends State<CommonSettingPage>{
           }
         },
       ),
-    );
+    ]));
   }
 
 
   Widget showActionInput() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(15.0, 5.0, 0.0, 0.0),
+      padding: const EdgeInsets.fromLTRB(15.0, 15.0, 15.0, 0.0),
       child:Column(children: [
         Row(
           children:[
@@ -77,12 +91,18 @@ class CommonSettingState extends State<CommonSettingPage>{
             Text("目标收益达成时:")
           ],
         ),
-      Column(
+      Card(
+        color:Color(0xfff5f5f5),
+        elevation: 0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(20.0)),),
+      child: Column(
         children: <Widget>[
           Row(children:[
           Radio(
             // 按钮的值
             value: "auto_limit",
+            activeColor: Color(0xd33094FE),
             // 改变事件
             onChanged: (value){
               setState(() {
@@ -98,6 +118,7 @@ class CommonSettingState extends State<CommonSettingPage>{
             Radio(
               // 按钮的值
               value: "auto_market",
+              activeColor: Color(0xd33094FE),
               // 改变事件
               onChanged: (value){
                 setState(() {
@@ -112,6 +133,7 @@ class CommonSettingState extends State<CommonSettingPage>{
           Row(children:[
           Radio(
             value:"notify",
+            activeColor: Color(0xd33094FE),
             onChanged: (value){
               setState(() {
                 ror_touch = value.toString();
@@ -125,7 +147,8 @@ class CommonSettingState extends State<CommonSettingPage>{
                children:[
                Radio(
               value:"non",
-              onChanged: (value){
+                 activeColor: Color(0xd33094FE),
+                 onChanged: (value){
                 setState(() {
                   ror_touch = value.toString();
                 });
@@ -135,14 +158,14 @@ class CommonSettingState extends State<CommonSettingPage>{
           Text("不执行任何操作",style: TextStyle(fontSize: 13))
            ])
         ],
-      )
+      ) )
     ]),
     );
   }
 
   Widget showLActionInput() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(15.0, 5.0, 0.0, 0.0),
+      padding: const EdgeInsets.fromLTRB(15.0, 15.0, 0.0, 0.0),
       child:Column(children: [
         Row(
           children:[
@@ -150,12 +173,18 @@ class CommonSettingState extends State<CommonSettingPage>{
             Text("最低收益达成时:")
           ],
         ),
-        Column(
+    Card(
+    color:Color(0xfff5f5f5),
+    elevation: 0,
+    shape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.all(Radius.circular(20.0))),
+    child:Column(
           children: <Widget>[
             Row(children:[
               Radio(
                 // 按钮的值
                 value: "auto_limit",
+                activeColor: Color(0xd33094FE),
                 // 改变事件
                 onChanged: (value){
                   setState(() {
@@ -170,6 +199,7 @@ class CommonSettingState extends State<CommonSettingPage>{
             Row(children:[
               Radio(
                 value:"auto_market",
+                activeColor: Color(0xd33094FE),
                 onChanged: (value){
                   setState(() {
                     l_ror_touch = value.toString();
@@ -182,6 +212,7 @@ class CommonSettingState extends State<CommonSettingPage>{
             Row(children:[
               Radio(
                 value:"notify",
+                activeColor: Color(0xd33094FE),
                 onChanged: (value){
                   setState(() {
                     l_ror_touch = value.toString();
@@ -195,6 +226,7 @@ class CommonSettingState extends State<CommonSettingPage>{
                 children:[
                   Radio(
                     value:"non",
+                    activeColor: Color(0xd33094FE),
                     onChanged: (value){
                       setState(() {
                         l_ror_touch = value.toString();
@@ -205,7 +237,7 @@ class CommonSettingState extends State<CommonSettingPage>{
                   Text("不执行任何操作",style: TextStyle(fontSize: 13))
                 ])
           ],
-        )
+        ))
       ]),
     );
   }
@@ -213,14 +245,15 @@ class CommonSettingState extends State<CommonSettingPage>{
   Widget showNewCoinNotifySwitch(){
 
     return Padding(
-        padding: const EdgeInsets.fromLTRB(15.0, 5.0, 0.0, 0.0),
+        padding: const EdgeInsets.fromLTRB(15.0, 5.0, 15.0, 0.0),
         child:Column(children:[
         Row(
           children:[
-            SizedBox(width: 0),
             Text("新币上市提醒:"),
+            SizedBox(width: 130),
             Switch(
                 value: new_coin_notify,
+                activeColor: Color(0xd33094FE),
                 onChanged: (value) {
                   setState(() {
                     new_coin_notify = value;
@@ -305,10 +338,12 @@ class CommonSettingState extends State<CommonSettingPage>{
     return Scaffold(
 
           appBar:AppBar(
-            title: const Text('收益设置'),
-              backgroundColor: Colors.teal,
+            title: const Text('收益设置',style:TextStyle(color:Colors.black)),
+              backgroundColor: Colors.white70,
+              elevation: 0,
+              centerTitle: true,
               leading: IconButton(
-                icon:Icon(Icons.arrow_back_ios,color:Colors.white),
+                icon:Icon(Icons.arrow_back_ios,color:Colors.black),
                 onPressed: () async {
                     Navigator.pop(context);
                 },
@@ -324,9 +359,8 @@ class CommonSettingState extends State<CommonSettingPage>{
                 key : _formKey,
                 child: Container(
 
-                  padding: const EdgeInsets.fromLTRB(25, 30, 25, 0),
-                  child: Card(
-                    child: Column(
+                  padding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
+                  child: Column(
                       children: <Widget>[
                         showDurationInput(),
                         showActionInput(),
@@ -336,21 +370,22 @@ class CommonSettingState extends State<CommonSettingPage>{
                       ]
                     )
                   )
-
-                )
-
-
             ),
               Container(
-                height: 70,
-                padding: const EdgeInsets.fromLTRB(25, 30, 25, 0),
+                height: 40,
+                padding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
                 child: TextButton(
                   child: Text('提 交'),
                   style: ButtonStyle(
-                    textStyle: MaterialStateProperty.all(TextStyle(fontSize: 16)),
-                    backgroundColor: MaterialStateProperty.all(Colors.teal),
-                    foregroundColor: MaterialStateProperty.all(Colors.white)
-                ),
+                      textStyle: MaterialStateProperty.all(TextStyle(fontSize: 16)),
+                      backgroundColor: MaterialStateProperty.all(Color(0xd33094FE)),
+                      foregroundColor: MaterialStateProperty.all(Colors.white),
+                      shape: MaterialStateProperty.all(
+                          RoundedRectangleBorder(
+                              borderRadius:
+                              BorderRadius.circular(
+                                  40)))
+                  ),
                   onPressed: () {
 
                     if(!_formKey.currentState!.validate()){

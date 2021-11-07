@@ -56,9 +56,10 @@ class RorSettingState extends State<RorSettingPage>{
     return Scaffold(
 
           appBar:AppBar(
-            title: const Text('收益率目标设定'),
-            backgroundColor: Colors.teal
-
+            title: const Text('收益率目标设定',style:TextStyle(color:Colors.black)),
+            backgroundColor: Colors.white70,
+            elevation: 0,
+            centerTitle: true
           ),
 
           body: ListView(
