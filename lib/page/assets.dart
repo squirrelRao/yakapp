@@ -219,8 +219,9 @@ class AssetsState extends State<AssetsPage>{
 
     return GestureDetector(
         child:Card(
-
-        elevation: 1,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10.0))),
+        elevation: 1.5,
         margin: const EdgeInsets.only(left:20,right:20,top:12),
         color: Colors.white,
         child:Column(
@@ -275,13 +276,26 @@ class AssetsState extends State<AssetsPage>{
                             "目标收益率",
                             style: TextStyle(fontSize: 15.0)
                         ),
-
                         Text(
                             item["target_ror"].toString()+"%",
                             style: TextStyle(fontSize: 15.0)
+                        ),
+                      ])),
+              Padding(padding: EdgeInsets.only(left:14,top:2,right:14,bottom:0),
+                  child:Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                            "达成自动卖出",
+                            style: TextStyle(fontSize: 11.0,color:Colors.grey)
+                        ),
+
+                        Text(
+                            item["t_sell"].toString()+"%",
+                            style: TextStyle(fontSize: 11.0,color:Colors.grey)
                         )
                       ])),
-              Padding(padding: EdgeInsets.only(left:14,top:8,right:14,bottom: 20),
+              Padding(padding: EdgeInsets.only(left:14,top:8,right:14,bottom: 0),
                   child:Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -293,6 +307,20 @@ class AssetsState extends State<AssetsPage>{
                         Text(
                             item["lowest_ror"].toString()+"%",
                             style: TextStyle(fontSize: 15.0)
+                        )
+                      ])),
+              Padding(padding: EdgeInsets.only(left:14,top:2,right:14,bottom:20),
+                  child:Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                            "达成自动卖出",
+                            style: TextStyle(fontSize: 11.0,color:Colors.grey)
+                        ),
+
+                        Text(
+                            item["l_sell"].toString()+"%",
+                            style: TextStyle(fontSize: 11.0,color:Colors.grey)
                         )
                       ])),
             ]
@@ -317,8 +345,9 @@ class AssetsState extends State<AssetsPage>{
 
     return GestureDetector(
       child:Card(
-
-          elevation: 1,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10.0))),
+          elevation: 1.5,
           margin: const EdgeInsets.only(left:20,right:20,top:12),
           color: Colors.white,
           child:Column(
@@ -392,8 +421,8 @@ class AssetsState extends State<AssetsPage>{
                               margin: EdgeInsets.only(top:180),
                               decoration:BoxDecoration(
                                 color: Colors.white,
-                              borderRadius: BorderRadius.horizontal(left: Radius.circular(10)
-                              ,right:Radius.circular(10)),
+                              borderRadius: BorderRadius.horizontal(left: Radius.circular(16)
+                              ,right:Radius.circular(16)),
                               ),
                               child:buildUSDTDetail(index)
                             )
