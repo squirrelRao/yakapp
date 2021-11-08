@@ -82,60 +82,50 @@ class AssetsState extends State<AssetsPage>{
     return GestureDetector(
 
       child:Card(
-
-        elevation: 1,
-        margin: const EdgeInsets.all(4.0),
-        color: Colors.white60,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.zero,
+                topRight:Radius.zero ,
+                bottomLeft: Radius.circular(0.0),
+                bottomRight: Radius.circular(0.0))),
+        elevation: 0,
+        margin: const EdgeInsets.all(0.0),
+        color: Color(0xd33094FE),
         child:Column(
-          children: [
-            Row(
-              children: [
-                Expanded(
-                    child:(
-                        Column(
+            children: [
+                        Container(
+                        margin: EdgeInsets.fromLTRB(20, 10, 0, 0),
+                        child:Column(
+
                             children: [
-                              SizedBox(height: 10),
                               Text(
-                                  "总资产",
-                                  style: TextStyle(fontSize: 15.0)
+                                  "总资产("+datas["price_unit"]+")",
+                                  style: TextStyle(fontSize: 16.0,color: Color(0xfff3f3f3))
                               ),
+                              SizedBox(height: 10),
+
                               Text(
-                                  datas["accumulates_free"].toString()+" "+datas["price_unit"],
-                                  style: TextStyle(fontSize: 15.0)
+                                  datas["accumulates_free"].toString(),
+                                  style: TextStyle(fontSize: 25.0,color: Colors.white,fontWeight: FontWeight.w500)
                               )
-                            ])
+                            ]
                     )),
-                Expanded(
-                    child:(
-                        Column(
-                            children: [
-                              SizedBox(height: 10),
-                              Text(
-                                  "收益周期",
-                                  style: TextStyle(fontSize: 15.0)
-                              ),
-                              Text(
-                                  datas["ror_duration"].toString()+"天",
-                                  style: TextStyle(fontSize: 15.0)
-                              )
-                            ])
-                    ))
-              ],
-            ),
-            SizedBox(height: 10),
-            Row(
-                children: [
+            Container(
+                margin: EdgeInsets.fromLTRB(10, 20, 10, 0),
+                child:Row(
+                    children: [
                   Expanded(
                       child:(
                           Column(
                               children: [
                                 Text(
-                                    "累计收益",
-                                    style: TextStyle(fontSize: 15.0)
+                                    "收益周期(天)",
+                                    style: TextStyle(fontSize: 13.0,color: Color(0xfff3f3f3))
                                 ),
+                                SizedBox(height: 10),
                                 Text(
-                                    datas["accumulates_return"].toString()+" "+datas["price_unit"],
-                                    style: TextStyle(fontSize: 15.0)
+                                    datas["ror_duration"].toString(),
+                                    style: TextStyle(fontSize: 16.0,color: Colors.white,fontWeight: FontWeight.w500)
                                 )
                               ])
                       )),
@@ -144,34 +134,49 @@ class AssetsState extends State<AssetsPage>{
                           Column(
                               children: [
                                 Text(
-                                    "累计收益率",
-                                    style: TextStyle(fontSize: 15.0)
+                                    "收益("+datas["price_unit"]+")",
+                                    style: TextStyle(fontSize: 13.0,color: Color(0xfff3f3f3))
                                 ),
+                                SizedBox(height: 10),
+                                Text(
+                                    datas["accumulates_return"].toString(),
+                                    style: TextStyle(fontSize: 16.0,color: Colors.white,fontWeight: FontWeight.w500)
+                                ),
+                              ])
+                      )),
+                  Expanded(
+                      child:(
+                          Column(
+                              children: [
+                                Text(
+                                    "收益率",
+                                    style: TextStyle(fontSize: 13.0,color: Color(0xfff3f3f3))
+                                ),
+                                SizedBox(height: 10),
                                 Text(
                                     datas["accumulates_ror"].toString()+"%",
-                                    style: TextStyle(fontSize: 15.0)
-                                )
+                                    style: TextStyle(fontSize: 16.0,color: Colors.white,fontWeight: FontWeight.w500)
+                                ),
+
+
                               ])
                       )),
 
                 ]
 
-            ),
-            SizedBox(height: 10),
-            Row(
+            )),
+            Container(
+                margin: EdgeInsets.fromLTRB(10, 20, 10, 40),
+                child:Row(
                 children: [
                   Expanded(
                       child:(
                           Column(
                               children: [
                                 Text(
-                                    "目标收益达成",
-                                    style: TextStyle(fontSize: 15.0)
+                                    "目标收益达成: "+datas["ror_touch"],
+                                    style: TextStyle(fontSize: 11.0,color: Color(0xfff3f3f3))
                                 ),
-                                Text(
-                                    datas["ror_touch"],
-                                    style: TextStyle(fontSize: 15.0)
-                                )
                               ])
                       )),
                   Expanded(
@@ -179,20 +184,14 @@ class AssetsState extends State<AssetsPage>{
                           Column(
                               children: [
                                 Text(
-                                    "最低收益达成",
-                                    style: TextStyle(fontSize: 15.0)
-                                ),
-                                Text(
-                                    datas["l_ror_touch"],
-                                    style: TextStyle(fontSize: 15.0)
+                                    "最低收益达成: "+ datas["l_ror_touch"],
+                                    style: TextStyle(fontSize: 11.0,color: Color(0xfff3f3f3))
                                 )
                               ])
                       )),
                 ]
 
-            ),
-            SizedBox(height: 10),
-
+            )),
           ]
         )
 
@@ -391,8 +390,9 @@ class AssetsState extends State<AssetsPage>{
     return Scaffold(
 
             appBar: AppBar(
-              title: const Text('资产'),
-              backgroundColor: Colors.teal,
+              title: const Text('资产',style:TextStyle(color:Colors.white)),
+              backgroundColor:Color(0xd33094FE),
+              elevation: 0,
               actions: [
                 // Center(
                  Container(
@@ -424,13 +424,9 @@ class AssetsState extends State<AssetsPage>{
 
                     }else{
 
-
                       return buildAssetDetail(index-1);
 
                     }
-
-
-
             })
             )
 
