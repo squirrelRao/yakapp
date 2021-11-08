@@ -36,21 +36,21 @@ class TransactionState extends State<TransactionPage>{
           item["symbol"] = item["symbol"].replaceAll("USDT","");
           if(item["type"] == "LIMIT"){
             item["type"] = "卖出";
-            item["price"] = item["price"].toString()+" USDT";
-            item["type_color"] = Colors.redAccent;
+            item["price"] = item["price"].toString();
+            item["type_color"] = Color(0xff48ABFD);
 
           }else if(item["type"] == "MARKET"){
             item["type"] = "卖出";
             item["price"] = "市场最新价";
-            item["type_color"] = Colors.redAccent;
+            item["type_color"] = Color(0xff48ABFD);
 
           }
 
-          item["origQty"] = item["origQty"].toString()+" "+item["symbol"].replaceAll("USDT","");
+          item["origQty"] = item["origQty"].toString();
           item["status_prefix"] = "";
           if(item["status"] == "FAILED"){
             item["status_str"] = "失败("+item["status_str"]+")";
-
+            item["status_str_color"] = Color(0xffE95555);
           }
         }
       }
@@ -73,121 +73,106 @@ class TransactionState extends State<TransactionPage>{
 
   }
 
+
+
   //build asset summary
   Widget buildTransactionDetail(index){
 
     var item  = datas[index];
 
-
     return GestureDetector(
-        child:Card(
-
-        elevation: 1,
-        margin: const EdgeInsets.all(10.0),
-        color: Colors.white,
-        child:Column(
-            children: [
-              Row(
-                children: [
-                  Expanded(
-                      child:(
-                          Row(
-                              children: [
-                                Card(
-                                    color: item["type_color"],
-                                    elevation: 0,
-                                    margin: EdgeInsets.only(top: 0.0,bottom: 0.0,left: 10.0,right: 10.0),
-                                child:
-                                    Padding(
-                                        padding: EdgeInsets.fromLTRB(8, 4, 8, 4),
-                                        child:Text(
-                                    item["type"],
-                                    style: TextStyle(fontSize: 12.0,color: Colors.white)
-                                )
-                                )),
-                                Text(
-                                    item["symbol"]+"/USDT",
-                                    style: TextStyle(fontSize: 16.0)
-                                )
-                              ])
-                      )),
-                  Expanded(
-                      child:(
-                          Column(
-                              children: [
-                                SizedBox(height: 10),
-                                Text(
-                                    "订单时间",
-                                    style: TextStyle(fontSize: 13.0,color:Colors.grey)
-                                ),
-                                Text(
-                                    item["update_time_sr"],
-                                    style: TextStyle(fontSize: 16.0)
-                                )
-                              ])
-                      )),
-                ],
-              ),
-              SizedBox(height: 20),
-              Divider(height: 1.0,indent: 10,endIndent: 10,color: Colors.grey),
-              SizedBox(height: 20),
-              Row(
-                  children: [
-                    Expanded(
-                        child:(
-                            Column(
-                                children: [
-                                  Text(
-                                      item["origQty"].toString(),
-                                      style: TextStyle(fontSize: 16.0)
-                                  ),
-                                  Text(
-                                      "数量",
-                                      style: TextStyle(fontSize: 13.0)
+      child:Card(
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(10.0))),
+          elevation: 1.5,
+          margin: const EdgeInsets.only(left:20,right:20,top:12),
+          color: Colors.white,
+          child:Column(
+              children: [
+                Padding(padding: EdgeInsets.only(left:14,top:10,right:14),
+                    child:Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                              item["symbol"],
+                              style: TextStyle(fontSize: 15.0,fontWeight: FontWeight.w500)
+                          ),
+                          Card(
+                              color: item["type_color"],
+                              elevation: 0,
+                              margin: EdgeInsets.only(top: 0.0,bottom: 0.0,left: 10.0,right: 0.0),
+                              child:
+                              Padding(
+                                  padding: EdgeInsets.fromLTRB(8, 4, 8, 4),
+                                  child:Text(
+                                      item["type"],
+                                      style: TextStyle(fontSize: 12.0,color: Colors.white)
                                   )
-                                ])
-                        )),
-                    Expanded(
-                        child:(
-                            Column(
-                                children: [
-                                  Text(
-                                      item["price"].toString(),
-                                      style: TextStyle(fontSize: 16.0)
-                                  ),
-                                  Text(
-                                      "价格",
-                                      style: TextStyle(fontSize: 13.0)
-                                  )
-                                ])
-                        )),
-                    Expanded(
-                        child:(
-                            Column(
-                                children: [
-                                  Text(
-                                      item["status_str"].toString(),
-                                      style: TextStyle(fontSize: 16.0)
-                                  ),
-                                  Text(
-                                      "状态",
-                                      style: TextStyle(fontSize: 13.0)
-                                  )
-                                ])
-                        )),
-                  ]
+                              )),
+                        ])),
+                Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
+                    child:Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                              "数量",
+                              style: TextStyle(fontSize: 15.0)
+                          ),
 
-              ),
-              SizedBox(height: 30),
-            ]
-        )
+                          Text(
+                              item["origQty"].toString(),
+                              style: TextStyle(fontSize: 15.0)
+                          )
+                        ])),
+                Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
+                    child:Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                              "价格(usdt)",
+                              style: TextStyle(fontSize: 15.0)
+                          ),
 
+                          Text(
+                              item["price"].toString(),
+                              style: TextStyle(fontSize: 15.0)
+                          )
+                        ])),
+                Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
+                    child:Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                              "状态",
+                              style: TextStyle(fontSize: 15.0)
+                          ),
+                          Text(
+                              item["status_str"].toString(),
+                              style: TextStyle(fontSize: 15.0,color:item["status_str_color"])
+                          ),
+                        ])),
+                Padding(padding: EdgeInsets.only(left:14,top:8,right:14,bottom:10),
+                    child:Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                              "时间",
+                              style: TextStyle(fontSize: 15.0)
+                          ),
 
-    ),
+                          Text(
+                              item["update_time_sr"].toString(),
+                              style: TextStyle(fontSize: 15.0)
+                          )
+                        ]))
+              ]
+          )
+
+      ),
       onTap: (){
-          setState(() {
-            // Navigator.push(context, MaterialPageRoute(builder: (content){return AssetSettingPage(asset : item["asset"]);}));
-          });
+        setState(() {
+          // Navigator.push(context, MaterialPageRoute(builder: (content){return AssetSettingPage(asset : item["asset"]);}));
+        });
       },
     );
   }
