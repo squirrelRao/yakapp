@@ -84,7 +84,7 @@ class SplashState extends State<SplashPage> {
     return Stack(
 
     children:[
-      Container(child: Image.asset("images/splash.png",fit:BoxFit.cover)),
+      Container(child: Image.asset("images/splash.png",fit:BoxFit.fill)),
       Positioned(
           left:136,
           top:264,
