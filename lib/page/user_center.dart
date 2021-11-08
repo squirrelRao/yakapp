@@ -18,6 +18,7 @@ class UserCenterState extends State<UserCenterPage> {
 
   String bindStatus = "未绑定";
   String userName = "";
+  String userMail = "";
 
   showAboutDialog(BuildContext context) {
 
@@ -47,11 +48,13 @@ class UserCenterState extends State<UserCenterPage> {
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var name = prefs.getString("name")!;
+    var mail = prefs.getString("mail")!;
     var bind = prefs.getInt("isBind")!;
 
     setState(() {
 
       userName = name;
+      userMail = mail;
       if(bind == 1){
         bindStatus = "已绑定";
       }else{
@@ -76,30 +79,41 @@ class UserCenterState extends State<UserCenterPage> {
             body: ListView(
               scrollDirection: Axis.vertical,
               children: [
-
-               Row(
+              Container(
+                margin: EdgeInsets.only(top:25,bottom:20),
+               child:Row(
                       children: [
-                        // Expanded(
-                        //     child: Container(
-                        //       height: 100,
-                        //       alignment: Alignment.center,
-                        //       child: Image.asset('images/default_avatar.jpeg'),
-                        //     )
-                        // ),
+                            Container(
+                              width: 45.0,
+                              height: 45.0,
+                              margin: EdgeInsets.only(left:20,top:10),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                image: DecorationImage(
+                                  image: AssetImage(
+                                    "images/logo.png",
+                                  ),
+                                ),
+                              )
+                            ),
                         Expanded(
                             child: Container(
-                              height: 90,
                               alignment: Alignment.centerLeft,
                               child: Padding(
-                                padding: const EdgeInsets.fromLTRB(30, 30, 0, 0),
-                                child:Text(
-                                userName,
-                                style:TextStyle(fontSize:20,color:Color(0xff292D33)),
+                                padding: const EdgeInsets.fromLTRB(10, 10, 0, 0),
+                                child:Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                children:[
+                                     Text(userMail, style:TextStyle(fontSize:17,color:Color(0xff292D33))),
+                                    SizedBox(height:2),
+                                    Text(userName,style:TextStyle(fontSize:14,color:Colors.grey))
+
+                                ]
                               ),
                               ))
                         )
                       ],
-                ),
+                )),
                  Padding(
                   padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                   child:Card(
