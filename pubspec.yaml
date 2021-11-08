@@ -71,6 +71,15 @@ flutter:
    - images/logo.png
    - images/splash.jpg
    - images/default_avatar.jpeg
+   - images/notice_icon.png
+   - images/lock.png
+   - images/phone.png
+   - images/valide.png
+   - images/wallet.png
+   - images/return.png
+   - images/about.png
+   - images/right_arrow.png
+
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

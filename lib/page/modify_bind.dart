@@ -33,8 +33,11 @@ class ModifyBindState extends State<ModifyBindPage>{
       Row(
 
         children: [
-          Icon(Icons.lock,
-              color:Color(0xff48ABFD)),
+          Image(
+            width:20,
+            height:20,
+            image: AssetImage("images/lock.png"),
+          ),
           Text("交易所账号对应的key",style:TextStyle(fontSize: 18))
         ],
       ),
@@ -71,8 +74,11 @@ class ModifyBindState extends State<ModifyBindPage>{
       Row(
 
         children: [
-          Icon(Icons.lock,
-              color:Color(0xff48ABFD)),
+          Image(
+            width:20,
+            height:20,
+            image: AssetImage("images/lock.png"),
+          ),
           Text("交易所账号对应的secret",style:TextStyle(fontSize: 18))
         ],
       ),

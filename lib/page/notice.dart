@@ -85,8 +85,12 @@ class NoticeState extends State<NoticePage>{
               child:
               Row(
                   children: [
-                          Icon(Icons.info_outlined,color:Color(0xff48ABFD)
+                            Image(
+                            width:15,
+                            height:15,
+                            image: AssetImage("images/notice_icon.png"),
                           ),
+                          SizedBox(width:4),
                           Text(
                               "新币信息",
                               style: TextStyle(fontSize: 15.0)

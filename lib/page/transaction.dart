@@ -103,7 +103,7 @@ class TransactionState extends State<TransactionPage>{
                               margin: EdgeInsets.only(top: 0.0,bottom: 0.0,left: 10.0,right: 0.0),
                               child:
                               Padding(
-                                  padding: EdgeInsets.fromLTRB(8, 4, 8, 4),
+                                  padding: EdgeInsets.fromLTRB(8, 2, 8, 2),
                                   child:Text(
                                       item["type"],
                                       style: TextStyle(fontSize: 12.0,color: Colors.white)

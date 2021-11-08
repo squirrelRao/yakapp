@@ -37,8 +37,11 @@ class BindExchangeState extends State<BindExchangePage>{
         Row(
 
           children: [
-            Icon(Icons.lock,
-                color:Color(0xff48ABFD)),
+            Image(
+              width:20,
+              height:20,
+              image: AssetImage("images/valide.png"),
+            ),
             Text("交易所账号对应的key",style:TextStyle(fontSize: 18))
           ],
         ),
@@ -73,8 +76,11 @@ class BindExchangeState extends State<BindExchangePage>{
     Row(
 
     children: [
-    Icon(Icons.lock,
-    color:Color(0xff48ABFD)),
+      Image(
+        width:20,
+        height:20,
+        image: AssetImage("images/valide.png"),
+      ),
     Text("交易所账号对应的key",style:TextStyle(fontSize: 18))
     ],
     ),

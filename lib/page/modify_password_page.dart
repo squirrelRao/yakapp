@@ -30,9 +30,12 @@ class ModifyPasswordState extends State<ModifyPasswordPage>{
       Row(
 
         children: [
-          Icon(Icons.lock,
-              color:Color(0xff48ABFD)),
-          Text("旧密码",style:TextStyle(fontSize: 18))
+          Image(
+            width:20,
+            height:20,
+            image: AssetImage("images/lock.png"),
+          ),
+          Text("旧密码",style:TextStyle(fontSize: 14))
         ],
       ),
       new TextFormField(
@@ -77,9 +80,12 @@ class ModifyPasswordState extends State<ModifyPasswordPage>{
       Row(
 
         children: [
-          Icon(Icons.lock,
-              color:Color(0xff48ABFD)),
-          Text("新密码",style:TextStyle(fontSize: 18))
+          Image(
+            width:20,
+            height:20,
+            image: AssetImage("images/lock.png"),
+          ),
+          Text("新密码",style:TextStyle(fontSize: 14))
         ],
       ),
       new TextFormField(
@@ -124,9 +130,12 @@ class ModifyPasswordState extends State<ModifyPasswordPage>{
         Row(
 
           children: [
-            Icon(Icons.lock,
-                color:Color(0xff48ABFD)),
-            Text("密码确认",style:TextStyle(fontSize: 18))
+            Image(
+              width:20,
+              height:20,
+              image: AssetImage("images/valide.png"),
+            ),
+            Text("密码确认",style:TextStyle(fontSize: 14))
           ],
         ),
       new TextFormField(

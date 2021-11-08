@@ -32,9 +32,12 @@ class LoginState extends State<LoginPage>{
             Row(
 
               children: [
-                Icon(Icons.phone_rounded,
-                color:Color(0xff48ABFD)),
-                Text("手机号",style:TextStyle(fontSize: 18))
+                Image(
+                  width:20,
+                  height:20,
+                  image: AssetImage("images/phone.png"),
+                ),
+                Text("手机号",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
               ],
             ),
             SizedBox(height: 10),
@@ -103,9 +106,12 @@ class LoginState extends State<LoginPage>{
       Row(
 
         children: [
-          Icon(Icons.lock,
-              color:Color(0xff48ABFD)),
-          Text("密码",style:TextStyle(fontSize: 18))
+          Image(
+            width:20,
+            height:20,
+            image: AssetImage("images/lock.png"),
+          ),
+          Text("密码",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
         ],
       ),
       SizedBox(height: 10),
@@ -155,11 +161,11 @@ class LoginState extends State<LoginPage>{
 
               Container(
                 padding: const EdgeInsets.fromLTRB(30, 80, 25, 0),
-                child:Text("你好",style:TextStyle(fontSize: 30,fontWeight: FontWeight.w700)),
+                child:Text("你好",style:TextStyle(fontSize: 30,color:Color(0xff292D33),fontWeight: FontWeight.w700)),
               ),
               Container(
                 padding: const EdgeInsets.fromLTRB(30, 10, 25, 0),
-                child:Text("欢迎来到Yak!",style:TextStyle(fontSize: 30,fontWeight: FontWeight.w700)),
+                child:Text("欢迎来到Yak!",style:TextStyle(fontSize: 30,color:Color(0xff292D33),fontWeight: FontWeight.w700)),
               ),
               Form(
 
@@ -227,7 +233,7 @@ class LoginState extends State<LoginPage>{
                 alignment: Alignment.centerRight,
                 padding: const EdgeInsets.fromLTRB(35, 10, 35, 0),
                 child: TextButton(
-                  child:Text("注册账号",style: TextStyle(fontSize: 14,color:Colors.grey)),
+                  child:Text("注册账号",style: TextStyle(fontSize: 14,color:Color(0xff999999))),
                   onPressed: (){
                     Navigator.push(context,
                         MaterialPageRoute(builder: (content){return RegistPage();})

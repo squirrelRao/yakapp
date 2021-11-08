@@ -74,9 +74,12 @@ class RegistState extends State<RegistPage>{
             Row(
 
               children: [
-                Icon(Icons.phone_rounded,
-                    color:Color(0xff48ABFD)),
-                Text("手机号",style:TextStyle(fontSize: 18))
+                Image(
+                  width:20,
+                  height:20,
+                  image: AssetImage("images/phone.png"),
+                ),
+                Text("手机号",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
               ],
             ),
       TextFormField(
@@ -144,9 +147,12 @@ class RegistState extends State<RegistPage>{
       Row(
 
         children: [
-          Icon(Icons.mail_outline,
-              color:Color(0xff48ABFD)),
-          Text("邮箱",style:TextStyle(fontSize: 18))
+          Image(
+            width:20,
+            height:20,
+            image: AssetImage("images/valide.png"),
+          ),
+          Text("邮箱「 接收提醒 」",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
         ],
       ),
         TextFormField(
@@ -195,9 +201,12 @@ class RegistState extends State<RegistPage>{
       Row(
 
         children: [
-          Icon(Icons.lock,
-              color:Color(0xff48ABFD)),
-          Text("密码",style:TextStyle(fontSize: 18))
+          Image(
+            width:20,
+            height:20,
+            image: AssetImage("images/lock.png"),
+          ),
+          Text("密码",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
         ],
       ),
       new TextFormField(
@@ -241,9 +250,12 @@ class RegistState extends State<RegistPage>{
         Row(
 
           children: [
-            Icon(Icons.lock,
-                color:Color(0xff48ABFD)),
-            Text("密码确认",style:TextStyle(fontSize: 18))
+            Image(
+              width:20,
+              height:20,
+              image: AssetImage("images/lock.png"),
+            ),
+            Text("密码确认",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
           ],
         ),
       new TextFormField(

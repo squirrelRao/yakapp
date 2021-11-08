@@ -94,7 +94,7 @@ class UserCenterState extends State<UserCenterPage> {
                                 padding: const EdgeInsets.fromLTRB(30, 30, 0, 0),
                                 child:Text(
                                 userName,
-                                style: TextStyle(fontSize: 20.0),
+                                style:TextStyle(fontSize:20,color:Color(0xff292D33)),
                               ),
                               ))
                         )
@@ -109,15 +109,23 @@ class UserCenterState extends State<UserCenterPage> {
                  children:[
                  ListTile(
 
-                  leading: Icon(Icons.wallet_giftcard,color: Color(0xff48ABFD)),
-                  title: Text("交易所钱包"),
-                  subtitle: Text(bindStatus),
+                  leading: Image(
+                    width:20,
+                    height:20,
+                    image: AssetImage("images/wallet.png"),
+                  ),
+                  title: Text("交易所钱包",style:TextStyle(fontSize:14,color:Color(0xff292D33))),
+                  subtitle: Text(bindStatus,style:TextStyle(fontSize:11,color:Colors.grey)),
                   onTap: (){
                     Navigator.push(context,
                         MaterialPageRoute(builder: (content){return ModifyBindPage();}));
                   },
                   trailing: IconButton(
-                    icon:Icon(Icons.keyboard_arrow_right),
+                    icon:Image(
+                      width:20,
+                      height:20,
+                      image: AssetImage("images/right_arrow.png"),
+                    ),
                     onPressed: (){
                       Navigator.push(context,
                           MaterialPageRoute(builder: (content){return BindExchangePage();}));
@@ -126,26 +134,44 @@ class UserCenterState extends State<UserCenterPage> {
                 ),
                 ListTile(
 
-                  leading: Icon(Icons.password_outlined,color: Color(0xff48ABFD)),
-                  title: Text("修改密码"),
+                  leading: Image(
+                    width:20,
+                    height:20,
+                    image: AssetImage("images/lock.png"),
+                  ),
+                  title: Text("修改密码",style:TextStyle(fontSize:14,color:Color(0xff292D33))),
                   onTap: (){
                     Navigator.push(context,
                         MaterialPageRoute(builder: (content){return ModifyPasswordPage();}));
                   },
                   trailing: IconButton(
-                    icon:Icon(Icons.keyboard_arrow_right),
+                      icon:Image(
+                        width:20,
+                        height:20,
+                        image: AssetImage("images/right_arrow.png"),
+                      ),
                       onPressed: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (content){return ModifyPasswordPage();}));
                       })
                 ),
                 ListTile(
-                  leading: Icon(Icons.monetization_on_outlined,color: Color(0xff48ABFD)),
-                  title: Text("收益设置"),
+                  leading:Image(
+                    width:20,
+                    height:20,
+                    image: AssetImage("images/return.png"),
+                  ),
+                  title: Text("收益设置",style:TextStyle(fontSize:14,color:Color(0xff292D33))),
                   onTap: (){
                     Navigator.push(context, MaterialPageRoute(builder: (content){return CommonSettingPage();}));
                   },
-                  trailing:IconButton(icon:Icon(Icons.keyboard_arrow_right),
+                  trailing:IconButton(
+                      icon:Image(
+                        width:20,
+                        height:20,
+                        image: AssetImage("images/right_arrow.png"),
+                      )
+                  ,
                       onPressed: (){
 
                         Navigator.push(context, MaterialPageRoute(builder: (content){return CommonSettingPage();}));
@@ -153,12 +179,21 @@ class UserCenterState extends State<UserCenterPage> {
                       })
                 ),
                 ListTile(
-                  leading: Icon(Icons.info_outline,color: Color(0xff48ABFD)),
-                  title: Text("关于"),
+                  leading: Image(
+                    width:20,
+                    height:20,
+                    image: AssetImage("images/about.png"),
+                  ),
+                  title: Text("关于",style:TextStyle(fontSize:14,color:Color(0xff292D33))),
                   onTap: (){
                     showAboutDialog(context);
                   },
-                  trailing: IconButton(icon:Icon(Icons.keyboard_arrow_right),
+                  trailing: IconButton(
+                      icon:Image(
+                        width:20,
+                        height:20,
+                        image: AssetImage("images/right_arrow.png"),
+                      ),
                     onPressed: (){
                       showAboutDialog(context);
 
