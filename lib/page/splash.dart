@@ -81,9 +81,23 @@ class SplashState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
 
-    return Container(
-        child: Image.asset("images/splash.jpg",fit:BoxFit.cover)
-    );
+    return Stack(
+
+    children:[
+      Container(child: Image.asset("images/splash.png",fit:BoxFit.cover)),
+      Positioned(
+          left:136,
+          top:264,
+          child: Image.asset("images/logo.png",width: 80,height:80)
+      ),
+      Positioned(
+          left:138,
+          top:359,
+          child: Image.asset("images/yak.png",width: 77,height:19)
+      ),
+
+
+    ]);
   }
 }
 
