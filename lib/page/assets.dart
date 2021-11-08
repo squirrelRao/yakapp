@@ -32,9 +32,26 @@ class AssetsState extends State<AssetsPage>{
 
               if(data["rc"] == 0) {
 
-                upate_time = "数据时间:"+data["data"]["update_time_str"];
+                // upate_time = data["data"]["update_time_desc"];
+                upate_time = "";
+
                 listCount = data["data"]["snapshots"].length + 1;
                 datas = data["data"];
+
+                for(var item in datas["snapshots"]){
+
+                  if(item["ror"] < 0){
+                    item["ror_color"] = Color(0xffE95555);
+                  }else{
+                    item["ror_color"] = Color(0xff02AC8F);
+                  }
+
+                  if(item["return"] < 0){
+                    item["return_color"] = Color(0xffE95555);
+                  }else{
+                    item["return_color"] = Color(0xff02AC8F);
+                  }
+                }
 
                 if(datas["ror_touch"] == "auto_limit"){
                   datas["ror_touch"] = "限价卖出";
@@ -90,7 +107,7 @@ class AssetsState extends State<AssetsPage>{
                 bottomRight: Radius.circular(0.0))),
         elevation: 0,
         margin: const EdgeInsets.all(0.0),
-        color: Color(0xd33094FE),
+        color: Color(0xff48ABFD),
         child:Column(
             children: [
                         Container(
@@ -251,7 +268,7 @@ class AssetsState extends State<AssetsPage>{
 
                         Text(
                             item["return"].toString(),
-                            style: TextStyle(fontSize: 15.0)
+                            style: TextStyle(fontSize: 15.0,color:item["return_color"])
                         )
                       ])),
               Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
@@ -265,7 +282,7 @@ class AssetsState extends State<AssetsPage>{
 
                         Text(
                             item["ror"].toString()+"%",
-                            style: TextStyle(fontSize: 15.0)
+                            style: TextStyle(fontSize: 15.0,color:item["ror_color"])
                         )
                       ])),
               Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
@@ -383,7 +400,7 @@ class AssetsState extends State<AssetsPage>{
 
             appBar: AppBar(
               title: const Text('资产',style:TextStyle(color:Colors.white)),
-              backgroundColor:Color(0xd33094FE),
+              backgroundColor:Color(0xff48ABFD),
               elevation: 0,
               actions: [
                 // Center(

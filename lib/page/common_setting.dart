@@ -102,7 +102,7 @@ class CommonSettingState extends State<CommonSettingPage>{
           Radio(
             // 按钮的值
             value: "auto_limit",
-            activeColor: Color(0xd33094FE),
+            activeColor: Color(0xff48ABFD),
             // 改变事件
             onChanged: (value){
               setState(() {
@@ -118,7 +118,7 @@ class CommonSettingState extends State<CommonSettingPage>{
             Radio(
               // 按钮的值
               value: "auto_market",
-              activeColor: Color(0xd33094FE),
+              activeColor: Color(0xff48ABFD),
               // 改变事件
               onChanged: (value){
                 setState(() {
@@ -133,7 +133,7 @@ class CommonSettingState extends State<CommonSettingPage>{
           Row(children:[
           Radio(
             value:"notify",
-            activeColor: Color(0xd33094FE),
+            activeColor: Color(0xff48ABFD),
             onChanged: (value){
               setState(() {
                 ror_touch = value.toString();
@@ -147,7 +147,7 @@ class CommonSettingState extends State<CommonSettingPage>{
                children:[
                Radio(
               value:"non",
-                 activeColor: Color(0xd33094FE),
+                 activeColor: Color(0xff48ABFD),
                  onChanged: (value){
                 setState(() {
                   ror_touch = value.toString();
@@ -184,7 +184,7 @@ class CommonSettingState extends State<CommonSettingPage>{
               Radio(
                 // 按钮的值
                 value: "auto_limit",
-                activeColor: Color(0xd33094FE),
+                activeColor: Color(0xff48ABFD),
                 // 改变事件
                 onChanged: (value){
                   setState(() {
@@ -199,7 +199,7 @@ class CommonSettingState extends State<CommonSettingPage>{
             Row(children:[
               Radio(
                 value:"auto_market",
-                activeColor: Color(0xd33094FE),
+                activeColor: Color(0xff48ABFD),
                 onChanged: (value){
                   setState(() {
                     l_ror_touch = value.toString();
@@ -212,7 +212,7 @@ class CommonSettingState extends State<CommonSettingPage>{
             Row(children:[
               Radio(
                 value:"notify",
-                activeColor: Color(0xd33094FE),
+                activeColor: Color(0xff48ABFD),
                 onChanged: (value){
                   setState(() {
                     l_ror_touch = value.toString();
@@ -226,7 +226,7 @@ class CommonSettingState extends State<CommonSettingPage>{
                 children:[
                   Radio(
                     value:"non",
-                    activeColor: Color(0xd33094FE),
+                    activeColor: Color(0xff48ABFD),
                     onChanged: (value){
                       setState(() {
                         l_ror_touch = value.toString();
@@ -253,7 +253,7 @@ class CommonSettingState extends State<CommonSettingPage>{
             SizedBox(width: 130),
             Switch(
                 value: new_coin_notify,
-                activeColor: Color(0xd33094FE),
+                activeColor: Color(0xff48ABFD),
                 onChanged: (value) {
                   setState(() {
                     new_coin_notify = value;
@@ -378,7 +378,7 @@ class CommonSettingState extends State<CommonSettingPage>{
                   child: Text('提 交'),
                   style: ButtonStyle(
                       textStyle: MaterialStateProperty.all(TextStyle(fontSize: 16)),
-                      backgroundColor: MaterialStateProperty.all(Color(0xd33094FE)),
+                      backgroundColor: MaterialStateProperty.all(Color(0xff48ABFD)),
                       foregroundColor: MaterialStateProperty.all(Colors.white),
                       shape: MaterialStateProperty.all(
                           RoundedRectangleBorder(

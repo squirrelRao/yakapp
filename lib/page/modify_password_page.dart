@@ -31,7 +31,7 @@ class ModifyPasswordState extends State<ModifyPasswordPage>{
 
         children: [
           Icon(Icons.lock,
-              color:Color(0xd33094FE)),
+              color:Color(0xff48ABFD)),
           Text("旧密码",style:TextStyle(fontSize: 18))
         ],
       ),
@@ -78,7 +78,7 @@ class ModifyPasswordState extends State<ModifyPasswordPage>{
 
         children: [
           Icon(Icons.lock,
-              color:Color(0xd33094FE)),
+              color:Color(0xff48ABFD)),
           Text("新密码",style:TextStyle(fontSize: 18))
         ],
       ),
@@ -125,7 +125,7 @@ class ModifyPasswordState extends State<ModifyPasswordPage>{
 
           children: [
             Icon(Icons.lock,
-                color:Color(0xd33094FE)),
+                color:Color(0xff48ABFD)),
             Text("密码确认",style:TextStyle(fontSize: 18))
           ],
         ),
@@ -212,7 +212,7 @@ class ModifyPasswordState extends State<ModifyPasswordPage>{
                   child: Text('确认修改'),
                   style: ButtonStyle(
                       textStyle: MaterialStateProperty.all(TextStyle(fontSize: 16)),
-                      backgroundColor: MaterialStateProperty.all(Color(0xd33094FE)),
+                      backgroundColor: MaterialStateProperty.all(Color(0xff48ABFD)),
                       foregroundColor: MaterialStateProperty.all(Colors.white),
                       shape: MaterialStateProperty.all(
                           RoundedRectangleBorder(

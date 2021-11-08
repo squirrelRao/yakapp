@@ -125,7 +125,7 @@ class AssetSettingState extends State<AssetSettingPage>{
         ///设置内容内边距
         contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
         filled: true,
-        fillColor: Color(0x4fD3D3D3),
+        fillColor: Color(0xff48ABFD),
       ),
         onSaved: (value) => loweset_ror = double.parse(value!.trim()),
         validator: (value){
@@ -349,7 +349,7 @@ class AssetSettingState extends State<AssetSettingPage>{
                   child: Text('提 交'),
                   style: ButtonStyle(
                       textStyle: MaterialStateProperty.all(TextStyle(fontSize: 16)),
-                      backgroundColor: MaterialStateProperty.all(Color(0xd33094FE)),
+                      backgroundColor: MaterialStateProperty.all(Color(0xff48ABFD)),
                       foregroundColor: MaterialStateProperty.all(Colors.white),
                       shape: MaterialStateProperty.all(
                           RoundedRectangleBorder(

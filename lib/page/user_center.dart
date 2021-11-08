@@ -109,7 +109,7 @@ class UserCenterState extends State<UserCenterPage> {
                  children:[
                  ListTile(
 
-                  leading: Icon(Icons.wallet_giftcard,color: Color(0xd33094FE)),
+                  leading: Icon(Icons.wallet_giftcard,color: Color(0xff48ABFD)),
                   title: Text("交易所钱包"),
                   subtitle: Text(bindStatus),
                   onTap: (){
@@ -126,7 +126,7 @@ class UserCenterState extends State<UserCenterPage> {
                 ),
                 ListTile(
 
-                  leading: Icon(Icons.password_outlined,color: Color(0xd33094FE)),
+                  leading: Icon(Icons.password_outlined,color: Color(0xff48ABFD)),
                   title: Text("修改密码"),
                   onTap: (){
                     Navigator.push(context,
@@ -140,7 +140,7 @@ class UserCenterState extends State<UserCenterPage> {
                       })
                 ),
                 ListTile(
-                  leading: Icon(Icons.monetization_on_outlined,color: Color(0xd33094FE)),
+                  leading: Icon(Icons.monetization_on_outlined,color: Color(0xff48ABFD)),
                   title: Text("收益设置"),
                   onTap: (){
                     Navigator.push(context, MaterialPageRoute(builder: (content){return CommonSettingPage();}));
@@ -153,7 +153,7 @@ class UserCenterState extends State<UserCenterPage> {
                       })
                 ),
                 ListTile(
-                  leading: Icon(Icons.info_outline,color: Color(0xd33094FE)),
+                  leading: Icon(Icons.info_outline,color: Color(0xff48ABFD)),
                   title: Text("关于"),
                   onTap: (){
                     showAboutDialog(context);

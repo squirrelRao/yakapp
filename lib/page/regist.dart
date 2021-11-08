@@ -75,7 +75,7 @@ class RegistState extends State<RegistPage>{
 
               children: [
                 Icon(Icons.phone_rounded,
-                    color:Color(0xd33094FE)),
+                    color:Color(0xff48ABFD)),
                 Text("手机号",style:TextStyle(fontSize: 18))
               ],
             ),
@@ -145,7 +145,7 @@ class RegistState extends State<RegistPage>{
 
         children: [
           Icon(Icons.mail_outline,
-              color:Color(0xd33094FE)),
+              color:Color(0xff48ABFD)),
           Text("邮箱",style:TextStyle(fontSize: 18))
         ],
       ),
@@ -196,7 +196,7 @@ class RegistState extends State<RegistPage>{
 
         children: [
           Icon(Icons.lock,
-              color:Color(0xd33094FE)),
+              color:Color(0xff48ABFD)),
           Text("密码",style:TextStyle(fontSize: 18))
         ],
       ),
@@ -242,7 +242,7 @@ class RegistState extends State<RegistPage>{
 
           children: [
             Icon(Icons.lock,
-                color:Color(0xd33094FE)),
+                color:Color(0xff48ABFD)),
             Text("密码确认",style:TextStyle(fontSize: 18))
           ],
         ),
@@ -337,7 +337,7 @@ class RegistState extends State<RegistPage>{
                   child: Text('注 册'),
                   style: ButtonStyle(
                       textStyle: MaterialStateProperty.all(TextStyle(fontSize: 16)),
-                      backgroundColor: MaterialStateProperty.all(Color(0xd33094FE)),
+                      backgroundColor: MaterialStateProperty.all(Color(0xff48ABFD)),
                       foregroundColor: MaterialStateProperty.all(Colors.white),
                       shape: MaterialStateProperty.all(
                           RoundedRectangleBorder(

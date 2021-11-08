@@ -38,7 +38,7 @@ class BindExchangeState extends State<BindExchangePage>{
 
           children: [
             Icon(Icons.lock,
-                color:Color(0xd33094FE)),
+                color:Color(0xff48ABFD)),
             Text("交易所账号对应的key",style:TextStyle(fontSize: 18))
           ],
         ),
@@ -74,7 +74,7 @@ class BindExchangeState extends State<BindExchangePage>{
 
     children: [
     Icon(Icons.lock,
-    color:Color(0xd33094FE)),
+    color:Color(0xff48ABFD)),
     Text("交易所账号对应的key",style:TextStyle(fontSize: 18))
     ],
     ),
@@ -176,7 +176,7 @@ class BindExchangeState extends State<BindExchangePage>{
                   child: Text('提 交'),
                   style: ButtonStyle(
                       textStyle: MaterialStateProperty.all(TextStyle(fontSize: 16)),
-                      backgroundColor: MaterialStateProperty.all(Color(0xd33094FE)),
+                      backgroundColor: MaterialStateProperty.all(Color(0xff48ABFD)),
                       foregroundColor: MaterialStateProperty.all(Colors.white),
                       shape: MaterialStateProperty.all(
                           RoundedRectangleBorder(

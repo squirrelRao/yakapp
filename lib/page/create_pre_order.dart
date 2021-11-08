@@ -61,7 +61,7 @@ class CreatePreOrderState extends State<CreatePreOrderPage>{
   Widget showOpenTime() {
     return Padding(
       padding: const EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0),
-      child: new Text(open_time+"以最新市价买入",style:TextStyle(fontSize: 14.5,color:Color(0xd33094FE))),
+      child: new Text(open_time+"以最新市价买入",style:TextStyle(fontSize: 14.5,color:Color(0xff48ABFD))),
     );
   }
 
@@ -452,7 +452,7 @@ class CreatePreOrderState extends State<CreatePreOrderPage>{
                       child: Text('提交预购'),
                       style: ButtonStyle(
                           textStyle: MaterialStateProperty.all(TextStyle(fontSize: 12)),
-                          backgroundColor: MaterialStateProperty.all(Color(0xd33094FE)),
+                          backgroundColor: MaterialStateProperty.all(Color(0xff48ABFD)),
                           foregroundColor: MaterialStateProperty.all(Colors.white)
                       ),
                       onPressed: () {

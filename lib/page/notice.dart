@@ -85,7 +85,7 @@ class NoticeState extends State<NoticePage>{
               child:
               Row(
                   children: [
-                          Icon(Icons.info_outlined,color:Color(0xd33094FE)
+                          Icon(Icons.info_outlined,color:Color(0xff48ABFD)
                           ),
                           Text(
                               "新币信息",
@@ -164,7 +164,7 @@ class NoticeState extends State<NoticePage>{
           child:Container(
             height: 70,
               decoration: BoxDecoration(
-                color: Color(0xd33094FE),
+                color: Color(0xff48ABFD),
                   borderRadius:BorderRadius.only(bottomLeft: Radius.circular(14),
                       bottomRight: Radius.circular(14))
               )
@@ -187,7 +187,7 @@ class NoticeState extends State<NoticePage>{
 
             appBar: AppBar(
               title: const Text('新币',style:TextStyle(color:Colors.white)),
-              backgroundColor: Color(0xd33094FE),
+              backgroundColor: Color(0xff48ABFD),
               elevation: 0,
             ),
             body:
