@@ -213,174 +213,137 @@ class AssetsState extends State<AssetsPage>{
       item["ror"] = 0.0;
     }
 
+    if(item["asset"] == 'USDT'){
+      return SizedBox();
+    }
+
     return GestureDetector(
         child:Card(
 
         elevation: 1,
-        margin: const EdgeInsets.all(4.0),
-        color: Colors.white60,
+        margin: const EdgeInsets.only(left:20,right:20,top:12),
+        color: Colors.white,
         child:Column(
             children: [
-              Row(
-                children: [
-                  Expanded(
-                      child:(
-                          Column(
+                          Padding(padding: EdgeInsets.only(left:14,top:10,right:14),
+                          child:Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                SizedBox(height: 10),
-                                Text(
-                                    "币种",
-                                    style: TextStyle(fontSize: 15.0)
-                                ),
                                 Text(
                                     item["asset"],
                                     style: TextStyle(fontSize: 15.0)
-                                )
-                              ])
-                      )),
-                  Expanded(
-                      child:(
-                          Column(
-                              children: [
-                                SizedBox(height: 10),
-                                Text(
-                                    "可用",
-                                    style: TextStyle(fontSize: 15.0)
                                 ),
+
                                 Text(
-                                    item["free"].toString(),
+                                    item["free"],
                                     style: TextStyle(fontSize: 15.0)
                                 )
-                              ])
-                      )),
+                              ])),
+              Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
+                  child:Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                            "收益",
+                            style: TextStyle(fontSize: 15.0)
+                        ),
 
+                        Text(
+                            item["return"].toString(),
+                            style: TextStyle(fontSize: 15.0)
+                        )
+                      ])),
+              Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
+                  child:Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                            "当前收益率",
+                            style: TextStyle(fontSize: 15.0)
+                        ),
 
-                  Expanded(
-                      child:(
-                          Column(
-                              children: [
-                                SizedBox(height: 10),
-                                Text(
-                                    "冻结",
-                                    style: TextStyle(fontSize: 15.0)
-                                ),
-                                Text(
-                                    item["locked"].toString(),
-                                    style: TextStyle(fontSize: 15.0)
-                                )
-                              ])
-                      )),
+                        Text(
+                            item["ror"].toString()+"%",
+                            style: TextStyle(fontSize: 15.0)
+                        )
+                      ])),
+              Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
+                  child:Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                            "目标收益率",
+                            style: TextStyle(fontSize: 15.0)
+                        ),
 
-                ],
-              ),
-              SizedBox(height: 10),
-              Row(
-                  children: [
-                    Expanded(
-                        child:(
-                            Column(
-                                children: [
-                                  Text(
-                                      "累计收益率",
-                                      style: TextStyle(fontSize: 15.0)
-                                  ),
-                                  Text(
-                                      item["ror"].toString()+"%",
-                                      style: TextStyle(fontSize: 15.0)
-                                  )
-                                ])
-                        )),
-                    Expanded(
-                        child:(
-                            Column(
-                                children: [
-                                  Text(
-                                      "目标收益率",
-                                      style: TextStyle(fontSize: 15.0)
-                                  ),
-                                  Text(
-                                      item["target_ror"].toString()+"%",
-                                      style: TextStyle(fontSize: 15.0)
-                                  )
-                                ])
-                        )),
-                    Expanded(
-                        child:(
-                            Column(
-                                children: [
-                                  Text(
-                                      "止损收益率",
-                                      style: TextStyle(fontSize: 15.0)
-                                  ),
-                                  Text(
-                                      item["lowest_ror"].toString()+"%",
-                                      style: TextStyle(fontSize: 15.0)
-                                  )
-                                ])
-                        )),
+                        Text(
+                            item["target_ror"].toString()+"%",
+                            style: TextStyle(fontSize: 15.0)
+                        )
+                      ])),
+              Padding(padding: EdgeInsets.only(left:14,top:8,right:14,bottom: 20),
+                  child:Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                            "最低收益率",
+                            style: TextStyle(fontSize: 15.0)
+                        ),
 
-                  ]
-
-              ),
-              SizedBox(height: 10),
-              Row(
-                  children: [
-                    Expanded(
-                        child:(
-                            Column(
-                                children: [
-                                  Text(
-                                      "累计收益",
-                                      style: TextStyle(fontSize: 15.0)
-                                  ),
-                                  Text(
-                                      item["return"].toString(),
-                                      style: TextStyle(fontSize: 15.0)
-                                  )
-                                ])
-                        )),
-                    Expanded(
-                        child:(
-                            Column(
-                                children: [
-                                  Text(
-                                      "目标达成卖出",
-                                      style: TextStyle(fontSize: 15.0)
-                                  ),
-                                  Text(
-                                      item["t_sell"].toString()+"%",
-                                      style: TextStyle(fontSize: 15.0)
-                                  )
-                                ])
-                        )),
-                    Expanded(
-                        child:(
-                            Column(
-                                children: [
-                                  Text(
-                                      "止损触发卖出",
-                                      style: TextStyle(fontSize: 15.0)
-                                  ),
-                                  Text(
-                                      item["l_sell"].toString()+"%",
-                                      style: TextStyle(fontSize: 15.0)
-                                  )
-                                ])
-                        )),
-
-                  ]
-
-              ),
-              SizedBox(height: 10),
+                        Text(
+                            item["lowest_ror"].toString()+"%",
+                            style: TextStyle(fontSize: 15.0)
+                        )
+                      ])),
             ]
         )
-
 
     ),
       onTap: (){
           setState(() {
             Navigator.push(context, MaterialPageRoute(builder: (content){return AssetSettingPage(asset : item["asset"]);}));
           });
+      },
+    );
+  }
+
+  //build asset summary
+  Widget buildUSDTDetail(index){
+
+    var item  = datas["snapshots"][index];
+    if(item["ror"]==-0.0){
+      item["ror"] = 0.0;
+    }
+
+    return GestureDetector(
+      child:Card(
+
+          elevation: 1,
+          margin: const EdgeInsets.only(left:20,right:20,top:12),
+          color: Colors.white,
+          child:Column(
+              children: [
+                Padding(padding: EdgeInsets.only(left:14,top:12,right:14,bottom:16),
+                    child:Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                              item["asset"],
+                              style: TextStyle(fontSize: 15.0)
+                          ),
+
+                          Text(
+                              item["free"],
+                              style: TextStyle(fontSize: 15.0)
+                          )
+                        ]))
+              ]
+          )
+
+      ),
+      onTap: (){
+        setState(() {
+        });
       },
     );
   }
@@ -413,38 +376,41 @@ class AssetsState extends State<AssetsPage>{
               getUserAssets();
 
             },
-            child:Stack(
-
-              children: [
-                Container(
-                height:200,
-                child:buildAssetSummary()
-                ),
-                Container(
-                margin: EdgeInsets.only(top:180,left:0,right: 0),
-                decoration:BoxDecoration(
-                  borderRadius: BorderRadius.horizontal(left: Radius.circular(15),
-                  right:Radius.circular(15)),
-                color: Colors.white),
-                child:ListView.builder(
-                    itemCount: listCount-1,
+            child:ListView.builder(
+                    itemCount: listCount,
                     itemBuilder: (BuildContext context,int index) {
 
-                      // if(index > 0){
-                      //  return;
-                        //return buildAssetSummary();
+                      if(index == 0){
+
+                        return Stack(
+
+                          children:[
+                            Container(
+                            height:200,
+                            child:buildAssetSummary()),
+                            Container(
+                              margin: EdgeInsets.only(top:180),
+                              decoration:BoxDecoration(
+                                color: Colors.white,
+                              borderRadius: BorderRadius.horizontal(left: Radius.circular(10)
+                              ,right:Radius.circular(10)),
+                              ),
+                              child:buildUSDTDetail(index)
+                            )
+                          ]
+
+                        );
+
+                      }else{
+
+                        return buildAssetDetail(index-1);
+
+                     }
+                    }
+
+      ))
 
 
-                      //}else{
-
-                        return buildAssetDetail(index);
-
-                     // }
-                    }))
-
-      ])
-
-            )
 
 
     );
