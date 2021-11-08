@@ -413,22 +413,39 @@ class AssetsState extends State<AssetsPage>{
               getUserAssets();
 
             },
-            child:ListView.builder(
-                itemCount: listCount,
-                itemBuilder: (BuildContext context,int index) {
+            child:Stack(
 
-                    if(index == 0){
+              children: [
+                Container(
+                height:200,
+                child:buildAssetSummary()
+                ),
+                Container(
+                margin: EdgeInsets.only(top:180,left:0,right: 0),
+                decoration:BoxDecoration(
+                  borderRadius: BorderRadius.horizontal(left: Radius.circular(15),
+                  right:Radius.circular(15)),
+                color: Colors.white),
+                child:ListView.builder(
+                    itemCount: listCount-1,
+                    itemBuilder: (BuildContext context,int index) {
 
-                      return buildAssetSummary();
+                      // if(index > 0){
+                      //  return;
+                        //return buildAssetSummary();
 
 
-                    }else{
+                      //}else{
 
-                      return buildAssetDetail(index-1);
+                        return buildAssetDetail(index);
 
-                    }
-            })
+                     // }
+                    }))
+
+      ])
+
             )
+
 
     );
   }
