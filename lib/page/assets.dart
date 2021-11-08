@@ -232,12 +232,12 @@ class AssetsState extends State<AssetsPage>{
                               children: [
                                 Text(
                                     item["asset"],
-                                    style: TextStyle(fontSize: 15.0)
+                                    style: TextStyle(fontSize: 15.0,fontWeight: FontWeight.w500)
                                 ),
 
                                 Text(
                                     item["free"],
-                                    style: TextStyle(fontSize: 15.0)
+                                    style: TextStyle(fontSize: 15.0,fontWeight: FontWeight.w500)
                                 )
                               ])),
               Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
@@ -358,12 +358,12 @@ class AssetsState extends State<AssetsPage>{
                         children: [
                           Text(
                               item["asset"],
-                              style: TextStyle(fontSize: 15.0)
+                              style: TextStyle(fontSize: 15.0,fontWeight: FontWeight.w500)
                           ),
 
                           Text(
                               item["free"],
-                              style: TextStyle(fontSize: 15.0)
+                              style: TextStyle(fontSize: 15.0,fontWeight: FontWeight.w500)
                           )
                         ]))
               ]
