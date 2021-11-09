@@ -33,11 +33,34 @@ class RegistState extends State<RegistPage>{
         builder: (BuildContext context) {
 
           return SimpleDialog(
-            title: Text("账号注册成功！"),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(16))
+              ),
+            contentPadding: EdgeInsets.only(top:23,bottom:23,left:10,right:10),
+            title: Text("账号注册成功！",textAlign:TextAlign.center,style:TextStyle(color:Color(0xff221232),fontWeight: FontWeight.w500)),
             children: [
 
               SimpleDialogOption(
-                  child: Text("绑定交易所账号 >",style: TextStyle(color: Colors.teal,fontSize:18)),
+
+                   child:
+                       Container(
+                         height: 44,
+                           decoration: new BoxDecoration(
+                             color: Color(0xff48ABFD),
+                             borderRadius: BorderRadius.all(Radius.circular(22)),
+
+                           ),
+                       child:Padding(
+                    padding:EdgeInsets.only(left:10,right:10),
+                   child:
+                   
+                   Row(
+                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                       children:[
+                      Text("绑定交易所账号",style: TextStyle(color: Colors.white,fontSize:14,fontWeight: FontWeight.w400)),
+                         Image(image: AssetImage("images/right_white_arrow.png"),
+                         width:16,height:16)
+                      ]))),
                   onPressed: (){
                     Navigator.pop(context);
                     Navigator.push(context,
@@ -46,9 +69,24 @@ class RegistState extends State<RegistPage>{
                   },
               ),
               SimpleDialogOption(
-                child: Text("稍后绑定...",style: TextStyle(fontSize: 18,color: Colors.teal)),
-                onPressed: (){
-                  Navigator.pop(context);
+                child: Container(
+                    height: 44,
+                    decoration: new BoxDecoration(
+                  color: Color(0xffF3F5F7),
+                  borderRadius: BorderRadius.all(Radius.circular(22)),
+
+                  ),
+                    child:Padding(
+                        padding:EdgeInsets.only(left:10,right:10),
+                        child:
+
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children:[
+                              Text("稍后绑定...",style: TextStyle(color: Color(0xff48ABFD),fontSize:14,fontWeight: FontWeight.w400)),
+                            ]))),
+                        onPressed: (){
+                          Navigator.pop(context);
                   Navigator.pop(context,
                       MaterialPageRoute(builder: (content){return LoginPage();})
                   );
@@ -56,7 +94,7 @@ class RegistState extends State<RegistPage>{
               ),
               Container(
                 alignment: Alignment.center,
-                padding: const EdgeInsets.fromLTRB(0.0, 10, 0, 10),
+                padding: const EdgeInsets.fromLTRB(0.0, 10, 0, 0),
                 child: Text("提示: 不绑定交易所账号将无法使用相关服务",style: TextStyle(color: Colors.grey,fontSize: 13))
                 ,
               )
@@ -360,10 +398,13 @@ class RegistState extends State<RegistPage>{
                   onPressed: () {
 
                     if(!_formKey.currentState!.validate()){
+                      showAfterRegistDialog(context,"1");
 
                       return;
                     }
                     _formKey.currentState!.save();
+
+
                     NetClient().post(Configs.registApi, {"phone":phone,"passwd":password,"mail":mail},
                         (data) {
 
