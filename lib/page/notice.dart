@@ -70,7 +70,7 @@ class NoticeState extends State<NoticePage>{
 
     var top_margin = 10.0;
     if(index == 0){
-      top_margin = 24.0;
+      top_margin = 30.0;
     }
     Widget card = GestureDetector(
         child:Card(
@@ -147,7 +147,7 @@ class NoticeState extends State<NoticePage>{
                                 ])
                         ))
                   ])),
-              SizedBox(height: 10),
+              SizedBox(height: 14),
 
             ]
         )

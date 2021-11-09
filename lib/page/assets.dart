@@ -111,24 +111,23 @@ class AssetsState extends State<AssetsPage>{
         child:Column(
             children: [
                         Container(
-                        margin: EdgeInsets.fromLTRB(20, 10, 0, 0),
+                        margin: EdgeInsets.fromLTRB(20, 10, 20, 0),
                         child:Column(
 
                             children: [
                               Text(
-                                  "总资产("+datas["price_unit"]+")",
+                                  "总资产(USDT)",
                                   style: TextStyle(fontSize: 16.0,color: Color(0xfff3f3f3))
                               ),
-                              SizedBox(height: 10),
-
+                              SizedBox(height: 8),
                               Text(
                                   datas["accumulates_free"].toString(),
-                                  style: TextStyle(fontSize: 25.0,color: Colors.white,fontWeight: FontWeight.w500)
+                                  style: TextStyle(fontSize: 26.0,color: Colors.white,fontWeight: FontWeight.w500)
                               )
                             ]
                     )),
             Container(
-                margin: EdgeInsets.fromLTRB(10, 20, 10, 0),
+                margin: EdgeInsets.fromLTRB(20, 20, 20, 0),
                 child:Row(
                     children: [
                   Expanded(
@@ -136,10 +135,10 @@ class AssetsState extends State<AssetsPage>{
                           Column(
                               children: [
                                 Text(
-                                    "收益周期(天)",
+                                    "周期(天)",
                                     style: TextStyle(fontSize: 13.0,color: Color(0xfff3f3f3))
                                 ),
-                                SizedBox(height: 10),
+                                SizedBox(height: 8),
                                 Text(
                                     datas["ror_duration"].toString(),
                                     style: TextStyle(fontSize: 16.0,color: Colors.white,fontWeight: FontWeight.w500)
@@ -151,10 +150,10 @@ class AssetsState extends State<AssetsPage>{
                           Column(
                               children: [
                                 Text(
-                                    "收益("+datas["price_unit"]+")",
+                                    "收益(USDT)",
                                     style: TextStyle(fontSize: 13.0,color: Color(0xfff3f3f3))
                                 ),
-                                SizedBox(height: 10),
+                                SizedBox(height: 8),
                                 Text(
                                     datas["accumulates_return"].toString(),
                                     style: TextStyle(fontSize: 16.0,color: Colors.white,fontWeight: FontWeight.w500)
@@ -169,7 +168,7 @@ class AssetsState extends State<AssetsPage>{
                                     "收益率",
                                     style: TextStyle(fontSize: 13.0,color: Color(0xfff3f3f3))
                                 ),
-                                SizedBox(height: 10),
+                                SizedBox(height: 8),
                                 Text(
                                     datas["accumulates_ror"].toString()+"%",
                                     style: TextStyle(fontSize: 16.0,color: Colors.white,fontWeight: FontWeight.w500)
@@ -243,18 +242,18 @@ class AssetsState extends State<AssetsPage>{
         color: Colors.white,
         child:Column(
             children: [
-                          Padding(padding: EdgeInsets.only(left:14,top:10,right:14),
+                          Padding(padding: EdgeInsets.only(left:14,top:14,right:14),
                           child:Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
                                     item["asset"],
-                                    style: TextStyle(fontSize: 15.0,fontWeight: FontWeight.w500)
+                                    style: TextStyle(fontSize: 16.0,fontWeight: FontWeight.w500)
                                 ),
 
                                 Text(
                                     item["free"],
-                                    style: TextStyle(fontSize: 15.0,fontWeight: FontWeight.w500)
+                                    style: TextStyle(fontSize: 16.0,fontWeight: FontWeight.w500)
                                 )
                               ])),
               Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
@@ -263,12 +262,12 @@ class AssetsState extends State<AssetsPage>{
                       children: [
                         Text(
                             "收益",
-                            style: TextStyle(fontSize: 15.0)
+                            style: TextStyle(fontSize: 14.0)
                         ),
 
                         Text(
                             item["return"].toString(),
-                            style: TextStyle(fontSize: 15.0,color:item["return_color"])
+                            style: TextStyle(fontSize: 14.0,color:item["return_color"])
                         )
                       ])),
               Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
@@ -276,13 +275,13 @@ class AssetsState extends State<AssetsPage>{
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                            "当前收益率",
-                            style: TextStyle(fontSize: 15.0)
+                            "收益率",
+                            style: TextStyle(fontSize: 14.0)
                         ),
 
                         Text(
                             item["ror"].toString()+"%",
-                            style: TextStyle(fontSize: 15.0,color:item["ror_color"])
+                            style: TextStyle(fontSize: 14.0,color:item["ror_color"])
                         )
                       ])),
               Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
@@ -291,11 +290,11 @@ class AssetsState extends State<AssetsPage>{
                       children: [
                         Text(
                             "目标收益率",
-                            style: TextStyle(fontSize: 15.0)
+                            style: TextStyle(fontSize: 13.0)
                         ),
                         Text(
                             item["target_ror"].toString()+"%",
-                            style: TextStyle(fontSize: 15.0)
+                            style: TextStyle(fontSize: 13.0)
                         ),
                       ])),
               Padding(padding: EdgeInsets.only(left:14,top:2,right:14,bottom:0),
@@ -318,15 +317,15 @@ class AssetsState extends State<AssetsPage>{
                       children: [
                         Text(
                             "最低收益率",
-                            style: TextStyle(fontSize: 15.0)
+                            style: TextStyle(fontSize: 12.0)
                         ),
 
                         Text(
                             item["lowest_ror"].toString()+"%",
-                            style: TextStyle(fontSize: 15.0)
+                            style: TextStyle(fontSize: 12.0)
                         )
                       ])),
-              Padding(padding: EdgeInsets.only(left:14,top:2,right:14,bottom:20),
+              Padding(padding: EdgeInsets.only(left:14,top:2,right:14,bottom:14),
                   child:Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -369,18 +368,18 @@ class AssetsState extends State<AssetsPage>{
           color: Colors.white,
           child:Column(
               children: [
-                Padding(padding: EdgeInsets.only(left:14,top:12,right:14,bottom:16),
+                Padding(padding: EdgeInsets.only(left:14,top:14,right:14,bottom:14),
                     child:Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
                               item["asset"],
-                              style: TextStyle(fontSize: 15.0,fontWeight: FontWeight.w500)
+                              style: TextStyle(fontSize: 16.0,fontWeight: FontWeight.w500)
                           ),
 
                           Text(
                               item["free"],
-                              style: TextStyle(fontSize: 15.0,fontWeight: FontWeight.w500)
+                              style: TextStyle(fontSize: 16.0,fontWeight: FontWeight.w500)
                           )
                         ]))
               ]
@@ -435,7 +434,7 @@ class AssetsState extends State<AssetsPage>{
                             height:200,
                             child:buildAssetSummary()),
                             Container(
-                              margin: EdgeInsets.only(top:180),
+                              margin: EdgeInsets.only(top:174),
                               decoration:BoxDecoration(
                                 color: Colors.white,
                               borderRadius: BorderRadius.horizontal(left: Radius.circular(16)

@@ -85,11 +85,11 @@ class TransactionState extends State<TransactionPage>{
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(10.0))),
           elevation: 1.5,
-          margin: const EdgeInsets.only(left:20,right:20,top:12),
+          margin: const EdgeInsets.only(left:28,right:28,top:12),
           color: Colors.white,
           child:Column(
               children: [
-                Padding(padding: EdgeInsets.only(left:14,top:10,right:14),
+                Padding(padding: EdgeInsets.only(left:14,top:14,right:14),
                     child:Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -106,7 +106,7 @@ class TransactionState extends State<TransactionPage>{
                                   padding: EdgeInsets.fromLTRB(8, 2, 8, 2),
                                   child:Text(
                                       item["type"],
-                                      style: TextStyle(fontSize: 12.0,color: Colors.white)
+                                      style: TextStyle(fontSize: 12.0,color: Colors.white,fontWeight: FontWeight.w500)
                                   )
                               )),
                         ])),
@@ -116,12 +116,12 @@ class TransactionState extends State<TransactionPage>{
                         children: [
                           Text(
                               "数量",
-                              style: TextStyle(fontSize: 15.0)
+                              style: TextStyle(fontSize: 13.0)
                           ),
 
                           Text(
                               item["origQty"].toString(),
-                              style: TextStyle(fontSize: 15.0)
+                              style: TextStyle(fontSize: 13.0)
                           )
                         ])),
                 Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
@@ -130,12 +130,12 @@ class TransactionState extends State<TransactionPage>{
                         children: [
                           Text(
                               "价格(usdt)",
-                              style: TextStyle(fontSize: 15.0)
+                              style: TextStyle(fontSize: 13.0)
                           ),
 
                           Text(
                               item["price"].toString(),
-                              style: TextStyle(fontSize: 15.0)
+                              style: TextStyle(fontSize: 13.0)
                           )
                         ])),
                 Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
@@ -144,25 +144,25 @@ class TransactionState extends State<TransactionPage>{
                         children: [
                           Text(
                               "状态",
-                              style: TextStyle(fontSize: 15.0)
+                              style: TextStyle(fontSize: 13.0)
                           ),
                           Text(
                               item["status_str"].toString(),
-                              style: TextStyle(fontSize: 15.0,color:item["status_str_color"])
+                              style: TextStyle(fontSize: 13.0,color:item["status_str_color"])
                           ),
                         ])),
-                Padding(padding: EdgeInsets.only(left:14,top:8,right:14,bottom:10),
+                Padding(padding: EdgeInsets.only(left:14,top:8,right:14,bottom:14),
                     child:Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
                               "时间",
-                              style: TextStyle(fontSize: 15.0)
+                              style: TextStyle(fontSize: 13.0)
                           ),
 
                           Text(
                               item["update_time_sr"].toString(),
-                              style: TextStyle(fontSize: 15.0)
+                              style: TextStyle(fontSize: 13.0)
                           )
                         ]))
               ]
