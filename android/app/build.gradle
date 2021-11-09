@@ -73,5 +73,6 @@ flutter {
 }
 
 dependencies {
+    implementation "com.android.support:appcompat-v7:22.2.0"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
