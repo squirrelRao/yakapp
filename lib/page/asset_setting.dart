@@ -75,7 +75,7 @@ class AssetSettingState extends State<AssetSettingPage>{
           ///设置内容内边距
           contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
           filled: true,
-          fillColor: Color(0x4fD3D3D3),
+          fillColor: Color(0xffF3F5F7),
         ),
         onSaved: (value) => target_ror = double.parse(value!.trim()),
         validator: (value){
@@ -174,7 +174,7 @@ class AssetSettingState extends State<AssetSettingPage>{
           ///设置内容内边距
           contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
           filled: true,
-          fillColor: Color(0x4fD3D3D3),
+          fillColor: Color(0xffF3F5F7),
         ),
         onSaved: (value) => t_sell = double.parse(value!.trim()),
         validator: (value){
@@ -224,7 +224,7 @@ class AssetSettingState extends State<AssetSettingPage>{
           ///设置内容内边距
           contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
           filled: true,
-          fillColor: Color(0x4fD3D3D3),
+          fillColor: Color(0xffF3F5F7),
         ),
         onSaved: (value) => l_sell = double.parse(value!.trim()),
         validator: (value){

@@ -138,7 +138,7 @@ class RegistState extends State<RegistPage>{
           ///设置内容内边距
           contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
           filled: true,
-          fillColor: Color(0x4fD3D3D3),
+          fillColor: Color(0xffF3F5F7),
         ),
         onSaved: (value) {
           phone = value!.trim();
@@ -213,7 +213,7 @@ class RegistState extends State<RegistPage>{
             ///设置内容内边距
             contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
             filled: true,
-            fillColor: Color(0x4fD3D3D3),
+            fillColor: Color(0xffF3F5F7),
           ),
           onSaved: (value) {
             mail = value!.trim();
@@ -269,7 +269,7 @@ class RegistState extends State<RegistPage>{
           ///设置内容内边距
           contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
           filled: true,
-          fillColor: Color(0x4fD3D3D3),
+          fillColor: Color(0xffF3F5F7),
         ),
         onSaved: (value){
 
@@ -321,7 +321,7 @@ class RegistState extends State<RegistPage>{
             ///设置内容内边距
             contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
             filled: true,
-            fillColor: Color(0x4fD3D3D3),
+            fillColor: Color(0xffF3F5F7),
           ),
 
         onSaved: (value){
@@ -377,7 +377,7 @@ class RegistState extends State<RegistPage>{
                       // ),
                       Container(
 
-                  padding: const EdgeInsets.fromLTRB(28, 34, 28, 0),
+                  padding: const EdgeInsets.fromLTRB(28, 30, 28, 0),
                   child:  Column(
                       children: <Widget>[
                         _showPhoneInput(),

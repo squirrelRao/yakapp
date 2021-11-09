@@ -23,10 +23,9 @@ class ModifyPasswordState extends State<ModifyPasswordPage>{
 
   Widget _showOldPasswordInput() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(15.0, 5.0, 15.0, 0.0),
+      padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
       child: Column(
           children:[
-          SizedBox(height: 10),
       Row(
 
         children: [
@@ -35,15 +34,18 @@ class ModifyPasswordState extends State<ModifyPasswordPage>{
             height:20,
             image: AssetImage("images/lock.png"),
           ),
-          Text("旧密码",style:TextStyle(fontSize: 14))
+          Text("旧密码",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
         ],
       ),
-      new TextFormField(
+            SizedBox(height: 5),
+            new TextFormField(
         maxLines: 1,
         obscureText: true,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         autofocus: false,
-        style: TextStyle(fontSize: 20),
+        style: TextStyle(fontSize: 15),
+              cursorColor: Color(0xff48ABFD),
+              cursorHeight: 16,
         decoration: new InputDecoration(
           hintText: "",
           labelText: "",
@@ -54,7 +56,7 @@ class ModifyPasswordState extends State<ModifyPasswordPage>{
           ///设置内容内边距
           contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
           filled: true,
-          fillColor: Color(0x4fD3D3D3),
+          fillColor: Color(0xffF3F5F7),
         ),
         onSaved: (value){
 
@@ -72,11 +74,10 @@ class ModifyPasswordState extends State<ModifyPasswordPage>{
 
   Widget _showNewPasswordInput() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(15.0, 5.0, 15.0, 0.0),
+      padding: const EdgeInsets.fromLTRB(0.0, 25.0, 0.0, 0.0),
       child:
       Column(
           children:[
-          SizedBox(height: 10),
       Row(
 
         children: [
@@ -85,15 +86,18 @@ class ModifyPasswordState extends State<ModifyPasswordPage>{
             height:20,
             image: AssetImage("images/lock.png"),
           ),
-          Text("新密码",style:TextStyle(fontSize: 14))
+          Text("新密码",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
         ],
       ),
+      SizedBox(height:5),
       new TextFormField(
         maxLines: 1,
         obscureText: true,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         autofocus: false,
-        style: TextStyle(fontSize: 20),
+        style: TextStyle(fontSize: 15),
+        cursorColor: Color(0xff48ABFD),
+        cursorHeight: 16,
         decoration: new InputDecoration(
           hintText: "",
           labelText: "",
@@ -104,7 +108,7 @@ class ModifyPasswordState extends State<ModifyPasswordPage>{
           ///设置内容内边距
           contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
           filled: true,
-          fillColor: Color(0x4fD3D3D3),
+          fillColor: Color(0xffF3F5F7),
         ),
         onSaved: (value){
 
@@ -123,10 +127,9 @@ class ModifyPasswordState extends State<ModifyPasswordPage>{
 
   Widget _showPasswordConfirmInput() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(15.0, 5.0, 15.0, 10.0),
+      padding: const EdgeInsets.fromLTRB(0.0, 25.0, 0.0, 0.0),
       child: Column(
           children:[
-          SizedBox(height: 10),
         Row(
 
           children: [
@@ -135,15 +138,18 @@ class ModifyPasswordState extends State<ModifyPasswordPage>{
               height:20,
               image: AssetImage("images/valide.png"),
             ),
-            Text("密码确认",style:TextStyle(fontSize: 14))
+            Text("密码确认",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
           ],
         ),
-      new TextFormField(
+            SizedBox(height:5),
+            new TextFormField(
         maxLines: 1,
         obscureText: true,
           autovalidateMode: AutovalidateMode.onUserInteraction,
           autofocus: false,
-        style: TextStyle(fontSize: 20),
+        style: TextStyle(fontSize: 15),
+                cursorColor: Color(0xff48ABFD),
+                cursorHeight: 16,
           decoration: new InputDecoration(
             hintText: "",
             labelText: "",
@@ -154,7 +160,7 @@ class ModifyPasswordState extends State<ModifyPasswordPage>{
             ///设置内容内边距
             contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
             filled: true,
-            fillColor: Color(0x4fD3D3D3),
+            fillColor: Color(0xffF3F5F7),
           ),
         onSaved: (value){
 
@@ -202,23 +208,21 @@ class ModifyPasswordState extends State<ModifyPasswordPage>{
                 key : _formKey,
                 child: Container(
 
-                  padding: const EdgeInsets.fromLTRB(25, 30, 25, 0),
+                  padding: const EdgeInsets.fromLTRB(28, 30, 28, 0),
                   child: Column(
                       children: <Widget>[
-                        SizedBox(height: 20),
                         _showOldPasswordInput(),
                         _showNewPasswordInput(),
                         _showPasswordConfirmInput(),
-                        SizedBox(height: 20)
                       ]
                     )
                   )
             ),
               Container(
                 height: 70,
-                padding: const EdgeInsets.fromLTRB(35, 30, 35, 0),
+                padding: const EdgeInsets.fromLTRB(32, 30, 32, 0),
                 child: TextButton(
-                  child: Text('确认修改'),
+                  child: Text('提 交',style:TextStyle(color:Colors.white,fontWeight: FontWeight.w500)),
                   style: ButtonStyle(
                       textStyle: MaterialStateProperty.all(TextStyle(fontSize: 16)),
                       backgroundColor: MaterialStateProperty.all(Color(0xff48ABFD)),

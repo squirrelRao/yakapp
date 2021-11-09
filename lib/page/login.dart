@@ -57,7 +57,7 @@ class LoginState extends State<LoginPage>{
             ///设置内容内边距
             contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
             filled: true,
-            fillColor: Color(0x4fD3D3D3),
+            fillColor: Color(0xffF3F5F7),
           ),
           onSaved: (value) {
             phone = value!.trim();
@@ -134,7 +134,7 @@ class LoginState extends State<LoginPage>{
           ///设置内容内边距
           contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
           filled: true,
-          fillColor: Color(0x4fD3D3D3),
+          fillColor: Color(0xffF3F5F7),
         ),
         onSaved: (value){
 
