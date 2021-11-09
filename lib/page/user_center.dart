@@ -27,17 +27,22 @@ class UserCenterState extends State<UserCenterPage> {
         builder: (BuildContext context) {
 
               return SimpleDialog(
-                title: Text("Yak"),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(16))
+                ),
+                contentPadding: EdgeInsets.only(top:23,bottom:23,left:10,right:10),
+
+                title: Text("Yak",textAlign:TextAlign.center,style:TextStyle(color:Color(0xff221232),fontWeight: FontWeight.w500)),
                 children: [
 
                   SimpleDialogOption(
-                      child: Text("v1.0")
+                      child: Text("V1.0",style:TextStyle(color:Color(0xff221232)))
                   ),
                   SimpleDialogOption(
-                      child: Text("hqraop@163.com")
+                  child: Text("hqraop@163.com",style:TextStyle(color:Color(0xff221232)))
                   ),
                   SimpleDialogOption(
-                      child: Text("by squirrelRao @2021")
+                    child: Text("by squirrelRao @2021",style:TextStyle(color:Color(0xff221232)))
                   )
                 ],
               );
@@ -123,14 +128,16 @@ class UserCenterState extends State<UserCenterPage> {
 
                  children:[
                  ListTile(
-                  leading: Image(
+                     visualDensity: VisualDensity(horizontal: -4),
+                      contentPadding: EdgeInsets.only(left:18,right:0),
+                     leading: Image(
                     width:20,
                     height:20,
                     image: AssetImage("images/wallet.png"),
                   ),
                   title: Text("交易所钱包",style:TextStyle(fontSize:14,color:Color(0xff292D33),fontWeight: FontWeight.w400)),
                   subtitle: Text(bindStatus,style:TextStyle(fontSize:11,color:Colors.grey)),
-                  onTap: (){
+                     onTap: (){
                     Navigator.push(context,
                         MaterialPageRoute(builder: (content){return ModifyBindPage();}));
                   },
@@ -147,7 +154,8 @@ class UserCenterState extends State<UserCenterPage> {
                     )
                 ),
                 ListTile(
-
+                    visualDensity: VisualDensity(horizontal: -4),
+                    contentPadding: EdgeInsets.only(left:18,right:0),
                   leading: Image(
                     width:20,
                     height:20,
@@ -170,6 +178,8 @@ class UserCenterState extends State<UserCenterPage> {
                       })
                 ),
                 ListTile(
+                    visualDensity: VisualDensity(horizontal: -4),
+                    contentPadding: EdgeInsets.only(left:18,right:0),
                   leading:Image(
                     width:20,
                     height:20,
@@ -193,6 +203,8 @@ class UserCenterState extends State<UserCenterPage> {
                       })
                 ),
                 ListTile(
+                    visualDensity: VisualDensity(horizontal: -4),
+                    contentPadding: EdgeInsets.only(left:18,right:0),
                   leading: Image(
                     width:20,
                     height:20,
@@ -215,8 +227,8 @@ class UserCenterState extends State<UserCenterPage> {
                 )]
     )),
                 Container(
-                  height: 60,
-                  padding: const EdgeInsets.fromLTRB(28, 20, 28, 0),
+                  height: 70,
+                  padding: const EdgeInsets.fromLTRB(28, 30, 28, 0),
                   child: TextButton(
                       child: Text('退出登录'),
                       onPressed: () async {
