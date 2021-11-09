@@ -244,8 +244,8 @@ class LoginState extends State<LoginPage>{
                   child:Text("注册账号",style: TextStyle(fontSize: 13,color:Color(0xff999999))),
                   onPressed: (){
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (content){return RegistPage();})
-                        // MaterialPageRoute(builder: (content){return BindExchangePage();})
+                       MaterialPageRoute(builder: (content){return RegistPage();})
+                       // MaterialPageRoute(builder: (content){return BindExchangePage();})
                     );
                   },
                 ),

@@ -310,7 +310,8 @@ class RegistState extends State<RegistPage>{
           autofocus: false,
           style: TextStyle(fontSize: 15),
           cursorColor: Color(0xff48ABFD),
-          cursorHeight: 16,          decoration: new InputDecoration(
+          cursorHeight: 16,
+          decoration: new InputDecoration(
             hintText: "",
             labelText: "",
             border:OutlineInputBorder(

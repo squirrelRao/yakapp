@@ -29,11 +29,13 @@ class BindExchangeState extends State<BindExchangePage>{
 
   Widget showKeyInput() {
     return Card(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(16.0))),
         child:Padding(
-      padding: const EdgeInsets.fromLTRB(15.0, 0.0, 0.0, 0.0),
+
+      padding: const EdgeInsets.fromLTRB(24.0, 17.0, 24, 16),
       child:  Column(
         children:[
-        SizedBox(height: 10),
         Row(
 
           children: [
@@ -42,7 +44,7 @@ class BindExchangeState extends State<BindExchangePage>{
               height:20,
               image: AssetImage("images/valide.png"),
             ),
-            Text("交易所账号对应的key",style:TextStyle(fontSize: 18))
+            Text("交易所账号对应的key",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
           ],
         ),
         Padding(padding: const EdgeInsets.fromLTRB(18.0, 0.0, 18.0, 0.0),
@@ -51,6 +53,8 @@ class BindExchangeState extends State<BindExchangePage>{
         keyboardType: TextInputType.text,
         autofocus: false,
         style: TextStyle(fontSize: 16),
+            cursorColor: Color(0xff48ABFD),
+            cursorHeight: 16,
         decoration: new InputDecoration(
             border: InputBorder.none,
             hintText: '',
@@ -68,11 +72,12 @@ class BindExchangeState extends State<BindExchangePage>{
 
   Widget showSecretInput() {
     return Card(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(16.0))),
         child:Padding(
-        padding: const EdgeInsets.fromLTRB(15.0, 0.0, 0.0, 0.0),
+        padding: const EdgeInsets.fromLTRB(24.0, 17.0, 24, 16),
     child:  Column(
     children:[
-    SizedBox(height: 10),
     Row(
 
     children: [
@@ -81,7 +86,7 @@ class BindExchangeState extends State<BindExchangePage>{
         height:20,
         image: AssetImage("images/valide.png"),
       ),
-    Text("交易所账号对应的key",style:TextStyle(fontSize: 18))
+      Text("交易所账号对应的secret",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
     ],
     ),
     Padding(padding: const EdgeInsets.fromLTRB(18.0, 0.0, 18.0, 0.0),
@@ -91,6 +96,8 @@ class BindExchangeState extends State<BindExchangePage>{
         obscureText: false,
         autofocus: false,
         style: TextStyle(fontSize: 16),
+        cursorColor: Color(0xff48ABFD),
+        cursorHeight: 16,
         decoration: new InputDecoration(
             border: InputBorder.none,
             hintText: '',
@@ -161,14 +168,13 @@ class BindExchangeState extends State<BindExchangePage>{
                 key : _formKey,
                 child: Container(
 
-                  padding: const EdgeInsets.fromLTRB(25, 30, 25, 0),
+                    padding: const EdgeInsets.fromLTRB(28, 30, 28, 0),
                   child:  Column(
                       children: <Widget>[
                         SizedBox(height: 10),
                         showKeyInput(),
-                        SizedBox(height: 10),
+                        SizedBox(height: 24),
                         showSecretInput(),
-                        SizedBox(height: 10)
                       ]
                     )
                 )
@@ -177,9 +183,9 @@ class BindExchangeState extends State<BindExchangePage>{
             ),
               Container(
                 height: 70,
-                padding: const EdgeInsets.fromLTRB(25, 30, 25, 0),
+                padding: const EdgeInsets.fromLTRB(32, 30, 32, 0),
                 child: TextButton(
-                  child: Text('提 交'),
+                  child: Text('提 交',style:TextStyle(color:Colors.white,fontWeight: FontWeight.w500)),
                   style: ButtonStyle(
                       textStyle: MaterialStateProperty.all(TextStyle(fontSize: 16)),
                       backgroundColor: MaterialStateProperty.all(Color(0xff48ABFD)),
