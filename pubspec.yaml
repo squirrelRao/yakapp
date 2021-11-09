@@ -89,6 +89,14 @@ flutter:
    - images/about.png
    - images/right_arrow.png
    - images/yak.png
+   - images/asset.png
+   - images/asset_active.png
+   - images/notice.png
+   - images/notice_active.png
+   - images/transaction.png
+   - images/transaction_active.png
+   - images/user_center.png
+   - images/user_center_active.png
 
   #   - images/a_dot_ham.jpeg
 

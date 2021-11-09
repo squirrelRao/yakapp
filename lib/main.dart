@@ -93,27 +93,64 @@ class _HomePageState extends State<HomePage> {
         bottomNavigationBar:BottomNavigationBar(
 
           currentIndex: this.currentIndex,
-          iconSize: 30,
           type: BottomNavigationBarType.fixed,
           selectedItemColor: Color(0xff48ABFD),
+          selectedLabelStyle: TextStyle(fontSize: 11),
+          unselectedLabelStyle: TextStyle(fontSize: 11,color:Color(0xff707881)),
           onTap: (index){
             onTabSelected(index);
           },
           items:[
             BottomNavigationBarItem(
-              icon:Icon(Icons.home),
+              icon:Image(
+                width:22,
+                height:22,
+                image: AssetImage("images/asset.png"),
+              ),
+              activeIcon: Image(
+                width:22,
+                height:22,
+                image: AssetImage("images/asset_active.png"),
+              ),
               label:"资产"
             ),
             BottomNavigationBarItem(
-                icon:Icon(Icons.addchart_rounded),
+                icon:Image(
+                  width:22,
+                  height:22,
+                  image: AssetImage("images/notice.png"),
+                ),
+                activeIcon: Image(
+                  width:22,
+                  height:22,
+                  image: AssetImage("images/notice_active.png"),
+                ),
                 label:"新币"
             ),
             BottomNavigationBarItem(
-                icon:Icon(Icons.category),
+                icon:Image(
+                  width:22,
+                  height:22,
+                  image: AssetImage("images/transaction.png"),
+                ),
+                activeIcon: Image(
+                  width:22,
+                  height:22,
+                  image: AssetImage("images/transaction_active.png"),
+                ),
                 label:"交易"
             ),
             BottomNavigationBarItem(
-                icon:Icon(Icons.settings),
+                icon:Image(
+                  width:22,
+                  height:22,
+                  image: AssetImage("images/user_center.png"),
+                ),
+                activeIcon: Image(
+                  width:22,
+                  height:22,
+                  image: AssetImage("images/user_center_active.png"),
+                ),
                 label:"我的"
             ),
           ]
