@@ -30,7 +30,7 @@ class UserCenterState extends State<UserCenterPage> {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(16))
                 ),
-                contentPadding: EdgeInsets.only(top:23,bottom:23,left:10,right:10),
+                contentPadding: EdgeInsets.only(top:20,bottom:20,left:10,right:10),
 
                 title: Text("Yak",textAlign:TextAlign.center,style:TextStyle(color:Color(0xff221232),fontWeight: FontWeight.w500)),
                 children: [
@@ -44,6 +44,7 @@ class UserCenterState extends State<UserCenterPage> {
                   SimpleDialogOption(
                     child: Text("by squirrelRao @2021",style:TextStyle(color:Color(0xff221232)))
                   )
+
                 ],
               );
     });
