@@ -75,29 +75,29 @@ class NoticeState extends State<NoticePage>{
     Widget card = GestureDetector(
         child:Card(
         elevation: 1,
-        margin: EdgeInsets.only(top: top_margin,left:25,right: 25),
+        margin: EdgeInsets.only(top: top_margin,left:28,right: 28),
         shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(20.0))),
+              borderRadius: BorderRadius.all(Radius.circular(16.0))),
         color: Colors.white,
         child:Column(
             children: [
-              Padding( padding: EdgeInsets.only(left:10,top:10),
+              Padding( padding: EdgeInsets.only(left:14,top:13),
               child:
               Row(
                   children: [
                             Image(
-                            width:15,
-                            height:15,
+                            width:20,
+                            height:20,
                             image: AssetImage("images/notice_icon.png"),
                           ),
-                          SizedBox(width:4),
+                          SizedBox(width:8),
                           Text(
                               "新币信息",
-                              style: TextStyle(fontSize: 15.0)
+                              style: TextStyle(fontSize: 15.0,color:Color(0xff999999))
                           )
                   ])),
 
-              Padding( padding: EdgeInsets.only(left:30,top:5),
+              Padding( padding: EdgeInsets.only(left:44,top:6),
                child:Row(
                 children: [
                                 Text(
@@ -106,30 +106,30 @@ class NoticeState extends State<NoticePage>{
                                 )
                               ])
                 ),
-            Padding( padding: EdgeInsets.only(left:30,top:15,right:10),
+            Padding( padding: EdgeInsets.only(left:44,top:10,right:12),
               child:Row(
                   children: [
                                   Expanded(
                                   child:Text(
                                       "交易对:"+item["symbols"].toString(),
-                                      maxLines:2,
-                                      style: TextStyle(fontSize: 14.0)
+                                      maxLines:3,
+                                      style: TextStyle(fontSize: 12.0,color:Color(0xff6D7580))
                                   ))
                                 ])
 
               ),
-            Padding( padding: EdgeInsets.only(left:30,top:15),
+            Padding( padding: EdgeInsets.only(left:44,top:12),
             child:Row(
                   children: [
                             Column(
                                 children: [
                                   Text(
                                       item["open_time"],
-                                      style: TextStyle(fontSize: 13.0)
+                                      style: TextStyle(fontSize: 12.0,color:Color(0xff6D7580))
                                   ),
                                   Text(
                                       "上线时间",
-                                      style: TextStyle(fontSize: 11.0)
+                                      style: TextStyle(fontSize: 11.0,color:Color(0xff6C7682))
                                   )
                                 ]),
                     Expanded(
@@ -138,11 +138,11 @@ class NoticeState extends State<NoticePage>{
                                 children: [
                                   Text(
                                     item["pre_order_status"].toString(),
-                                      style: TextStyle(fontSize: 13.0)
+                                      style: TextStyle(fontSize: 12.0,color:Color(0xff6D7580))
                                   ),
                                   Text(
                                       "预购",
-                                      style: TextStyle(fontSize: 11.0)
+                                      style: TextStyle(fontSize: 11.0,color:Color(0xff6C7682))
                                   )
                                 ])
                         ))
