@@ -105,10 +105,9 @@ class RegistState extends State<RegistPage>{
 
   Widget _showPhoneInput() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(15.0, 5.0, 15.0, 0.0),
+      padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
       child:Column(
           children:[
-          SizedBox(height: 10),
             Row(
 
               children: [
@@ -120,12 +119,15 @@ class RegistState extends State<RegistPage>{
                 Text("手机号",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
               ],
             ),
-      TextFormField(
+            SizedBox(height: 5),
+            TextFormField(
         maxLines: 1,
         keyboardType: TextInputType.phone,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         autofocus: false,
-        style: TextStyle(fontSize: 20),
+        style: TextStyle(fontSize: 15),
+        cursorColor: Color(0xff48ABFD),
+        cursorHeight: 16,
         decoration: new InputDecoration(
           hintText: "",
           labelText: "",
@@ -178,10 +180,9 @@ class RegistState extends State<RegistPage>{
 
   Widget _showMailInput() {
     return Padding(
-        padding: const EdgeInsets.fromLTRB(15.0, 5.0, 15.0, 0.0),
+        padding: const EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0),
         child: Column(
             children:[
-            SizedBox(height: 10),
       Row(
 
         children: [
@@ -193,12 +194,15 @@ class RegistState extends State<RegistPage>{
           Text("邮箱「 接收提醒 」",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
         ],
       ),
-        TextFormField(
+              SizedBox(height: 5),
+              TextFormField(
           maxLines: 1,
           keyboardType: TextInputType.text,
           autovalidateMode: AutovalidateMode.onUserInteraction,
           autofocus: false,
-          style: TextStyle(fontSize: 20),
+          style: TextStyle(fontSize: 15),
+                cursorColor: Color(0xff48ABFD),
+                cursorHeight: 16,
           decoration: new InputDecoration(
             hintText: "",
             labelText: "",
@@ -232,10 +236,9 @@ class RegistState extends State<RegistPage>{
 
   Widget _showPasswordInput() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(15.0, 5.0, 15.0, 0.0),
+      padding: const EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0),
       child:Column(
           children:[
-          SizedBox(height: 10),
       Row(
 
         children: [
@@ -247,12 +250,15 @@ class RegistState extends State<RegistPage>{
           Text("密码",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
         ],
       ),
+      SizedBox(height:5),
       new TextFormField(
         maxLines: 1,
         obscureText: true,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         autofocus: false,
-        style: TextStyle(fontSize: 20),
+        style: TextStyle(fontSize: 15),
+        cursorColor: Color(0xff48ABFD),
+        cursorHeight: 16,
         decoration: new InputDecoration(
           hintText: "",
           labelText: "",
@@ -281,7 +287,7 @@ class RegistState extends State<RegistPage>{
 
   Widget _showPasswordConfirmInput() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(15.0, 5.0, 15.0, 10.0),
+      padding: const EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0),
       child: Column(
           children:[
           SizedBox(height: 10),
@@ -296,13 +302,15 @@ class RegistState extends State<RegistPage>{
             Text("密码确认",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
           ],
         ),
+      SizedBox(height:10),
       new TextFormField(
         maxLines: 1,
         obscureText: true,
           autovalidateMode: AutovalidateMode.onUserInteraction,
           autofocus: false,
-        style: TextStyle(fontSize: 20),
-          decoration: new InputDecoration(
+          style: TextStyle(fontSize: 15),
+          cursorColor: Color(0xff48ABFD),
+          cursorHeight: 16,          decoration: new InputDecoration(
             hintText: "",
             labelText: "",
             border:OutlineInputBorder(
@@ -340,6 +348,8 @@ class RegistState extends State<RegistPage>{
     return Scaffold(
 
           appBar:AppBar(
+            title: const Text('注册账号',style: TextStyle(color: Colors.black)),
+            centerTitle: true,
             backgroundColor: Colors.white70,
             elevation: 0,
             leading: IconButton(
@@ -359,22 +369,21 @@ class RegistState extends State<RegistPage>{
                 child: ListView(
 
                     children:[
-
+                      //
+                      // Container(
+                      //   padding: const EdgeInsets.fromLTRB(28, 18, 28, 0),
+                      //   child:Text("注册账号",style:TextStyle(fontSize: 30,fontWeight: FontWeight.w700)),
+                      // ),
                       Container(
-                        padding: const EdgeInsets.fromLTRB(40, 50, 25, 0),
-                        child:Text("注册账号",style:TextStyle(fontSize: 30,fontWeight: FontWeight.w700)),
-                      ),
-                      Container(
 
-                  padding: const EdgeInsets.fromLTRB(25, 10, 25, 0),
+                  padding: const EdgeInsets.fromLTRB(28, 34, 28, 0),
                   child:  Column(
                       children: <Widget>[
-
                         _showPhoneInput(),
                         _showMailInput(),
                         _showPasswordInput(),
                         _showPasswordConfirmInput(),
-                        SizedBox(height: 10)
+                        SizedBox(height:10)
                       ]
 
                   )
@@ -382,9 +391,9 @@ class RegistState extends State<RegistPage>{
                 ),
               Container(
                 height: 70,
-                padding: const EdgeInsets.fromLTRB(35, 30, 35, 0),
+                padding: const EdgeInsets.fromLTRB(28, 26, 28, 0),
                 child: TextButton(
-                  child: Text('注 册'),
+                  child: Text('注 册',style:TextStyle(color:Colors.white,fontWeight: FontWeight.w500)),
                   style: ButtonStyle(
                       textStyle: MaterialStateProperty.all(TextStyle(fontSize: 16)),
                       backgroundColor: MaterialStateProperty.all(Color(0xff48ABFD)),
@@ -393,12 +402,11 @@ class RegistState extends State<RegistPage>{
                           RoundedRectangleBorder(
                               borderRadius:
                               BorderRadius.circular(
-                                  40)))
+                                  22)))
                   ),
                   onPressed: () {
 
                     if(!_formKey.currentState!.validate()){
-                      showAfterRegistDialog(context,"1");
 
                       return;
                     }
