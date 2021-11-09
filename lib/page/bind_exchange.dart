@@ -49,10 +49,10 @@ class BindExchangeState extends State<BindExchangePage>{
         ),
         Padding(padding: const EdgeInsets.fromLTRB(18.0, 0.0, 18.0, 0.0),
           child:new TextFormField(
-        maxLines: 2,
+        maxLines: 3,
         keyboardType: TextInputType.text,
         autofocus: false,
-        style: TextStyle(fontSize: 16),
+        style: TextStyle(fontSize: 15),
             cursorColor: Color(0xff48ABFD),
             cursorHeight: 16,
         decoration: new InputDecoration(
@@ -91,11 +91,11 @@ class BindExchangeState extends State<BindExchangePage>{
     ),
     Padding(padding: const EdgeInsets.fromLTRB(18.0, 0.0, 18.0, 0.0),
       child: new TextFormField(
-        maxLines: 2,
+        maxLines: 3,
         keyboardType: TextInputType.text,
         obscureText: false,
         autofocus: false,
-        style: TextStyle(fontSize: 16),
+        style: TextStyle(fontSize: 15),
         cursorColor: Color(0xff48ABFD),
         cursorHeight: 16,
         decoration: new InputDecoration(
@@ -171,7 +171,6 @@ class BindExchangeState extends State<BindExchangePage>{
                     padding: const EdgeInsets.fromLTRB(28, 30, 28, 0),
                   child:  Column(
                       children: <Widget>[
-                        SizedBox(height: 10),
                         showKeyInput(),
                         SizedBox(height: 24),
                         showSecretInput(),
@@ -183,7 +182,7 @@ class BindExchangeState extends State<BindExchangePage>{
             ),
               Container(
                 height: 70,
-                padding: const EdgeInsets.fromLTRB(32, 30, 32, 0),
+                padding: const EdgeInsets.fromLTRB(32, 26, 32, 0),
                 child: TextButton(
                   child: Text('提 交',style:TextStyle(color:Colors.white,fontWeight: FontWeight.w500)),
                   style: ButtonStyle(

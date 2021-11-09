@@ -67,17 +67,16 @@ class CreatePreOrderState extends State<CreatePreOrderPage>{
 
   Widget showBuyCountInput() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(15.0, 5.0, 15.0, 0.0),
+      padding: const EdgeInsets.fromLTRB(0, 15.0, 0.0, 0.0),
       child: Column(
           children:[
-          SizedBox(height: 10),
       Row(
 
         children: [
-          Text("购买个数",style:TextStyle(fontSize: 18))
+          Text("购买个数",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
         ],
       ),
-      SizedBox(height: 10),
+      SizedBox(height: 5),
       new TextFormField(
         maxLines: 1,
         keyboardType: TextInputType.number,
@@ -87,7 +86,9 @@ class CreatePreOrderState extends State<CreatePreOrderPage>{
         ],
         autovalidateMode: AutovalidateMode.onUserInteraction,
         controller: buyCountController,
-        style: TextStyle(fontSize: 16),
+        style: TextStyle(fontSize: 15),
+        cursorColor: Color(0xff48ABFD),
+        cursorHeight: 16,
         decoration: new InputDecoration(
           hintText: "",
           labelText: "",
@@ -116,17 +117,16 @@ class CreatePreOrderState extends State<CreatePreOrderPage>{
 
   Widget showTargetRorInput() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(15.0, 5.0, 15.0, 0.0),
+      padding: const EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0),
       child: Column(
           children:[
-          SizedBox(height: 10),
       Row(
 
         children: [
-          Text("目标收益率(%)",style:TextStyle(fontSize: 18))
+          Text("目标收益率(%)",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
         ],
       ),
-      SizedBox(height: 10),
+      SizedBox(height: 5),
       new TextFormField(
         maxLines: 1,
         keyboardType: TextInputType.number,
@@ -136,7 +136,9 @@ class CreatePreOrderState extends State<CreatePreOrderPage>{
         ],
         autovalidateMode: AutovalidateMode.onUserInteraction,
         controller: trController,
-        style: TextStyle(fontSize: 16),
+        style: TextStyle(fontSize: 15),
+        cursorColor: Color(0xff48ABFD),
+        cursorHeight: 16,
           decoration: new InputDecoration(
             hintText: "",
             labelText: "",
@@ -165,17 +167,16 @@ class CreatePreOrderState extends State<CreatePreOrderPage>{
 
   Widget showLowestRorInput() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(15.0, 5.0, 0.0, 0.0),
+      padding: const EdgeInsets.fromLTRB(0, 15.0, 0, 0.0),
       child: Column(
           children:[
-          SizedBox(height: 10),
       Row(
 
         children: [
-          Text("止损收益率(%)",style:TextStyle(fontSize: 18))
+          Text("止损收益率(%)",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
         ],
       ),
-      SizedBox(height: 10),
+      SizedBox(height: 5),
       new TextFormField(
         maxLines: 1,
         keyboardType: TextInputType.number,
@@ -185,8 +186,9 @@ class CreatePreOrderState extends State<CreatePreOrderPage>{
         ],
         autovalidateMode: AutovalidateMode.onUserInteraction,
         controller: lrController,
-        style: TextStyle(fontSize: 16),
-        decoration: new InputDecoration(
+        style: TextStyle(fontSize: 15),
+        cursorColor: Color(0xff48ABFD),
+        cursorHeight: 16,        decoration: new InputDecoration(
           hintText: "",
           labelText: "",
           border:OutlineInputBorder(
@@ -214,17 +216,16 @@ class CreatePreOrderState extends State<CreatePreOrderPage>{
 
   Widget showTsellInput() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(15.0, 5.0, 0.0, 0.0),
+      padding: const EdgeInsets.fromLTRB(0, 15.0, 0.0, 0.0),
       child: Column(
           children:[
-          SizedBox(height: 10),
       Row(
 
         children: [
-          Text("目标达成卖出比例(%)",style:TextStyle(fontSize: 18))
+          Text("目标达成卖出比例(%)",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
         ],
       ),
-      SizedBox(height: 10),
+      SizedBox(height: 5),
       new TextFormField(
         maxLines: 1,
         keyboardType: TextInputType.number,
@@ -234,8 +235,9 @@ class CreatePreOrderState extends State<CreatePreOrderPage>{
         ],
         autovalidateMode: AutovalidateMode.onUserInteraction,
         controller: tsController,
-        style: TextStyle(fontSize: 16),
-        decoration: new InputDecoration(
+        style: TextStyle(fontSize: 15),
+        cursorColor: Color(0xff48ABFD),
+        cursorHeight: 16,        decoration: new InputDecoration(
           hintText: "",
           labelText: "",
           border:OutlineInputBorder(
@@ -264,17 +266,16 @@ class CreatePreOrderState extends State<CreatePreOrderPage>{
 
   Widget showLsellInput() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(15.0, 5.0, 0.0, 0.0),
+      padding: const EdgeInsets.fromLTRB(0, 15.0, 0.0, 0.0),
       child:  Column(
           children:[
-            SizedBox(height: 10),
         Row(
 
           children: [
-            Text("止损触发卖出比例(%)",style:TextStyle(fontSize: 18))
+            Text("止损触发卖出比例(%)",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
           ],
         ),
-        SizedBox(height: 10),
+        SizedBox(height: 5),
     new TextFormField(
         maxLines: 1,
         keyboardType: TextInputType.number,
@@ -284,8 +285,9 @@ class CreatePreOrderState extends State<CreatePreOrderPage>{
         ],
         autovalidateMode: AutovalidateMode.onUserInteraction,
         controller: lsController,
-        style: TextStyle(fontSize: 16),
-    decoration: new InputDecoration(
+      style: TextStyle(fontSize: 15),
+      cursorColor: Color(0xff48ABFD),
+      cursorHeight: 16,    decoration: new InputDecoration(
     hintText: "",
     labelText: "",
     border:OutlineInputBorder(
@@ -410,7 +412,7 @@ class CreatePreOrderState extends State<CreatePreOrderPage>{
                 key : _formKey,
                 child: Container(
 
-                  padding: const EdgeInsets.fromLTRB(25, 10, 25, 0),
+                  padding: const EdgeInsets.fromLTRB(28, 30, 28, 0),
                   child:Column(
                       children: <Widget>[
                         // showSymbol(),
@@ -420,7 +422,6 @@ class CreatePreOrderState extends State<CreatePreOrderPage>{
                         showLowestRorInput(),
                         showLsellInput(),
                         showOpenTime(),
-                        SizedBox(height: 5)
                       ]
                   )
 
@@ -430,7 +431,7 @@ class CreatePreOrderState extends State<CreatePreOrderPage>{
             ),
               Container(
                 height: 70,
-                padding: const EdgeInsets.fromLTRB(25, 30, 25, 0),
+                padding: const EdgeInsets.fromLTRB(32, 26, 32, 0),
                 child: Row(
                   children:[
                     Expanded(

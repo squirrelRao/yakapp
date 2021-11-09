@@ -392,7 +392,7 @@ class RegistState extends State<RegistPage>{
                 ),
               Container(
                 height: 70,
-                padding: const EdgeInsets.fromLTRB(28, 26, 28, 0),
+                padding: const EdgeInsets.fromLTRB(32, 26, 32, 0),
                 child: TextButton(
                   child: Text('注 册',style:TextStyle(color:Colors.white,fontWeight: FontWeight.w500)),
                   style: ButtonStyle(

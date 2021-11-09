@@ -74,7 +74,7 @@ class ModifyPasswordState extends State<ModifyPasswordPage>{
 
   Widget _showNewPasswordInput() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(0.0, 25.0, 0.0, 0.0),
+      padding: const EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0),
       child:
       Column(
           children:[
@@ -127,7 +127,7 @@ class ModifyPasswordState extends State<ModifyPasswordPage>{
 
   Widget _showPasswordConfirmInput() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(0.0, 25.0, 0.0, 0.0),
+      padding: const EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0),
       child: Column(
           children:[
         Row(
@@ -220,7 +220,7 @@ class ModifyPasswordState extends State<ModifyPasswordPage>{
             ),
               Container(
                 height: 70,
-                padding: const EdgeInsets.fromLTRB(32, 30, 32, 0),
+                padding: const EdgeInsets.fromLTRB(32, 26, 32, 0),
                 child: TextButton(
                   child: Text('提 交',style:TextStyle(color:Colors.white,fontWeight: FontWeight.w500)),
                   style: ButtonStyle(

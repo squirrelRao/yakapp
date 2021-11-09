@@ -44,17 +44,16 @@ class AssetSettingState extends State<AssetSettingPage>{
 
   Widget showTargetRorInput() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(15.0, 5.0, 15.0, 0.0),
+      padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
       child: Column(
           children:[
-          SizedBox(height: 10),
       Row(
 
         children: [
-          Text("目标收益率(%)",style:TextStyle(fontSize: 18))
+          Text("目标收益率(%)",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
         ],
       ),
-      SizedBox(height: 10),
+      SizedBox(height: 5),
       new TextFormField(
         maxLines: 1,
         keyboardType: TextInputType.number,
@@ -64,7 +63,9 @@ class AssetSettingState extends State<AssetSettingPage>{
         ],
         autovalidateMode: AutovalidateMode.onUserInteraction,
         controller: trController,
-        style: TextStyle(fontSize: 16),
+        style: TextStyle(fontSize: 15),
+        cursorColor: Color(0xff48ABFD),
+        cursorHeight: 16,
         decoration: new InputDecoration(
           hintText: "",
           labelText: "",
@@ -94,17 +95,16 @@ class AssetSettingState extends State<AssetSettingPage>{
 
   Widget showLowestRorInput() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(15.0, 5.0, 15.0, 0.0),
+      padding: const EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0),
       child: Column(
       children:[
-      SizedBox(height: 10),
       Row(
 
       children: [
-      Text("止损收益率(%)",style:TextStyle(fontSize: 18))
+      Text("止损收益率(%)",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
       ],
       ),
-      SizedBox(height: 10),
+      SizedBox(height: 5),
     new TextFormField(
         maxLines: 1,
         keyboardType: TextInputType.number,
@@ -114,7 +114,9 @@ class AssetSettingState extends State<AssetSettingPage>{
         ],
         autovalidateMode: AutovalidateMode.onUserInteraction,
         controller: lrController,
-        style: TextStyle(fontSize: 16),
+      style: TextStyle(fontSize: 15),
+      cursorColor: Color(0xff48ABFD),
+      cursorHeight: 16,
       decoration: new InputDecoration(
         hintText: "",
         labelText: "",
@@ -125,7 +127,7 @@ class AssetSettingState extends State<AssetSettingPage>{
         ///设置内容内边距
         contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
         filled: true,
-        fillColor: Color(0xff48ABFD),
+        fillColor: Color(0xffF3F5F7),
       ),
         onSaved: (value) => loweset_ror = double.parse(value!.trim()),
         validator: (value){
@@ -143,17 +145,16 @@ class AssetSettingState extends State<AssetSettingPage>{
 
   Widget showTsellInput() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(15.0, 5.0, 15.0, 0.0),
+      padding: const EdgeInsets.fromLTRB(0.0, 15.0, 0, 0.0),
       child: Column(
           children:[
-          SizedBox(height: 10),
       Row(
 
         children: [
-          Text("目标达成卖出比例(%)",style:TextStyle(fontSize: 18))
+          Text("目标达成卖出比例(%)",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
         ],
       ),
-      SizedBox(height: 10),
+      SizedBox(height: 5),
       new TextFormField(
         maxLines: 1,
         keyboardType: TextInputType.number,
@@ -163,7 +164,9 @@ class AssetSettingState extends State<AssetSettingPage>{
         ],
         autovalidateMode: AutovalidateMode.onUserInteraction,
         controller: tsController,
-        style: TextStyle(fontSize: 16),
+        style: TextStyle(fontSize: 15),
+        cursorColor: Color(0xff48ABFD),
+        cursorHeight: 16,
         decoration: new InputDecoration(
           hintText: "",
           labelText: "",
@@ -193,17 +196,16 @@ class AssetSettingState extends State<AssetSettingPage>{
 
   Widget showLsellInput() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(15.0, 5.0, 15.0, 0.0),
+      padding: const EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0),
       child: Column(
           children:[
-          SizedBox(height: 10),
       Row(
 
         children: [
-          Text("止损触发卖出比例(%)",style:TextStyle(fontSize: 18))
+          Text("止损触发卖出比例(%)",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
         ],
       ),
-      SizedBox(height: 10),
+      SizedBox(height: 5),
       new TextFormField(
         maxLines: 1,
         keyboardType: TextInputType.number,
@@ -213,7 +215,9 @@ class AssetSettingState extends State<AssetSettingPage>{
         ],
         autovalidateMode: AutovalidateMode.onUserInteraction,
         controller: lsController,
-        style: TextStyle(fontSize: 16),
+        style: TextStyle(fontSize: 15),
+        cursorColor: Color(0xff48ABFD),
+        cursorHeight: 16,
         decoration: new InputDecoration(
           hintText: "",
           labelText: "",
@@ -329,7 +333,7 @@ class AssetSettingState extends State<AssetSettingPage>{
                 key : _formKey,
                 child: Container(
 
-                  padding: const EdgeInsets.fromLTRB(25, 30, 25, 0),
+                  padding: const EdgeInsets.fromLTRB(28, 30, 28, 0),
                   child:  Column(
                       children: <Widget>[
                         // showCoin(),
@@ -344,9 +348,9 @@ class AssetSettingState extends State<AssetSettingPage>{
             ),
               Container(
                 height: 70,
-                padding: const EdgeInsets.fromLTRB(25, 30, 25, 0),
+                padding: const EdgeInsets.fromLTRB(32, 26, 32, 0),
                 child: TextButton(
-                  child: Text('提 交'),
+                  child: Text('提 交',style:TextStyle(color:Colors.white,fontWeight: FontWeight.w500)),
                   style: ButtonStyle(
                       textStyle: MaterialStateProperty.all(TextStyle(fontSize: 16)),
                       backgroundColor: MaterialStateProperty.all(Color(0xff48ABFD)),

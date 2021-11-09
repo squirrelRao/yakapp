@@ -44,11 +44,11 @@ class ModifyBindState extends State<ModifyBindPage>{
         Padding(padding: const EdgeInsets.fromLTRB(18.0, 0.0, 18.0, 0.0),
             child:
       new TextFormField(
-        maxLines: 4,
+        maxLines: 3,
         keyboardType: TextInputType.text,
         autofocus: false,
         controller: keyController,
-        style: TextStyle(fontSize: 16),
+        style: TextStyle(fontSize: 15),
         cursorColor: Color(0xff48ABFD),
         cursorHeight: 16,
         decoration: new InputDecoration(
@@ -87,11 +87,11 @@ class ModifyBindState extends State<ModifyBindPage>{
       Padding(padding: const EdgeInsets.fromLTRB(18.0, 0.0, 18.0, 0),
       child:
       new TextFormField(
-        maxLines: 4,
+        maxLines: 3,
         autofocus: false,
         controller: secretController,
         keyboardType: TextInputType.text,
-        style: TextStyle(fontSize: 16),
+        style: TextStyle(fontSize: 15),
         cursorColor: Color(0xff48ABFD),
         cursorHeight: 16,
         decoration: new InputDecoration(
@@ -196,7 +196,6 @@ class ModifyBindState extends State<ModifyBindPage>{
                   padding: const EdgeInsets.fromLTRB(28, 30, 28, 0),
                   child:  Column(
                       children: <Widget>[
-                        SizedBox(height: 10),
                         showKeyInput(),
                         SizedBox(height: 24),
                         showSecretInput(),
@@ -208,7 +207,7 @@ class ModifyBindState extends State<ModifyBindPage>{
             ),
               Container(
                 height: 70,
-                padding: const EdgeInsets.fromLTRB(32, 30, 32, 0),
+                padding: const EdgeInsets.fromLTRB(32, 26, 32, 0),
                 child: TextButton(
                   child: Text('提 交',style:TextStyle(color:Colors.white,fontWeight: FontWeight.w500)),
                   style: ButtonStyle(

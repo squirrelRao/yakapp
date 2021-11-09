@@ -194,7 +194,7 @@ class LoginState extends State<LoginPage>{
             ),
               Container(
                 height: 70,
-                padding: const EdgeInsets.fromLTRB(28, 26, 28, 0),
+                padding: const EdgeInsets.fromLTRB(32, 26, 32, 0),
                 child: TextButton(
                   child: Text('登 录',style:TextStyle(color:Colors.white,fontWeight: FontWeight.w500)),
                   style: ButtonStyle(

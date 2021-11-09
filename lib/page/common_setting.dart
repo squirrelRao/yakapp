@@ -371,6 +371,7 @@ class CommonSettingState extends State<CommonSettingPage>{
                   )
             ),
               Container(
+                color: Colors.white,
                 height: 40,
                 padding: const EdgeInsets.fromLTRB(32, 0, 32, 0),
                 child: TextButton(
