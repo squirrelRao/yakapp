@@ -80,13 +80,13 @@ class UserCenterState extends State<UserCenterPage> {
               scrollDirection: Axis.vertical,
               children: [
               Container(
-                margin: EdgeInsets.only(top:25,bottom:20),
+                margin: EdgeInsets.only(top:30),
                child:Row(
                       children: [
                             Container(
-                              width: 45.0,
-                              height: 45.0,
-                              margin: EdgeInsets.only(left:20,top:10),
+                              width: 60.0,
+                              height: 60.0,
+                              margin: EdgeInsets.only(left:28,top:10),
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 image: DecorationImage(
@@ -106,7 +106,7 @@ class UserCenterState extends State<UserCenterPage> {
                                 children:[
                                      Text(userMail, style:TextStyle(fontSize:17,color:Color(0xff292D33))),
                                     SizedBox(height:2),
-                                    Text(userName,style:TextStyle(fontSize:14,color:Colors.grey))
+                                    Text(userName,style:TextStyle(fontSize:14,color:Color(0xff6D7580)))
 
                                 ]
                               ),
@@ -114,21 +114,21 @@ class UserCenterState extends State<UserCenterPage> {
                         )
                       ],
                 )),
-                 Padding(
-                  padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                  child:Card(
+                  Card(
 
+                    margin: EdgeInsets.only(left:28,right:28,top:30),
+                    shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(8.0))),
                 child:Column(
 
                  children:[
                  ListTile(
-
                   leading: Image(
                     width:20,
                     height:20,
                     image: AssetImage("images/wallet.png"),
                   ),
-                  title: Text("交易所钱包",style:TextStyle(fontSize:14,color:Color(0xff292D33))),
+                  title: Text("交易所钱包",style:TextStyle(fontSize:14,color:Color(0xff292D33),fontWeight: FontWeight.w400)),
                   subtitle: Text(bindStatus,style:TextStyle(fontSize:11,color:Colors.grey)),
                   onTap: (){
                     Navigator.push(context,
@@ -153,7 +153,7 @@ class UserCenterState extends State<UserCenterPage> {
                     height:20,
                     image: AssetImage("images/lock.png"),
                   ),
-                  title: Text("修改密码",style:TextStyle(fontSize:14,color:Color(0xff292D33))),
+                  title: Text("修改密码",style:TextStyle(fontSize:14,color:Color(0xff292D33),fontWeight: FontWeight.w400)),
                   onTap: (){
                     Navigator.push(context,
                         MaterialPageRoute(builder: (content){return ModifyPasswordPage();}));
@@ -175,7 +175,7 @@ class UserCenterState extends State<UserCenterPage> {
                     height:20,
                     image: AssetImage("images/return.png"),
                   ),
-                  title: Text("收益设置",style:TextStyle(fontSize:14,color:Color(0xff292D33))),
+                  title: Text("收益设置",style:TextStyle(fontSize:14,color:Color(0xff292D33),fontWeight: FontWeight.w400)),
                   onTap: (){
                     Navigator.push(context, MaterialPageRoute(builder: (content){return CommonSettingPage();}));
                   },
@@ -198,7 +198,7 @@ class UserCenterState extends State<UserCenterPage> {
                     height:20,
                     image: AssetImage("images/about.png"),
                   ),
-                  title: Text("关于",style:TextStyle(fontSize:14,color:Color(0xff292D33))),
+                  title: Text("关于",style:TextStyle(fontSize:14,color:Color(0xff292D33),fontWeight: FontWeight.w400)),
                   onTap: (){
                     showAboutDialog(context);
                   },
@@ -213,10 +213,10 @@ class UserCenterState extends State<UserCenterPage> {
 
                     })
                 )]
-    ))),
+    )),
                 Container(
                   height: 60,
-                  padding: const EdgeInsets.fromLTRB(65, 20, 65, 0),
+                  padding: const EdgeInsets.fromLTRB(28, 20, 28, 0),
                   child: TextButton(
                       child: Text('退出登录'),
                       onPressed: () async {
@@ -226,14 +226,14 @@ class UserCenterState extends State<UserCenterPage> {
                         Navigator.push(context,MaterialPageRoute(builder: (content){return LoginPage();}));
                       },
                       style: ButtonStyle(
-                          textStyle: MaterialStateProperty.all(TextStyle(fontSize: 16)),
-                          backgroundColor: MaterialStateProperty.all(Color(0x4fD3D3D3)),
-                          foregroundColor: MaterialStateProperty.all(Colors.black26),
+                          textStyle: MaterialStateProperty.all(TextStyle(fontSize: 14)),
+                          backgroundColor: MaterialStateProperty.all(Color(0xffF3F5F7)),
+                          foregroundColor: MaterialStateProperty.all(Color(0xff292D33)),
                           shape: MaterialStateProperty.all(
                               RoundedRectangleBorder(
                                   borderRadius:
                                   BorderRadius.circular(
-                                      40)))
+                                      22)))
                       ))),
                 ]
 
