@@ -115,8 +115,8 @@ class AssetsState extends State<AssetsPage>{
 
                             children: [
                               Text(
-                                  "总资产(USDT)",
-                                  style: TextStyle(fontSize: 16.0,color: Color(0xfff3f3f3))
+                                  "总额(USDT)",
+                                  style: TextStyle(fontSize: 13.0,color: Color(0xfff3f3f3))
                               ),
                               SizedBox(height: 8),
                               Text(
