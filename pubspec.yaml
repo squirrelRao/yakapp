@@ -28,8 +28,7 @@ flutter_native_splash:
     fullscreen: true
 
 flutter_icons:
-  image_path: 'images/logo.png'
-  android: false
+  image_path: 'images/logo_arch.png'
   ios: true
 
 # Dependencies specify other packages that your package needs in order to work.
@@ -106,6 +105,7 @@ flutter:
    - images/login_bg.png
    - images/back.png
    - images/blank_bg.png
+   - images/logo_arch.png
 
   #   - images/a_dot_ham.jpeg
 
