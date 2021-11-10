@@ -70,18 +70,14 @@ class AboutState extends State<AboutPage> {
 
             ),
                   Positioned(
-                      bottom:22,
+                      bottom:25,
                     child:Container(
                         child:Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children:[
                           Column(
                               children:[
-                                Text("by squirrelRao",style:TextStyle(fontSize:14,color:Color(0xff6F7781))),
-                                SizedBox(height:5),
-                                Text("mail: hqraop@163.com",style:TextStyle(fontSize:12.5,color:Color(0xff6F7781))),
-                                SizedBox(height:5),
-                                Text("Copyright©2021. All Rights Reserved",style:TextStyle(fontSize:12.5,color:Color(0xff8F97A0))),
+                                Text("©2021 squirrelRao",style:TextStyle(fontSize:14,color:Color(0xff8F97A0))),
                               ])
                         ]
                     )
