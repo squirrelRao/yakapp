@@ -100,6 +100,7 @@ flutter:
    - images/right_white_arrow.png
    - images/login_bg.png
    - images/back.png
+   - images/blank_bg.png
 
   #   - images/a_dot_ham.jpeg
 

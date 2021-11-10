@@ -6,6 +6,8 @@ import 'package:yakapp/page/common_setting.dart';
 import 'package:yakapp/page/login.dart';
 import 'package:yakapp/page/modify_bind.dart';
 
+import 'about.dart';
+
 class UserCenterPage extends StatefulWidget{
 
 
@@ -154,6 +156,31 @@ class UserCenterState extends State<UserCenterPage> {
                     }
                     )
                 ),
+                   ListTile(
+                       visualDensity: VisualDensity(horizontal: -4),
+                       contentPadding: EdgeInsets.only(left:18,right:0),
+                       leading:Image(
+                         width:20,
+                         height:20,
+                         image: AssetImage("images/return.png"),
+                       ),
+                       title: Text("收益设置",style:TextStyle(fontSize:14,color:Color(0xff292D33),fontWeight: FontWeight.w400)),
+                       onTap: (){
+                         Navigator.push(context, MaterialPageRoute(builder: (content){return CommonSettingPage();}));
+                       },
+                       trailing:IconButton(
+                           icon:Image(
+                             width:20,
+                             height:20,
+                             image: AssetImage("images/right_arrow.png"),
+                           )
+                           ,
+                           onPressed: (){
+
+                             Navigator.push(context, MaterialPageRoute(builder: (content){return CommonSettingPage();}));
+
+                           })
+                   ),
                 ListTile(
                     visualDensity: VisualDensity(horizontal: -4),
                     contentPadding: EdgeInsets.only(left:18,right:0),
@@ -162,7 +189,7 @@ class UserCenterState extends State<UserCenterPage> {
                     height:20,
                     image: AssetImage("images/lock.png"),
                   ),
-                  title: Text("修改密码",style:TextStyle(fontSize:14,color:Color(0xff292D33),fontWeight: FontWeight.w400)),
+                  title: Text("密码修改",style:TextStyle(fontSize:14,color:Color(0xff292D33),fontWeight: FontWeight.w400)),
                   onTap: (){
                     Navigator.push(context,
                         MaterialPageRoute(builder: (content){return ModifyPasswordPage();}));
@@ -178,31 +205,7 @@ class UserCenterState extends State<UserCenterPage> {
                             MaterialPageRoute(builder: (content){return ModifyPasswordPage();}));
                       })
                 ),
-                ListTile(
-                    visualDensity: VisualDensity(horizontal: -4),
-                    contentPadding: EdgeInsets.only(left:18,right:0),
-                  leading:Image(
-                    width:20,
-                    height:20,
-                    image: AssetImage("images/return.png"),
-                  ),
-                  title: Text("收益设置",style:TextStyle(fontSize:14,color:Color(0xff292D33),fontWeight: FontWeight.w400)),
-                  onTap: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (content){return CommonSettingPage();}));
-                  },
-                  trailing:IconButton(
-                      icon:Image(
-                        width:20,
-                        height:20,
-                        image: AssetImage("images/right_arrow.png"),
-                      )
-                  ,
-                      onPressed: (){
 
-                        Navigator.push(context, MaterialPageRoute(builder: (content){return CommonSettingPage();}));
-
-                      })
-                ),
                 ListTile(
                     visualDensity: VisualDensity(horizontal: -4),
                     contentPadding: EdgeInsets.only(left:18,right:0),
@@ -213,7 +216,9 @@ class UserCenterState extends State<UserCenterPage> {
                   ),
                   title: Text("关于",style:TextStyle(fontSize:14,color:Color(0xff292D33),fontWeight: FontWeight.w400)),
                   onTap: (){
-                    showAboutDialog(context);
+                    //showAboutDialog(context);
+                    Navigator.push(context, MaterialPageRoute(builder: (content){return AboutPage();}));
+
                   },
                   trailing: IconButton(
                       icon:Image(
@@ -222,7 +227,8 @@ class UserCenterState extends State<UserCenterPage> {
                         image: AssetImage("images/right_arrow.png"),
                       ),
                     onPressed: (){
-                      showAboutDialog(context);
+                      //showAboutDialog(context);
+                      Navigator.push(context, MaterialPageRoute(builder: (content){return AboutPage();}));
 
                     })
                 )]
