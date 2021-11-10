@@ -33,7 +33,7 @@ class AboutState extends State<AboutPage> {
             backgroundColor: Colors.transparent, //把scaffold的背景色改成透明
             appBar:AppBar(
                 title:  Text("关于",style:TextStyle(color: Color(0xff323232),fontSize: 17)),
-                backgroundColor: Colors.white70,
+                backgroundColor: Colors.transparent,
                 elevation: 0,
                 centerTitle: true,
                 leading: IconButton(
@@ -53,7 +53,7 @@ class AboutState extends State<AboutPage> {
                 children:[
 
                   Container(
-                  margin: EdgeInsets.only(top:180),
+                  margin: EdgeInsets.only(top:190),
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children:[
