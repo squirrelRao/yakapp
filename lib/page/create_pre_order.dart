@@ -472,6 +472,7 @@ class CreatePreOrderState extends State<CreatePreOrderPage>{
                           foregroundColor: MaterialStateProperty.all(Colors.blueGrey)
                       ),
                       onPressed: () {
+                        FocusScope.of(context).requestFocus(FocusNode());
 
                         submitPreBuyOrder(asset,0,open_time,0,0,0,0);
                       },
