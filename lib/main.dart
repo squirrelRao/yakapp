@@ -28,6 +28,7 @@ class MyApp extends StatelessWidget {
 
     return OverlaySupport.global(child:MaterialApp(
       title: 'Yak',
+       debugShowCheckedModeBanner: false,
       home:SplashPage()
     ));
   }
