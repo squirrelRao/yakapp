@@ -5,6 +5,7 @@ import 'package:yakapp/util/net_util.dart';
 
 import 'asset_setting.dart';
 import 'common_setting.dart';
+import 'package:overlay_support/overlay_support.dart';
 
 class AssetsPage extends StatefulWidget{
 
@@ -33,7 +34,7 @@ class AssetsState extends State<AssetsPage>{
               if(data["rc"] == 0) {
 
                 // upate_time = data["data"]["update_time_desc"];
-                upate_time = "";
+                upate_time = upate_time = data["data"]["update_time_str"];
 
                 listCount = data["data"]["snapshots"].length + 1;
                 datas = data["data"];
@@ -74,8 +75,6 @@ class AssetsState extends State<AssetsPage>{
                 }
 
               }
-
-
 
               setState(() {});
     }));
@@ -403,12 +402,12 @@ class AssetsState extends State<AssetsPage>{
               elevation: 0,
               actions: [
                 // Center(
-                 Container(
-                  child:  Text(upate_time,style: TextStyle(fontSize: 13)),
-                  padding: const EdgeInsets.fromLTRB(0,0,5,10.0),
-                  alignment: Alignment.bottomCenter,
+                //  Container(
+                //   child:  Text(upate_time,style: TextStyle(fontSize: 13)),
+                //   padding: const EdgeInsets.fromLTRB(0,0,5,10.0),
+                //   alignment: Alignment.bottomCenter,
                // )
-                )
+               // )
               ],
             ),
             body:
@@ -419,6 +418,7 @@ class AssetsState extends State<AssetsPage>{
               listCount = 0;
               datas.clear();
               getUserAssets();
+
 
             },
             child:ListView.builder(

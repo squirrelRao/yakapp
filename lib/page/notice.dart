@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yakapp/page/create_pre_order.dart';
 import 'package:yakapp/util/configs.dart';
 import 'package:yakapp/util/net_util.dart';
+import 'package:overlay_support/overlay_support.dart';
 
 class NoticePage extends StatefulWidget{
 
@@ -205,6 +206,7 @@ class NoticeState extends State<NoticePage>{
               listCount = 0;
               datas.clear();
               getNotices();
+            
 
             },
             child:ListView.builder(
