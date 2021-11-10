@@ -6,6 +6,7 @@ import 'package:yakapp/page/login.dart';
 import 'package:yakapp/util/configs.dart';
 import 'package:yakapp/util/net_util.dart';
 import 'package:yakapp/util/common_util.dart';
+import 'package:overlay_support/overlay_support.dart';
 
 class BindExchangePage extends StatefulWidget{
 
@@ -120,7 +121,12 @@ class BindExchangeState extends State<BindExchangePage>{
 
           if(data["rc"] == 0){
 
-            Fluttertoast.showToast(msg: "交易所绑定成功，请登录");
+            showSimpleNotification(
+                Text("交易所绑定成功，请登录"),
+                duration: Duration(seconds: 1,milliseconds: 800),
+                leading: Icon(Icons.check,color:Colors.white),
+                background: Color(0xff48ABFD));
+
             Navigator.pop(context);
             Navigator.push(context,
                 MaterialPageRoute(builder: (content) {
@@ -129,8 +135,11 @@ class BindExchangeState extends State<BindExchangePage>{
             );
 
           }else{
-            Fluttertoast.showToast(msg: "绑定失败，请检查key和secret是否正确！");
-
+            showSimpleNotification(
+                Text("更新失败，请检查key和secret是否正确"),
+                duration: Duration(seconds: 1,milliseconds: 800),
+                leading: Icon(Icons.error_outline,color:Colors.white),
+                background: Color(0xffE95555));
           }
 
         });

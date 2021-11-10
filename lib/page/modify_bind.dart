@@ -6,6 +6,7 @@ import 'package:yakapp/page/login.dart';
 import 'package:yakapp/util/configs.dart';
 import 'package:yakapp/util/net_util.dart';
 import 'package:yakapp/util/common_util.dart';
+import 'package:overlay_support/overlay_support.dart';
 
 class ModifyBindPage extends StatefulWidget{
 
@@ -139,7 +140,7 @@ class ModifyBindState extends State<ModifyBindPage>{
 
   }
 
-  void bindExchange(key,secret) async {
+  void bindExchange(context,key,secret) async {
 
     SharedPreferences prefs =  await SharedPreferences.getInstance();
     String? userId = prefs.getString("uid");
@@ -148,11 +149,17 @@ class ModifyBindState extends State<ModifyBindPage>{
 
           if(data["rc"] == 0){
 
-            Fluttertoast.showToast(msg: "交易所账号更新成功");
-
+            showSimpleNotification(
+                Text("交易所账号更新成功"),
+                duration: Duration(seconds: 1,milliseconds: 800),
+                leading: Icon(Icons.check,color:Colors.white),
+                background: Color(0xff48ABFD));
           }else{
-            Fluttertoast.showToast(msg: "绑定失败，请检查key和secret是否正确！");
-
+            showSimpleNotification(
+                Text("更新失败，请检查key和secret是否正确"),
+                duration: Duration(seconds: 1,milliseconds: 800),
+                leading: Icon(Icons.error_outline,color:Colors.white),
+                background: Color(0xffE95555));
           }
 
         });
@@ -228,7 +235,7 @@ class ModifyBindState extends State<ModifyBindPage>{
                     }
 
                     _formKey.currentState!.save();
-                    bindExchange(key,secret);
+                    bindExchange(context,key,secret);
                   },
                 ),
               )

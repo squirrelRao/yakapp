@@ -6,6 +6,7 @@ import 'package:yakapp/page/bind_exchange.dart';
 import 'package:yakapp/page/login.dart';
 import 'package:yakapp/util/net_util.dart';
 import 'package:yakapp/util/configs.dart';
+import 'package:overlay_support/overlay_support.dart';
 
 class ModifyPasswordPage extends StatefulWidget{
 
@@ -248,12 +249,20 @@ class ModifyPasswordState extends State<ModifyPasswordPage>{
 
                               if(data["rc"] == 0){
 
-                                Fluttertoast.showToast(msg:"密码更新成功");
+                                showSimpleNotification(
+                                Text("密码更新成功"),
+                                duration: Duration(seconds: 1,milliseconds: 800),
+                                leading: Icon(Icons.check,color:Colors.white),
+                                background: Color(0xff48ABFD));
+
 
                               }else{
 
-                                Fluttertoast.showToast(msg: "旧密码不正确，更新失败");
-
+                                showSimpleNotification(
+                                Text("旧密码不正确，更新失败"),
+                                duration: Duration(seconds: 1,milliseconds: 800),
+                                leading: Icon(Icons.error_outline,color:Colors.white),
+                                background: Color(0xffE95555));
                               }
                         });
 

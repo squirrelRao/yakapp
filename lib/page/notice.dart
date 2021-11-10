@@ -97,13 +97,16 @@ class NoticeState extends State<NoticePage>{
                           )
                   ])),
 
-              Padding( padding: EdgeInsets.only(left:44,top:6),
+              Padding( padding: EdgeInsets.only(left:44,top:6,right:12),
                child:Row(
                 children: [
-                                Text(
+               Expanded(
+
+               child:Text(
                                     item["title"],
+                                    maxLines:2,
                                     style: TextStyle(fontSize: 15.0,fontWeight: FontWeight.w500)
-                                )
+                                ))
                               ])
                 ),
             Padding( padding: EdgeInsets.only(left:44,top:10,right:12),

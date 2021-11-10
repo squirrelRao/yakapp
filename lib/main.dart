@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:jpush_flutter/jpush_flutter.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:yakapp/page/notice.dart';
 import 'package:yakapp/page/splash.dart';
@@ -25,14 +26,10 @@ class MyApp extends StatelessWidget {
     LogUtil.init(bool.fromEnvironment("dart.vm.product"));
     requestPermission();
 
-    return MaterialApp(
+    return OverlaySupport.global(child:MaterialApp(
       title: 'Yak',
-
-      theme: ThemeData(
-        primarySwatch: Colors.teal,
-      ),
       home:SplashPage()
-    );
+    ));
   }
 
   Future requestPermission() async {

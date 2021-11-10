@@ -6,6 +6,7 @@ import 'package:yakapp/page/bind_exchange.dart';
 import 'package:yakapp/page/login.dart';
 import 'package:yakapp/util/net_util.dart';
 import 'package:yakapp/util/configs.dart';
+import 'package:overlay_support/overlay_support.dart';
 
 class RegistPage extends StatefulWidget{
 
@@ -423,7 +424,12 @@ class RegistState extends State<RegistPage>{
 
                               }else{
 
-                                Fluttertoast.showToast(msg: data["msg"]);
+
+                                    showSimpleNotification(
+                                    Text(data["msg"]),
+                                    duration: Duration(seconds: 1,milliseconds: 800),
+                                    leading: Icon(Icons.error_outline,color:Colors.white),
+                                    background: Color(0xffE95555));
 
                               }
                         });

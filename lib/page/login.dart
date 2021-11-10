@@ -8,6 +8,8 @@ import 'package:yakapp/util/common_util.dart';
 import 'package:yakapp/util/configs.dart';
 import 'package:yakapp/util/net_util.dart';
 import 'regist.dart';
+import 'package:overlay_support/overlay_support.dart';
+
 
 class LoginPage extends StatefulWidget{
 
@@ -229,7 +231,12 @@ class LoginState extends State<LoginPage>{
                                 MaterialPageRoute(builder: (content){return HomePage();})
                             );
                           }else{
-                            Fluttertoast.showToast(msg:"用户名或密码错误");
+
+                              showSimpleNotification(
+                              Text("用户名或密码错误"),
+                              duration: Duration(seconds: 1,milliseconds: 800),
+                              leading: Icon(Icons.error_outline,color:Colors.white),
+                              background: Color(0xffE95555));
                           }
 
                       });

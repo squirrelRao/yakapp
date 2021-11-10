@@ -5,6 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yakapp/util/configs.dart';
 import 'package:yakapp/util/net_util.dart';
+import 'package:overlay_support/overlay_support.dart';
 
 class CommonSettingPage extends StatefulWidget{
 
@@ -313,11 +314,18 @@ class CommonSettingState extends State<CommonSettingPage>{
 
           if(data["rc"] == 0){
 
-            Fluttertoast.showToast(msg: "更新成功");
+            showSimpleNotification(
+                Text("更新成功"),
+                duration: Duration(seconds: 1,milliseconds: 800),
+                leading: Icon(Icons.check,color:Colors.white),
+                background: Color(0xff48ABFD));
 
           }else{
-            Fluttertoast.showToast(msg: "更新失败，请重新登录后再设置");
-
+            showSimpleNotification(
+                Text("更新失败，请重新登录后再设置"),
+                duration: Duration(seconds: 1,milliseconds: 800),
+                leading: Icon(Icons.error_outline,color:Colors.white),
+                background: Color(0xffE95555));
           }
 
         });

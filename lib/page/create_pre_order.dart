@@ -5,6 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yakapp/util/configs.dart';
 import 'package:yakapp/util/net_util.dart';
+import 'package:overlay_support/overlay_support.dart';
 
 class  CreatePreOrderPage extends StatefulWidget{
 
@@ -367,10 +368,28 @@ class CreatePreOrderState extends State<CreatePreOrderPage>{
               });
             }
 
-            Fluttertoast.showToast(msg: "更新成功");
+            var msg = "撤销成功";
+            if(buy_count > 0){
+              msg = "预购成功";
+            }
+
+            showSimpleNotification(
+                Text(msg),
+                duration: Duration(seconds: 1,milliseconds: 800),
+                leading: Icon(Icons.check,color:Colors.white),
+                background: Color(0xff48ABFD));
 
           }else{
-            Fluttertoast.showToast(msg: "更新失败，请重新登录后再设置");
+
+            var msg = "撤销失败，请重新登录后再设置";
+            if(buy_count > 0){
+              msg = "撤销成功，请重新登录后再设置";
+            }
+            showSimpleNotification(
+                Text(msg),
+                duration: Duration(seconds: 1,milliseconds: 800),
+                leading: Icon(Icons.error_outline,color:Colors.white),
+                background: Color(0xffE95555));
 
           }
 
