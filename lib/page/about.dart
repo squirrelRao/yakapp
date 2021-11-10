@@ -79,9 +79,9 @@ class AboutState extends State<AboutPage> {
                               children:[
                                 Text("by squirrelRao",style:TextStyle(fontSize:14,color:Color(0xff6F7781))),
                                 SizedBox(height:5),
-                                Text("mail: hqraop@163.com",style:TextStyle(fontSize:14,color:Color(0xff6F7781))),
+                                Text("mail: hqraop@163.com",style:TextStyle(fontSize:12.5,color:Color(0xff6F7781))),
                                 SizedBox(height:5),
-                                Text("Copyright©2021. All Rights Reserved",style:TextStyle(fontSize:14,color:Color(0xff8F97A0))),
+                                Text("Copyright©2021. All Rights Reserved",style:TextStyle(fontSize:12.5,color:Color(0xff8F97A0))),
                               ])
                         ]
                     )
