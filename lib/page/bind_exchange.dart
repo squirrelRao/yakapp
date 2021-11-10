@@ -172,7 +172,13 @@ class BindExchangeState extends State<BindExchangePage>{
               )
           ),
 
-          body: ListView(
+          body: GestureDetector(
+
+    behavior: HitTestBehavior.translucent,
+    onTap:() {
+    FocusScope.of(context).requestFocus(FocusNode());
+    },
+    child:ListView(
 
             children: <Widget>[
 
@@ -209,6 +215,7 @@ class BindExchangeState extends State<BindExchangePage>{
                                   40)))
                   ),
                   onPressed: () {
+                    FocusScope.of(context).requestFocus(FocusNode());
 
                     if(!_formKey.currentState!.validate()){
 
@@ -224,7 +231,7 @@ class BindExchangeState extends State<BindExchangePage>{
           ],
 
         )
-    );
+    ));
   }
 
 

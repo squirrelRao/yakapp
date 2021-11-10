@@ -369,7 +369,13 @@ class RegistState extends State<RegistPage>{
             ),
           ),
 
-          body: Form(
+          body:  GestureDetector(
+
+    behavior: HitTestBehavior.translucent,
+    onTap:() {
+    FocusScope.of(context).requestFocus(FocusNode());
+    },
+    child:Form(
 
                 key : _formKey,
                 child: ListView(
@@ -411,6 +417,7 @@ class RegistState extends State<RegistPage>{
                                   22)))
                   ),
                   onPressed: () {
+                    FocusScope.of(context).requestFocus(FocusNode());
 
                     if(!_formKey.currentState!.validate()){
 
@@ -445,7 +452,7 @@ class RegistState extends State<RegistPage>{
               )
               ]))
 
-    );
+    ));
   }
 
 

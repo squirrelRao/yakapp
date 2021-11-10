@@ -337,7 +337,13 @@ class AssetSettingState extends State<AssetSettingPage>{
               )
           ),
 
-          body: ListView(
+          body: GestureDetector(
+
+              behavior: HitTestBehavior.translucent,
+            onTap:() {
+              FocusScope.of(context).requestFocus(FocusNode());
+            },
+            child:ListView(
 
             children: <Widget>[
 
@@ -375,6 +381,7 @@ class AssetSettingState extends State<AssetSettingPage>{
                                   40)))
                   ),
                   onPressed: () {
+                    FocusScope.of(context).requestFocus(FocusNode());
 
                     if(!_formKey.currentState!.validate()){
 
@@ -390,7 +397,7 @@ class AssetSettingState extends State<AssetSettingPage>{
           ],
 
         )
-    );
+    ));
   }
 
 

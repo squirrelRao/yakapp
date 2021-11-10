@@ -426,7 +426,13 @@ class CreatePreOrderState extends State<CreatePreOrderPage>{
               )
           ),
 
-          body: ListView(
+          body: GestureDetector(
+
+    behavior: HitTestBehavior.translucent,
+    onTap:() {
+    FocusScope.of(context).requestFocus(FocusNode());
+    },
+    child:ListView(
 
             children: <Widget>[
 
@@ -480,6 +486,7 @@ class CreatePreOrderState extends State<CreatePreOrderPage>{
                           foregroundColor: MaterialStateProperty.all(Colors.white)
                       ),
                       onPressed: () {
+                        FocusScope.of(context).requestFocus(FocusNode());
 
                         if(!_formKey.currentState!.validate()){
 
@@ -497,7 +504,7 @@ class CreatePreOrderState extends State<CreatePreOrderPage>{
             ],
 
         )
-    );
+    ));
   }
 
 

@@ -205,7 +205,13 @@ class ModifyPasswordState extends State<ModifyPasswordPage>{
             ),
           ),
 
-          body: ListView(
+          body:  GestureDetector(
+
+    behavior: HitTestBehavior.translucent,
+    onTap:() {
+    FocusScope.of(context).requestFocus(FocusNode());
+    },
+    child:ListView(
 
             children: <Widget>[
               Form(
@@ -239,6 +245,7 @@ class ModifyPasswordState extends State<ModifyPasswordPage>{
                                   40)))
                   ),
                   onPressed: () async {
+                    FocusScope.of(context).requestFocus(FocusNode());
 
                     if(!_formKey.currentState!.validate()){
 
@@ -280,7 +287,7 @@ class ModifyPasswordState extends State<ModifyPasswordPage>{
 
         )
 
-    );
+          ));
   }
 
 

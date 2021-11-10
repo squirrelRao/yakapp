@@ -361,7 +361,13 @@ class CommonSettingState extends State<CommonSettingPage>{
               )
           ),
 
-          body: ListView(
+          body:  GestureDetector(
+
+    behavior: HitTestBehavior.translucent,
+    onTap:() {
+    FocusScope.of(context).requestFocus(FocusNode());
+    },
+    child:ListView(
 
             children: <Widget>[
 
@@ -399,6 +405,7 @@ class CommonSettingState extends State<CommonSettingPage>{
                                   40)))
                   ),
                   onPressed: () {
+                    FocusScope.of(context).requestFocus(FocusNode());
 
                     if(!_formKey.currentState!.validate()){
 
@@ -414,7 +421,7 @@ class CommonSettingState extends State<CommonSettingPage>{
           ],
 
         )
-    );
+    ));
   }
 
 

@@ -195,7 +195,13 @@ class ModifyBindState extends State<ModifyBindPage>{
               )
           ),
 
-          body: ListView(
+          body:  GestureDetector(
+
+    behavior: HitTestBehavior.translucent,
+    onTap:() {
+    FocusScope.of(context).requestFocus(FocusNode());
+    },
+    child:ListView(
 
             children: <Widget>[
 
@@ -232,6 +238,7 @@ class ModifyBindState extends State<ModifyBindPage>{
                                   40)))
                   ),
                   onPressed: () {
+                    FocusScope.of(context).requestFocus(FocusNode());
 
                     if(!_formKey.currentState!.validate()){
 
@@ -247,7 +254,7 @@ class ModifyBindState extends State<ModifyBindPage>{
           ],
 
         )
-    );
+    ));
   }
 
 

@@ -156,7 +156,13 @@ class LoginState extends State<LoginPage>{
 
     return  Scaffold(
 
-          body: Container(
+          body:  GestureDetector(
+
+        behavior: HitTestBehavior.translucent,
+        onTap:() {
+      FocusScope.of(context).requestFocus(FocusNode());
+    },
+    child:Container(
 
         decoration: BoxDecoration(
                 image: DecorationImage(
@@ -211,6 +217,7 @@ class LoginState extends State<LoginPage>{
                 ),
 
                     onPressed: () {
+                      FocusScope.of(context).requestFocus(FocusNode());
 
                       if(!_formKey.currentState!.validate()){
 
@@ -260,7 +267,7 @@ class LoginState extends State<LoginPage>{
 
         )
 
-    ));
+    )));
   }
 
 
