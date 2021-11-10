@@ -179,12 +179,16 @@ class ModifyBindState extends State<ModifyBindPage>{
     return Scaffold(
 
           appBar:AppBar(
-            title: const Text('更新交易所账号',style: TextStyle(color: Colors.black)),
+            title: const Text('更新交易所账号',style:TextStyle(color: Color(0xff323232),fontSize: 17)),
               centerTitle: true,
               elevation: 0,
               backgroundColor: Colors.white70,
               leading: IconButton(
-                icon:Icon(Icons.arrow_back_ios,color:Colors.black),
+                icon:Image(
+                  width:24,
+                  height:24,
+                  image: AssetImage("images/back.png"),
+                ),
                 onPressed: () async {
                     Navigator.pop(context);
                 },

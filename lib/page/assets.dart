@@ -397,7 +397,7 @@ class AssetsState extends State<AssetsPage>{
     return Scaffold(
 
             appBar: AppBar(
-              title: const Text('资产',style:TextStyle(color:Colors.white)),
+              title: const Text('资产',style:TextStyle(color:Colors.white,fontSize:17)),
               backgroundColor:Color(0xff48ABFD),
               elevation: 0,
               actions: [

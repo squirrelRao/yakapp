@@ -350,12 +350,16 @@ class RegistState extends State<RegistPage>{
     return Scaffold(
 
           appBar:AppBar(
-            title: const Text('注册账号',style: TextStyle(color: Colors.black)),
+            title: const Text('注册账号',style: TextStyle(color: Color(0xff323232),fontSize: 17)),
             centerTitle: true,
             backgroundColor: Colors.white70,
             elevation: 0,
             leading: IconButton(
-                icon:Icon(Icons.arrow_back_ios,color:Colors.black),
+              icon:Image(
+                width:24,
+                height:24,
+                image: AssetImage("images/back.png"),
+              ),
               onPressed: (){
 
                 Navigator.pop(context,

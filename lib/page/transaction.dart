@@ -184,7 +184,7 @@ class TransactionState extends State<TransactionPage>{
     return Scaffold(
 
             appBar: AppBar(
-              title: const Text('交易',style:TextStyle(color:Colors.black)),
+              title: const Text('交易',style:TextStyle(color: Color(0xff323232),fontSize: 17)),
               backgroundColor: Colors.white70,
               elevation: 0  ,
             ),

@@ -321,12 +321,16 @@ class AssetSettingState extends State<AssetSettingPage>{
     return Scaffold(
 
           appBar:AppBar(
-            title:  Text(title,style:TextStyle(color: Colors.black)),
+            title:  Text(title,style:TextStyle(color: Color(0xff323232),fontSize: 17)),
               backgroundColor: Colors.white70,
               elevation: 0,
               centerTitle: true,
               leading: IconButton(
-                icon:Icon(Icons.arrow_back_ios,color:Colors.black),
+                icon:Image(
+                  width:24,
+                  height:24,
+                  image: AssetImage("images/back.png"),
+                ),
                 onPressed: () async {
                     Navigator.pop(context);
                 },

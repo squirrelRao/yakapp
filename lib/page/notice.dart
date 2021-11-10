@@ -194,7 +194,7 @@ class NoticeState extends State<NoticePage>{
     return Scaffold(
 
             appBar: AppBar(
-              title: const Text('新币',style:TextStyle(color:Colors.white)),
+              title: const Text('新币',style:TextStyle(color:Colors.white,fontSize:17)),
               backgroundColor: Color(0xff48ABFD),
               elevation: 0,
             ),
@@ -206,7 +206,7 @@ class NoticeState extends State<NoticePage>{
               listCount = 0;
               datas.clear();
               getNotices();
-            
+
 
             },
             child:ListView.builder(
