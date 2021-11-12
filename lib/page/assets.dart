@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yakapp/util/configs.dart';
@@ -5,7 +7,8 @@ import 'package:yakapp/util/net_util.dart';
 
 import 'asset_setting.dart';
 import 'common_setting.dart';
-import 'package:overlay_support/overlay_support.dart';
+import 'package:decimal/decimal.dart';
+
 
 class AssetsPage extends StatefulWidget{
 
@@ -19,6 +22,7 @@ class AssetsState extends State<AssetsPage>{
   late Map datas;
   int listCount = 0;
   var upate_time = "";
+  var _timer;
 
   void getUserAssets() async {
 
@@ -81,14 +85,24 @@ class AssetsState extends State<AssetsPage>{
 
   }
 
+  void RefreshDataPeriodic(){
+
+    getUserAssets();
+    _timer = Timer.periodic(Duration(seconds: 2), (timestamp)=>getUserAssets());
+}
 
   @override
   void initState() {
     super.initState();
 
-    WidgetsBinding.instance!.addPostFrameCallback( (timestamp)=> getUserAssets());
+    WidgetsBinding.instance!.addPostFrameCallback((timestamp) => RefreshDataPeriodic());
+  }
 
+  @override
+  void dispose(){
 
+    super.dispose();
+    _timer.cancel();
   }
 
   //build asset summary
@@ -120,7 +134,7 @@ class AssetsState extends State<AssetsPage>{
                               ),
                               SizedBox(height: 8),
                               Text(
-                                  datas["accumulates_free"].toString(),
+                                  Decimal.parse(datas["accumulates_free"].toString()).toString(),
                                   style: TextStyle(fontSize: 26.0,color: Colors.white,fontWeight: FontWeight.w500)
                               )
                             ]
@@ -154,7 +168,7 @@ class AssetsState extends State<AssetsPage>{
                                 ),
                                 SizedBox(height: 8),
                                 Text(
-                                    datas["accumulates_return"].toString(),
+                                    Decimal.parse(datas["accumulates_return"].toString()).toString(),
                                     style: TextStyle(fontSize: 16.0,color: Colors.white,fontWeight: FontWeight.w500)
                                 ),
                               ])
@@ -169,7 +183,7 @@ class AssetsState extends State<AssetsPage>{
                                 ),
                                 SizedBox(height: 8),
                                 Text(
-                                    datas["accumulates_ror"].toString()+"%",
+    Decimal.parse(datas["accumulates_ror"].toString()).toString()+"%",
                                     style: TextStyle(fontSize: 16.0,color: Colors.white,fontWeight: FontWeight.w500)
                                 ),
 
@@ -251,7 +265,7 @@ class AssetsState extends State<AssetsPage>{
                                 ),
 
                                 Text(
-                                    item["free"],
+                                    Decimal.parse(item["free"].toString()).toString(),
                                     style: TextStyle(fontSize: 16.0,fontWeight: FontWeight.w500)
                                 )
                               ])),
@@ -265,7 +279,7 @@ class AssetsState extends State<AssetsPage>{
                         ),
 
                         Text(
-                            item["return"].toString(),
+                            Decimal.parse(item["return"].toString()).toString(),
                             style: TextStyle(fontSize: 14.0,color:item["return_color"])
                         )
                       ])),
@@ -279,7 +293,7 @@ class AssetsState extends State<AssetsPage>{
                         ),
 
                         Text(
-                            item["ror"].toString()+"%",
+                            Decimal.parse(item["ror"].toString()).toString()+"%",
                             style: TextStyle(fontSize: 14.0,color:item["ror_color"])
                         )
                       ])),
@@ -400,6 +414,7 @@ class AssetsState extends State<AssetsPage>{
               title: const Text('资产',style:TextStyle(color:Colors.white,fontSize:17)),
               backgroundColor:Color(0xff48ABFD),
               elevation: 0,
+
               actions: [
                 // Center(
                 //  Container(
