@@ -391,7 +391,7 @@ class AssetsState extends State<AssetsPage>{
                           ),
 
                           Text(
-                              item["free"],
+                              Decimal.parse(item["free"].toString()).toString(),
                               style: TextStyle(fontSize: 16.0,fontWeight: FontWeight.w500)
                           )
                         ]))
