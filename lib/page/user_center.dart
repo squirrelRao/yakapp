@@ -164,7 +164,7 @@ class UserCenterState extends State<UserCenterPage> {
                          height:20,
                          image: AssetImage("images/return.png"),
                        ),
-                       title: Text("收益设置",style:TextStyle(fontSize:14,color:Color(0xff292D33),fontWeight: FontWeight.w400)),
+                       title: Text("通用设置",style:TextStyle(fontSize:14,color:Color(0xff292D33),fontWeight: FontWeight.w400)),
                        onTap: (){
                          Navigator.push(context, MaterialPageRoute(builder: (content){return CommonSettingPage();}));
                        },
