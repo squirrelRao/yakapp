@@ -135,7 +135,7 @@ class AssetsState extends State<AssetsPage>{
                               SizedBox(height: 8),
                               Text(
                                   Decimal.parse(datas["accumulates_free"].toString()).toString(),
-                                  style: TextStyle(fontSize: 26.0,color: Colors.white,fontWeight: FontWeight.w500)
+                                  style: TextStyle(fontSize: 27.0,color: Colors.white,fontWeight: FontWeight.w500)
                               )
                             ]
                     )),
@@ -266,7 +266,7 @@ class AssetsState extends State<AssetsPage>{
 
                                 Text(
                                     Decimal.parse(item["free"].toString()).toString(),
-                                    style: TextStyle(fontSize: 16.0,fontWeight: FontWeight.w500)
+                                    style: TextStyle(fontSize: 16.0,fontWeight: FontWeight.w400)
                                 )
                               ])),
               Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
@@ -392,7 +392,7 @@ class AssetsState extends State<AssetsPage>{
 
                           Text(
                               Decimal.parse(item["free"].toString()).toString(),
-                              style: TextStyle(fontSize: 16.0,fontWeight: FontWeight.w500)
+                              style: TextStyle(fontSize: 16.0,fontWeight: FontWeight.w400)
                           )
                         ]))
               ]
