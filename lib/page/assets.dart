@@ -302,11 +302,11 @@ class AssetsState extends State<AssetsPage>{
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                            "目标/最低收益率",
+                            "目标收益率",
                             style: TextStyle(fontSize: 12.0)
                         ),
                         Text(
-                            item["target_ror"].toString()+"% / "+item["lowest_ror"].toString()+"%",
+                            item["lowest_ror"].toString()+"% - "+item["target_ror"].toString()+"%",
                             style: TextStyle(fontSize: 12.0)
                         ),
                       ])),
@@ -320,7 +320,7 @@ class AssetsState extends State<AssetsPage>{
                         ),
 
                         Text(
-                            item["t_sell"].toString()+"% / "+item["l_sell"].toString()+"%",
+                            item["l_sell"].toString()+"% - "+item["t_sell"].toString()+"%",
                             style: TextStyle(fontSize: 11.0,color:Colors.grey)
                         )
                       ])),
