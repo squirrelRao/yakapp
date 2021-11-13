@@ -103,7 +103,7 @@ class AssetSettingState extends State<AssetSettingPage>{
       Row(
 
       children: [
-      Text("止损收益率(%)",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
+      Text("最低收益率(%)",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
       ],
       ),
       SizedBox(height: 5),
@@ -134,7 +134,7 @@ class AssetSettingState extends State<AssetSettingPage>{
         onSaved: (value) => loweset_ror = double.parse(value!.trim()),
         validator: (value){
           if(value!.trim()==""){
-            return "止损收益率不能为空";
+            return "最低收益率不能为空";
           }
 
           if(double.parse(value) < 0 || double.parse(value) > 100){
@@ -204,7 +204,7 @@ class AssetSettingState extends State<AssetSettingPage>{
       Row(
 
         children: [
-          Text("止损触发卖出比例(%)",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
+          Text("最低触发卖出比例(%)",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
         ],
       ),
       SizedBox(height: 5),
@@ -235,7 +235,7 @@ class AssetSettingState extends State<AssetSettingPage>{
         onSaved: (value) => l_sell = double.parse(value!.trim()),
         validator: (value){
           if(value!.trim()==""){
-            return "触发止损收益卖出比不能为空";
+            return "触发最低收益卖出比不能为空";
           }
 
           if(double.parse(value) < 0 || double.parse(value) > 100){

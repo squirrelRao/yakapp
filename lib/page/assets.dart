@@ -254,7 +254,7 @@ class AssetsState extends State<AssetsPage>{
         margin: const EdgeInsets.only(left:20,right:20,top:12),
         color: Colors.white,
         child:Column(
-            children: [
+            children: [q
                           Padding(padding: EdgeInsets.only(left:14,top:14,right:14),
                           child:Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -302,11 +302,11 @@ class AssetsState extends State<AssetsPage>{
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                            "目标收益率",
+                            "目标收益",
                             style: TextStyle(fontSize: 12.0)
                         ),
                         Text(
-                            item["lowest_ror"].toString()+"% - "+item["target_ror"].toString()+"%",
+                            item["lowest_ror"].toString()+"% , "+item["target_ror"].toString()+"%",
                             style: TextStyle(fontSize: 12.0)
                         ),
                       ])),
@@ -315,12 +315,12 @@ class AssetsState extends State<AssetsPage>{
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                            "达成自动卖出",
+                            "达成卖出",
                             style: TextStyle(fontSize: 11.0,color:Colors.grey)
                         ),
 
                         Text(
-                            item["l_sell"].toString()+"% - "+item["t_sell"].toString()+"%",
+                            item["l_sell"].toString()+"% , "+item["t_sell"].toString()+"%",
                             style: TextStyle(fontSize: 11.0,color:Colors.grey)
                         )
                       ])),
