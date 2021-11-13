@@ -204,7 +204,7 @@ class AssetSettingState extends State<AssetSettingPage>{
       Row(
 
         children: [
-          Text("最低触发卖出比例(%)",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
+          Text("最低收益率达成卖出比例(%)",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
         ],
       ),
       SizedBox(height: 5),
