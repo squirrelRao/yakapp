@@ -254,7 +254,7 @@ class AssetsState extends State<AssetsPage>{
         margin: const EdgeInsets.only(left:20,right:20,top:12),
         color: Colors.white,
         child:Column(
-            children: [q
+            children: [
                           Padding(padding: EdgeInsets.only(left:14,top:14,right:14),
                           child:Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
