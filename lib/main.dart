@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:jpush_flutter/jpush_flutter.dart';
 import 'package:overlay_support/overlay_support.dart';
@@ -14,6 +15,7 @@ import 'util/common_util.dart';
 
 void main() {
   runApp(const MyApp());
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
 }
 
 class MyApp extends StatelessWidget {
@@ -31,6 +33,8 @@ class MyApp extends StatelessWidget {
        debugShowCheckedModeBanner: false,
       home:SplashPage()
     ));
+
+
   }
 
   Future requestPermission() async {
@@ -156,5 +160,7 @@ class _HomePageState extends State<HomePage> {
 
 
     );
+
+
   }
 }

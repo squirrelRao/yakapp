@@ -36,14 +36,18 @@ class TransactionState extends State<TransactionPage>{
         for(var item in datas){
 
           item["symbol"] = item["symbol"].replaceAll("USDT","");
-          if(item["type"] == "LIMIT"){
-            item["type"] = "卖出";
-            item["price"] = item["price"].toString();
+          if(item["side"] == "BUY"){
+            item["side"] = "买入";
+            item["price"] = "市场最新价";
             item["type_color"] = Color(0xff48ABFD);
 
-          }else if(item["type"] == "MARKET"){
-            item["type"] = "卖出";
-            item["price"] = "市场最新价";
+          }else if(item["side"] == "SELL"){
+            item["side"] = "卖出";
+            if(item["type"] == "MARKET") {
+              item["price"] = "市场最新价";
+            }else{
+              item["price"] = item["price"].toString();
+            }
             item["type_color"] = Color(0xff48ABFD);
 
           }
@@ -107,7 +111,7 @@ class TransactionState extends State<TransactionPage>{
                               Padding(
                                   padding: EdgeInsets.fromLTRB(8, 2, 8, 2),
                                   child:Text(
-                                      item["type"],
+                                      item["side"],
                                       style: TextStyle(fontSize: 12.0,color: Colors.white,fontWeight: FontWeight.w500)
                                   )
                               )),

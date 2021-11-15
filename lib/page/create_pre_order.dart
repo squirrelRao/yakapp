@@ -495,7 +495,6 @@ class CreatePreOrderState extends State<CreatePreOrderPage>{
                         }
 
                         _formKey.currentState!.save();
-                        buy_count = 0;
                         submitPreBuyOrder(asset,buy_count,open_time,target_ror,t_sell,loweset_ror,l_sell);
                       },
                     ),
