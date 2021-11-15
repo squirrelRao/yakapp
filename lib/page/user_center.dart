@@ -111,6 +111,11 @@ class UserCenterState extends State<UserCenterPage> {
                             ),
                           onTap: (){
 
+                            showSimpleNotification(
+                                Text("钱包数据同步中..."),
+                                duration: Duration(seconds: 1,milliseconds: 200),
+                                leading: Icon(Icons.check,color:Colors.white),
+                                background: Color(0xff48ABFD));
                             NetClient().post(Configs.syncHistoryApi, {},
                                     (data) {
 
