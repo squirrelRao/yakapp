@@ -1,3 +1,4 @@
+import 'package:decimal/decimal.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yakapp/util/configs.dart';
@@ -41,12 +42,18 @@ class TransactionState extends State<TransactionPage>{
             item["price"] = "市场最新价";
             item["type_color"] = Color(0xff48ABFD);
 
+            if(item["status"]=="FILLED"){
+              if(item["data"]["fills"].length > 0){
+                item["price"] = Decimal.parse(item["data"]["fills"][0]["price"]);
+              }
+            }
+
           }else if(item["side"] == "SELL"){
             item["side"] = "卖出";
             if(item["type"] == "MARKET") {
               item["price"] = "市场最新价";
             }else{
-              item["price"] = item["price"].toString();
+              item["price"] = Decimal.parse(item["price"].toString());
             }
             item["type_color"] = Color(0xff48ABFD);
 
@@ -128,7 +135,7 @@ class TransactionState extends State<TransactionPage>{
                           ),
 
                           Text(
-                              item["origQty"].toString(),
+                              Decimal.parse(item["origQty"].toString()).toString(),
                               style: TextStyle(fontSize: 13.0)
                           )
                         ])),
@@ -137,7 +144,7 @@ class TransactionState extends State<TransactionPage>{
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                              "价格(usdt)",
+                              "价格(USDT)",
                               style: TextStyle(fontSize: 13.0)
                           ),
 
