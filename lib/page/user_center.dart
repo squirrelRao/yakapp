@@ -5,6 +5,10 @@ import 'package:yakapp/page/bind_exchange.dart';
 import 'package:yakapp/page/common_setting.dart';
 import 'package:yakapp/page/login.dart';
 import 'package:yakapp/page/modify_bind.dart';
+import 'package:yakapp/util/configs.dart';
+import 'package:yakapp/util/net_util.dart';
+import 'package:overlay_support/overlay_support.dart';
+
 
 import 'about.dart';
 
@@ -91,7 +95,8 @@ class UserCenterState extends State<UserCenterPage> {
                 margin: EdgeInsets.only(top:30),
                child:Row(
                       children: [
-                            Container(
+                        GestureDetector(
+                            child:Container(
                               width: 60.0,
                               height: 60.0,
                               margin: EdgeInsets.only(left:28,top:10),
@@ -104,6 +109,23 @@ class UserCenterState extends State<UserCenterPage> {
                                 ),
                               )
                             ),
+                          onTap: (){
+
+                            NetClient().post(Configs.syncHistoryApi, {},
+                                    (data) {
+
+                                  if(data["rc"] == 0){
+
+                                    showSimpleNotification(
+                                        Text("钱包数据同步完成"),
+                                        duration: Duration(seconds: 1,milliseconds: 800),
+                                        leading: Icon(Icons.check,color:Colors.white),
+                                        background: Color(0xff48ABFD));
+                                  }
+                                });
+
+                          },
+                        ),
                         Expanded(
                             child: Container(
                               alignment: Alignment.centerLeft,

@@ -18,6 +18,8 @@ class Configs {
   static const String getNoticeApi = baseUrl +"/v1/notice/get";
   static const String getPreBuyOrderApi = baseUrl +"/v1/prebuy/get";
   static const String updatePreBuyOrderApi = baseUrl +"/v1/prebuy/new";
+  static const String syncHistoryApi = baseUrl +"/v1/sync/history";
+
 
 
   static const String checkSystemStatusApi = baseUrl +"/v1/regist";
