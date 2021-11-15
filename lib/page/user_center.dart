@@ -25,6 +25,117 @@ class UserCenterState extends State<UserCenterPage> {
   String bindStatus = "未绑定";
   String userName = "";
   String userMail = "";
+  late BuildContext dialogContext;
+
+
+  showSyncDialog(BuildContext context,user_id) {
+
+    showDialog(
+        context: context,
+        barrierDismissible: true,
+        builder: (BuildContext context) {
+          dialogContext = context;
+          return SimpleDialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(16))
+            ),
+            contentPadding: EdgeInsets.only(top:23,bottom:23,left:10,right:10),
+            title: Text("请选择钱包同步方式",textAlign:TextAlign.center,style:TextStyle(color:Color(0xff221232),fontSize:14,fontWeight: FontWeight.w500)),
+            children: [
+
+              SimpleDialogOption(
+
+                child:
+                Container(
+                    height: 44,
+                    decoration: new BoxDecoration(
+                      color: Color(0xffF3F5F7),
+                      borderRadius: BorderRadius.all(Radius.circular(22)),
+
+                    ),
+                    child:Padding(
+                        padding:EdgeInsets.only(left:10,right:10),
+                        child:
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children:[
+                              Text("增量同步",textAlign:TextAlign.center,style: TextStyle(color: Color(0xff48ABFD),fontSize:14,fontWeight: FontWeight.w400)),
+
+                            ]))),
+                onPressed: (){
+
+                  showSimpleNotification(
+                      Text("钱包数据同步中..."),
+                      duration: Duration(seconds: 1,milliseconds: 200),
+                      leading: Icon(Icons.check,color:Colors.white),
+                      background: Color(0xff48ABFD));
+                  NetClient().post(Configs.syncHistoryApi, {"type":1,"user_id":user_id},
+                          (data) {
+
+                        if(data["rc"] == 0){
+                          Navigator.pop(dialogContext);
+                          showSimpleNotification(
+                              Text("钱包数据同步完成"),
+                              duration: Duration(seconds: 1,milliseconds: 800),
+                              leading: Icon(Icons.check,color:Colors.white),
+                              background: Color(0xff48ABFD));
+                        }
+                      });
+
+
+                },
+              ),
+              SimpleDialogOption(
+                child: Container(
+                    height: 44,
+                    decoration: new BoxDecoration(
+                      color: Color(0xffF3F5F7),
+                      borderRadius: BorderRadius.all(Radius.circular(22)),
+
+                    ),
+                    child:Padding(
+                        padding:EdgeInsets.only(left:10,right:10),
+                        child:
+
+                        Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children:[
+                              Text("全量同步",textAlign:TextAlign.center,style: TextStyle(color: Color(0xff48ABFD),fontSize:14,fontWeight: FontWeight.w400)),
+                            ]))),
+                onPressed: (){
+
+
+                  showSimpleNotification(
+                      Text("钱包同步中..."),
+                      duration: Duration(seconds: 1,milliseconds: 200),
+                      leading: Icon(Icons.check,color:Colors.white),
+                      background: Color(0xff48ABFD));
+                  NetClient().post(Configs.syncHistoryApi, {"type":2,"user_id":user_id},
+                          (data) {
+
+                        if(data["rc"] == 0){
+                          Navigator.pop(dialogContext);
+                          showSimpleNotification(
+                              Text("钱包同步完成"),
+                              duration: Duration(seconds: 1,milliseconds: 800),
+                              leading: Icon(Icons.check,color:Colors.white),
+                              background: Color(0xff48ABFD));
+                        }
+                      });
+
+
+                },
+              ),
+              Container(
+                alignment: Alignment.center,
+                padding: const EdgeInsets.fromLTRB(0.0, 10, 0, 0),
+                child: Text("提示: 有买入时增量，有卖出时全量",style: TextStyle(color: Colors.grey,fontSize: 11))
+                ,
+              )
+            ],
+          );
+        });
+  }
 
   showAboutDialog(BuildContext context) {
 
@@ -111,24 +222,6 @@ class UserCenterState extends State<UserCenterPage> {
                             ),
                           onTap: (){
 
-                            showSimpleNotification(
-                                Text("钱包数据同步中..."),
-                                duration: Duration(seconds: 1,milliseconds: 200),
-                                leading: Icon(Icons.check,color:Colors.white),
-                                background: Color(0xff48ABFD));
-                            NetClient().post(Configs.syncHistoryApi, {},
-                                    (data) {
-
-                                  if(data["rc"] == 0){
-
-                                    showSimpleNotification(
-                                        Text("钱包数据同步完成"),
-                                        duration: Duration(seconds: 1,milliseconds: 800),
-                                        leading: Icon(Icons.check,color:Colors.white),
-                                        background: Color(0xff48ABFD));
-                                  }
-                                });
-
                           },
                         ),
                         Expanded(
@@ -157,6 +250,29 @@ class UserCenterState extends State<UserCenterPage> {
                 child:Column(
 
                  children:[
+                   ListTile(
+                       visualDensity: VisualDensity(horizontal: -4),
+                       contentPadding: EdgeInsets.only(left:18,right:0),
+                       leading:Icon(Icons.sync,size:20,color:Color(0xff48ABFD)),
+                       title: Text("钱包同步",style:TextStyle(fontSize:14,color:Color(0xff292D33),fontWeight: FontWeight.w400)),
+                       onTap: (){
+
+                         showSyncDialog(context,"");
+                       },
+                       trailing:IconButton(
+                           icon:Image(
+                             width:20,
+                             height:20,
+                             image: AssetImage("images/right_arrow.png"),
+                           )
+                           ,
+                           onPressed: (){
+
+
+
+
+                           })
+                   ),
                  ListTile(
                      visualDensity: VisualDensity(horizontal: -4),
                       contentPadding: EdgeInsets.only(left:18,right:0),
