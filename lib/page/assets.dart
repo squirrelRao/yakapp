@@ -86,9 +86,8 @@ class AssetsState extends State<AssetsPage>{
   }
 
   void RefreshDataPeriodic(){
-
-    getUserAssets();
     _timer = Timer.periodic(Duration(seconds: 2), (timestamp)=>getUserAssets());
+    getUserAssets();
 }
 
   @override
