@@ -57,6 +57,8 @@ class TransactionState extends State<TransactionPage>{
           if(item["status"] == "FAILED"){
             item["status_str"] = "失败("+item["status_str"]+")";
             item["status_str_color"] = Color(0xffE95555);
+          }else if(item["status"]=="FILLED"){
+            item["status_str_color"] = Color(0xff02AC8F);
           }
         }
       }
