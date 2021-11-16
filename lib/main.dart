@@ -14,8 +14,8 @@ import 'util/common_util.dart';
 
 
 void main() {
+  
   runApp(const MyApp());
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
 }
 
 class MyApp extends StatelessWidget {

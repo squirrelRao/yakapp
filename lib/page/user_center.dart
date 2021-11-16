@@ -129,7 +129,7 @@ class UserCenterState extends State<UserCenterPage> {
               Container(
                 alignment: Alignment.center,
                 padding: const EdgeInsets.fromLTRB(0.0, 10, 0, 0),
-                child: Text("有买入时增量，有卖出时全量，全量会重置计算时刻",style: TextStyle(color: Colors.grey,fontSize: 11))
+                child: Text("新买入时增量，常规买卖全量并重置收益计算时刻",style: TextStyle(color: Colors.grey,fontSize: 11))
                 ,
               )
             ],
