@@ -123,7 +123,7 @@ class AssetsState extends State<AssetsPage>{
         child:Column(
             children: [
                         Container(
-                        margin: EdgeInsets.fromLTRB(20, 10, 20, 0),
+                        margin: EdgeInsets.fromLTRB(16, 10, 16, 0),
                         child:Column(
 
                             children: [
@@ -139,7 +139,7 @@ class AssetsState extends State<AssetsPage>{
                             ]
                     )),
             Container(
-                margin: EdgeInsets.fromLTRB(12, 20, 12, 0),
+                margin: EdgeInsets.fromLTRB(10, 20, 10, 0),
                 child:Row(
                     children: [
                   Expanded(
