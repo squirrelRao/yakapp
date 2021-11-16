@@ -345,7 +345,7 @@ class CommonSettingState extends State<CommonSettingPage>{
     return Scaffold(
 
           appBar:AppBar(
-            title: const Text('收益设置',style:TextStyle(color: Color(0xff323232),fontSize: 17)),
+            title: const Text('通用设置',style:TextStyle(color: Color(0xff323232),fontSize: 17)),
               backgroundColor: Colors.white70,
               elevation: 0,
               centerTitle: true,

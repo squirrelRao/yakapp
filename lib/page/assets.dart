@@ -139,7 +139,7 @@ class AssetsState extends State<AssetsPage>{
                             ]
                     )),
             Container(
-                margin: EdgeInsets.fromLTRB(20, 20, 20, 0),
+                margin: EdgeInsets.fromLTRB(12, 20, 12, 0),
                 child:Row(
                     children: [
                   Expanded(
@@ -202,7 +202,7 @@ class AssetsState extends State<AssetsPage>{
                           Column(
                               children: [
                                 Text(
-                                    "目标收益达成: "+datas["ror_touch"],
+                                    "估值(CNY): "+ Decimal.parse(datas["accumulates_free_cny"].toString()).toString(),
                                     style: TextStyle(fontSize: 11.0,color: Color(0xfff3f3f3))
                                 ),
                               ])
@@ -212,7 +212,7 @@ class AssetsState extends State<AssetsPage>{
                           Column(
                               children: [
                                 Text(
-                                    "最低收益达成: "+ datas["l_ror_touch"],
+                                    "智能操作: "+ datas["smart"],
                                     style: TextStyle(fontSize: 11.0,color: Color(0xfff3f3f3))
                                 )
                               ])
@@ -268,6 +268,20 @@ class AssetsState extends State<AssetsPage>{
                                     style: TextStyle(fontSize: 16.0,fontWeight: FontWeight.w400)
                                 )
                               ])),
+              Padding(padding: EdgeInsets.only(left:14,top:2,right:14,bottom:0),
+                  child:Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                            "估值(CNY)",
+                            style: TextStyle(fontSize: 11.0,color:Colors.grey)
+                        ),
+
+                        Text(
+                            Decimal.parse(item["cny_value"].toString()).toString(),
+                            style: TextStyle(fontSize: 11.0,color:Colors.grey)
+                        )
+                      ])),
               Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
                   child:Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -380,7 +394,7 @@ class AssetsState extends State<AssetsPage>{
           color: Colors.white,
           child:Column(
               children: [
-                Padding(padding: EdgeInsets.only(left:14,top:14,right:14,bottom:14),
+                Padding(padding: EdgeInsets.only(left:14,top:14,right:14,bottom:0),
                     child:Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -393,7 +407,21 @@ class AssetsState extends State<AssetsPage>{
                               Decimal.parse(item["free"].toString()).toString(),
                               style: TextStyle(fontSize: 16.0,fontWeight: FontWeight.w400)
                           )
-                        ]))
+                        ])),
+                Padding(padding: EdgeInsets.only(left:14,top:2,right:14,bottom:12),
+                    child:Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                              "估值(CNY)",
+                              style: TextStyle(fontSize: 11.0,color:Colors.grey)
+                          ),
+
+                          Text(
+                              Decimal.parse(item["cny_value"].toString()).toString(),
+                              style: TextStyle(fontSize: 11.0,color:Colors.grey)
+                          )
+                        ])),
               ]
           )
 
