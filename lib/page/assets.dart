@@ -45,6 +45,9 @@ class AssetsState extends State<AssetsPage>{
 
                 for(var item in datas["snapshots"]){
 
+                  if(item["price"]<0){
+                    item["price"] = 0;
+                  }
                   if(item["ror"] < 0){
                     item["ror_color"] = Color(0xffE95555);
                   }else{
@@ -212,7 +215,7 @@ class AssetsState extends State<AssetsPage>{
                           Column(
                               children: [
                                 Text(
-                                    "智能操作: "+ datas["smart"],
+                                    "智能辅助: "+ datas["smart"],
                                     style: TextStyle(fontSize: 11.0,color: Color(0xfff3f3f3))
                                 )
                               ])
@@ -280,6 +283,20 @@ class AssetsState extends State<AssetsPage>{
                         Text(
                             Decimal.parse(item["cny_value"].toString()).toString(),
                             style: TextStyle(fontSize: 11.0,color:Colors.grey)
+                        )
+                      ])),
+              Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
+                  child:Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                            "价格",
+                            style: TextStyle(fontSize: 14.0)
+                        ),
+
+                        Text(
+                            Decimal.parse(item["price"].toString()).toString(),
+                            style: TextStyle(fontSize: 14.0)
                         )
                       ])),
               Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
