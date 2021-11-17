@@ -31,7 +31,7 @@ class CreatePreOrderState extends State<CreatePreOrderPage>{
   var target_ror;
   var t_sell;
   var loweset_ror;
-  var l_sell;
+  var l_buy;
   var title = "";
   var order_type = "MARKET";
   var price_coin = "USDT";
@@ -174,7 +174,7 @@ class CreatePreOrderState extends State<CreatePreOrderPage>{
       Row(
 
         children: [
-          Text("止损收益率(%)",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
+          Text("加仓收益率(%)",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
         ],
       ),
       SizedBox(height: 5),
@@ -204,12 +204,9 @@ class CreatePreOrderState extends State<CreatePreOrderPage>{
         onSaved: (value) => loweset_ror = double.parse(value!.trim()),
         validator: (value){
           if(value!.trim()==""){
-            return "止损收益率不能为空";
+            return "加仓收益率不能为空";
           }
 
-          if(double.parse(value) < 0 || double.parse(value) > 100){
-            return "范围为0到100";
-          }
         },
       ),
     ]));
@@ -273,7 +270,7 @@ class CreatePreOrderState extends State<CreatePreOrderPage>{
         Row(
 
           children: [
-            Text("止损触发卖出比例(%)",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
+            Text("加仓买入量",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
           ],
         ),
         SizedBox(height: 5),
@@ -300,14 +297,14 @@ class CreatePreOrderState extends State<CreatePreOrderPage>{
     filled: true,
     fillColor: Color(0xffF3F5F7),
     ),
-        onSaved: (value) => l_sell = double.parse(value!.trim()),
+        onSaved: (value) => l_buy = double.parse(value!.trim()),
         validator: (value){
           if(value!.trim()==""){
-            return "触发止损收益卖出比不能为空";
+            return "触发加仓收益买入量不能为空";
           }
 
-          if(double.parse(value) < 0 || double.parse(value) > 100){
-            return "范围为0到100";
+          if(double.parse(value) < 0){
+            return "须大于0";
           }
         },
       ),
@@ -328,7 +325,7 @@ class CreatePreOrderState extends State<CreatePreOrderPage>{
           trController.text = data["target_ror"].toString();
           tsController.text = data["t_sell"].toString();
           lrController.text = data["lowest_ror"].toString();
-          lsController.text = data["l_sell"].toString();
+          lsController.text = data["l_buy"].toString();
           buyCountController.text = data["buy_count"].toString();
 
         });
@@ -348,7 +345,7 @@ class CreatePreOrderState extends State<CreatePreOrderPage>{
 
   }
 
-  void submitPreBuyOrder(asset,buy_count,open_time,target_ror,t_sell,lowest_ror,l_sell) async {
+  void submitPreBuyOrder(asset,buy_count,open_time,target_ror,t_sell,lowest_ror,l_buy) async {
 
     SharedPreferences prefs =  await SharedPreferences.getInstance();
     String? userId = prefs.getString("uid");
@@ -357,7 +354,7 @@ class CreatePreOrderState extends State<CreatePreOrderPage>{
     open_time += ":00";
 
     (NetClient()).post(Configs.updatePreBuyOrderApi ,
-        {"user_id":userId,"asset":asset,"buy_count":buy_count,"buy_time":open_time,"target_ror":target_ror,"t_sell":t_sell,"lowest_ror":lowest_ror,"l_sell":l_sell},
+        {"user_id":userId,"asset":asset,"buy_count":buy_count,"buy_time":open_time,"target_ror":target_ror,"t_sell":t_sell,"lowest_ror":lowest_ror,"l_buy":l_buy},
             (data){
 
           if(data["rc"] == 0){
@@ -495,7 +492,7 @@ class CreatePreOrderState extends State<CreatePreOrderPage>{
                         }
 
                         _formKey.currentState!.save();
-                        submitPreBuyOrder(asset,buy_count,open_time,target_ror,t_sell,loweset_ror,l_sell);
+                        submitPreBuyOrder(asset,buy_count,open_time,target_ror,t_sell,loweset_ror,l_buy);
                       },
                     ),
                     )]

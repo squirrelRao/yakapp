@@ -336,11 +336,11 @@ class AssetsState extends State<AssetsPage>{
                             style: TextStyle(fontSize: 12.0)
                         ),
                         Text(
-                            item["lowest_ror"].toString()+"% , "+item["target_ror"].toString()+"%",
+                            item["target_ror"].toString()+"%",
                             style: TextStyle(fontSize: 12.0)
                         ),
                       ])),
-              Padding(padding: EdgeInsets.only(left:14,top:2,right:14,bottom:14),
+              Padding(padding: EdgeInsets.only(left:14,top:2,right:14,bottom:0),
                   child:Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -350,38 +350,38 @@ class AssetsState extends State<AssetsPage>{
                         ),
 
                         Text(
-                            item["l_sell"].toString()+"% , "+item["t_sell"].toString()+"%",
+                            item["t_sell"].toString()+"%",
                             style: TextStyle(fontSize: 11.0,color:Colors.grey)
                         )
                       ])),
-              // Padding(padding: EdgeInsets.only(left:14,top:8,right:14,bottom: 0),
-              //     child:Row(
-              //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //         children: [
-              //           Text(
-              //               "最低收益率",
-              //               style: TextStyle(fontSize: 12.0)
-              //           ),
-              //
-              //           Text(
-              //               item["lowest_ror"].toString()+"%",
-              //               style: TextStyle(fontSize: 12.0)
-              //           )
-              //         ])),
-              // Padding(padding: EdgeInsets.only(left:14,top:2,right:14,bottom:14),
-              //     child:Row(
-              //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //         children: [
-              //           Text(
-              //               "达成自动卖出",
-              //               style: TextStyle(fontSize: 11.0,color:Colors.grey)
-              //           ),
-              //
-              //           Text(
-              //               item["l_sell"].toString()+"%",
-              //               style: TextStyle(fontSize: 11.0,color:Colors.grey)
-              //           )
-              //         ])),
+              Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
+                  child:Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                            "加仓收益",
+                            style: TextStyle(fontSize: 12.0)
+                        ),
+                        Text(
+                            item["lowest_ror"].toString()+"%",
+                            style: TextStyle(fontSize: 12.0)
+                        ),
+                      ])),
+              Padding(padding: EdgeInsets.only(left:14,top:2,right:14,bottom:14),
+                  child:Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                            "达成加仓("+item["asset"]+")",
+                            style: TextStyle(fontSize: 11.0,color:Colors.grey)
+                        ),
+
+                        Text(
+                            item["l_buy"].toString(),
+                            style: TextStyle(fontSize: 11.0,color:Colors.grey)
+                        )
+                      ])),
+
             ]
         )
 

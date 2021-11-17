@@ -26,7 +26,7 @@ class AssetSettingState extends State<AssetSettingPage>{
   var target_ror;
   var t_sell;
   var loweset_ror;
-  var l_sell;
+  var l_buy;
   var title = "盈损设置";
 
   final _formKey = new GlobalKey<FormState>();
@@ -103,7 +103,7 @@ class AssetSettingState extends State<AssetSettingPage>{
       Row(
 
       children: [
-      Text("最低收益率(%)",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
+      Text("加仓收益率(%)",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
       ],
       ),
       SizedBox(height: 5),
@@ -204,7 +204,7 @@ class AssetSettingState extends State<AssetSettingPage>{
       Row(
 
         children: [
-          Text("最低收益率达成卖出比例(%)",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
+          Text("加仓收益率到达买入量",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
         ],
       ),
       SizedBox(height: 5),
@@ -232,14 +232,14 @@ class AssetSettingState extends State<AssetSettingPage>{
           filled: true,
           fillColor: Color(0xffF3F5F7),
         ),
-        onSaved: (value) => l_sell = double.parse(value!.trim()),
+        onSaved: (value) => l_buy = double.parse(value!.trim()),
         validator: (value){
           if(value!.trim()==""){
-            return "触发最低收益卖出比不能为空";
+            return "触发加仓收益买入量不能为空";
           }
 
-          if(double.parse(value) < 0 || double.parse(value) > 100){
-            return "范围为0到100";
+          if(double.parse(value) < 0){
+            return "须大于0";
           }
         },
       ),
@@ -262,7 +262,7 @@ class AssetSettingState extends State<AssetSettingPage>{
           trController.text = data["target_ror"].toString();
           tsController.text = data["t_sell"].toString();
           lrController.text = data["lowest_ror"].toString();
-          lsController.text = data["l_sell"].toString();
+          lsController.text = data["l_buy"].toString();
 
         });
       }else{
@@ -280,12 +280,12 @@ class AssetSettingState extends State<AssetSettingPage>{
 
   }
 
-  void submitConfig(target_ror,t_sell,lowest_ror,l_sell) async {
+  void submitConfig(target_ror,t_sell,lowest_ror,l_buy) async {
 
     SharedPreferences prefs =  await SharedPreferences.getInstance();
     String? userId = prefs.getString("uid");
     (NetClient()).post(Configs.updateAssetConfigApi,
-        {"user_id":userId,"asset":asset,"target_ror":target_ror,"t_sell":t_sell,"lowest_ror":lowest_ror,"l_sell":l_sell},
+        {"user_id":userId,"asset":asset,"target_ror":target_ror,"t_sell":t_sell,"lowest_ror":lowest_ror,"l_buy":l_buy},
             (data){
 
           if(data["rc"] == 0){
@@ -389,7 +389,7 @@ class AssetSettingState extends State<AssetSettingPage>{
                     }
 
                     _formKey.currentState!.save();
-                    submitConfig(target_ror,t_sell,loweset_ror,l_sell);
+                    submitConfig(target_ror,t_sell,loweset_ror,l_buy);
                   },
                 ),
               )
