@@ -1,4 +1,5 @@
 
+import 'package:decimal/decimal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -210,7 +211,7 @@ class AssetSettingState extends State<AssetSettingPage>{
       Row(
 
         children: [
-          Text("加仓达到买入量",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
+          Text("加仓买入量",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
         ],
       ),
       SizedBox(height: 5),
@@ -266,10 +267,10 @@ class AssetSettingState extends State<AssetSettingPage>{
         setState(() {
           this.asset = asset;
           this.title = this.asset + "盈损设置";
-          trController.text = data["target_ror"].toString();
-          tsController.text = data["t_sell"].toString();
-          lrController.text = data["lowest_ror"].toString();
-          lsController.text = data["l_buy"].toString();
+          trController.text = Decimal.parse(data["target_ror"].toString()).toString();
+          tsController.text = Decimal.parse(data["t_sell"].toString()).toString();
+          lrController.text = Decimal.parse(data["lowest_ror"].toString()).toString();
+          lsController.text = Decimal.parse(data["l_buy"].toString()).toString();
 
         });
       }else{

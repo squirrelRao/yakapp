@@ -336,7 +336,7 @@ class AssetsState extends State<AssetsPage>{
                             style: TextStyle(fontSize: 12.0)
                         ),
                         Text(
-                            item["target_ror"].toString()+"%",
+                            Decimal.parse(item["target_ror"].toString()).toString()+"%",
                             style: TextStyle(fontSize: 12.0)
                         ),
                       ])),
@@ -350,7 +350,7 @@ class AssetsState extends State<AssetsPage>{
                         ),
 
                         Text(
-                            item["t_sell"].toString()+"%",
+                            Decimal.parse(item["t_sell"].toString()).toString()+"%",
                             style: TextStyle(fontSize: 11.0,color:Colors.grey)
                         )
                       ])),
@@ -363,7 +363,7 @@ class AssetsState extends State<AssetsPage>{
                             style: TextStyle(fontSize: 12.0)
                         ),
                         Text(
-                            item["lowest_ror"].toString()+"%",
+                            Decimal.parse(item["lowest_ror"].toString()).toString()+"%",
                             style: TextStyle(fontSize: 12.0)
                         ),
                       ])),
@@ -377,7 +377,7 @@ class AssetsState extends State<AssetsPage>{
                         ),
 
                         Text(
-                            item["l_buy"].toString(),
+                            Decimal.parse(item["l_buy"].toString()).toString(),
                             style: TextStyle(fontSize: 11.0,color:Colors.grey)
                         )
                       ])),

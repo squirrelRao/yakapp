@@ -1,4 +1,5 @@
 
+import 'package:decimal/decimal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -279,7 +280,7 @@ class CommonSettingState extends State<CommonSettingPage>{
 
         setState(() {
 
-          durationController.text = data["ror_duration"].toString();
+          durationController.text = Decimal.parse(data["ror_duration"].toString()).toString();
           ror_touch = data["ror_touch"];
           l_ror_touch = data["l_ror_touch"];
           if(data["new_coin_notify"]==1){
