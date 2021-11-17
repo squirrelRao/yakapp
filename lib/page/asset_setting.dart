@@ -58,10 +58,9 @@ class AssetSettingState extends State<AssetSettingPage>{
       SizedBox(height: 5),
       new TextFormField(
         maxLines: 1,
-        keyboardType: TextInputType.number,
+        keyboardType: TextInputType.text,
         inputFormatters: [
-          LengthLimitingTextInputFormatter(3),
-          FilteringTextInputFormatter.allow(RegExp("[0-9]"))
+          FilteringTextInputFormatter.allow(RegExp("[-0-9.]"))
         ],
         autovalidateMode: AutovalidateMode.onUserInteraction,
         controller: trController,
@@ -86,8 +85,12 @@ class AssetSettingState extends State<AssetSettingPage>{
             return "目标收益率不能为空";
           }
 
-          if(double.parse(value) < 0 || double.parse(value) > 100){
-            return "范围为0到100";
+          if(double.tryParse(value) == null){
+            return "格式错误";
+          }
+
+          if(double.parse(value) < 0){
+            return "不能小于0";
           }
         },
       ),
@@ -109,10 +112,9 @@ class AssetSettingState extends State<AssetSettingPage>{
       SizedBox(height: 5),
     new TextFormField(
         maxLines: 1,
-        keyboardType: TextInputType.number,
+        keyboardType: TextInputType.text,
         inputFormatters: [
-          LengthLimitingTextInputFormatter(3),
-          FilteringTextInputFormatter.allow(RegExp("[0-9]"))
+          FilteringTextInputFormatter.allow(RegExp("[-0-9.]"))
         ],
         autovalidateMode: AutovalidateMode.onUserInteraction,
         controller: lrController,
@@ -134,12 +136,13 @@ class AssetSettingState extends State<AssetSettingPage>{
         onSaved: (value) => loweset_ror = double.parse(value!.trim()),
         validator: (value){
           if(value!.trim()==""){
-            return "最低收益率不能为空";
+            return "加仓收益率不能为空";
           }
 
-          if(double.parse(value) < 0 || double.parse(value) > 100){
-            return "范围为0到100";
+          if(double.tryParse(value) == null){
+            return "格式错误";
           }
+
         },
       ),
     ]));
@@ -159,10 +162,9 @@ class AssetSettingState extends State<AssetSettingPage>{
       SizedBox(height: 5),
       new TextFormField(
         maxLines: 1,
-        keyboardType: TextInputType.number,
+        keyboardType: TextInputType.text,
         inputFormatters: [
-          LengthLimitingTextInputFormatter(3),
-          FilteringTextInputFormatter.allow(RegExp("[0-9]"))
+          FilteringTextInputFormatter.allow(RegExp("[0-9.]"))
         ],
         autovalidateMode: AutovalidateMode.onUserInteraction,
         controller: tsController,
@@ -187,7 +189,11 @@ class AssetSettingState extends State<AssetSettingPage>{
             return "目标达成卖出比不能为空";
           }
 
-          if(double.parse(value) < 0 || double.parse(value) > 100){
+          if(double.tryParse(value) == null){
+            return "格式错误";
+          }
+
+       if(double.parse(value) < 0 || double.parse(value) > 100){
             return "范围为0到100";
           }
         },
@@ -204,16 +210,15 @@ class AssetSettingState extends State<AssetSettingPage>{
       Row(
 
         children: [
-          Text("加仓收益率到达买入量",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
+          Text("加仓达到买入量",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
         ],
       ),
       SizedBox(height: 5),
       new TextFormField(
         maxLines: 1,
-        keyboardType: TextInputType.number,
+        keyboardType: TextInputType.text,
         inputFormatters: [
-          LengthLimitingTextInputFormatter(3),
-          FilteringTextInputFormatter.allow(RegExp("[0-9]"))
+          FilteringTextInputFormatter.allow(RegExp("[0-9.]"))
         ],
         autovalidateMode: AutovalidateMode.onUserInteraction,
         controller: lsController,
@@ -237,7 +242,9 @@ class AssetSettingState extends State<AssetSettingPage>{
           if(value!.trim()==""){
             return "触发加仓收益买入量不能为空";
           }
-
+          if(double.tryParse(value) == null){
+            return "格式错误";
+          }
           if(double.parse(value) < 0){
             return "须大于0";
           }
