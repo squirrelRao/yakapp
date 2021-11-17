@@ -41,9 +41,8 @@ class CommonSettingState extends State<CommonSettingPage>{
       SizedBox(height: 5),
       new TextFormField(
         maxLines: 1,
-        keyboardType: TextInputType.number,
+        keyboardType: TextInputType.text,
         inputFormatters: [
-          LengthLimitingTextInputFormatter(3),
           FilteringTextInputFormatter.allow(RegExp("[0-9]"))
         ],
         autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -72,6 +71,9 @@ class CommonSettingState extends State<CommonSettingPage>{
             return "不能为空";
           }
 
+          if(double.tryParse(value) == null){
+            return "格式错误";
+          }
           if(double.parse(value) < 1 || double.parse(value) > 365){
             return "范围为1到365";
           }
