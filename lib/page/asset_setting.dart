@@ -292,11 +292,18 @@ class AssetSettingState extends State<AssetSettingPage>{
       Row(
 
         children: [
-          Text("加仓买入量 「 约花费 "+Decimal.parse(this.buy_usdt.toStringAsFixed(8)).toString()+" usdt 」",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
+          Text("加仓买入量 「 约花费 "+Decimal.parse(this.buy_usdt.toStringAsFixed(8)).toString()+" usdt 」",style:TextStyle(fontSize: 14,color:Color(0xff999999))),
         ],
       ),
-      SizedBox(height: 5),
-      new TextFormField(
+      SizedBox(height: 1.5),
+            Row(
+
+              children: [
+                Text("( 可花费 "+Decimal.parse(this.free_usdt.toString()).toString()+" usdt )",style:TextStyle(fontSize: 13,color:Color(0xff999999)))
+              ],
+            ),
+            SizedBox(height: 5),
+            new TextFormField(
         maxLines: 1,
         keyboardType: TextInputType.text,
         inputFormatters: [
@@ -345,6 +352,10 @@ class AssetSettingState extends State<AssetSettingPage>{
           }
           if(double.parse(value) < 0){
             return "须大于0";
+          }
+
+          if(double.parse(value) > this.free_usdt){
+            return "加仓需要花费的USDT超过可用额度";
           }
 
         },
@@ -475,8 +486,8 @@ class AssetSettingState extends State<AssetSettingPage>{
                         showTargetRorInput(),
                         showTsellInput(),
                         showLowestRorInput(),
+                        // showFreeUsdt(),
                         showLsellInput(),
-                        showFreeUsdt(),
                         SizedBox(height: 10)
                       ]
                     )
