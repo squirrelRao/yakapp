@@ -79,13 +79,13 @@ class AssetSettingState extends State<AssetSettingPage>{
 
   Widget showFreeUsdt() {
     return Padding(
-        padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 12.0),
+        padding: const EdgeInsets.fromLTRB(0.0, 5.0, 0.0,0),
         child: Column(
             children:[
               Row(
 
                 children: [
-                  Text("加仓可花费USDT总量: "+Decimal.parse(this.free_usdt.toString()).toString()+"%",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
+                  Text("* 可花费总额: "+Decimal.parse(this.free_usdt.toString()).toString()+" usdt",style:TextStyle(fontSize: 13,color:Color(0xff999999)))
                 ],
 
               )]));
@@ -475,8 +475,8 @@ class AssetSettingState extends State<AssetSettingPage>{
                         showTargetRorInput(),
                         showTsellInput(),
                         showLowestRorInput(),
-                        showFreeUsdt(),
                         showLsellInput(),
+                        showFreeUsdt(),
                         SizedBox(height: 10)
                       ]
                     )
