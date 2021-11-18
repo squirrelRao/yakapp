@@ -14,19 +14,21 @@ class AssetSettingPage extends StatefulWidget{
   var asset = "";
   var free = 0.0;
   var price = 0.0;
-  AssetSettingPage({ required this.asset, required this.free, required this.price});
+  var ror = 0.0;
+  AssetSettingPage({ required this.asset, required this.free, required this.price, required this.ror});
 
   @override
-  State createState()  => AssetSettingState(asset: asset, price : price, free : free);
+  State createState()  => AssetSettingState(asset: asset, price : price, free : free, ror : ror);
 }
 
 class AssetSettingState extends State<AssetSettingPage>{
   var asset="";
   var price =0.0;
   var free = 0.0;
+  var ror = 0.0;
 
 
-  AssetSettingState({required this.asset,required this.price, required this.free});
+  AssetSettingState({required this.asset,required this.price, required this.free, required this.ror});
 
   var target_ror;
   var t_sell;
@@ -51,10 +53,25 @@ class AssetSettingState extends State<AssetSettingPage>{
       Row(
 
       children: [
-      Text("拥有量: "+this.free.toString(),style:TextStyle(fontSize: 14,color:Color(0xff999999)))
+      Text("拥有量: "+Decimal.parse(this.free.toString()).toString(),style:TextStyle(fontSize: 14,color:Color(0xff999999)))
       ],
 
     )]));
+
+  }
+
+  Widget showRor() {
+    return Padding(
+        padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 12.0),
+        child: Column(
+            children:[
+              Row(
+
+                children: [
+                  Text("收益率: "+Decimal.parse(this.ror.toString()).toString()+"%",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
+                ],
+
+              )]));
 
   }
 
@@ -122,6 +139,8 @@ class AssetSettingState extends State<AssetSettingPage>{
           if(double.parse(value) < 0){
             return "不能小于0";
           }
+          target_ror = double.parse(value!.trim());
+
         },
       ),
     ]));
@@ -172,7 +191,7 @@ class AssetSettingState extends State<AssetSettingPage>{
           if(double.tryParse(value) == null){
             return "格式错误";
           }
-
+          loweset_ror = double.parse(value!.trim());
         },
       ),
     ]));
@@ -218,7 +237,10 @@ class AssetSettingState extends State<AssetSettingPage>{
 
     setState(() {
       if (double.tryParse(value) != null) {
-        this.sell_usdt = double.parse(value) / 100 * this.free * this.price;
+        var _price = 0.0;
+        _price = (1 + ( target_ror - this.ror)/100) * this.price;
+
+        this.sell_usdt = double.parse(value) / 100 * this.free * _price;
       } else {
         this.sell_usdt = 0.0;
       }
@@ -286,8 +308,10 @@ class AssetSettingState extends State<AssetSettingPage>{
           setState(() {
 
           if(double.tryParse(value) != null){
+            var _price = 0.0;
+            _price = (1 + ( loweset_ror - this.ror)/100) * this.price;
 
-          this.buy_usdt = double.parse(value) * this.price;
+          this.buy_usdt = double.parse(value) * _price;
           }else{
             this.buy_usdt = 0.0;
           }
@@ -328,8 +352,13 @@ class AssetSettingState extends State<AssetSettingPage>{
           tsController.text = Decimal.parse(data["t_sell"].toString()).toString();
           lrController.text = Decimal.parse(data["lowest_ror"].toString()).toString();
           lsController.text = Decimal.parse(data["l_buy"].toString()).toString();
-          this.buy_usdt = data["l_buy"] * this.price;
-          this.sell_usdt = data["t_sell"] / 100 * this.free * this.price;
+
+          var target_price = (1 + ( data["target_ror"] - this.ror)/100) * this.price;
+          this.sell_usdt = data["t_sell"] / 100 * this.free * target_price;
+
+
+          var lowest_price = (1 + ( data["lowest_ror"] - this.ror)/100) * this.price;
+          this.buy_usdt = data["l_buy"] * lowest_price;
 
         });
       }else{
@@ -424,6 +453,7 @@ class AssetSettingState extends State<AssetSettingPage>{
                       children: <Widget>[
                         // showCoin(),
                         showCount(),
+                        showRor(),
                         showPrice(),
                         showTargetRorInput(),
                         showTsellInput(),
