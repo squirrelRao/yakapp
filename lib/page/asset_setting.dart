@@ -15,10 +15,11 @@ class AssetSettingPage extends StatefulWidget{
   var free = 0.0;
   var price = 0.0;
   var ror = 0.0;
-  AssetSettingPage({ required this.asset, required this.free, required this.price, required this.ror});
+  var free_usdt = 0.0;
+  AssetSettingPage({ required this.asset, required this.free, required this.price, required this.ror, required this.free_usdt});
 
   @override
-  State createState()  => AssetSettingState(asset: asset, price : price, free : free, ror : ror);
+  State createState()  => AssetSettingState(asset: asset, price : price, free : free, ror : ror, free_usdt :free_usdt);
 }
 
 class AssetSettingState extends State<AssetSettingPage>{
@@ -26,9 +27,10 @@ class AssetSettingState extends State<AssetSettingPage>{
   var price =0.0;
   var free = 0.0;
   var ror = 0.0;
+  var free_usdt = 0.0;
 
 
-  AssetSettingState({required this.asset,required this.price, required this.free, required this.ror});
+  AssetSettingState({required this.asset,required this.price, required this.free, required this.ror,required this.free_usdt});
 
   var target_ror;
   var t_sell;
@@ -69,6 +71,21 @@ class AssetSettingState extends State<AssetSettingPage>{
 
                 children: [
                   Text("收益率: "+Decimal.parse(this.ror.toString()).toString()+"%",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
+                ],
+
+              )]));
+
+  }
+
+  Widget showFreeUsdt() {
+    return Padding(
+        padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 12.0),
+        child: Column(
+            children:[
+              Row(
+
+                children: [
+                  Text("可用USDT: "+Decimal.parse(this.free_usdt.toString()).toString()+"%",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
                 ],
 
               )]));
@@ -453,6 +470,7 @@ class AssetSettingState extends State<AssetSettingPage>{
                       children: <Widget>[
                         // showCoin(),
                         showCount(),
+                        showFreeUsdt(),
                         showRor(),
                         showPrice(),
                         showTargetRorInput(),
