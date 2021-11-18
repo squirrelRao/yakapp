@@ -85,7 +85,7 @@ class AssetSettingState extends State<AssetSettingPage>{
               Row(
 
                 children: [
-                  Text("可用USDT: "+Decimal.parse(this.free_usdt.toString()).toString()+"%",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
+                  Text("加仓可花费USDT总量: "+Decimal.parse(this.free_usdt.toString()).toString()+"%",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
                 ],
 
               )]));
@@ -222,7 +222,7 @@ class AssetSettingState extends State<AssetSettingPage>{
       Row(
 
         children: [
-          Text("目标达成卖出比例(%) 「 约 "+Decimal.parse(this.sell_usdt.toStringAsFixed(8)).toString() +" usdt 」",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
+          Text("目标达成卖出比例(%) 「 约获得 "+Decimal.parse(this.sell_usdt.toStringAsFixed(8)).toString() +" usdt 」",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
         ],
       ),
       SizedBox(height: 5),
@@ -292,7 +292,7 @@ class AssetSettingState extends State<AssetSettingPage>{
       Row(
 
         children: [
-          Text("加仓买入量 「 约 "+Decimal.parse(this.buy_usdt.toStringAsFixed(8)).toString()+" usdt 」",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
+          Text("加仓买入量 「 约花费 "+Decimal.parse(this.buy_usdt.toStringAsFixed(8)).toString()+" usdt 」",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
         ],
       ),
       SizedBox(height: 5),
@@ -470,12 +470,12 @@ class AssetSettingState extends State<AssetSettingPage>{
                       children: <Widget>[
                         // showCoin(),
                         showCount(),
-                        showFreeUsdt(),
                         showRor(),
                         showPrice(),
                         showTargetRorInput(),
                         showTsellInput(),
                         showLowestRorInput(),
+                        showFreeUsdt(),
                         showLsellInput(),
                         SizedBox(height: 10)
                       ]
