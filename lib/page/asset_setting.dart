@@ -328,6 +328,8 @@ class AssetSettingState extends State<AssetSettingPage>{
           tsController.text = Decimal.parse(data["t_sell"].toString()).toString();
           lrController.text = Decimal.parse(data["lowest_ror"].toString()).toString();
           lsController.text = Decimal.parse(data["l_buy"].toString()).toString();
+          this.buy_usdt = data["l_buy"] * this.price;
+          this.sell_usdt = data["t_sell"] / 100 * this.free * this.price;
 
         });
       }else{
