@@ -12,23 +12,29 @@ import 'package:overlay_support/overlay_support.dart';
 class AssetSettingPage extends StatefulWidget{
 
   var asset = "";
-  AssetSettingPage({ required this.asset});
+  var free = 0.0;
+  var price = 0.0;
+  AssetSettingPage({ required this.asset, required this.free, required this.price});
 
   @override
-  State createState()  => AssetSettingState(asset: asset);
+  State createState()  => AssetSettingState(asset: asset, price : price, free : free);
 }
 
 class AssetSettingState extends State<AssetSettingPage>{
   var asset="";
+  var price =0.0;
+  var free = 0.0;
 
 
-  AssetSettingState({required this.asset});
+  AssetSettingState({required this.asset,required this.price, required this.free});
 
   var target_ror;
   var t_sell;
   var loweset_ror;
   var l_buy;
   var title = "盈损设置";
+  var buy_usdt = 0.0;
+  var sell_usdt = 0.0;
 
   final _formKey = new GlobalKey<FormState>();
 
@@ -37,11 +43,34 @@ class AssetSettingState extends State<AssetSettingPage>{
   TextEditingController lrController = new TextEditingController(text: "");
   TextEditingController lsController = new TextEditingController(text: "");
 
-  Widget showCoin() {
+  Widget showCount() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(15.0, 5.0, 0.0, 0.0),
-      child: Text(asset,style: TextStyle(fontSize: 20,color:Colors.teal))
-    );
+      padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 12.0),
+      child: Column(
+          children:[
+      Row(
+
+      children: [
+      Text("拥有量: "+this.free.toString(),style:TextStyle(fontSize: 14,color:Color(0xff999999)))
+      ],
+
+    )]));
+
+  }
+
+  Widget showPrice() {
+    return Padding(
+        padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 12.0),
+        child: Column(
+            children:[
+              Row(
+
+                children: [
+                  Text("价格: "+this.price.toString(),style:TextStyle(fontSize: 14,color:Color(0xff999999)))
+                ],
+
+              )]));
+
   }
 
 
@@ -157,7 +186,7 @@ class AssetSettingState extends State<AssetSettingPage>{
       Row(
 
         children: [
-          Text("目标达成卖出比例(%)",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
+          Text("目标达成卖出比例(%) 「 约 "+Decimal.parse(this.sell_usdt.toStringAsFixed(8)).toString() +" usdt 」",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
         ],
       ),
       SizedBox(height: 5),
@@ -185,6 +214,17 @@ class AssetSettingState extends State<AssetSettingPage>{
           fillColor: Color(0xffF3F5F7),
         ),
         onSaved: (value) => t_sell = double.parse(value!.trim()),
+        onChanged: (value){
+
+    setState(() {
+      if (double.tryParse(value) != null) {
+        this.sell_usdt = double.parse(value) / 100 * this.free * this.price;
+      } else {
+        this.sell_usdt = 0.0;
+      }
+    });
+
+        },
         validator: (value){
           if(value!.trim()==""){
             return "目标达成卖出比不能为空";
@@ -197,6 +237,8 @@ class AssetSettingState extends State<AssetSettingPage>{
        if(double.parse(value) < 0 || double.parse(value) > 100){
             return "范围为0到100";
           }
+
+
         },
       ),
     ]));
@@ -211,7 +253,7 @@ class AssetSettingState extends State<AssetSettingPage>{
       Row(
 
         children: [
-          Text("加仓买入量",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
+          Text("加仓买入量 「 约 "+Decimal.parse(this.buy_usdt.toStringAsFixed(8)).toString()+" usdt 」",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
         ],
       ),
       SizedBox(height: 5),
@@ -239,6 +281,20 @@ class AssetSettingState extends State<AssetSettingPage>{
           fillColor: Color(0xffF3F5F7),
         ),
         onSaved: (value) => l_buy = double.parse(value!.trim()),
+        onChanged: (value){
+
+          setState(() {
+
+          if(double.tryParse(value) != null){
+
+          this.buy_usdt = double.parse(value) * this.price;
+          }else{
+            this.buy_usdt = 0.0;
+          }
+
+          });
+
+        },
         validator: (value){
           if(value!.trim()==""){
             return "触发加仓收益买入量不能为空";
@@ -249,6 +305,7 @@ class AssetSettingState extends State<AssetSettingPage>{
           if(double.parse(value) < 0){
             return "须大于0";
           }
+
         },
       ),
     ]));
@@ -364,6 +421,8 @@ class AssetSettingState extends State<AssetSettingPage>{
                   child:  Column(
                       children: <Widget>[
                         // showCoin(),
+                        showCount(),
+                        showPrice(),
                         showTargetRorInput(),
                         showTsellInput(),
                         showLowestRorInput(),
