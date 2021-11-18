@@ -292,14 +292,14 @@ class AssetSettingState extends State<AssetSettingPage>{
       Row(
 
         children: [
-          Text("加仓买入量 「 约花费 "+Decimal.parse(this.buy_usdt.toStringAsFixed(8)).toString()+" usdt 」",style:TextStyle(fontSize: 14,color:Color(0xff999999))),
+          Text("加仓买入量 「 约消耗 "+Decimal.parse(this.buy_usdt.toStringAsFixed(8)).toString()+" usdt 」",style:TextStyle(fontSize: 14,color:Color(0xff999999))),
         ],
       ),
       SizedBox(height: 1.5),
             Row(
 
               children: [
-                Text("( 可花费 "+Decimal.parse(this.free_usdt.toString()).toString()+" usdt )",style:TextStyle(fontSize: 13,color:Color(0xff999999)))
+                Text("( 额度:"+Decimal.parse(this.free_usdt.toString()).toString()+" usdt )",style:TextStyle(fontSize: 13,color:Color(0xff999999)))
               ],
             ),
             SizedBox(height: 5),
