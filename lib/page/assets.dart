@@ -198,31 +198,24 @@ class AssetsState extends State<AssetsPage>{
             )),
             Container(
                 margin: EdgeInsets.fromLTRB(6, 20, 6, 40),
-                child:Row(
-                children: [
-                  Expanded(
-                      child:(
-                          Column(
-                              children: [
+                child:
+                    Padding(
+                      padding: EdgeInsets.only(left:33.5,right:33.5),
+                    child:Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
                                 Text(
                                     "估值(CNY): "+ Decimal.parse(datas["accumulates_free_cny"].toString()).toString(),
                                     style: TextStyle(fontSize: 11.0,color: Color(0xfff3f3f3))
                                 ),
-                              ])
-                      )),
-                  Expanded(
-                      child:(
-                          Column(
-                              children: [
+
                                 Text(
                                     "智能辅助: "+ datas["smart"],
                                     style: TextStyle(fontSize: 11.0,color: Color(0xfff3f3f3))
                                 )
-                              ])
-                      )),
-                ]
+                            ]
 
-            )),
+            ))),
           ]
         )
 
