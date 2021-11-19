@@ -142,7 +142,7 @@ class AssetsState extends State<AssetsPage>{
                             ]
                     )),
             Container(
-                margin: EdgeInsets.fromLTRB(10, 20, 10, 0),
+                margin: EdgeInsets.fromLTRB(6, 20, 6, 0),
                 child:Row(
                     children: [
                   Expanded(
@@ -156,7 +156,7 @@ class AssetsState extends State<AssetsPage>{
                                 SizedBox(height: 8),
                                 Text(
                                     datas["ror_duration"].toString(),
-                                    style: TextStyle(fontSize: 16.0,color: Colors.white,fontWeight: FontWeight.w500)
+                                    style: TextStyle(fontSize: 15.0,color: Colors.white,fontWeight: FontWeight.w500)
                                 )
                               ])
                       )),
@@ -171,7 +171,7 @@ class AssetsState extends State<AssetsPage>{
                                 SizedBox(height: 8),
                                 Text(
                                     Decimal.parse(datas["accumulates_return"].toString()).toString(),
-                                    style: TextStyle(fontSize: 16.0,color: Colors.white,fontWeight: FontWeight.w500)
+                                    style: TextStyle(fontSize: 15.0,color: Colors.white,fontWeight: FontWeight.w500)
                                 ),
                               ])
                       )),
@@ -186,7 +186,7 @@ class AssetsState extends State<AssetsPage>{
                                 SizedBox(height: 8),
                                 Text(
     Decimal.parse(datas["accumulates_ror"].toString()).toString()+"%",
-                                    style: TextStyle(fontSize: 16.0,color: Colors.white,fontWeight: FontWeight.w500)
+                                    style: TextStyle(fontSize: 15.0,color: Colors.white,fontWeight: FontWeight.w500)
                                 ),
 
 
@@ -197,7 +197,7 @@ class AssetsState extends State<AssetsPage>{
 
             )),
             Container(
-                margin: EdgeInsets.fromLTRB(10, 20, 10, 40),
+                margin: EdgeInsets.fromLTRB(6, 20, 6, 40),
                 child:Row(
                 children: [
                   Expanded(

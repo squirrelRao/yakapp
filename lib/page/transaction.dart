@@ -43,17 +43,26 @@ class TransactionState extends State<TransactionPage>{
             item["type_color"] = Color(0xff48ABFD);
 
             if(item["status"]=="FILLED"){
+              item['cummulativeQuoteQty'] = Decimal.parse(item["data"]["cummulativeQuoteQty"]);
               if(item["data"]["fills"].length > 0){
                 item["price"] = Decimal.parse(item["data"]["fills"][0]["price"]);
               }
-            }
+            }else{
+              item['cummulativeQuoteQty'] = 0;
 
+            }
           }else if(item["side"] == "SELL"){
             item["side"] = "卖出";
             if(item["type"] == "MARKET") {
               item["price"] = "市场最新价";
             }else{
               item["price"] = Decimal.parse(item["price"].toString());
+            }
+            if(item["status"]=="FILLED"){
+              item['cummulativeQuoteQty'] = Decimal.parse(item["data"]["cummulativeQuoteQty"]);
+              item["price"] = Decimal.parse(item["data"]["fills"][0]["price"]);
+            }else{
+              item['cummulativeQuoteQty'] = 0;
             }
             item["type_color"] = Color(0xff48ABFD);
 
@@ -144,12 +153,26 @@ class TransactionState extends State<TransactionPage>{
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                              "价格(USDT)",
+                              "价格",
                               style: TextStyle(fontSize: 13.0)
                           ),
 
                           Text(
                               item["price"].toString(),
+                              style: TextStyle(fontSize: 13.0)
+                          )
+                        ])),
+                Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
+                    child:Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                              "估值",
+                              style: TextStyle(fontSize: 13.0)
+                          ),
+
+                          Text(
+                              item["cummulativeQuoteQty"].toString(),
                               style: TextStyle(fontSize: 13.0)
                           )
                         ])),
