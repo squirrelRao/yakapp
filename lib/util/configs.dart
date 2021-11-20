@@ -25,5 +25,6 @@ class Configs {
   static const String checkSystemStatusApi = baseUrl +"/v1/regist";
   static const String checkUserStatusApi = baseUrl +"/v1/regist";
 
+  static const String syncOrderApi = baseUrl +"/v1/remote/order/sync";
 
 }

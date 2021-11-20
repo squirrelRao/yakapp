@@ -42,7 +42,6 @@ class UserCenterState extends State<UserCenterPage> {
             contentPadding: EdgeInsets.only(top:23,bottom:23,left:10,right:10),
             title: Text("请选择钱包同步方式",textAlign:TextAlign.center,style:TextStyle(color:Color(0xff221232),fontSize:14,fontWeight: FontWeight.w500)),
             children: [
-
               SimpleDialogOption(
 
                 child:
@@ -59,7 +58,50 @@ class UserCenterState extends State<UserCenterPage> {
                         Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children:[
-                              Text("增量同步",textAlign:TextAlign.center,style: TextStyle(color: Color(0xff48ABFD),fontSize:14,fontWeight: FontWeight.w400)),
+                              Text("交易订单同步",textAlign:TextAlign.center,style: TextStyle(color: Color(0xff48ABFD),fontSize:14,fontWeight: FontWeight.w400)),
+
+                            ]))),
+                onPressed: (){
+
+                  showSimpleNotification(
+                      Text("订单数据同步中..."),
+                      duration: Duration(seconds: 1,milliseconds: 200),
+                      leading: Icon(Icons.check,color:Colors.white),
+                      background: Color(0xff48ABFD));
+                  NetClient().post(Configs.syncOrderApi, {"user_id":user_id},
+                          (data) {
+
+                        if(data["rc"] == 0){
+                          Navigator.pop(dialogContext);
+                          showSimpleNotification(
+                              Text("订单数据同步完成"),
+                              duration: Duration(seconds: 1,milliseconds: 800),
+                              leading: Icon(Icons.check,color:Colors.white),
+                              background: Color(0xff48ABFD));
+                        }
+                      });
+
+
+                },
+              ),
+              SimpleDialogOption(
+
+                child:
+
+                Container(
+                    height: 44,
+                    decoration: new BoxDecoration(
+                      color: Color(0xffF3F5F7),
+                      borderRadius: BorderRadius.all(Radius.circular(22)),
+
+                    ),
+                    child:Padding(
+                        padding:EdgeInsets.only(left:10,right:10),
+                        child:
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children:[
+                              Text("资产增量同步",textAlign:TextAlign.center,style: TextStyle(color: Color(0xff48ABFD),fontSize:14,fontWeight: FontWeight.w400)),
 
                             ]))),
                 onPressed: (){
@@ -100,7 +142,7 @@ class UserCenterState extends State<UserCenterPage> {
                         Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children:[
-                              Text("全量同步",textAlign:TextAlign.center,style: TextStyle(color: Color(0xff48ABFD),fontSize:14,fontWeight: FontWeight.w400)),
+                              Text("资产全量同步",textAlign:TextAlign.center,style: TextStyle(color: Color(0xff48ABFD),fontSize:14,fontWeight: FontWeight.w400)),
                             ]))),
                 onPressed: (){
 

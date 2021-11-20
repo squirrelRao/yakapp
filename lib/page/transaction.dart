@@ -39,28 +39,26 @@ class TransactionState extends State<TransactionPage>{
           item["symbol"] = item["symbol"].replaceAll("USDT","");
           if(item["side"] == "BUY"){
             item["side"] = "买入";
-            item["price"] = "市场最新价";
+            // item["price"] = "市场最新价";
             item["type_color"] = Color(0xff48ABFD);
 
             if(item["status"]=="FILLED"){
               item['cummulativeQuoteQty'] = Decimal.parse(item["data"]["cummulativeQuoteQty"]);
-              if(item["data"]["fills"].length > 0){
-                item["price"] = Decimal.parse(item["data"]["fills"][0]["price"]);
-              }
+
             }else{
               item['cummulativeQuoteQty'] = 0;
 
             }
           }else if(item["side"] == "SELL"){
             item["side"] = "卖出";
-            if(item["type"] == "MARKET") {
-              item["price"] = "市场最新价";
-            }else{
-              item["price"] = Decimal.parse(item["price"].toString());
-            }
+            // if(item["type"] == "MARKET") {
+            //   item["price"] = "市场最新价";
+            // }else{
+            //   item["price"] = Decimal.parse(item["price"].toString());
+            // }
             if(item["status"]=="FILLED"){
-              item['cummulativeQuoteQty'] = Decimal.parse(item["data"]["cummulativeQuoteQty"]);
-              item["price"] = Decimal.parse(item["data"]["fills"][0]["price"]);
+              item['cummulativeQuoteQty'] = Decimal.parse(item["cummulativeQuoteQty"]);
+
             }else{
               item['cummulativeQuoteQty'] = 0;
             }
