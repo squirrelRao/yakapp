@@ -101,22 +101,22 @@ class CommonSettingState extends State<CommonSettingPage>{
           borderRadius: BorderRadius.all(Radius.circular(22.0)),),
       child: Column(
         children: <Widget>[
-    //       Row(children:[
-    //       Radio(
-    //         // 按钮的值
-    //         value: "auto_limit",
-    //         activeColor: Color(0xff48ABFD),
-    //         // 改变事件
-    //         onChanged: (value){
-    //           setState(() {
-    //             ror_touch = value.toString();
-    //           });
-    //         },
-    //         // 按钮组的值
-    //         groupValue:ror_touch,
-    //       ),
-    //       Text("限价自动卖出",style: TextStyle(fontSize: 14,color:Color(0xff292D33)))
-    // ]),
+          Row(children:[
+          Radio(
+            // 按钮的值
+            value: "auto_limit",
+            activeColor: Color(0xff48ABFD),
+            // 改变事件
+            onChanged: (value){
+              setState(() {
+                ror_touch = value.toString();
+              });
+            },
+            // 按钮组的值
+            groupValue:ror_touch,
+          ),
+          Text("限价卖出 (收益触达时价格)",style: TextStyle(fontSize: 14,color:Color(0xff292D33)))
+    ]),
           Row(children:[
             Radio(
               // 按钮的值
@@ -131,7 +131,7 @@ class CommonSettingState extends State<CommonSettingPage>{
               // 按钮组的值
               groupValue:ror_touch,
             ),
-            Text("市价卖出",style: TextStyle(fontSize: 14,color:Color(0xff292D33)))
+            Text("市价卖出  (最新市场价格）",style: TextStyle(fontSize: 14,color:Color(0xff292D33)))
           ]),
           Row(children:[
           Radio(
@@ -183,22 +183,22 @@ class CommonSettingState extends State<CommonSettingPage>{
     borderRadius: BorderRadius.all(Radius.circular(22.0))),
     child:Column(
           children: <Widget>[
-            // Row(children:[
-            //   Radio(
-            //     // 按钮的值
-            //     value: "auto_limit",
-            //     activeColor: Color(0xff48ABFD),
-            //     // 改变事件
-            //     onChanged: (value){
-            //       setState(() {
-            //         l_ror_touch = value.toString();
-            //       });
-            //     },
-            //     // 按钮组的值
-            //     groupValue:l_ror_touch,
-            //   ),
-            //   Text("限价自动卖出",style: TextStyle(fontSize: 14,color:Color(0xff292D33)))
-            // ]),
+            Row(children:[
+              Radio(
+                // 按钮的值
+                value: "auto_limit",
+                activeColor: Color(0xff48ABFD),
+                // 改变事件
+                onChanged: (value){
+                  setState(() {
+                    l_ror_touch = value.toString();
+                  });
+                },
+                // 按钮组的值
+                groupValue:l_ror_touch,
+              ),
+              Text("限价买入 (收益触达时价格)",style: TextStyle(fontSize: 14,color:Color(0xff292D33)))
+            ]),
             Row(children:[
               Radio(
                 value:"auto_market",
@@ -210,7 +210,7 @@ class CommonSettingState extends State<CommonSettingPage>{
                 },
                 groupValue:l_ror_touch,
               ),
-              Text("市价买入",style: TextStyle(fontSize: 14,color:Color(0xff292D33)))
+              Text("市价买入 (最新市场价格）",style: TextStyle(fontSize: 14,color:Color(0xff292D33)))
             ]),
             Row(children:[
               Radio(
