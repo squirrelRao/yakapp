@@ -225,7 +225,13 @@ class AssetSettingState extends State<AssetSettingPage>{
           Text("目标达成卖出量 「 约获得 "+Decimal.parse(this.sell_usdt.toStringAsFixed(8)).toString() +" usdt 」",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
         ],
       ),
-      SizedBox(height: 5),
+            SizedBox(height: 1.5),
+            Row(
+
+              children: [
+                Text("( 拥有量:"+Decimal.parse(this.free.toString()).toString()+" )",style:TextStyle(fontSize: 13,color:Color(0xff999999)))
+              ],
+            ), SizedBox(height: 5),
       new TextFormField(
         maxLines: 1,
         keyboardType: TextInputType.text,
@@ -384,7 +390,7 @@ class AssetSettingState extends State<AssetSettingPage>{
           lsController.text = Decimal.parse(data["l_buy"].toString()).toString();
 
           var target_price = (1 + ( data["target_ror"] - this.ror)/100) * this.price;
-          this.sell_usdt = data["t_sell"] / 100 * this.free * target_price;
+          this.sell_usdt = data["t_sell"] * target_price;
 
 
           var lowest_price = (1 + ( data["lowest_ror"] - this.ror)/100) * this.price;
