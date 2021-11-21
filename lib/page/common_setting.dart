@@ -37,7 +37,7 @@ class CommonSettingState extends State<CommonSettingPage>{
           children:[
       Row(
       children:[
-          Text("收益累计周期 (推荐: 7或30天)",textAlign: TextAlign.left,style:TextStyle(color:Color(0xff999999),fontSize: 14))
+          Text("收益环比周期 (推荐: 1、3、7、30天)",textAlign: TextAlign.left,style:TextStyle(color:Color(0xff999999),fontSize: 14))
         ]),
       SizedBox(height: 5),
       new TextFormField(

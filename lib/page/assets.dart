@@ -150,7 +150,7 @@ class AssetsState extends State<AssetsPage>{
                           Column(
                               children: [
                                 Text(
-                                    "周期(天)",
+                                    "环比周期(天)",
                                     style: TextStyle(fontSize: 13.0,color: Color(0xfff3f3f3))
                                 ),
                                 SizedBox(height: 8),
@@ -290,6 +290,20 @@ class AssetsState extends State<AssetsPage>{
                         Text(
                             Decimal.parse(item["price"].toString()).toString(),
                             style: TextStyle(fontSize: 14.0)
+                        )
+                      ])),
+              Padding(padding: EdgeInsets.only(left:14,top:2,right:14,bottom:0),
+                  child:Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                            "环比",
+                            style: TextStyle(fontSize: 11.0,color:Colors.grey)
+                        ),
+
+                        Text(
+                            Decimal.parse(item["capital_price"].toString()).toString(),
+                            style: TextStyle(fontSize: 11.0,color:Colors.grey)
                         )
                       ])),
               Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
