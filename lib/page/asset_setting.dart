@@ -222,7 +222,7 @@ class AssetSettingState extends State<AssetSettingPage>{
       Row(
 
         children: [
-          Text("目标达成卖出比例(%) 「 约获得 "+Decimal.parse(this.sell_usdt.toStringAsFixed(8)).toString() +" usdt 」",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
+          Text("目标达成卖出量 「 约获得 "+Decimal.parse(this.sell_usdt.toStringAsFixed(8)).toString() +" usdt 」",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
         ],
       ),
       SizedBox(height: 5),
@@ -257,7 +257,7 @@ class AssetSettingState extends State<AssetSettingPage>{
         var _price = 0.0;
         _price = (1 + ( target_ror - this.ror)/100) * this.price;
 
-        this.sell_usdt = double.parse(value) / 100 * this.free * _price;
+        this.sell_usdt = double.parse(value)  * _price;
       } else {
         this.sell_usdt = 0.0;
       }
@@ -266,18 +266,20 @@ class AssetSettingState extends State<AssetSettingPage>{
         },
         validator: (value){
           if(value!.trim()==""){
-            return "目标达成卖出比不能为空";
+            return "卖出量不能为空";
           }
 
           if(double.tryParse(value) == null){
             return "格式错误";
           }
 
-       if(double.parse(value) < 0 || double.parse(value) > 100){
-            return "范围为0到100";
+       if(double.parse(value) < 0){
+            return "须大于0";
           }
 
-
+          if(double.parse(value) > this.free){
+            return "卖出量超过拥有量";
+          }
         },
       ),
     ]));

@@ -352,12 +352,12 @@ class AssetsState extends State<AssetsPage>{
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                            "达成卖出",
+                            "达成卖出("+item["asset"]+")",
                             style: TextStyle(fontSize: 11.0,color:Colors.grey)
                         ),
 
                         Text(
-                            Decimal.parse(item["t_sell"].toString()).toString()+"%",
+                            Decimal.parse(item["t_sell"].toString()).toString(),
                             style: TextStyle(fontSize: 11.0,color:Colors.grey)
                         )
                       ])),
