@@ -91,7 +91,7 @@ class CommonSettingState extends State<CommonSettingPage>{
         Row(
           children:[
             SizedBox(width: 0),
-            Text("目标收益达成时:",textAlign: TextAlign.left,style:TextStyle(color:Color(0xff999999),fontSize: 14))
+            Text("目标涨幅达成时:",textAlign: TextAlign.left,style:TextStyle(color:Color(0xff999999),fontSize: 14))
           ],
         ),
       Card(
@@ -115,7 +115,7 @@ class CommonSettingState extends State<CommonSettingPage>{
             // 按钮组的值
             groupValue:ror_touch,
           ),
-          Text("限价卖出 (收益触达时价格)",style: TextStyle(fontSize: 14,color:Color(0xff292D33)))
+          Text("限价卖出 (涨幅触达时价格)",style: TextStyle(fontSize: 14,color:Color(0xff292D33)))
     ]),
           Row(children:[
             Radio(
@@ -173,7 +173,7 @@ class CommonSettingState extends State<CommonSettingPage>{
         Row(
           children:[
             SizedBox(width: 0),
-            Text("加仓收益达成时:",textAlign: TextAlign.left,style:TextStyle(color:Color(0xff999999),fontSize: 14))
+            Text("加仓涨幅达成时:",textAlign: TextAlign.left,style:TextStyle(color:Color(0xff999999),fontSize: 14))
           ],
         ),
     Card(
@@ -197,7 +197,7 @@ class CommonSettingState extends State<CommonSettingPage>{
                 // 按钮组的值
                 groupValue:l_ror_touch,
               ),
-              Text("限价买入 (收益触达时价格)",style: TextStyle(fontSize: 14,color:Color(0xff292D33)))
+              Text("限价买入 (涨幅触达时价格)",style: TextStyle(fontSize: 14,color:Color(0xff292D33)))
             ]),
             Row(children:[
               Radio(

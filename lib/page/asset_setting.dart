@@ -116,7 +116,7 @@ class AssetSettingState extends State<AssetSettingPage>{
       Row(
 
         children: [
-          Text("目标收益率(%)",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
+          Text("目标涨幅(%)",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
         ],
       ),
       SizedBox(height: 5),
@@ -146,7 +146,7 @@ class AssetSettingState extends State<AssetSettingPage>{
         onSaved: (value) => target_ror = double.parse(value!.trim()),
         validator: (value){
           if(value!.trim()==""){
-            return "目标收益率不能为空";
+            return "目标涨幅不能为空";
           }
 
           if(double.tryParse(value) == null){
@@ -172,7 +172,7 @@ class AssetSettingState extends State<AssetSettingPage>{
       Row(
 
       children: [
-      Text("加仓收益率(%)",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
+      Text("加仓涨幅(%)",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
       ],
       ),
       SizedBox(height: 5),
@@ -202,7 +202,7 @@ class AssetSettingState extends State<AssetSettingPage>{
         onSaved: (value) => loweset_ror = double.parse(value!.trim()),
         validator: (value){
           if(value!.trim()==""){
-            return "加仓收益率不能为空";
+            return "加仓涨幅不能为空";
           }
 
           if(double.tryParse(value) == null){

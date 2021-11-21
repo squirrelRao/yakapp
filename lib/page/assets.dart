@@ -59,6 +59,12 @@ class AssetsState extends State<AssetsPage>{
                   }else{
                     item["return_color"] = Color(0xff02AC8F);
                   }
+
+                  if(item["price_change"] < 0){
+                    item["price_change_color"] = Color(0xffE95555);
+                  }else{
+                    item["price_change_color"] = Color(0xff02AC8F);
+                  }
                 }
 
                 if(datas["ror_touch"] == "auto_limit"){
@@ -334,12 +340,27 @@ class AssetsState extends State<AssetsPage>{
                             style: TextStyle(fontSize: 14.0,color:item["ror_color"])
                         )
                       ])),
+
               Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
                   child:Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                            "目标收益",
+                            "价格涨幅",
+                            style: TextStyle(fontSize: 14.0)
+                        ),
+
+                        Text(
+                            Decimal.parse(item["price_change"].toString()).toString()+"%",
+                            style: TextStyle(fontSize: 14.0,color:item["price_change_color"])
+                        )
+                      ])),
+              Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
+                  child:Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                            "目标涨幅",
                             style: TextStyle(fontSize: 12.0)
                         ),
                         Text(
@@ -366,7 +387,7 @@ class AssetsState extends State<AssetsPage>{
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                            "加仓收益",
+                            "加仓涨幅",
                             style: TextStyle(fontSize: 12.0)
                         ),
                         Text(
