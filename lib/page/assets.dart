@@ -416,7 +416,7 @@ class AssetsState extends State<AssetsPage>{
     ),
       onTap: (){
           setState(() {
-            Navigator.push(context, MaterialPageRoute(builder: (content){return AssetSettingPage(asset : item["asset"], price: item["price"],free: double.parse(item["free"]), ror : item["ror"],free_usdt:double.parse(datas["snapshots"][0]["free"]));}));
+            Navigator.push(context, MaterialPageRoute(builder: (content){return AssetSettingPage(asset : item["asset"], price: item["price"],compare_price: item["capital_price"],free: double.parse(item["free"]), ror : item["price_change"],free_usdt:double.parse(datas["snapshots"][0]["free"]));}));
           });
       },
     );

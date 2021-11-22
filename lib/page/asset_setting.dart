@@ -16,10 +16,11 @@ class AssetSettingPage extends StatefulWidget{
   var price = 0.0;
   var ror = 0.0;
   var free_usdt = 0.0;
-  AssetSettingPage({ required this.asset, required this.free, required this.price, required this.ror, required this.free_usdt});
+  var compare_price = 0.0;
+  AssetSettingPage({ required this.asset, required this.free, required this.price,required this.compare_price, required this.ror, required this.free_usdt});
 
   @override
-  State createState()  => AssetSettingState(asset: asset, price : price, free : free, ror : ror, free_usdt :free_usdt);
+  State createState()  => AssetSettingState(asset: asset, price : price, compare_price : compare_price, free : free, ror : ror, free_usdt :free_usdt);
 }
 
 class AssetSettingState extends State<AssetSettingPage>{
@@ -28,9 +29,10 @@ class AssetSettingState extends State<AssetSettingPage>{
   var free = 0.0;
   var ror = 0.0;
   var free_usdt = 0.0;
+  var compare_price = 0.0;
+  var _return = 0.0;
 
-
-  AssetSettingState({required this.asset,required this.price, required this.free, required this.ror,required this.free_usdt});
+  AssetSettingState({required this.asset,required this.price,required this.compare_price, required this.free, required this.ror,required this.free_usdt});
 
   var target_ror;
   var t_sell;
@@ -62,6 +64,21 @@ class AssetSettingState extends State<AssetSettingPage>{
 
   }
 
+  Widget showReturn() {
+    return Padding(
+        padding: const EdgeInsets.fromLTRB(0.0, 2.0, 0.0, 0),
+        child: Column(
+            children:[
+              Row(
+
+                children: [
+                  Text("预计收益: "+Decimal.parse(this._return.toString()).toString()+" usdt",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
+                ],
+
+              )]));
+
+  }
+
   Widget showRor() {
     return Padding(
         padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 12.0),
@@ -70,7 +87,7 @@ class AssetSettingState extends State<AssetSettingPage>{
               Row(
 
                 children: [
-                  Text("收益率: "+Decimal.parse(this.ror.toString()).toString()+"%",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
+                  Text("涨幅: "+Decimal.parse(this.ror.toString()).toString()+"%",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
                 ],
 
               )]));
@@ -100,7 +117,23 @@ class AssetSettingState extends State<AssetSettingPage>{
               Row(
 
                 children: [
-                  Text("价格: "+this.price.toString(),style:TextStyle(fontSize: 14,color:Color(0xff999999)))
+                  Text("当前价格: "+this.price.toString(),style:TextStyle(fontSize: 14,color:Color(0xff999999)))
+                ],
+
+              )]));
+
+  }
+
+
+  Widget showComparePrice() {
+    return Padding(
+        padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 12.0),
+        child: Column(
+            children:[
+              Row(
+
+                children: [
+                  Text("环比价格: "+this.compare_price.toString(),style:TextStyle(fontSize: 14,color:Color(0xff999999)))
                 ],
 
               )]));
@@ -261,12 +294,13 @@ class AssetSettingState extends State<AssetSettingPage>{
     setState(() {
       if (double.tryParse(value) != null) {
         var _price = 0.0;
-        _price = (1 + ( target_ror - this.ror)/100) * this.price;
+        _price = (1 + ( target_ror - this.ror)/100) * this.compare_price;
 
         this.sell_usdt = double.parse(value)  * _price;
       } else {
         this.sell_usdt = 0.0;
       }
+      this._return = this.sell_usdt - this.buy_usdt;
     });
 
         },
@@ -341,12 +375,13 @@ class AssetSettingState extends State<AssetSettingPage>{
 
           if(double.tryParse(value) != null){
             var _price = 0.0;
-            _price = (1 + ( loweset_ror - this.ror)/100) * this.price;
+            _price = (1 + ( loweset_ror - this.ror)/100) * this.compare_price;
 
           this.buy_usdt = double.parse(value) * _price;
           }else{
             this.buy_usdt = 0.0;
           }
+          this._return = this.sell_usdt - this.buy_usdt;
 
           });
 
@@ -389,12 +424,13 @@ class AssetSettingState extends State<AssetSettingPage>{
           lrController.text = Decimal.parse(data["lowest_ror"].toString()).toString();
           lsController.text = Decimal.parse(data["l_buy"].toString()).toString();
 
-          var target_price = (1 + ( data["target_ror"] - this.ror)/100) * this.price;
+          var target_price = (1 + ( data["target_ror"] - this.ror)/100) * this.compare_price;
           this.sell_usdt = data["t_sell"] * target_price;
 
-
-          var lowest_price = (1 + ( data["lowest_ror"] - this.ror)/100) * this.price;
+          var lowest_price = (1 + ( data["lowest_ror"] - this.ror)/100) * this.compare_price;
           this.buy_usdt = data["l_buy"] * lowest_price;
+
+          this._return = this.sell_usdt - this.buy_usdt;
 
         });
       }else{
@@ -488,24 +524,64 @@ class AssetSettingState extends State<AssetSettingPage>{
                   child:  Column(
                       children: <Widget>[
                         // showCoin(),
-                        showCount(),
-                        showRor(),
+                        // showCount(),
                         showPrice(),
+                        showComparePrice(),
+                        showRor(),
                         showTargetRorInput(),
                         showTsellInput(),
                         showLowestRorInput(),
                         // showFreeUsdt(),
                         showLsellInput(),
-                        SizedBox(height: 10)
+                        SizedBox(height: 2),
+                        showReturn(),
+                        SizedBox(height: 2)
                       ]
                     )
                   )
             ),
               Container(
-                height: 70,
-                padding: const EdgeInsets.fromLTRB(32, 26, 32, 0),
+                height: 60,
+                padding: const EdgeInsets.fromLTRB(32, 22, 32, 0),
                 child: TextButton(
-                  child: Text('提 交',style:TextStyle(color:Colors.white,fontWeight: FontWeight.w500)),
+                  child: Text('收益预计',),
+                  style: ButtonStyle(
+                      textStyle:MaterialStateProperty.all(TextStyle(color:Color(0xff48ABFD),fontWeight: FontWeight.w400)),
+                      backgroundColor: MaterialStateProperty.all(Color(0xffF3F5F7)),
+                      foregroundColor: MaterialStateProperty.all(Color(0xff48ABFD)),
+                      shape: MaterialStateProperty.all(
+                          RoundedRectangleBorder(
+                              borderRadius:
+                              BorderRadius.circular(
+                                  40)))
+                  ),
+                  onPressed: () {
+                    FocusScope.of(context).requestFocus(FocusNode());
+
+                    if(!_formKey.currentState!.validate()){
+
+                      return;
+                    }
+                    _formKey.currentState!.save();
+
+                    setState(() {
+                      var target_price = (1 + ( this.target_ror - this.ror)/100) * this.compare_price;
+                      this.sell_usdt = this.t_sell * target_price;
+
+                      var lowest_price = (1 + ( this.loweset_ror - this.ror)/100) * this.compare_price;
+                      this.buy_usdt = this.l_buy * lowest_price;
+
+                      this._return = this.sell_usdt - this.buy_usdt;
+                    });
+
+                  },
+                ),
+              ),
+              Container(
+                height: 60,
+                padding: const EdgeInsets.fromLTRB(32, 22, 32, 0),
+                child: TextButton(
+                  child: Text('提交设置',style:TextStyle(color:Colors.white,fontWeight: FontWeight.w500)),
                   style: ButtonStyle(
                       textStyle: MaterialStateProperty.all(TextStyle(fontSize: 16)),
                       backgroundColor: MaterialStateProperty.all(Color(0xff48ABFD)),
