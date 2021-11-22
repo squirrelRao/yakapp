@@ -43,7 +43,7 @@ class TransactionState extends State<TransactionPage>{
             item["type_color"] = Color(0xff48ABFD);
 
             if(item["status"]=="FILLED"){
-              item['cummulativeQuoteQty'] = Decimal.parse(item["data"]["cummulativeQuoteQty"]);
+              item['cummulativeQuoteQty'] = Decimal.parse(item["cummulativeQuoteQty"]);
 
             }else{
               item['cummulativeQuoteQty'] = 0;
