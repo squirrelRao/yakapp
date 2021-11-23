@@ -203,10 +203,10 @@ class AssetSettingState extends State<AssetSettingPage>{
           if(double.tryParse(value) == null){
             return "格式错误";
           }
-
-          if(double.parse(value) < 0){
-            return "不能小于0";
-          }
+          //
+          // if(double.parse(value) < 0){
+          //   return "不能小于0";
+          // }
           target_ror = double.parse(value!.trim());
 
         },
