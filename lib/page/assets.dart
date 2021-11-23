@@ -156,7 +156,7 @@ class AssetsState extends State<AssetsPage>{
                           Column(
                               children: [
                                 Text(
-                                    "环比周期(天)",
+                                    datas["anchor_day_desc"],
                                     style: TextStyle(fontSize: 13.0,color: Color(0xfff3f3f3))
                                 ),
                                 SizedBox(height: 8),

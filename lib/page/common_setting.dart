@@ -24,6 +24,8 @@ class CommonSettingState extends State<CommonSettingPage>{
   var l_ror_touch = "notify";
   var ror_duration = 7.0;
   bool new_coin_notify = true;
+  bool is_anchored = true;
+
 
   final _formKey = new GlobalKey<FormState>();
 
@@ -248,7 +250,7 @@ class CommonSettingState extends State<CommonSettingPage>{
   Widget showNewCoinNotifySwitch(){
 
     return Padding(
-        padding: const EdgeInsets.fromLTRB(0.0, 3.0, 0.0, 0.0),
+        padding: const EdgeInsets.fromLTRB(0.0, 2.0, 0.0, 0.0),
         child:Column(children:[
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -269,6 +271,32 @@ class CommonSettingState extends State<CommonSettingPage>{
 
   }
 
+
+  Widget showAnchorSwitch(){
+
+    return Padding(
+        padding: const EdgeInsets.fromLTRB(0.0, 2.0, 0.0, 0.0),
+        child:Column(children:[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children:[
+              Text("锚定环比日期:",textAlign: TextAlign.left,style:TextStyle(color:Color(0xff999999),fontSize: 14)),
+              Switch(
+                  value: is_anchored,
+                  activeColor: Color(0xff48ABFD),
+                  onChanged: (value) {
+                    setState(() {
+                      is_anchored = value;
+                    });
+                  })
+            ],
+          ),
+        ])
+    );
+
+  }
+
+
   void queryUserInfo() async {
 
     SharedPreferences prefs =  await SharedPreferences.getInstance();
@@ -287,6 +315,12 @@ class CommonSettingState extends State<CommonSettingPage>{
               new_coin_notify = true;
           }else{
               new_coin_notify = false;
+          }
+
+          if(data["is_anchor_day"] ==1){
+            this.is_anchored = true;
+          }else{
+            this.is_anchored = false;
           }
 
         });
@@ -311,8 +345,13 @@ class CommonSettingState extends State<CommonSettingPage>{
       isNotifyNewCoin = 0;
     }
 
+    var isAnchorDay = 1;
+    if(showAnchorSwitch == false){
+      isAnchorDay = 0;
+    }
+
     (NetClient()).post(Configs.updateUserConfigApi,
-        {"user_id":userId,"ror_duration":ror_duration,"ror_touch":ror_touch,"l_ror_touch":l_ror_touch,"new_coin_notify":isNotifyNewCoin},
+        {"user_id":userId,"ror_duration":ror_duration,"ror_touch":ror_touch,"l_ror_touch":l_ror_touch,"new_coin_notify":isNotifyNewCoin,"is_anchor_day":isAnchorDay},
             (data){
 
           if(data["rc"] == 0){
@@ -386,6 +425,7 @@ class CommonSettingState extends State<CommonSettingPage>{
                         showActionInput(),
                         showLActionInput(),
                         showNewCoinNotifySwitch(),
+                        showAnchorSwitch(),
                         SizedBox(height:5)
                       ]
                     )

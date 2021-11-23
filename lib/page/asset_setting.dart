@@ -31,6 +31,7 @@ class AssetSettingState extends State<AssetSettingPage>{
   var free_usdt = 0.0;
   var compare_price = 0.0;
   var _return = 0.0;
+  var order_return = 0.0;
 
   AssetSettingState({required this.asset,required this.price,required this.compare_price, required this.free, required this.ror,required this.free_usdt});
 
@@ -41,6 +42,7 @@ class AssetSettingState extends State<AssetSettingPage>{
   var title = "盈损设置";
   var buy_usdt = 0.0;
   var sell_usdt = 0.0;
+  var latest_buy_value = 0.0;
 
   final _formKey = new GlobalKey<FormState>();
 
@@ -72,12 +74,28 @@ class AssetSettingState extends State<AssetSettingPage>{
               Row(
 
                 children: [
-                  Text("预计收益: "+Decimal.parse(this._return.toString()).toString()+" usdt",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
+                  Text("按加仓量预计收益: "+Decimal.parse(this._return.toStringAsFixed(8)).toString()+" usdt",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
                 ],
 
               )]));
 
   }
+
+  Widget showOrderReturn() {
+    return Padding(
+        padding: const EdgeInsets.fromLTRB(0.0, 2.0, 0.0, 0),
+        child: Column(
+            children:[
+              Row(
+
+                children: [
+                  Text("按近买入交易预计收益: "+Decimal.parse(this.order_return.toStringAsFixed(8)).toString()+" usdt",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
+                ],
+
+              )]));
+
+  }
+
 
   Widget showRor() {
     return Padding(
@@ -301,6 +319,7 @@ class AssetSettingState extends State<AssetSettingPage>{
         this.sell_usdt = 0.0;
       }
       this._return = this.sell_usdt - this.buy_usdt;
+      this.order_return = this.sell_usdt - this.latest_buy_value;
     });
 
         },
@@ -382,6 +401,7 @@ class AssetSettingState extends State<AssetSettingPage>{
             this.buy_usdt = 0.0;
           }
           this._return = this.sell_usdt - this.buy_usdt;
+          this.order_return = this.sell_usdt - this.latest_buy_value;
 
           });
 
@@ -431,6 +451,8 @@ class AssetSettingState extends State<AssetSettingPage>{
           this.buy_usdt = data["l_buy"] * lowest_price;
 
           this._return = this.sell_usdt - this.buy_usdt;
+          this.order_return = this.sell_usdt - this.latest_buy_value;
+
 
         });
       }else{
@@ -535,6 +557,7 @@ class AssetSettingState extends State<AssetSettingPage>{
                         showLsellInput(),
                         SizedBox(height: 2),
                         showReturn(),
+                        showOrderReturn(),
                         SizedBox(height: 2)
                       ]
                     )
@@ -572,6 +595,8 @@ class AssetSettingState extends State<AssetSettingPage>{
                       this.buy_usdt = this.l_buy * lowest_price;
 
                       this._return = this.sell_usdt - this.buy_usdt;
+                      this.order_return = this.sell_usdt - this.latest_buy_value;
+
                     });
 
                   },
