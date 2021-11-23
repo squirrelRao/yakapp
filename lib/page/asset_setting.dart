@@ -74,7 +74,7 @@ class AssetSettingState extends State<AssetSettingPage>{
               Row(
 
                 children: [
-                  Text("按加仓量预计收益: "+Decimal.parse(this._return.toStringAsFixed(8)).toString()+" usdt",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
+                  Text("按本次加仓量预计收益: "+Decimal.parse(this._return.toStringAsFixed(8)).toString()+" usdt",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
                 ],
 
               )]));
@@ -89,7 +89,7 @@ class AssetSettingState extends State<AssetSettingPage>{
               Row(
 
                 children: [
-                  Text("按近买入交易预计收益: "+Decimal.parse(this.order_return.toStringAsFixed(8)).toString()+" usdt",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
+                  Text("按上次买入量预计收益: "+Decimal.parse(this.order_return.toStringAsFixed(8)).toString()+" usdt",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
                 ],
 
               )]));
@@ -450,8 +450,10 @@ class AssetSettingState extends State<AssetSettingPage>{
           var lowest_price = (1 + ( data["lowest_ror"] - this.ror)/100) * this.compare_price;
           this.buy_usdt = data["l_buy"] * lowest_price;
 
+          this.latest_buy_value = data["latest_buy_value"];
+
           this._return = this.sell_usdt - this.buy_usdt;
-          this.order_return = this.sell_usdt - this.latest_buy_value;
+          this.order_return = this.sell_usdt - latest_buy_value;
 
 
         });
