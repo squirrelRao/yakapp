@@ -280,7 +280,7 @@ class CommonSettingState extends State<CommonSettingPage>{
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children:[
-              Text("锚定环比日期:",textAlign: TextAlign.left,style:TextStyle(color:Color(0xff999999),fontSize: 14)),
+              Text("锚定环比模式:",textAlign: TextAlign.left,style:TextStyle(color:Color(0xff999999),fontSize: 14)),
               Switch(
                   value: is_anchored,
                   activeColor: Color(0xff48ABFD),
