@@ -43,6 +43,8 @@ class AssetSettingState extends State<AssetSettingPage>{
   var buy_usdt = 0.0;
   var sell_usdt = 0.0;
   var latest_buy_value = 0.0;
+  var sell_price = 0.0;
+  var buy_price = 0.0;
 
   final _formKey = new GlobalKey<FormState>();
 
@@ -167,7 +169,7 @@ class AssetSettingState extends State<AssetSettingPage>{
       Row(
 
         children: [
-          Text("目标涨幅(%)",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
+          Text("目标涨幅(%) 「 价格为: "+Decimal.parse(this.sell_price.toStringAsFixed(8)).toString() +" 」",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
         ],
       ),
       SizedBox(height: 5),
@@ -195,6 +197,13 @@ class AssetSettingState extends State<AssetSettingPage>{
           fillColor: Color(0xffF3F5F7),
         ),
         onSaved: (value) => target_ror = double.parse(value!.trim()),
+        onChanged: (value){
+          if(double.tryParse(value) != null){
+            this.sell_price = (1 + double.parse(value)/100.0) * this.compare_price;
+          }else{
+            this.sell_price = 0;
+          }
+        },
         validator: (value){
           if(value!.trim()==""){
             return "目标涨幅不能为空";
@@ -223,7 +232,7 @@ class AssetSettingState extends State<AssetSettingPage>{
       Row(
 
       children: [
-      Text("加仓涨幅(%)",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
+      Text("加仓涨幅(%) 「 价格为: "+Decimal.parse(this.buy_price.toStringAsFixed(8)).toString() +" 」",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
       ],
       ),
       SizedBox(height: 5),
@@ -251,6 +260,14 @@ class AssetSettingState extends State<AssetSettingPage>{
         fillColor: Color(0xffF3F5F7),
       ),
         onSaved: (value) => loweset_ror = double.parse(value!.trim()),
+    onChanged: (value){
+      if(double.tryParse(value) != null){
+        this.buy_price = (1 + double.parse(value) /100.0) * this.compare_price;
+      }else{
+        this.buy_price = 0;
+      }
+
+    },
         validator: (value){
           if(value!.trim()==""){
             return "加仓涨幅不能为空";
@@ -312,7 +329,7 @@ class AssetSettingState extends State<AssetSettingPage>{
     setState(() {
       if (double.tryParse(value) != null) {
         var _price = 0.0;
-        _price = (1 + ( target_ror - this.ror)/100) * this.compare_price;
+        _price = (1 + target_ror/100.0) * this.compare_price;
 
         this.sell_usdt = double.parse(value)  * _price;
       } else {
@@ -394,7 +411,7 @@ class AssetSettingState extends State<AssetSettingPage>{
 
           if(double.tryParse(value) != null){
             var _price = 0.0;
-            _price = (1 + ( loweset_ror - this.ror)/100) * this.compare_price;
+            _price = (1 + loweset_ror/100.0) * this.compare_price;
 
           this.buy_usdt = double.parse(value) * _price;
           }else{
@@ -444,11 +461,16 @@ class AssetSettingState extends State<AssetSettingPage>{
           lrController.text = Decimal.parse(data["lowest_ror"].toString()).toString();
           lsController.text = Decimal.parse(data["l_buy"].toString()).toString();
 
-          var target_price = (1 + ( data["target_ror"] - this.ror)/100) * this.compare_price;
+          var target_price = (1 + data["target_ror"]/100.0 ) * this.compare_price;
           this.sell_usdt = data["t_sell"] * target_price;
 
-          var lowest_price = (1 + ( data["lowest_ror"] - this.ror)/100) * this.compare_price;
+          this.sell_price = target_price;
+
+
+          var lowest_price = (1 + data["lowest_ror"] /100.0) * this.compare_price;
           this.buy_usdt = data["l_buy"] * lowest_price;
+
+          this.buy_price = lowest_price;
 
           this.latest_buy_value = data["latest_buy_value"];
 
@@ -590,11 +612,15 @@ class AssetSettingState extends State<AssetSettingPage>{
                     _formKey.currentState!.save();
 
                     setState(() {
-                      var target_price = (1 + ( this.target_ror - this.ror)/100) * this.compare_price;
+                      var target_price = (1 + this.target_ror/100.0) * this.compare_price;
                       this.sell_usdt = this.t_sell * target_price;
 
-                      var lowest_price = (1 + ( this.loweset_ror - this.ror)/100) * this.compare_price;
+                      this.sell_price = target_price;
+
+                      var lowest_price = (1 + this.loweset_ror/100.0) * this.compare_price;
                       this.buy_usdt = this.l_buy * lowest_price;
+
+                      this.buy_price = lowest_price;
 
                       this._return = this.sell_usdt - this.buy_usdt;
                       this.order_return = this.sell_usdt - this.latest_buy_value;
