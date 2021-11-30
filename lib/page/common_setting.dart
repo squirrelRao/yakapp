@@ -402,7 +402,7 @@ class CommonSettingState extends State<CommonSettingPage>{
     }
 
     var isAnchorDay = 1;
-    if(showAnchorSwitch == false){
+    if(is_anchored == false){
       isAnchorDay = 0;
     }
 

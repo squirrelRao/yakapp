@@ -156,7 +156,7 @@ class TransactionState extends State<TransactionPage>{
                           ),
 
                           Text(
-                              item["price"].toString(),
+                              Decimal.parse(item["price"].toString()).toString(),
                               style: TextStyle(fontSize: 13.0)
                           )
                         ])),
