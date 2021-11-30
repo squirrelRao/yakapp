@@ -32,6 +32,7 @@ class AssetSettingState extends State<AssetSettingPage>{
   var compare_price = 0.0;
   var _return = 0.0;
   var order_return = 0.0;
+  var order_count = 0;
 
   AssetSettingState({required this.asset,required this.price,required this.compare_price, required this.free, required this.ror,required this.free_usdt});
 
@@ -45,6 +46,7 @@ class AssetSettingState extends State<AssetSettingPage>{
   var latest_buy_value = 0.0;
   var sell_price = 0.0;
   var buy_price = 0.0;
+  var latest_buy_qty = 0.0;
 
   final _formKey = new GlobalKey<FormState>();
 
@@ -91,7 +93,22 @@ class AssetSettingState extends State<AssetSettingPage>{
               Row(
 
                 children: [
-                  Text("按上次买入量预计收益: "+Decimal.parse(this.order_return.toStringAsFixed(8)).toString()+" usdt",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
+                  Text("按最近加仓量预计收益: "+Decimal.parse(this.order_return.toStringAsFixed(8)).toString()+" usdt",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
+                ],
+
+              )]));
+
+  }
+
+  Widget showOrderQty() {
+    return Padding(
+        padding: const EdgeInsets.fromLTRB(0.0, 2.0, 0.0, 0),
+        child: Column(
+            children:[
+              Row(
+
+                children: [
+                  Text("最近加仓量累计: "+Decimal.parse(this.latest_buy_qty.toStringAsFixed(8)).toString()+" (共"+order_count.toString()+"次)",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
                 ],
 
               )]));
@@ -473,6 +490,9 @@ class AssetSettingState extends State<AssetSettingPage>{
           this.buy_price = lowest_price;
 
           this.latest_buy_value = data["latest_buy_value"];
+          order_count = data["latest_buy_count"];
+
+          this.latest_buy_qty = data["latest_buy_qty"];
 
           this._return = this.sell_usdt - this.buy_usdt;
           this.order_return = this.sell_usdt - latest_buy_value;
@@ -582,6 +602,7 @@ class AssetSettingState extends State<AssetSettingPage>{
                         SizedBox(height: 2),
                         showReturn(),
                         showOrderReturn(),
+                        showOrderQty(),
                         SizedBox(height: 2)
                       ]
                     )

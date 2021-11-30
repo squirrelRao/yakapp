@@ -28,10 +28,10 @@ class CreatePreOrderState extends State<CreatePreOrderPage>{
   var open_time;
   var asset="";
   var buy_count;
-  var target_ror;
-  var t_sell;
-  var loweset_ror;
-  var l_buy;
+  var target_ror = 0.0;
+  var t_sell = 0.0;
+  var loweset_ror = 0.0;
+  var l_buy = 0.0;
   var title = "";
   var order_type = "MARKET";
   var price_coin = "USDT";
@@ -443,10 +443,10 @@ class CreatePreOrderState extends State<CreatePreOrderPage>{
                       children: <Widget>[
                         // showSymbol(),
                         showBuyCountInput(),
-                        showTargetRorInput(),
-                        showTsellInput(),
-                        showLowestRorInput(),
-                        showLsellInput(),
+                        // showTargetRorInput(),
+                        // showTsellInput(),
+                        // showLowestRorInput(),
+                        // showLsellInput(),
                         showOpenTime(),
                       ]
                   )
