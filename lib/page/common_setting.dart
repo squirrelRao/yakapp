@@ -25,16 +25,18 @@ class CommonSettingState extends State<CommonSettingPage>{
   var ror_duration = 7.0;
   bool new_coin_notify = true;
   bool is_anchored = true;
+  var notify_period = 0;
 
 
   final _formKey = new GlobalKey<FormState>();
 
   TextEditingController durationController = new TextEditingController(text: "");
+  TextEditingController notifyPeriodController = new TextEditingController(text: "");
 
 
   Widget showDurationInput() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(0.0, 16.0, 0.0, 0.0),
+      padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
       child: Column(
           children:[
       Row(
@@ -83,6 +85,59 @@ class CommonSettingState extends State<CommonSettingPage>{
         },
       ),
     ]));
+  }
+
+  Widget showPeriodInput() {
+    return Padding(
+        padding: const EdgeInsets.fromLTRB(0.0, 12.0, 0.0, 0.0),
+        child: Column(
+            children:[
+              Row(
+                  children:[
+                    Text("消息提醒间隔(分钟）",textAlign: TextAlign.left,style:TextStyle(color:Color(0xff999999),fontSize: 14))
+                  ]),
+              SizedBox(height: 5),
+              new TextFormField(
+                maxLines: 1,
+                keyboardType: TextInputType.text,
+                inputFormatters: [
+                  FilteringTextInputFormatter.allow(RegExp("[0-9]"))
+                ],
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                controller: notifyPeriodController,
+                style: TextStyle(fontSize: 15),
+                cursorColor: Color(0xff48ABFD),
+                cursorHeight: 16,
+                decoration: new InputDecoration(
+                  hintText: "",
+                  labelText: "",
+                  border:OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(24),
+                      borderSide: BorderSide.none
+                  ),
+                  ///设置内容内边距
+                  contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+                  filled: true,
+                  fillColor: Color(0xffF3F5F7),
+                ),
+                onSaved: (value) => notify_period = int.parse(value!.trim()),
+                onTap: (){
+                  notifyPeriodController.text="";
+                },
+                validator: (value){
+                  if(value!.trim()==""){
+                    return "不能为空";
+                  }
+
+                  if(int.tryParse(value) == null){
+                    return "格式错误";
+                  }
+                  if(int.parse(value) < 0){
+                    return "必须大于0";
+                  }
+                },
+              ),
+            ]));
   }
 
 
@@ -148,20 +203,20 @@ class CommonSettingState extends State<CommonSettingPage>{
           ),
           Text("发送提醒",style: TextStyle(fontSize: 14,color:Color(0xff292D33)))
   ]),
-           Row(
-               children:[
-               Radio(
-              value:"non",
-                 activeColor: Color(0xff48ABFD),
-                 onChanged: (value){
-                setState(() {
-                  ror_touch = value.toString();
-                });
-              },
-            groupValue: ror_touch,
-          ),
-          Text("无操作",style: TextStyle(fontSize: 14,color:Color(0xff292D33)))
-           ])
+          //  Row(
+          //      children:[
+          //      Radio(
+          //     value:"non",
+          //        activeColor: Color(0xff48ABFD),
+          //        onChanged: (value){
+          //       setState(() {
+          //         ror_touch = value.toString();
+          //       });
+          //     },
+          //   groupValue: ror_touch,
+          // ),
+          // Text("无操作",style: TextStyle(fontSize: 14,color:Color(0xff292D33)))
+          //  ])
         ],
       ) )
     ]),
@@ -227,20 +282,20 @@ class CommonSettingState extends State<CommonSettingPage>{
               ),
               Text("发送提醒",style: TextStyle(fontSize: 14,color:Color(0xff292D33)))
             ]),
-            Row(
-                children:[
-                  Radio(
-                    value:"non",
-                    activeColor: Color(0xff48ABFD),
-                    onChanged: (value){
-                      setState(() {
-                        l_ror_touch = value.toString();
-                      });
-                    },
-                    groupValue: l_ror_touch,
-                  ),
-                  Text("无操作",style: TextStyle(fontSize: 14,color:Color(0xff292D33)))
-                ])
+            // Row(
+            //     children:[
+            //       Radio(
+            //         value:"non",
+            //         activeColor: Color(0xff48ABFD),
+            //         onChanged: (value){
+            //           setState(() {
+            //             l_ror_touch = value.toString();
+            //           });
+            //         },
+            //         groupValue: l_ror_touch,
+            //       ),
+            //       Text("无操作",style: TextStyle(fontSize: 14,color:Color(0xff292D33)))
+            //     ])
           ],
         ))
       ]),
@@ -311,6 +366,7 @@ class CommonSettingState extends State<CommonSettingPage>{
           durationController.text = Decimal.parse(data["ror_duration"].toString()).toString();
           ror_touch = data["ror_touch"];
           l_ror_touch = data["l_ror_touch"];
+            notifyPeriodController.text = data["notify_period"].toString();
           if(data["new_coin_notify"]==1){
               new_coin_notify = true;
           }else{
@@ -335,7 +391,7 @@ class CommonSettingState extends State<CommonSettingPage>{
 
   }
 
-  void submitConfig(ror_duration,ror_touch,l_ror_touch) async {
+  void submitConfig(ror_duration,ror_touch,l_ror_touch,notify_period) async {
 
     SharedPreferences prefs =  await SharedPreferences.getInstance();
     String? userId = prefs.getString("uid");
@@ -351,7 +407,7 @@ class CommonSettingState extends State<CommonSettingPage>{
     }
 
     (NetClient()).post(Configs.updateUserConfigApi,
-        {"user_id":userId,"ror_duration":ror_duration,"ror_touch":ror_touch,"l_ror_touch":l_ror_touch,"new_coin_notify":isNotifyNewCoin,"is_anchor_day":isAnchorDay},
+        {"user_id":userId,"ror_duration":ror_duration,"ror_touch":ror_touch,"l_ror_touch":l_ror_touch,"new_coin_notify":isNotifyNewCoin,"is_anchor_day":isAnchorDay,"notify_period":notify_period},
             (data){
 
           if(data["rc"] == 0){
@@ -422,6 +478,7 @@ class CommonSettingState extends State<CommonSettingPage>{
                   child: Column(
                       children: <Widget>[
                         showDurationInput(),
+                        showPeriodInput(),
                         showActionInput(),
                         showLActionInput(),
                         showNewCoinNotifySwitch(),
@@ -456,7 +513,7 @@ class CommonSettingState extends State<CommonSettingPage>{
                     }
 
                     _formKey.currentState!.save();
-                    submitConfig(ror_duration,ror_touch,l_ror_touch);
+                    submitConfig(ror_duration,ror_touch,l_ror_touch,notify_period);
                   },
                 ),
               )
