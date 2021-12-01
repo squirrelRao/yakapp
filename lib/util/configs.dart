@@ -19,12 +19,7 @@ class Configs {
   static const String getPreBuyOrderApi = baseUrl +"/v1/prebuy/get";
   static const String updatePreBuyOrderApi = baseUrl +"/v1/prebuy/new";
   static const String syncHistoryApi = baseUrl +"/v1/sync/history";
-
-
-
-  static const String checkSystemStatusApi = baseUrl +"/v1/regist";
-  static const String checkUserStatusApi = baseUrl +"/v1/regist";
-
+  static const String getFitValueApi= baseUrl +"/v1/fitvalue/get";
   static const String syncOrderApi = baseUrl +"/v1/remote/order/sync";
 
 }

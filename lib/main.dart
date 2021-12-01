@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:yakapp/page/fit_value.dart';
 import 'package:yakapp/page/notice.dart';
 import 'package:yakapp/page/splash.dart';
 import 'package:yakapp/page/transaction.dart';
@@ -66,7 +67,7 @@ class _HomePageState extends State<HomePage> {
 
 
   int currentIndex = 0;
-  List tabPages = [ AssetsPage(), NoticePage(),TransactionPage(),UserCenterPage()];
+  List tabPages = [ AssetsPage(),FitValuePage(),TransactionPage(),NoticePage(),UserCenterPage()];
 
   void onTabSelected(index){
 
@@ -116,17 +117,9 @@ class _HomePageState extends State<HomePage> {
               label:"资产"
             ),
             BottomNavigationBarItem(
-                icon:Image(
-                  width:22,
-                  height:22,
-                  image: AssetImage("images/notice.png"),
-                ),
-                activeIcon: Image(
-                  width:22,
-                  height:22,
-                  image: AssetImage("images/notice_active.png"),
-                ),
-                label:"新币"
+                icon:Icon(Icons.analytics_outlined,size:22,color:Color(0xff636A72)),
+                activeIcon: Icon(Icons.analytics_outlined,size:22,color:Color(0xff48ABFD)),
+                label:"行情"
             ),
             BottomNavigationBarItem(
                 icon:Image(
@@ -140,6 +133,19 @@ class _HomePageState extends State<HomePage> {
                   image: AssetImage("images/transaction_active.png"),
                 ),
                 label:"交易"
+            ),
+            BottomNavigationBarItem(
+                icon:Image(
+                  width:22,
+                  height:22,
+                  image: AssetImage("images/notice.png"),
+                ),
+                activeIcon: Image(
+                  width:22,
+                  height:22,
+                  image: AssetImage("images/notice_active.png"),
+                ),
+                label:"新币"
             ),
             BottomNavigationBarItem(
                 icon:Image(
