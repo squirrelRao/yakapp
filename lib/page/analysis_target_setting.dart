@@ -24,7 +24,7 @@ class AnalysisTargetSettingState extends State<AnalysisTargetSettingPage>{
 
   TextEditingController assetController = new TextEditingController(text: "");
 
-  var asset = 0;
+  var asset = "";
 
   Widget showAssetInput() {
     return Padding(
@@ -59,7 +59,7 @@ class AnalysisTargetSettingState extends State<AnalysisTargetSettingPage>{
           filled: true,
           fillColor: Color(0xffF3F5F7),
         ),
-        onSaved: (value) => asset = int.parse(value!.trim()),
+        onSaved: (value) => asset = value!.trim(),
         onTap: (){
           assetController.text="";
         },
@@ -143,7 +143,7 @@ class AnalysisTargetSettingState extends State<AnalysisTargetSettingPage>{
     return Scaffold(
 
           appBar:AppBar(
-            title: const Text('分析设置',style:TextStyle(color: Color(0xff323232),fontSize: 17)),
+            title: const Text('分析目标增删',style:TextStyle(color: Color(0xff323232),fontSize: 17)),
               backgroundColor: Colors.white70,
               elevation: 0,
               centerTitle: true,
@@ -172,7 +172,6 @@ class AnalysisTargetSettingState extends State<AnalysisTargetSettingPage>{
 
                 key : _formKey,
                 child: Container(
-                  color: Color(0xffffffff),
                   padding: const EdgeInsets.fromLTRB(28, 0, 28, 0),
                   child: Column(
                       children: <Widget>[

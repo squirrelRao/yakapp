@@ -242,7 +242,6 @@ class AnalysisSettingState extends State<AnalysisSettingPage>{
 
                 key : _formKey,
                 child: Container(
-                  color: Color(0xffffffff),
                   padding: const EdgeInsets.fromLTRB(28, 0, 28, 0),
                   child: Column(
                       children: <Widget>[
@@ -254,9 +253,7 @@ class AnalysisSettingState extends State<AnalysisSettingPage>{
                   )
             ),
               Container(
-                color: Colors.white,
                 height: 40,
-                margin: EdgeInsets.only(top:10,bottom:10),
                 padding: const EdgeInsets.fromLTRB(32, 0, 32, 0),
                 child: TextButton(
                   child: Text('提 交'),
