@@ -119,7 +119,7 @@ class _HomePageState extends State<HomePage> {
             BottomNavigationBarItem(
                 icon:Icon(Icons.analytics_outlined,size:22,color:Color(0xff636A72)),
                 activeIcon: Icon(Icons.analytics_outlined,size:22,color:Color(0xff48ABFD)),
-                label:"行情"
+                label:"分析"
             ),
             BottomNavigationBarItem(
                 icon:Image(

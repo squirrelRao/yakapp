@@ -11,6 +11,7 @@ import 'package:overlay_support/overlay_support.dart';
 
 
 import 'about.dart';
+import 'analysis_setting.dart';
 
 class UserCenterPage extends StatefulWidget{
 
@@ -363,6 +364,27 @@ class UserCenterState extends State<UserCenterPage> {
                            onPressed: (){
 
                              Navigator.push(context, MaterialPageRoute(builder: (content){return CommonSettingPage();}));
+
+                           })
+                   ),
+                   ListTile(
+                       visualDensity: VisualDensity(horizontal: -4),
+                       contentPadding: EdgeInsets.only(left:18,right:0),
+                       leading:Icon(Icons.analytics,size:22,color:Color(0xff48ABFD)),
+                       title: Text("分析设置",style:TextStyle(fontSize:14,color:Color(0xff292D33),fontWeight: FontWeight.w400)),
+                       onTap: (){
+                         Navigator.push(context, MaterialPageRoute(builder: (content){return AnalysisSettingPage();}));
+                       },
+                       trailing:IconButton(
+                           icon:Image(
+                             width:20,
+                             height:20,
+                             image: AssetImage("images/right_arrow.png"),
+                           )
+                           ,
+                           onPressed: (){
+
+                             Navigator.push(context, MaterialPageRoute(builder: (content){return AnalysisSettingPage();}));
 
                            })
                    ),

@@ -278,7 +278,7 @@ class FitValueState extends State<FitValuePage>{
 
             appBar: AppBar(
               // title: const Text('交易',style:TextStyle(color: Color(0xff323232),fontSize: 17)),
-              title: const Text('行情',style:TextStyle(color: Colors.white,fontSize: 17)),
+              title: const Text('分析',style:TextStyle(color: Colors.white,fontSize: 17)),
               backgroundColor:Color(0xff48ABFD),
               elevation: 0  ,
             ),
