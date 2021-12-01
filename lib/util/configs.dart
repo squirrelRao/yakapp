@@ -23,5 +23,8 @@ class Configs {
   static const String syncOrderApi = baseUrl +"/v1/remote/order/sync";
   static const String getFitValueConfigApi = baseUrl +"/v1/fitvalue/config/get";
   static const String updateFitValueConfigApi = baseUrl +"/v1/fitvalue/config/update";
+  static const String getMarketTarget = baseUrl +"/v1/market/target/get";
+  static const String addMarketTarget = baseUrl + "/v1/market/target/add";
+  static const String removeMarketTarget = baseUrl + "/v1/market/target/remove";
 
 }
