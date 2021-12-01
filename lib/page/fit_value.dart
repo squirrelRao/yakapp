@@ -8,6 +8,7 @@ import 'package:yakapp/util/net_util.dart';
 import 'package:overlay_support/overlay_support.dart';
 
 
+
 class FitValuePage extends StatefulWidget{
 
 
@@ -94,7 +95,7 @@ class FitValueState extends State<FitValuePage>{
                         children: [
                           Text(
                               item["asset"],
-                              style: TextStyle(fontSize: 15.0,fontWeight: FontWeight.w500)
+                              style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)
                           )
                           // Card(
                           //     color: item["type_color"],
@@ -115,7 +116,7 @@ class FitValueState extends State<FitValuePage>{
                         children: [
                           Text(
                               "适投值",
-                              style: TextStyle(fontSize: 13.0)
+                              style: TextStyle(fontSize: 13.5)
                           ),
 
                           Text(
@@ -129,12 +130,12 @@ class FitValueState extends State<FitValuePage>{
                         children: [
                           Text(
                               "流动性",
-                              style: TextStyle(fontSize: 13.0)
+                              style: TextStyle(fontSize: 13.5)
                           ),
 
                           Text(
                               Decimal.parse(item["fluidity_abs"].toString()).toString(),
-                              style: TextStyle(fontSize: 13)
+                              style: TextStyle(fontSize: 13.5)
                           )
                         ])),
                 Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
@@ -143,11 +144,11 @@ class FitValueState extends State<FitValuePage>{
                         children: [
                           Text(
                               "价格变化",
-                              style: TextStyle(fontSize: 13.0)
+                              style: TextStyle(fontSize: 13.5)
                           ),
                           Text(
                               Decimal.parse(item["ticker"]["priceChangePercent"].toString()).toString()+"%",
-                              style: TextStyle(fontSize: 13)
+                              style: TextStyle(fontSize: 13.5)
                           )
                         ])),
                 Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
@@ -156,12 +157,12 @@ class FitValueState extends State<FitValuePage>{
                         children: [
                           Text(
                               "价格弹性",
-                              style: TextStyle(fontSize: 13.0)
+                              style: TextStyle(fontSize: 13.5)
                           ),
 
                           Text(
                               Decimal.parse(item["price_elastic"].toString()).toString()+"%",
-                              style: TextStyle(fontSize: 13)
+                              style: TextStyle(fontSize: 13.5)
                           )
                         ])),
                 Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
@@ -170,11 +171,11 @@ class FitValueState extends State<FitValuePage>{
                         children: [
                           Text(
                               "成交超线",
-                              style: TextStyle(fontSize: 13.0)
+                              style: TextStyle(fontSize: 13.5)
                           ),
                           Text(
                               Decimal.parse(item["volume_up_change"].toString()).toString()+"%",
-                              style: TextStyle(fontSize: 13)
+                              style: TextStyle(fontSize: 13.5)
                           )
                         ])),
                 Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
@@ -183,12 +184,12 @@ class FitValueState extends State<FitValuePage>{
                         children: [
                           Text(
                               "流动方向",
-                              style: TextStyle(fontSize: 13.0)
+                              style: TextStyle(fontSize: 13.5)
                           ),
 
                           Text(
                               item["fluidity_desc"].toString(),
-                              style: TextStyle(fontSize: 13.0)
+                              style: TextStyle(fontSize: 13.5)
                           )
                         ])),
                 Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
@@ -197,11 +198,11 @@ class FitValueState extends State<FitValuePage>{
                         children: [
                           Text(
                               "买卖价差",
-                              style: TextStyle(fontSize: 13.0)
+                              style: TextStyle(fontSize: 13.5)
                           ),
                           Text(
                               Decimal.parse(item["ask_bid_price_change"].toString()).toString()+"%",
-                              style: TextStyle(fontSize: 13.0,color:item["status_str_color"])
+                              style: TextStyle(fontSize: 13.5,color:item["status_str_color"])
                           ),
                         ])),
                 Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
@@ -210,12 +211,12 @@ class FitValueState extends State<FitValuePage>{
                         children: [
                           Text(
                               "价格深度",
-                              style: TextStyle(fontSize: 13.0)
+                              style: TextStyle(fontSize: 13.5)
                           ),
 
                           Text(
                               Decimal.parse(item["price_depth_change"].toString()).toString()+"%",
-                              style: TextStyle(fontSize: 13.0)
+                              style: TextStyle(fontSize: 13.5)
                           )
                         ])),
                 Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
@@ -224,26 +225,12 @@ class FitValueState extends State<FitValuePage>{
                         children: [
                           Text(
                               "挂单深度",
-                              style: TextStyle(fontSize: 13.0)
+                              style: TextStyle(fontSize: 13.5)
                           ),
 
                           Text(
                               Decimal.parse(item["order_depth_change"].toString()).toString()+"%",
-                              style: TextStyle(fontSize: 13.0)
-                          )
-                        ])),
-                Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
-                    child:Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                              "深度描述",
-                              style: TextStyle(fontSize: 13.0)
-                          ),
-
-                          Text(
-                             item["price_depth_desc"]+" "+item["order_depth_desc"],
-                              style: TextStyle(fontSize: 13.0)
+                              style: TextStyle(fontSize: 13.5)
                           )
                         ])),
                 Padding(padding: EdgeInsets.only(left:14,top:8,right:14,bottom:14),
@@ -251,13 +238,13 @@ class FitValueState extends State<FitValuePage>{
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                              "时间范围",
-                              style: TextStyle(fontSize: 13.0)
+                              "深度含义",
+                              style: TextStyle(fontSize: 13.5)
                           ),
 
                           Text(
-                              "24小时",
-                              style: TextStyle(fontSize: 13.0)
+                             item["price_depth_desc"]+" "+item["order_depth_desc"],
+                              style: TextStyle(fontSize: 13.5)
                           )
                         ])),
               ]

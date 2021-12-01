@@ -67,7 +67,7 @@ class _HomePageState extends State<HomePage> {
 
 
   int currentIndex = 0;
-  List tabPages = [ AssetsPage(),FitValuePage(),TransactionPage(),NoticePage(),UserCenterPage()];
+  List tabPages = [ AssetsPage(),FitValuePage(),NoticePage(),TransactionPage(),UserCenterPage()];
 
   void onTabSelected(index){
 

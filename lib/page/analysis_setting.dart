@@ -8,6 +8,8 @@ import 'package:yakapp/util/configs.dart';
 import 'package:yakapp/util/net_util.dart';
 import 'package:overlay_support/overlay_support.dart';
 
+import 'analysis_target_setting.dart';
+
 class AnalysisSettingPage extends StatefulWidget{
 
   AnalysisSettingPage();
@@ -209,6 +211,12 @@ class AnalysisSettingState extends State<AnalysisSettingPage>{
               backgroundColor: Colors.white70,
               elevation: 0,
               centerTitle: true,
+              actions: [IconButton(
+                  icon: Icon(Icons.add,size: 24,color: Color(0xff323232),),
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (content){return AnalysisTargetSettingPage();}));
+                  })],
               leading: IconButton(
                 icon:Image(
                   width:24,
@@ -220,7 +228,6 @@ class AnalysisSettingState extends State<AnalysisSettingPage>{
                 },
               )
           ),
-
           body:  GestureDetector(
 
     behavior: HitTestBehavior.translucent,
@@ -249,6 +256,7 @@ class AnalysisSettingState extends State<AnalysisSettingPage>{
               Container(
                 color: Colors.white,
                 height: 40,
+                margin: EdgeInsets.only(top:10,bottom:10),
                 padding: const EdgeInsets.fromLTRB(32, 0, 32, 0),
                 child: TextButton(
                   child: Text('提 交'),
@@ -284,3 +292,4 @@ class AnalysisSettingState extends State<AnalysisSettingPage>{
 
 
 }
+
