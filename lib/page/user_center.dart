@@ -296,7 +296,7 @@ class UserCenterState extends State<UserCenterPage> {
                    ListTile(
                        visualDensity: VisualDensity(horizontal: -4),
                        contentPadding: EdgeInsets.only(left:18,right:0),
-                       leading:Icon(Icons.sync,size:20,color:Color(0xff48ABFD)),
+                       leading:Icon(Icons.sync_alt_sharp,size:20,color:Color(0xff48ABFD)),
                        title: Text("钱包同步",style:TextStyle(fontSize:14,color:Color(0xff292D33),fontWeight: FontWeight.w400)),
                        onTap: (){
 

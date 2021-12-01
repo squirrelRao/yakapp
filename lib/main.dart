@@ -121,19 +121,7 @@ class _HomePageState extends State<HomePage> {
                 activeIcon: Icon(Icons.analytics_outlined,size:22,color:Color(0xff48ABFD)),
                 label:"分析"
             ),
-            BottomNavigationBarItem(
-                icon:Image(
-                  width:22,
-                  height:22,
-                  image: AssetImage("images/transaction.png"),
-                ),
-                activeIcon: Image(
-                  width:22,
-                  height:22,
-                  image: AssetImage("images/transaction_active.png"),
-                ),
-                label:"交易"
-            ),
+
             BottomNavigationBarItem(
                 icon:Image(
                   width:22,
@@ -146,6 +134,19 @@ class _HomePageState extends State<HomePage> {
                   image: AssetImage("images/notice_active.png"),
                 ),
                 label:"新币"
+            ),
+            BottomNavigationBarItem(
+                icon:Image(
+                  width:22,
+                  height:22,
+                  image: AssetImage("images/transaction.png"),
+                ),
+                activeIcon: Image(
+                  width:22,
+                  height:22,
+                  image: AssetImage("images/transaction_active.png"),
+                ),
+                label:"交易"
             ),
             BottomNavigationBarItem(
                 icon:Image(

@@ -21,5 +21,7 @@ class Configs {
   static const String syncHistoryApi = baseUrl +"/v1/sync/history";
   static const String getFitValueApi= baseUrl +"/v1/fitvalue/get";
   static const String syncOrderApi = baseUrl +"/v1/remote/order/sync";
+  static const String getFitValueConfigApi = baseUrl +"/v1/fitvalue/config/get";
+  static const String updateFitValueConfigApi = baseUrl +"/v1/fitvalue/config/update";
 
 }

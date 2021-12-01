@@ -35,7 +35,7 @@ class AnalysisSettingState extends State<AnalysisSettingPage>{
           children:[
       Row(
       children:[
-          Text("设置深度数 (推荐5,10,20,50,100)",textAlign: TextAlign.left,style:TextStyle(color:Color(0xff999999),fontSize: 14))
+          Text("交易深度数 (推荐5,10,20,50,100)",textAlign: TextAlign.left,style:TextStyle(color:Color(0xff999999),fontSize: 14))
         ]),
       SizedBox(height: 5),
       new TextFormField(
@@ -138,21 +138,23 @@ class AnalysisSettingState extends State<AnalysisSettingPage>{
 
     SharedPreferences prefs =  await SharedPreferences.getInstance();
     String? userId = prefs.getString("uid");
-    (NetClient()).post(Configs.getUserInfo, {"user_id":userId}, (data){
+    (NetClient()).post(Configs.getFitValueConfigApi, {"user_id":userId}, (data){
 
       if(data["rc"] == 0 && data["data"] != ""){
         data = data["data"];
 
+
         setState(() {
 
-
-
+          depthController.text = data["depth_limit"].toString();
+          volumeBaseController.text = data["base_volume"].toString();
 
         });
       }else{
         setState(() {
 
-
+          depthController.text = "0";
+          volumeBaseController.text = "0";
         });
       }
 
@@ -160,14 +162,14 @@ class AnalysisSettingState extends State<AnalysisSettingPage>{
 
   }
 
-  void submitConfig(ror_duration,ror_touch,l_ror_touch,notify_period) async {
+  void submitConfig(depth_count,volume_base) async {
 
     SharedPreferences prefs =  await SharedPreferences.getInstance();
     String? userId = prefs.getString("uid");
 
 
-    (NetClient()).post(Configs.updateUserConfigApi,
-        {"user_id":userId},
+    (NetClient()).post(Configs.updateFitValueConfigApi,
+        {"user_id":userId,"depth":depth_count,"volume_base":volume_base},
             (data){
 
           if(data["rc"] == 0){
@@ -269,7 +271,7 @@ class AnalysisSettingState extends State<AnalysisSettingPage>{
                     }
 
                     _formKey.currentState!.save();
-                    // submitConfig(ror_duration,ror_touch,l_ror_touch,notify_period);
+                    submitConfig(depth_count,volume_base);
                   },
                 ),
               )
