@@ -451,19 +451,16 @@ class AssetSettingState extends State<AssetSettingPage>{
             return "须大于0";
           }
 
-            if(double.tryParse(value) != null){
-            var _price = 0.0;
-            _price = (1 + loweset_ror/100.0) * this.compare_price;
 
-            this.buy_usdt = double.parse(value) * _price;
-            }else{
-            this.buy_usdt = 0.0;
-            }
+          var _price = 0.0;
+          _price = (1 + loweset_ror/100.0) * this.compare_price;
 
-              if(buy_usdt > this.free_usdt){
+          this.buy_usdt = double.parse(value) * _price;
+
+          if(buy_usdt > this.free_usdt){
               return "加仓需要花费的USDT超过可用额度";
-              }
-            });
+          }
+
 
 
         },
