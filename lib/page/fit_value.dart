@@ -165,33 +165,21 @@ class FitValueState extends State<FitValuePage>{
                               style: TextStyle(fontSize: 13.5)
                           )
                         ])),
-                Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
-                    child:Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                              "成交超线",
-                              style: TextStyle(fontSize: 13.5)
-                          ),
-                          Text(
-                              Decimal.parse(item["volume_up_change"].toString()).toString()+"%",
-                              style: TextStyle(fontSize: 13.5)
-                          )
-                        ])),
-                Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
-                    child:Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                              "流动方向",
-                              style: TextStyle(fontSize: 13.5)
-                          ),
 
-                          Text(
-                              item["fluidity_desc"].toString(),
-                              style: TextStyle(fontSize: 13.5)
-                          )
-                        ])),
+                // Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
+                //     child:Row(
+                //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //         children: [
+                //           Text(
+                //               "流动方向",
+                //               style: TextStyle(fontSize: 13.5)
+                //           ),
+                //
+                //           Text(
+                //               item["fluidity_desc"].toString(),
+                //               style: TextStyle(fontSize: 13.5)
+                //           )
+                //         ])),
                 Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
                     child:Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -205,48 +193,61 @@ class FitValueState extends State<FitValuePage>{
                               style: TextStyle(fontSize: 13.5,color:item["status_str_color"])
                           ),
                         ])),
-                Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
-                    child:Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                              "价格深度",
-                              style: TextStyle(fontSize: 13.5)
-                          ),
-
-                          Text(
-                              Decimal.parse(item["price_depth_change"].toString()).toString()+"%",
-                              style: TextStyle(fontSize: 13.5)
-                          )
-                        ])),
-                Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
-                    child:Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                              "挂单深度",
-                              style: TextStyle(fontSize: 13.5)
-                          ),
-
-                          Text(
-                              Decimal.parse(item["order_depth_change"].toString()).toString()+"%",
-                              style: TextStyle(fontSize: 13.5)
-                          )
-                        ])),
                 Padding(padding: EdgeInsets.only(left:14,top:8,right:14,bottom:14),
                     child:Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                              "深度含义",
+                              "成交超线",
                               style: TextStyle(fontSize: 13.5)
                           ),
-
                           Text(
-                             item["price_depth_desc"]+" "+item["order_depth_desc"],
+                              Decimal.parse(item["volume_up_change"].toString()).toString()+"%",
                               style: TextStyle(fontSize: 13.5)
                           )
                         ])),
+                // Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
+                //     child:Row(
+                //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //         children: [
+                //           Text(
+                //               "价格深度",
+                //               style: TextStyle(fontSize: 13.5)
+                //           ),
+                //
+                //           Text(
+                //               Decimal.parse(item["price_depth_change"].toString()).toString()+"%",
+                //               style: TextStyle(fontSize: 13.5)
+                //           )
+                //         ])),
+                // Padding(padding: EdgeInsets.only(left:14,top:8,right:14,bottom:14),
+                //     child:Row(
+                //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //         children: [
+                //           Text(
+                //               "挂单深度",
+                //               style: TextStyle(fontSize: 13.5)
+                //           ),
+                //
+                //           Text(
+                //               Decimal.parse(item["order_depth_change"].toString()).toString()+"%",
+                //               style: TextStyle(fontSize: 13.5)
+                //           )
+                //         ])),
+                // Padding(padding: EdgeInsets.only(left:14,top:8,right:14,bottom:14),
+                //     child:Row(
+                //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //         children: [
+                //           Text(
+                //               "深度含义",
+                //               style: TextStyle(fontSize: 13.5)
+                //           ),
+                //
+                //           Text(
+                //              item["price_depth_desc"]+" "+item["order_depth_desc"],
+                //               style: TextStyle(fontSize: 13.5)
+                //           )
+                //         ])),
               ]
           )
 
