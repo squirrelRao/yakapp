@@ -39,8 +39,11 @@ class FitValueState extends State<FitValuePage>{
         datas = data["data"];
 
         for(var item in datas){
-
-
+          if(item["fit_value_abs"] < 100){
+            item["fit_value_color"] = Color(0xffE95555);
+          }else{
+            item["fit_value_color"] = Color(0xff02AC8F);
+          }
             // item["status_str_color"] = Color(0xffE95555);
             // item["status_str_color"] = Color(0xff02AC8F);
         }
@@ -121,7 +124,7 @@ class FitValueState extends State<FitValuePage>{
 
                           Text(
                               Decimal.parse(item["fit_value_abs"].toString()).toString(),
-                              style: TextStyle(fontSize: 13.5)
+                              style: TextStyle(fontSize: 13.5,color:item["fit_value_color"])
                           )
                         ])),
                 Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
