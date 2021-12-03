@@ -44,6 +44,26 @@ class FitValueState extends State<FitValuePage>{
           }else{
             item["fit_value_color"] = Color(0xff02AC8F);
           }
+
+          // if(item["fluidity_abs"] < 100){
+          //   item["fluidity_color"] = Color(0xffE95555);
+          // }else{
+          //   item["fluidity_color"] = Color(0xff02AC8F);
+          // }
+          //
+          // if(item["volume_up_change"] < 100){
+          //   item["volume_up_color"] = Color(0xffE95555);
+          // }else{
+          //   item["volume_up_color"] = Color(0xff02AC8F);
+          // }
+          //
+          // if(Decimal.parse(item["ticker"]["priceChangePercent"].toString()).abs() < Decimal.parse("1")){
+          //   item["priceChangePercent_color"] = Color(0xffE95555);
+          // }else{
+          //   item["priceChangePercent_color"] = Color(0xff02AC8F);
+          // }
+
+
             // item["status_str_color"] = Color(0xffE95555);
             // item["status_str_color"] = Color(0xff02AC8F);
         }
@@ -119,12 +139,12 @@ class FitValueState extends State<FitValuePage>{
                         children: [
                           Text(
                               "适投值",
-                              style: TextStyle(fontSize: 13.5)
+                              style: TextStyle(fontSize: 14)
                           ),
 
                           Text(
                               Decimal.parse(item["fit_value_abs"].toString()).toString(),
-                              style: TextStyle(fontSize: 13.5,color:item["fit_value_color"])
+                              style: TextStyle(fontSize: 14,color:item["fit_value_color"])
                           )
                         ])),
                 Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
@@ -133,12 +153,67 @@ class FitValueState extends State<FitValuePage>{
                         children: [
                           Text(
                               "流动性",
-                              style: TextStyle(fontSize: 13.5)
+                              style: TextStyle(fontSize: 14)
                           ),
 
                           Text(
                               Decimal.parse(item["fluidity_abs"].toString()).toString(),
-                              style: TextStyle(fontSize: 13.5)
+                              style: TextStyle(fontSize: 14,color:item["fluidity_color"])
+                          )
+                        ])),
+                Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
+                    child:Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                              "买卖价差",
+                              style: TextStyle(fontSize: 11,color:Colors.grey)
+                          ),
+                          Text(
+                              Decimal.parse(item["ask_bid_price_change"].toString()).toString()+"%",
+                              style: TextStyle(fontSize: 11,color:Colors.grey)
+                          ),
+                        ])),
+                Padding(padding: EdgeInsets.only(left:14,top:8,right:14,bottom:0),
+                    child:Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                              "价格弹性",
+                              style: TextStyle(fontSize: 11,color:Colors.grey)
+                          ),
+
+                          Text(
+                              Decimal.parse(item["price_elastic"].toString()).toString()+"%",
+                              style: TextStyle(fontSize: 11,color:Colors.grey)
+                          )
+                        ])),
+                Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
+                    child:Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                              "价格深度",
+                              style: TextStyle(fontSize: 11,color:Colors.grey)
+                          ),
+
+                          Text(
+                              Decimal.parse(item["price_depth_change"].toString()).toString()+"%",
+                              style: TextStyle(fontSize: 11,color:Colors.grey)
+                          )
+                        ])),
+                Padding(padding: EdgeInsets.only(left:14,top:8,right:14,bottom:0),
+                    child:Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                              "挂单深度",
+                              style: TextStyle(fontSize: 11,color:Colors.grey)
+                          ),
+
+                          Text(
+                              Decimal.parse(item["order_depth_change"].toString()).toString()+"%",
+                              style: TextStyle(fontSize: 11,color:Colors.grey)
                           )
                         ])),
                 Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
@@ -147,27 +222,27 @@ class FitValueState extends State<FitValuePage>{
                         children: [
                           Text(
                               "价格变化",
-                              style: TextStyle(fontSize: 13.5)
+                              style: TextStyle(fontSize: 14)
                           ),
                           Text(
                               Decimal.parse(item["ticker"]["priceChangePercent"].toString()).toString()+"%",
-                              style: TextStyle(fontSize: 13.5)
+                              style: TextStyle(fontSize: 14,color:item["priceChangePercent_color"])
                           )
                         ])),
-                Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
+                Padding(padding: EdgeInsets.only(left:14,top:8,right:14,bottom:14),
                     child:Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                              "价格弹性",
-                              style: TextStyle(fontSize: 13.5)
+                              "成交超线",
+                              style: TextStyle(fontSize: 14)
                           ),
-
                           Text(
-                              Decimal.parse(item["price_elastic"].toString()).toString()+"%",
-                              style: TextStyle(fontSize: 13.5)
+                              Decimal.parse(item["volume_up_change"].toString()).toString()+"%",
+                              style: TextStyle(fontSize: 14,color:item["volume_up_color"])
                           )
                         ])),
+
 
                 // Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
                 //     child:Row(
@@ -183,60 +258,7 @@ class FitValueState extends State<FitValuePage>{
                 //               style: TextStyle(fontSize: 13.5)
                 //           )
                 //         ])),
-                Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
-                    child:Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                              "买卖价差",
-                              style: TextStyle(fontSize: 13.5)
-                          ),
-                          Text(
-                              Decimal.parse(item["ask_bid_price_change"].toString()).toString()+"%",
-                              style: TextStyle(fontSize: 13.5,color:item["status_str_color"])
-                          ),
-                        ])),
-                Padding(padding: EdgeInsets.only(left:14,top:8,right:14,bottom:14),
-                    child:Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                              "成交超线",
-                              style: TextStyle(fontSize: 13.5)
-                          ),
-                          Text(
-                              Decimal.parse(item["volume_up_change"].toString()).toString()+"%",
-                              style: TextStyle(fontSize: 13.5)
-                          )
-                        ])),
-                // Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
-                //     child:Row(
-                //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //         children: [
-                //           Text(
-                //               "价格深度",
-                //               style: TextStyle(fontSize: 13.5)
-                //           ),
-                //
-                //           Text(
-                //               Decimal.parse(item["price_depth_change"].toString()).toString()+"%",
-                //               style: TextStyle(fontSize: 13.5)
-                //           )
-                //         ])),
-                // Padding(padding: EdgeInsets.only(left:14,top:8,right:14,bottom:14),
-                //     child:Row(
-                //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //         children: [
-                //           Text(
-                //               "挂单深度",
-                //               style: TextStyle(fontSize: 13.5)
-                //           ),
-                //
-                //           Text(
-                //               Decimal.parse(item["order_depth_change"].toString()).toString()+"%",
-                //               style: TextStyle(fontSize: 13.5)
-                //           )
-                //         ])),
+
                 // Padding(padding: EdgeInsets.only(left:14,top:8,right:14,bottom:14),
                 //     child:Row(
                 //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
