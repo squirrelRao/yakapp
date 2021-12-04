@@ -307,9 +307,9 @@ class FitValueState extends State<FitValuePage>{
                     icon: Icon(Icons.info_outline_rounded,size: 22,color: Colors.white),
                     onPressed: () {
                       showSimpleNotification(
-                          Text("成交量基线: "+volume_base+" usdt"),
+                          Text("成交量评估基线: "+volume_base+"USDT"),
                           subtitle:Text("深度: "+depth.toString()),
-                          duration: Duration(seconds: 5,milliseconds: 0),
+                          duration: Duration(seconds: 3,milliseconds: 500),
                           leading: Icon(Icons.info_outline_rounded,color:Colors.white),
                           background: Color(0xff48ABFD));
                     }

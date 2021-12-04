@@ -25,6 +25,7 @@ class AssetsState extends State<AssetsPage>{
   var upate_time = "";
   var _timer;
   var last_snapshot_time_str="";
+  var exchange = "";
 
   void getUserAssets() async {
 
@@ -46,6 +47,8 @@ class AssetsState extends State<AssetsPage>{
                 datas = data["data"];
 
                 last_snapshot_time_str = data["data"]["last_snapshot_time_str"];
+                exchange = Decimal.parse(data["data"]["exchange"].toString()).toString();
+
                 for(var item in datas["snapshots"]){
 
                   if(item["price"]<0){
@@ -495,8 +498,9 @@ class AssetsState extends State<AssetsPage>{
                     icon: Icon(Icons.info_outline_rounded,size: 22,color: Colors.white),
                     onPressed: () {
                       showSimpleNotification(
-                          Text("环比时间: "+last_snapshot_time_str),
-                          duration: Duration(seconds: 5,milliseconds: 0),
+                          Text("环比时刻: "+last_snapshot_time_str),
+                          subtitle: Text("实时汇率: 1USDT = "+exchange.toString()+"CNY"),
+                          duration: Duration(seconds: 3,milliseconds: 500),
                           leading: Icon(Icons.info_outline_rounded,color:Colors.white),
                           background: Color(0xff48ABFD));
                     }
