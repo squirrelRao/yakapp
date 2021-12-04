@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:decimal/decimal.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yakapp/util/configs.dart';
 import 'package:yakapp/util/net_util.dart';
@@ -21,8 +22,10 @@ class FitValueState extends State<FitValuePage>{
   List datas = [];
   int listCount = 0;
   var _timer;
-  var volume_base = 0;
+  var volume_base = "";
   var depth = 0;
+  var f = NumberFormat('###,###,###', 'en_US');
+
 
   void getFitValues() async {
 
@@ -40,7 +43,7 @@ class FitValueState extends State<FitValuePage>{
         listCount = data["data"].length;
         datas = data["data"];
 
-        volume_base = Decimal.parse(data["setting"]["base_volume"].toString()).toInt();
+        volume_base = data["setting"]["base_volume_str"];
         depth = Decimal.parse(data["setting"]["depth_limit"].toString()).toInt();
 
         for(var item in datas){
@@ -304,8 +307,9 @@ class FitValueState extends State<FitValuePage>{
                     icon: Icon(Icons.info_outline_rounded,size: 22,color: Colors.white),
                     onPressed: () {
                       showSimpleNotification(
-                          Text("成交量评估基线:"+volume_base.toString()+" 成交深度:"+depth.toString()),
-                          duration: Duration(seconds: 2,milliseconds: 500),
+                          Text("成交量基线: "+volume_base+" usdt"),
+                          subtitle:Text("深度: "+depth.toString()),
+                          duration: Duration(seconds: 5,milliseconds: 0),
                           leading: Icon(Icons.info_outline_rounded,color:Colors.white),
                           background: Color(0xff48ABFD));
                     }

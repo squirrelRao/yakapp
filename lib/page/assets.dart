@@ -495,8 +495,8 @@ class AssetsState extends State<AssetsPage>{
                     icon: Icon(Icons.info_outline_rounded,size: 22,color: Colors.white),
                     onPressed: () {
                       showSimpleNotification(
-                          Text("环比时间:"+last_snapshot_time_str),
-                          duration: Duration(seconds: 2,milliseconds: 500),
+                          Text("环比时间: "+last_snapshot_time_str),
+                          duration: Duration(seconds: 5,milliseconds: 0),
                           leading: Icon(Icons.info_outline_rounded,color:Colors.white),
                           background: Color(0xff48ABFD));
                     }
