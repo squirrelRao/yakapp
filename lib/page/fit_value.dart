@@ -21,6 +21,8 @@ class FitValueState extends State<FitValuePage>{
   List datas = [];
   int listCount = 0;
   var _timer;
+  var volume_base = 0;
+  var depth = 0;
 
   void getFitValues() async {
 
@@ -37,6 +39,9 @@ class FitValueState extends State<FitValuePage>{
       if(data["rc"] == 0) {
         listCount = data["data"].length;
         datas = data["data"];
+
+        volume_base = Decimal.parse(data["setting"]["base_volume"].toString()).toInt();
+        depth = Decimal.parse(data["setting"]["depth_limit"].toString()).toInt();
 
         for(var item in datas){
           if(item["fit_value_abs"] < 100){
@@ -294,6 +299,18 @@ class FitValueState extends State<FitValuePage>{
               title: const Text('分析',style:TextStyle(color: Colors.white,fontSize: 17)),
               backgroundColor:Color(0xff48ABFD),
               elevation: 0  ,
+              actions: [
+                IconButton(
+                    icon: Icon(Icons.info_outline_rounded,size: 22,color: Colors.white),
+                    onPressed: () {
+                      showSimpleNotification(
+                          Text("成交量评估基线:"+volume_base.toString()+" 成交深度:"+depth.toString()),
+                          duration: Duration(seconds: 2,milliseconds: 500),
+                          leading: Icon(Icons.info_outline_rounded,color:Colors.white),
+                          background: Color(0xff48ABFD));
+                    }
+                )
+              ],
             ),
             body:
             RefreshIndicator(

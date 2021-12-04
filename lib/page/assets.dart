@@ -8,6 +8,7 @@ import 'package:yakapp/util/net_util.dart';
 import 'asset_setting.dart';
 import 'common_setting.dart';
 import 'package:decimal/decimal.dart';
+import 'package:overlay_support/overlay_support.dart';
 
 
 class AssetsPage extends StatefulWidget{
@@ -23,6 +24,7 @@ class AssetsState extends State<AssetsPage>{
   int listCount = 0;
   var upate_time = "";
   var _timer;
+  var last_snapshot_time_str="";
 
   void getUserAssets() async {
 
@@ -43,6 +45,7 @@ class AssetsState extends State<AssetsPage>{
                 listCount = data["data"]["snapshots"].length + 1;
                 datas = data["data"];
 
+                last_snapshot_time_str = data["data"]["last_snapshot_time_str"];
                 for(var item in datas["snapshots"]){
 
                   if(item["price"]<0){
@@ -171,7 +174,7 @@ class AssetsState extends State<AssetsPage>{
                           Column(
                               children: [
                                 Text(
-                                    "累计收益",
+                                    "环比收益",
                                     style: TextStyle(fontSize: 13.0,color: Color(0xfff3f3f3))
                                 ),
                                 SizedBox(height: 8),
@@ -488,13 +491,16 @@ class AssetsState extends State<AssetsPage>{
               elevation: 0,
 
               actions: [
-                // Center(
-                //  Container(
-                //   child:  Text(upate_time,style: TextStyle(fontSize: 13)),
-                //   padding: const EdgeInsets.fromLTRB(0,0,5,10.0),
-                //   alignment: Alignment.bottomCenter,
-               // )
-               // )
+                IconButton(
+                    icon: Icon(Icons.info_outline_rounded,size: 22,color: Colors.white),
+                    onPressed: () {
+                      showSimpleNotification(
+                          Text("环比时间:"+last_snapshot_time_str),
+                          duration: Duration(seconds: 2,milliseconds: 500),
+                          leading: Icon(Icons.info_outline_rounded,color:Colors.white),
+                          background: Color(0xff48ABFD));
+                    }
+                )
               ],
             ),
             body:
