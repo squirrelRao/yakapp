@@ -196,7 +196,7 @@ class UserCenterState extends State<UserCenterPage> {
                 children: [
 
                   SimpleDialogOption(
-                      child: Text("V1.0",style:TextStyle(color:Color(0xff221232)))
+                      child: Text("",style:TextStyle(color:Color(0xff221232)))
                   ),
                   SimpleDialogOption(
                   child: Text("hqraop@163.com",style:TextStyle(color:Color(0xff221232)))
