@@ -289,8 +289,7 @@ class FitValueState extends State<FitValuePage>{
                           Text(
                               Decimal.parse(item["volume_up_change"].toString()).toString()+"%",
                               style: TextStyle(fontSize: 14,color:item["volume_up_color"])
-                          )
-                        ])),
+                          ),
                 Padding(padding: EdgeInsets.only(left:14,top:8,right:14,bottom:0),
                     child:Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -302,6 +301,20 @@ class FitValueState extends State<FitValuePage>{
                           Text(
                               Decimal.parse(item["cur_price"].toString()).toString(),
                               style: TextStyle(fontSize: 14)
+                          )
+                        ])),
+                        ])),
+                Padding(padding: EdgeInsets.only(left:14,top:8,right:14,bottom:0),
+                    child:Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                              "收盘时间",
+                              style: TextStyle(fontSize: 11,color:Colors.grey)
+                          ),
+                          Text(
+                              Decimal.parse(item["cur_price_time"].toString()).toString(),
+                              style: TextStyle(fontSize: 11,color:Colors.grey)
                           )
                         ])),
                 buildPredictDisabledWidget(item),
