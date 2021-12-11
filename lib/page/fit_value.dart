@@ -92,7 +92,8 @@ class FitValueState extends State<FitValuePage>{
 
     var item = datas[item_index];
 
-    if(item["is_predict"] == 1) {
+    if(item["is_predict"] == 1 && predict_index < item["predict"].length) {
+
       var predict = item["predict"][predict_index];
       var _color = Color(0xff02AC8F);
       if (predict["price_change"] < 0) {
