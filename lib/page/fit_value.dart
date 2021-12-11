@@ -4,6 +4,7 @@ import 'package:decimal/decimal.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:yakapp/page/asset_market_setting.dart';
 import 'package:yakapp/util/configs.dart';
 import 'package:yakapp/util/net_util.dart';
 import 'package:overlay_support/overlay_support.dart';
@@ -24,6 +25,7 @@ class FitValueState extends State<FitValuePage>{
   var _timer;
   var volume_base = "";
   var depth = 0;
+
   var f = NumberFormat('###,###,###', 'en_US');
 
 
@@ -53,27 +55,6 @@ class FitValueState extends State<FitValuePage>{
             item["fit_value_color"] = Color(0xff02AC8F);
           }
 
-          // if(item["fluidity_abs"] < 100){
-          //   item["fluidity_color"] = Color(0xffE95555);
-          // }else{
-          //   item["fluidity_color"] = Color(0xff02AC8F);
-          // }
-          //
-          // if(item["volume_up_change"] < 100){
-          //   item["volume_up_color"] = Color(0xffE95555);
-          // }else{
-          //   item["volume_up_color"] = Color(0xff02AC8F);
-          // }
-          //
-          // if(Decimal.parse(item["ticker"]["priceChangePercent"].toString()).abs() < Decimal.parse("1")){
-          //   item["priceChangePercent_color"] = Color(0xffE95555);
-          // }else{
-          //   item["priceChangePercent_color"] = Color(0xff02AC8F);
-          // }
-
-
-            // item["status_str_color"] = Color(0xffE95555);
-            // item["status_str_color"] = Color(0xff02AC8F);
         }
       }
 
@@ -106,10 +87,82 @@ class FitValueState extends State<FitValuePage>{
     _timer.cancel();
   }
 
+  Widget buildPredictWidget(item_index,predict_index){
+
+
+    var item = datas[item_index];
+
+    if(item["is_predict"] == 1) {
+      var predict = item["predict"][predict_index];
+      var _color = Color(0xff02AC8F);
+      if (predict["price_change"] < 0) {
+        _color = Color(0xffE95555);
+      }
+
+      var tip = predict["predict_hour_time"];
+
+      return Padding(
+          padding: EdgeInsets.only(left: 14, top: 8, right: 14, bottom: 0),
+          child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                    tip,
+                    style: TextStyle(fontSize: 14)
+                ),
+                Text(
+                    Decimal.parse(predict["predict_price"].toString()).toString(),
+                    style: TextStyle(fontSize: 14)
+                )
+              ]));
+    }else{
+
+      return Container();
+    }
+  }
+
+  Widget buildPredictDisabledWidget(item){
+
+    if(item["is_predict"] != 1) {
+      // return new Container(height:0.0,width:0.0);
+      return Padding(
+          padding: EdgeInsets.only(left: 14, top: 8, right: 14, bottom: 0),
+          child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                    "价格预测",
+                    style: TextStyle(fontSize: 14)
+                ),
+                Text(
+                    item["is_predict_desc"],
+                    style: TextStyle(fontSize: 14)
+                )
+              ]));
+    }else{
+      return Padding(
+          padding: EdgeInsets.only(left: 14, top: 8, right: 14, bottom: 0),
+          child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                    "价格预测",
+                    style: TextStyle(fontSize: 14)
+                ),
+                Text(
+                    "",
+                    style: TextStyle(fontSize: 14)
+                )
+              ]));
+    }
+  }
   //build asset summary
   Widget buildFitValueDetail(index){
 
     var item  = datas[index];
+    var predict = item["predict"];
+    var predict_count = predict.length;
+    var _height = predict_count * 50;
 
     return GestureDetector(
       child:Card(
@@ -128,18 +181,6 @@ class FitValueState extends State<FitValuePage>{
                               item["asset"],
                               style: TextStyle(fontSize: 15,fontWeight: FontWeight.w500)
                           )
-                          // Card(
-                          //     color: item["type_color"],
-                          //     elevation: 0,
-                          //     margin: EdgeInsets.only(top: 0.0,bottom: 0.0,left: 10.0,right: 0.0),
-                          //     child:
-                          //     Padding(
-                          //         padding: EdgeInsets.fromLTRB(8, 2, 8, 2),
-                          //         child:Text(
-                          //             item["side"],
-                          //             style: TextStyle(fontSize: 12.0,color: Colors.white,fontWeight: FontWeight.w500)
-                          //         )
-                          //     )),
                         ])),
                 Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
                     child:Row(
@@ -169,19 +210,19 @@ class FitValueState extends State<FitValuePage>{
                               style: TextStyle(fontSize: 14,color:item["fluidity_color"])
                           )
                         ])),
-                Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
-                    child:Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                              "买卖价差",
-                              style: TextStyle(fontSize: 11,color:Colors.grey)
-                          ),
-                          Text(
-                              Decimal.parse(item["ask_bid_price_change"].toString()).toString()+"%",
-                              style: TextStyle(fontSize: 11,color:Colors.grey)
-                          ),
-                        ])),
+                // Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
+                //     child:Row(
+                //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //         children: [
+                //           Text(
+                //               "买卖价差",
+                //               style: TextStyle(fontSize: 11,color:Colors.grey)
+                //           ),
+                //           Text(
+                //               Decimal.parse(item["ask_bid_price_change"].toString()).toString()+"%",
+                //               style: TextStyle(fontSize: 11,color:Colors.grey)
+                //           ),
+                //         ])),
                 Padding(padding: EdgeInsets.only(left:14,top:8,right:14,bottom:0),
                     child:Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -196,29 +237,28 @@ class FitValueState extends State<FitValuePage>{
                               style: TextStyle(fontSize: 11,color:Colors.grey)
                           )
                         ])),
-                Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
-                    child:Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                              "价格深度",
-                              style: TextStyle(fontSize: 11,color:Colors.grey)
-                          ),
-
-                          Text(
-                              Decimal.parse(item["price_depth_change"].toString()).toString()+"%",
-                              style: TextStyle(fontSize: 11,color:Colors.grey)
-                          )
-                        ])),
+                // Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
+                //     child:Row(
+                //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //         children: [
+                //           Text(
+                //               "价格深度",
+                //               style: TextStyle(fontSize: 11,color:Colors.grey)
+                //           ),
+                //
+                //           Text(
+                //               Decimal.parse(item["price_depth_change"].toString()).toString()+"%",
+                //               style: TextStyle(fontSize: 11,color:Colors.grey)
+                //           )
+                //         ])),
                 Padding(padding: EdgeInsets.only(left:14,top:8,right:14,bottom:0),
                     child:Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                              "挂单深度",
+                              "买卖深度差",
                               style: TextStyle(fontSize: 11,color:Colors.grey)
                           ),
-
                           Text(
                               Decimal.parse(item["order_depth_change"].toString()).toString()+"%",
                               style: TextStyle(fontSize: 11,color:Colors.grey)
@@ -233,11 +273,11 @@ class FitValueState extends State<FitValuePage>{
                               style: TextStyle(fontSize: 14)
                           ),
                           Text(
-                              Decimal.parse(item["ticker"]["priceChangePercent"].toString()).toString()+"%",
+                              Decimal.parse(item["priceChangePercent"].toString()).toString()+"%",
                               style: TextStyle(fontSize: 14,color:item["priceChangePercent_color"])
                           )
                         ])),
-                Padding(padding: EdgeInsets.only(left:14,top:8,right:14,bottom:14),
+                Padding(padding: EdgeInsets.only(left:14,top:8,right:14,bottom:0),
                     child:Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -250,44 +290,34 @@ class FitValueState extends State<FitValuePage>{
                               style: TextStyle(fontSize: 14,color:item["volume_up_color"])
                           )
                         ])),
-
-
-                // Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
-                //     child:Row(
-                //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //         children: [
-                //           Text(
-                //               "流动方向",
-                //               style: TextStyle(fontSize: 13.5)
-                //           ),
-                //
-                //           Text(
-                //               item["fluidity_desc"].toString(),
-                //               style: TextStyle(fontSize: 13.5)
-                //           )
-                //         ])),
-
-                // Padding(padding: EdgeInsets.only(left:14,top:8,right:14,bottom:14),
-                //     child:Row(
-                //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //         children: [
-                //           Text(
-                //               "深度含义",
-                //               style: TextStyle(fontSize: 13.5)
-                //           ),
-                //
-                //           Text(
-                //              item["price_depth_desc"]+" "+item["order_depth_desc"],
-                //               style: TextStyle(fontSize: 13.5)
-                //           )
-                //         ])),
+                Padding(padding: EdgeInsets.only(left:14,top:8,right:14,bottom:0),
+                    child:Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                              "最近价格",
+                              style: TextStyle(fontSize: 14)
+                          ),
+                          Text(
+                              Decimal.parse(item["cur_price"].toString()).toString(),
+                              style: TextStyle(fontSize: 14)
+                          )
+                        ])),
+                buildPredictDisabledWidget(item),
+                buildPredictWidget(index,0),
+                buildPredictWidget(index,1),
+                buildPredictWidget(index,2),
+                buildPredictWidget(index,3),
+                buildPredictWidget(index,4),
+                buildPredictWidget(index,5),
+                SizedBox(height:14)
               ]
           )
 
       ),
       onTap: (){
         setState(() {
-          // Navigator.push(context, MaterialPageRoute(builder: (content){return AssetSettingPage(asset : item["asset"]);}));
+          Navigator.push(context, MaterialPageRoute(builder: (content){return AssetMarketSettingPage(asset: item["asset"]);}));
         });
       },
     );
@@ -331,17 +361,6 @@ class FitValueState extends State<FitValuePage>{
             ListView.builder(
                 itemCount: listCount,
                 itemBuilder: (BuildContext context,int index) {
-
-                        // return Padding(padding: EdgeInsets.only(left:14,top:14,right:14),
-                        //     child:Row(
-                        //         mainAxisAlignment: MainAxisAlignment.center,
-                        //         children: [
-                        //           Text(
-                        //               "相关数值根据最近24小时价格及深度数据计算",
-                        //               style: TextStyle(fontSize: 11.0,color:Colors.grey)
-                        //           )
-                        //         ]));
-
                         return buildFitValueDetail(index);
 
 

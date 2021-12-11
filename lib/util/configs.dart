@@ -26,5 +26,7 @@ class Configs {
   static const String getMarketTarget = baseUrl +"/v1/market/target/get";
   static const String addMarketTarget = baseUrl + "/v1/market/target/add";
   static const String removeMarketTarget = baseUrl + "/v1/market/target/remove";
+  static const String updateMarketTarget = baseUrl +"/v1/market/target/update";
+
 
 }
