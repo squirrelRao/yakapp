@@ -132,7 +132,7 @@ class FitValueState extends State<FitValuePage>{
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                    "价格预测",
+                    "预测价格",
                     style: TextStyle(fontSize: 14)
                 ),
                 Text(
@@ -141,21 +141,55 @@ class FitValueState extends State<FitValuePage>{
                 )
               ]));
     }else{
+
       return Padding(
           padding: EdgeInsets.only(left: 14, top: 8, right: 14, bottom: 0),
           child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                    "价格预测",
+                    "预测价格",
                     style: TextStyle(fontSize: 14)
                 ),
                 Text(
-                    "",
+                  item["predict_scale"],
                     style: TextStyle(fontSize: 14)
                 )
               ]));
     }
+  }
+
+  Widget buildPredictChangeWidget(item_index){
+
+
+    var item = datas[item_index];
+
+    if(item["is_predict"] == 1 &&  item["predict"].length > 0) {
+
+      var _color = Color(0xff02AC8F);
+      if (item["predict_cur_change"] < 0) {
+        _color = Color(0xffE95555);
+      }
+      return Padding(
+          padding: EdgeInsets.only(left: 14, top: 2, right: 14, bottom: 0),
+          child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                    "偏差",
+                    style: TextStyle(fontSize: 11,color:Colors.grey)
+                ),
+                Text(
+                    Decimal.parse(item["predict_cur_change"].toString()).toString()+"%",
+                    style: TextStyle(fontSize: 11,color:_color)
+                )
+              ]));
+
+    }else{
+      return Container();
+    }
+
+
   }
   //build asset summary
   Widget buildFitValueDetail(index){
@@ -224,20 +258,20 @@ class FitValueState extends State<FitValuePage>{
                 //               style: TextStyle(fontSize: 11,color:Colors.grey)
                 //           ),
                 //         ])),
-                Padding(padding: EdgeInsets.only(left:14,top:8,right:14,bottom:0),
-                    child:Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                              "价格弹性",
-                              style: TextStyle(fontSize: 11,color:Colors.grey)
-                          ),
-
-                          Text(
-                              Decimal.parse(item["price_elastic"].toString()).toString()+"%",
-                              style: TextStyle(fontSize: 11,color:Colors.grey)
-                          )
-                        ])),
+                // Padding(padding: EdgeInsets.only(left:14,top:2,right:14,bottom:0),
+                //     child:Row(
+                //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //         children: [
+                //           Text(
+                //               "价格弹性",
+                //               style: TextStyle(fontSize: 11,color:Colors.grey)
+                //           ),
+                //
+                //           Text(
+                //               Decimal.parse(item["price_elastic"].toString()).toString()+"%",
+                //               style: TextStyle(fontSize: 11,color:Colors.grey)
+                //           )
+                //         ])),
                 // Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
                 //     child:Row(
                 //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -252,7 +286,7 @@ class FitValueState extends State<FitValuePage>{
                 //               style: TextStyle(fontSize: 11,color:Colors.grey)
                 //           )
                 //         ])),
-                Padding(padding: EdgeInsets.only(left:14,top:8,right:14,bottom:0),
+                Padding(padding: EdgeInsets.only(left:14,top:2,right:14,bottom:0),
                     child:Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -290,6 +324,7 @@ class FitValueState extends State<FitValuePage>{
                               Decimal.parse(item["volume_up_change"].toString()).toString()+"%",
                               style: TextStyle(fontSize: 14,color:item["volume_up_color"])
                           ),
+                        ])),
                 Padding(padding: EdgeInsets.only(left:14,top:8,right:14,bottom:0),
                     child:Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -303,8 +338,7 @@ class FitValueState extends State<FitValuePage>{
                               style: TextStyle(fontSize: 14)
                           )
                         ])),
-                        ])),
-                Padding(padding: EdgeInsets.only(left:14,top:8,right:14,bottom:0),
+                Padding(padding: EdgeInsets.only(left:14,top:2,right:14,bottom:0),
                     child:Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -313,17 +347,19 @@ class FitValueState extends State<FitValuePage>{
                               style: TextStyle(fontSize: 11,color:Colors.grey)
                           ),
                           Text(
-                              Decimal.parse(item["cur_price_time"].toString()).toString(),
+                              item["cur_price_time"].toString(),
                               style: TextStyle(fontSize: 11,color:Colors.grey)
                           )
                         ])),
                 buildPredictDisabledWidget(item),
                 buildPredictWidget(index,0),
+                buildPredictChangeWidget(index),
                 buildPredictWidget(index,1),
                 buildPredictWidget(index,2),
                 buildPredictWidget(index,3),
                 buildPredictWidget(index,4),
                 buildPredictWidget(index,5),
+                buildPredictWidget(index,6),
                 SizedBox(height:14)
               ]
           )
