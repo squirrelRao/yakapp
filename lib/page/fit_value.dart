@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:yakapp/page/asset_market_setting.dart';
+import 'package:yakapp/page/asset_predict_detail.dart';
 import 'package:yakapp/util/configs.dart';
 import 'package:yakapp/util/net_util.dart';
 import 'package:overlay_support/overlay_support.dart';
@@ -367,7 +368,11 @@ class FitValueState extends State<FitValuePage>{
       ),
       onTap: (){
         setState(() {
-          Navigator.push(context, MaterialPageRoute(builder: (content){return AssetMarketSettingPage(asset: item["asset"]);}));
+          if(item["is_predict"] != 1){
+            Navigator.push(context, MaterialPageRoute(builder: (content){return AssetMarketSettingPage(asset: item["asset"]);}));
+          }else{
+            Navigator.push(context, MaterialPageRoute(builder: (content){return AssetPredictDetailPage(asset: item["asset"]);}));
+          }
         });
       },
     );
