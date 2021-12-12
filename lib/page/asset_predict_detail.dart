@@ -75,9 +75,15 @@ class AssetPredictDetailState extends State<AssetPredictDetailPage>{
     {
       title: {
         left: 'center',
-        text: '未来1小时价格走势',
+        text: '未来1小时价格预测',
         textStyle: {color: '#999999',fontWeight: 'normal',fontSize: 14},
         top: '6%'
+      },
+      color:['#48ABFD'],
+      tooltip:{
+        show:true,
+        trigger: 'axis',
+        textStyle: {color: '#999999',fontWeight: 'normal',fontSize: 14}
       },
       xAxis: {
         type: 'category',
@@ -95,7 +101,7 @@ class AssetPredictDetailState extends State<AssetPredictDetailPage>{
         axisLabel:{
           margin:3,
           show:true,
-          textStyle: {color: '#999999',fontWeight: 'normal',fontSize: 10},
+          textStyle: {color: '#999999',fontWeight: 'normal',fontSize: 9},
         }
       },
       series: [{
@@ -176,10 +182,15 @@ class AssetPredictDetailState extends State<AssetPredictDetailPage>{
     {
       title: {
         left: 'center',
-        text: '历史预测与实际价格对比',
+        text: '预测价格与实际价格对比',
         subtext:'(最近两小时)',
         textStyle: {color: '#999999',fontWeight: 'normal',fontSize: 14},
         top: '0%'
+      },
+       tooltip:{
+        show:true,
+        trigger: 'axis',
+        textStyle: {color: '#999999',fontWeight: 'normal',fontSize: 14}
       },
       xAxis: {
         type: 'category',
@@ -197,7 +208,7 @@ class AssetPredictDetailState extends State<AssetPredictDetailPage>{
         axisLabel:{
           margin:3,
           show:true,
-          textStyle: {color: '#999999',fontWeight: 'normal',fontSize: 10},
+          textStyle: {color: '#999999',fontWeight: 'normal',fontSize: 9},
         }
       },
        color:['#48ABFD','#02AC8F'],
@@ -307,9 +318,14 @@ class AssetPredictDetailState extends State<AssetPredictDetailPage>{
     {
       title: {
         left: 'center',
-        text: '预测损失值对比',
+        text: 'LOSS对比',
         textStyle: {color: '#999999',fontWeight: 'normal',fontSize: 14},
         top: '5%'
+      },
+       tooltip:{
+        show:true,
+        trigger: 'axis',
+        textStyle: {color: '#999999',fontWeight: 'normal',fontSize: 14}
       },
       xAxis: {
         type: 'category',
@@ -327,7 +343,7 @@ class AssetPredictDetailState extends State<AssetPredictDetailPage>{
         axisLabel:{
           margin:3,
           show:true,
-          textStyle: {color: '#999999',fontWeight: 'normal',fontSize: 10},
+          textStyle: {color: '#999999',fontWeight: 'normal',fontSize: 8.5},
         }
       },
        color:['#48ABFD','#02AC8F'],
@@ -436,13 +452,17 @@ class AssetPredictDetailState extends State<AssetPredictDetailPage>{
               )
           ),
 
-          body:  GestureDetector(
+          body: RefreshIndicator(
 
-    behavior: HitTestBehavior.translucent,
-    onTap:() {
-    FocusScope.of(context).requestFocus(FocusNode());
-    },
-    child: ListView(
+              onRefresh: () async {
+
+
+                data.clear();
+                queryPredictDetail();
+              },
+
+
+            child: ListView(
                       children: <Widget>[
                         showPredictChart(),
                         showLatestHPChart(),
@@ -451,6 +471,7 @@ class AssetPredictDetailState extends State<AssetPredictDetailPage>{
                       ])
 
            ),
+
     );
   }
 
