@@ -37,16 +37,41 @@ class AssetPredictDetailState extends State<AssetPredictDetailPage>{
     if(data == null){
       return Container();
     }
+
+    var history_x = [];
+    var history_y = [];
+
+    var y = [];
+    var inter = 10;
+    var m = inter+1;
+    while( m > 1){
+      var n = data["history_predict"]["x"].length-m;
+      history_x.add(data["history_predict"]["x"][n]);
+      if(n >= data["history_kline"].length){
+        history_y.add(data["history_kline"][data["history_kline"].length-1]);
+      }else {
+        history_y.add(data["history_kline"][n]);
+      }
+      y.add("-");
+      m-=1;
+    }
+    y.remove(y.last);
     var predict = data["predict"];
-    var x = predict["x"];
-    var y = predict["y"];
+
+
+    predict["y"][0] = history_y[history_y.length-1];
+
+    var x = history_x;
+    x.remove(x.last);
+    x.addAll(predict["x"]);
+    y.addAll(predict["y"]);
 
     var line_x = "[";
 
     var i = 0;
     for(var j in x){
-      if(i == 0 || i  % 10 == 0 || i == x.length-1){
-        if(i == 0){
+      if(i >= 0){
+        if(i == inter-1){
           j = "现在";
         }
         var item = "'"+j+"'";
@@ -71,11 +96,23 @@ class AssetPredictDetailState extends State<AssetPredictDetailPage>{
     }
     line_y = line_y +"]";
 
+    var line_history_y = "[";
+    i = 0;
+    for(var j in history_y){
+      var item = "'"+j+"'";
+      line_history_y = line_history_y + item;
+      if(i != history_y.length-1){
+        line_history_y = line_history_y +",";
+      }
+      i += 1;
+    }
+    line_history_y = line_history_y +"]";
+
     var option ='''
     {
       title: {
         left: 'center',
-        text: '未来1小时价格预测',
+        text: '价格走势',
         textStyle: {color: '#999999',fontWeight: 'normal',fontSize: 14},
         top: '6%'
       },
@@ -95,6 +132,14 @@ class AssetPredictDetailState extends State<AssetPredictDetailPage>{
         }
        
       },
+      color:['#48ABFD','#02AC8F'],
+       legend: {
+        data: ['实际价格', '预测价格'],
+        x:'center',
+        y:'bottom',
+        textStyle: {color: '#999999',fontWeight: 'normal',fontSize: 10},
+
+    },
       yAxis: {
         type: 'value',
         scale:true,
@@ -106,12 +151,27 @@ class AssetPredictDetailState extends State<AssetPredictDetailPage>{
       },
       series: [{
         data: $line_y,
+        name:'预测价格',
         type: 'line',
-        smooth: true,
+        smooth: false,
         showSymbol: false,
         lineStyle:{
           normal:{
             color:"#48ABFD",
+            width:1.8,
+            type:'dotted'      
+          } 
+        }
+      },
+      {
+        data: $line_history_y,
+        type: 'line',
+        name:'实际价格',
+        smooth: false,
+        showSymbol: false,
+        lineStyle:{
+          normal:{
+            color:"#02AC8F",
             width:2,
           } 
         }
@@ -142,7 +202,8 @@ class AssetPredictDetailState extends State<AssetPredictDetailPage>{
 
     var i = 0;
     for(var j in x){
-      if(i == 0 || i  % 10 == 0 || i == x.length-1){
+      if(i == 0 || i  % 1 == 0 || i == x.length-1){
+
 
         var item = "'"+j+"'";
         line_x = line_x + item;
@@ -182,11 +243,12 @@ class AssetPredictDetailState extends State<AssetPredictDetailPage>{
     {
       title: {
         left: 'center',
-        text: '预测价格与实际价格对比',
-        subtext:'(最近两小时)',
+        text: '实际与预测对比',
+        subtext:'',
         textStyle: {color: '#999999',fontWeight: 'normal',fontSize: 14},
-        top: '0%'
+        top: '5%'
       },
+       dataZoom:[{type:"inside"}],
        tooltip:{
         show:true,
         trigger: 'axis',
@@ -211,9 +273,9 @@ class AssetPredictDetailState extends State<AssetPredictDetailPage>{
           textStyle: {color: '#999999',fontWeight: 'normal',fontSize: 9},
         }
       },
-       color:['#48ABFD','#02AC8F'],
+      color:['#48ABFD','#02AC8F'],
        legend: {
-        data: ['预测价格', '实际价格'],
+        data: ['实际价格', '预测价格'],
         x:'center',
         y:'bottom',
         textStyle: {color: '#999999',fontWeight: 'normal',fontSize: 10},
@@ -228,7 +290,8 @@ class AssetPredictDetailState extends State<AssetPredictDetailPage>{
         lineStyle:{
           normal:{
             color:"#48ABFD",
-            width:2,
+            width:1.8,
+            type:'dotted'      
           } 
         }
       },
@@ -346,7 +409,7 @@ class AssetPredictDetailState extends State<AssetPredictDetailPage>{
           textStyle: {color: '#999999',fontWeight: 'normal',fontSize: 8.5},
         }
       },
-       color:['#48ABFD','#02AC8F'],
+       color:['#02AC8F','#48ABFD'],
        legend: {
         data: ['loss', 'val_loss'],
         x:'center',
@@ -362,7 +425,7 @@ class AssetPredictDetailState extends State<AssetPredictDetailPage>{
         showSymbol: false,
         lineStyle:{
           normal:{
-            color:"#48ABFD",
+            color:"#02AC8F",
             width:2,
           } 
         }
@@ -375,7 +438,7 @@ class AssetPredictDetailState extends State<AssetPredictDetailPage>{
         showSymbol: false,
         lineStyle:{
           normal:{
-            color:"#02AC8F",
+            color:"#48ABFD",
             width:2,
           } 
         }

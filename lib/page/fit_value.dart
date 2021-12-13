@@ -358,9 +358,9 @@ class FitValueState extends State<FitValuePage>{
                 buildPredictWidget(index,1),
                 buildPredictWidget(index,2),
                 buildPredictWidget(index,3),
-                buildPredictWidget(index,4),
-                buildPredictWidget(index,5),
-                buildPredictWidget(index,6),
+                // buildPredictWidget(index,4),
+                // buildPredictWidget(index,5),
+                // buildPredictWidget(index,6),
                 SizedBox(height:14)
               ]
           )
