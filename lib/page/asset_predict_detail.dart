@@ -44,13 +44,13 @@ class AssetPredictDetailState extends State<AssetPredictDetailPage>{
     var y = [];
     var inter = 10;
     var m = inter+1;
-    while( m > 1){
-      var n = data["history_predict"]["x"].length-m;
-      history_x.add(data["history_predict"]["x"][n]);
-      if(n >= data["history_kline"].length){
-        history_y.add(data["history_kline"][data["history_kline"].length-1]);
-      }else {
+    while( m >= 1){
+      var n = data["history_predict"]["x"][data["history_predict"]["x"].length-m];
+      history_x.add(n);
+      if(data["history_kline"][n] != null){
         history_y.add(data["history_kline"][n]);
+      }else{
+        history_y.add("-");
       }
       y.add("-");
       m-=1;
@@ -200,11 +200,17 @@ class AssetPredictDetailState extends State<AssetPredictDetailPage>{
 
     var line_x = "[";
 
+    var kline_ys = [];
+
     var i = 0;
     for(var j in x){
       if(i == 0 || i  % 1 == 0 || i == x.length-1){
 
-
+        if(data["history_kline"][j] != null){
+          kline_ys.add(data["history_kline"][j]);
+        }else{
+          kline_ys.add("-");
+        }
         var item = "'"+j+"'";
         line_x = line_x + item;
         if(i != x.length-1){
@@ -229,7 +235,7 @@ class AssetPredictDetailState extends State<AssetPredictDetailPage>{
 
     var line_h = "[";
     i = 0;
-    for(var j in data["history_kline"]){
+    for(var j in kline_ys){
       var item = "'"+j+"'";
       line_h = line_h + item;
       if(i != y.length-1){
