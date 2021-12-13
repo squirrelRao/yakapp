@@ -28,7 +28,7 @@ class AssetPredictDetailState extends State<AssetPredictDetailPage>{
   AssetPredictDetailState({required this.asset});
 
   var asset;
-  var title = "价格预测详情";
+  var title = "价格预测";
   var data;
 
 
@@ -460,7 +460,7 @@ class AssetPredictDetailState extends State<AssetPredictDetailPage>{
     SharedPreferences prefs =  await SharedPreferences.getInstance();
     String? userId = prefs.getString("uid");
     (NetClient()).post(Configs.getPredictDetail, {"user_id":userId,"asset":asset}, (data){
-      title = asset+"价格预测详情";
+      title = asset+"价格预测";
       if(data["rc"] == 0 && data["data"] != ""){
         this.data = data["data"];
 
