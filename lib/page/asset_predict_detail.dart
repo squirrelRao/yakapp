@@ -249,7 +249,7 @@ class AssetPredictDetailState extends State<AssetPredictDetailPage>{
     {
       title: {
         left: 'center',
-        text: '实际与预测对比',
+        text: '实际与预测',
         subtext:'',
         textStyle: {color: '#999999',fontWeight: 'normal',fontSize: 14},
         top: '5%'
@@ -387,7 +387,7 @@ class AssetPredictDetailState extends State<AssetPredictDetailPage>{
     {
       title: {
         left: 'center',
-        text: 'LOSS对比',
+        text: 'LOSS',
         textStyle: {color: '#999999',fontWeight: 'normal',fontSize: 14},
         top: '5%'
       },
