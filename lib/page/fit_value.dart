@@ -56,6 +56,18 @@ class FitValueState extends State<FitValuePage>{
             item["fit_value_color"] = Color(0xff02AC8F);
           }
 
+          if(double.parse(item["priceChangePercent"]) < 0){
+            item["priceChangePercentColor"] = Color(0xffE95555);
+          }else{
+            item["priceChangePercentColor"] = Color(0xff02AC8F);
+          }
+
+          if(item["volume_up_change"]  < 100){
+            item["volume_up_color"] = Color(0xffE95555);
+          }else{
+            item["volume_up_color"] = Color(0xff02AC8F);
+
+          }
         }
       }
 
