@@ -197,6 +197,10 @@ class AssetPredictDetailState extends State<AssetPredictDetailPage>{
     var predict = data["history_predict"];
     var x = predict["x"];
     var y = predict["y"];
+    var deviation = data["deviation"];
+    var _avg = deviation["avg"];
+    var _max = deviation["max"];
+    var _min = deviation["min"];
 
     var line_x = "[";
 
@@ -250,9 +254,13 @@ class AssetPredictDetailState extends State<AssetPredictDetailPage>{
       title: {
         left: 'center',
         text: '实际与预测',
-        subtext:'',
+        subtext:'平均偏差: $_avg% 最大偏差：$_max% 最小偏差: $_min%',
         textStyle: {color: '#999999',fontWeight: 'normal',fontSize: 14},
-        top: '5%'
+        subtextStyle:{color: '#999999',fontWeight: 'normal',fontSize: 11},
+        top: '5%',
+      },
+      grid:{
+        top:'25%'
       },
        dataZoom:[{type:"inside"}],
        tooltip:{
