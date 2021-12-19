@@ -59,7 +59,6 @@ dependencies:
   intl: ^0.17.0
   flutter_echarts: ^2.3.0
   tab_indicator_styler: ^2.0.0
-  dropdown_button2: ^1.0.7
 
 dev_dependencies:
   flutter_test:
