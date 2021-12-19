@@ -85,6 +85,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "4.0.0"
+  dropdown_button2:
+    dependency: "direct main"
+    description:
+      name: dropdown_button2
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.7"
   fake_async:
     dependency: transitive
     description:
@@ -406,6 +413,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.1.0"
+  tab_indicator_styler:
+    dependency: "direct main"
+    description:
+      name: tab_indicator_styler
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.0.0"
   term_glyph:
     dependency: transitive
     description:

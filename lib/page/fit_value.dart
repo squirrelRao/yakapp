@@ -10,6 +10,8 @@ import 'package:yakapp/util/configs.dart';
 import 'package:yakapp/util/net_util.dart';
 import 'package:overlay_support/overlay_support.dart';
 
+import 'asset_predict.dart';
+
 
 
 class FitValuePage extends StatefulWidget{
@@ -383,7 +385,7 @@ class FitValueState extends State<FitValuePage>{
           if(item["is_predict"] != 1){
             Navigator.push(context, MaterialPageRoute(builder: (content){return AssetMarketSettingPage(asset: item["asset"]);}));
           }else{
-            Navigator.push(context, MaterialPageRoute(builder: (content){return AssetPredictDetailPage(asset: item["asset"]);}));
+            Navigator.push(context, MaterialPageRoute(builder: (content){return AssetPredictPage(asset: item["asset"], interval:"1m");}));
           }
         });
       },
