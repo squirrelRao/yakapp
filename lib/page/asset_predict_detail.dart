@@ -86,9 +86,9 @@ class AssetPredictDetailState extends State<AssetPredictDetailPage>{
     var i = 0;
     for(var j in x){
       if(i >= 0){
-        if(i == inter-1){
-          j = "现在";
-        }
+        // if(i == inter-1){
+        //   j = "现在";
+        // }
         var item = "'"+j+"'";
         line_x = line_x + item;
         if(i != x.length-1){
