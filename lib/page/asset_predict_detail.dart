@@ -67,7 +67,7 @@ class AssetPredictDetailState extends State<AssetPredictDetailPage>{
     var predict = data["predict"];
 
     if(predict["y"] != null && predict["y"].length > 0) {
-      if (history_y.length - 1 > 0) {
+      if (history_y.length - 1 >= 0) {
         predict["y"][0] = history_y[history_y.length - 1];
       } else {
         predict["y"].add(0);
@@ -75,9 +75,15 @@ class AssetPredictDetailState extends State<AssetPredictDetailPage>{
     }
 
     var x = history_x;
-    if(x.length > 0) {
-      x.remove(x.last);
+    if(x.length > 0 && predict["x"].length > 0) {
+
+      if(x[x.length-1] == predict["x"][0]){
+        predict["x"].removeAt(0);
+
+      }
     }
+
+
     x.addAll(predict["x"]);
     y.addAll(predict["y"]);
 
@@ -86,9 +92,7 @@ class AssetPredictDetailState extends State<AssetPredictDetailPage>{
     var i = 0;
     for(var j in x){
       if(i >= 0){
-        // if(i == inter-1){
-        //   j = "现在";
-        // }
+
         var item = "'"+j+"'";
         line_x = line_x + item;
         if(i != x.length-1){
@@ -108,7 +112,7 @@ class AssetPredictDetailState extends State<AssetPredictDetailPage>{
       }
       var item = "'"+j.toString()+"'";
       line_y = line_y + item;
-      if(i != y.length-1){
+      if(i != y.length){
         line_y = line_y +",";
       }
       i += 1;
@@ -120,7 +124,7 @@ class AssetPredictDetailState extends State<AssetPredictDetailPage>{
     for(var j in history_y){
       var item = "'"+j+"'";
       line_history_y = line_history_y + item;
-      if(i != history_y.length-1){
+      if(i != history_y.length){
         line_history_y = line_history_y +",";
       }
       i += 1;
