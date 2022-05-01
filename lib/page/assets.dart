@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:yakapp/page/notice.dart';
 import 'package:yakapp/util/configs.dart';
 import 'package:yakapp/util/net_util.dart';
 
@@ -494,6 +495,12 @@ class AssetsState extends State<AssetsPage>{
               elevation: 0,
 
               actions: [
+                IconButton(
+                    icon: Icon(Icons.fiber_new_rounded,size: 22,color: Colors.white),
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (content){return NoticePage();}));
+                    }
+                ),
                 IconButton(
                     icon: Icon(Icons.info_outline_rounded,size: 22,color: Colors.white),
                     onPressed: () {

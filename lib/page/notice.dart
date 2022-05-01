@@ -197,6 +197,17 @@ class NoticeState extends State<NoticePage>{
               title: const Text('新币',style:TextStyle(color:Colors.white,fontSize:17)),
               backgroundColor: Color(0xff48ABFD),
               elevation: 0,
+                leading: IconButton(
+                  icon:Image(
+                    width:24,
+                    height:24,
+                    image: AssetImage("images/back.png"),
+                    color: Colors.white,
+                  ),
+                  onPressed: () async {
+                    Navigator.pop(context);
+                  },
+                )
             ),
             body:
             RefreshIndicator(

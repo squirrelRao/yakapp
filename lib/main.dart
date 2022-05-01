@@ -7,6 +7,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:yakapp/page/fit_value.dart';
 import 'package:yakapp/page/notice.dart';
 import 'package:yakapp/page/splash.dart';
+import 'package:yakapp/page/grid.dart';
 import 'package:yakapp/page/transaction.dart';
 import 'page/assets.dart';
 import 'page/user_center.dart';
@@ -67,7 +68,7 @@ class _HomePageState extends State<HomePage> {
 
 
   int currentIndex = 0;
-  List tabPages = [ AssetsPage(),FitValuePage(),TransactionPage(),NoticePage(),UserCenterPage()];
+  List tabPages = [ AssetsPage(),FitValuePage(),GridPage(),TransactionPage(),UserCenterPage()];
 
   void onTabSelected(index){
 
@@ -132,7 +133,7 @@ class _HomePageState extends State<HomePage> {
                   height:22,
                   image: AssetImage("images/transaction_active.png"),
                 ),
-                label:"交易"
+                label:"网格"
             ),
             BottomNavigationBarItem(
                 icon:Image(
@@ -145,7 +146,7 @@ class _HomePageState extends State<HomePage> {
                   height:22,
                   image: AssetImage("images/notice_active.png"),
                 ),
-                label:"新币"
+                label:"交易"
             ),
             BottomNavigationBarItem(
                 icon:Image(
