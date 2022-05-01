@@ -35,9 +35,12 @@ class GridState extends State<GridPage>{
         for(var item in datas){
 
           item["symbol"] = item["symbol"].replaceAll("USDT","");
+          item["side"] = "GRID";
+          item["type_color"] = Color(0xff48ABFD);
         }
       }
-              setState(() {
+
+      setState(() {
 
               });
     }));
@@ -78,13 +81,25 @@ class GridState extends State<GridPage>{
                               item["symbol"],
                               style: TextStyle(fontSize: 15.0,fontWeight: FontWeight.w500)
                           ),
+                          Card(
+                              color: item["type_color"],
+                              elevation: 0,
+                              margin: EdgeInsets.only(top: 0.0,bottom: 0.0,left: 10.0,right: 0.0),
+                              child:
+                              Padding(
+                                  padding: EdgeInsets.fromLTRB(8, 2, 8, 2),
+                                  child:Text(
+                                      item["side"],
+                                      style: TextStyle(fontSize: 12.0,color: Colors.white,fontWeight: FontWeight.w500)
+                                  )
+                              ))
                         ])),
                 Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
                     child:Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                              "低点价格",
+                              "低点",
                               style: TextStyle(fontSize: 13.0)
                           ),
 
@@ -98,7 +113,7 @@ class GridState extends State<GridPage>{
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                              "高点价格",
+                              "高点",
                               style: TextStyle(fontSize: 13.0)
                           ),
 
@@ -131,7 +146,7 @@ class GridState extends State<GridPage>{
                           ),
 
                           Text(
-                              item["update_time_sr"].toString(),
+                              item["update_time_str"].toString(),
                               style: TextStyle(fontSize: 13.0)
                           )
                         ]))
@@ -156,6 +171,14 @@ class GridState extends State<GridPage>{
               title: const Text('网格',style:TextStyle(color: Colors.white,fontSize: 17)),
               backgroundColor:Color(0xff48ABFD),
               elevation: 0  ,
+              actions: [
+                  IconButton(
+                      icon: Icon(Icons.add,size: 22,color: Colors.white),
+                      onPressed: () {
+
+                      }
+                  )
+              ]
             ),
             body:
             RefreshIndicator(

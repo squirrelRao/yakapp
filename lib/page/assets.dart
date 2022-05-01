@@ -493,14 +493,13 @@ class AssetsState extends State<AssetsPage>{
               title: const Text('资产',style:TextStyle(color:Colors.white,fontSize:17)),
               backgroundColor:Color(0xff48ABFD),
               elevation: 0,
-
+              leading: IconButton(
+                  icon: Icon(Icons.fiber_new_rounded,size: 22,color: Colors.white),
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (content){return NoticePage();}));
+                  }
+              ),
               actions: [
-                IconButton(
-                    icon: Icon(Icons.fiber_new_rounded,size: 22,color: Colors.white),
-                    onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (content){return NoticePage();}));
-                    }
-                ),
                 IconButton(
                     icon: Icon(Icons.info_outline_rounded,size: 22,color: Colors.white),
                     onPressed: () {
