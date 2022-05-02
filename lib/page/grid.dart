@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:decimal/decimal.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -19,6 +21,7 @@ class GridState extends State<GridPage>{
 
   List datas = [];
   int listCount = 0;
+  var _timer;
 
   void getUserGrids() async {
 
@@ -50,6 +53,11 @@ class GridState extends State<GridPage>{
   }
 
 
+  void RefreshDataPeriodic(){
+    _timer = Timer.periodic(Duration(seconds: 2), (timestamp)=>getUserGrids());
+    getUserGrids();
+  }
+
   @override
   void initState() {
     super.initState();
@@ -59,7 +67,13 @@ class GridState extends State<GridPage>{
 
   }
 
+  @override
+  void dispose(){
 
+    super.dispose();
+    // _timer.cancel();
+
+  }
 
   //build asset summary
   Widget buildGridDetail(index){
@@ -95,6 +109,34 @@ class GridState extends State<GridPage>{
                                       style: TextStyle(fontSize: 12.0,color: Colors.white,fontWeight: FontWeight.w500)
                                   )
                               ))
+                        ])),
+                Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
+                    child:Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                              "最近价格",
+                              style: TextStyle(fontSize: 13.0)
+                          ),
+
+                          Text(
+                              Decimal.parse(item["price"].toString()).toString(),
+                              style: TextStyle(fontSize: 13.0)
+                          )
+                        ])),
+                Padding(padding: EdgeInsets.only(left:14,top:2,right:14),
+                    child:Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                              "收盘时间",
+                              style: TextStyle(fontSize: 11.0,color:Colors.grey)
+                          ),
+
+                          Text(
+                              item["price_time"],
+                              style: TextStyle(fontSize: 11.0,color:Colors.grey)
+                          )
                         ])),
                 Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
                     child:Row(
