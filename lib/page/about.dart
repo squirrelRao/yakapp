@@ -62,7 +62,7 @@ class AboutState extends State<AboutPage> {
                         children:[
                           Image(image:AssetImage("images/logo.png"),width:70,height:70),
                           SizedBox(height:15),
-                          Text("v1.2.3",style:TextStyle(fontSize:15,color:Color(0xff6F7781))),
+                          Text("v1.2.4",style:TextStyle(fontSize:15,color:Color(0xff6F7781))),
                         ])
                       ]
                   )
@@ -77,7 +77,7 @@ class AboutState extends State<AboutPage> {
                         children:[
                           Column(
                               children:[
-                                Text("©2021 squirrelRao",style:TextStyle(fontSize:14,color:Color(0xff8F97A0))),
+                                Text("©2021 - 2022 squirrelRao",style:TextStyle(fontSize:14,color:Color(0xff8F97A0))),
                               ])
                         ]
                     )
