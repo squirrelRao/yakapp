@@ -31,6 +31,7 @@ class Configs {
   static const String getUserGrids = baseUrl +"/v1/grid/query";
   static const String getUserGridDetail = baseUrl +"/v1/grid/query/detail";
   static const String modifyUserGrid = baseUrl +"/v1/grid/modify";
+  static const String createUserGrid = baseUrl +"/v1/grid/create";
 
 
 

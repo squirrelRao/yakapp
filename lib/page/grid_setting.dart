@@ -24,10 +24,11 @@ class GridSettingState extends State<GridSettingPage>{
   var low_price = 0.0;
   var high_price = 0.0;
   var qty = 0.0;
+  var is_open = true;
 
   GridSettingState({required this.gid});
 
-  var title = "网格设置";
+  var title = "创建网格";
 
   final _formKey = new GlobalKey<FormState>();
 
@@ -179,7 +180,7 @@ class GridSettingState extends State<GridSettingPage>{
                   filled: true,
                   fillColor: Color(0xffF3F5F7),
                 ),
-                onSaved: (value) => low_price = double.parse(value!.trim()),
+                onSaved: (value) => high_price = double.parse(value!.trim()),
                 onChanged: (value){
                 },
                 validator: (value){
@@ -251,6 +252,39 @@ class GridSettingState extends State<GridSettingPage>{
     ]));
   }
 
+  Widget showOpenSwitch(){
+
+    return gid.length == 0  ?
+    Padding(
+        padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
+        child: Column(
+            children:[
+              SizedBox(height: 0),
+            ])
+    ) :
+     Padding(
+        padding: const EdgeInsets.fromLTRB(0.0, 2.0, 0.0, 0.0),
+        child:Column(children:[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children:[
+              Text("开启/关闭:",textAlign: TextAlign.left,style:TextStyle(color:Color(0xff999999),fontSize: 14)),
+              Switch(
+                  value: is_open,
+                  activeColor: Color(0xff48ABFD),
+                  onChanged: (value) {
+                    setState(() {
+                      is_open = value;
+                    });
+                  })
+            ],
+          ),
+        ])
+    );
+
+  }
+
+
   void queryGridInfo() async {
 
     SharedPreferences prefs =  await SharedPreferences.getInstance();
@@ -262,8 +296,17 @@ class GridSettingState extends State<GridSettingPage>{
 
         setState(() {
           this.asset = data["symbol"];
-          this.title = this.asset + "网格设置";
+          if(gid.length == 0){
+            this.title = "创建网格";
+          }else{
+            this.title = this.asset + "网格设置";
+          }
           assetController.text = asset;
+          if(data["status"] == 1){
+            is_open = true;
+          }else{
+            is_open = false;
+          }
           lowPriceController.text = Decimal.parse(data["low_price"].toString()).toString();
           highPriceController.text = Decimal.parse(data["high_price"].toString()).toString();
           qtyController.text = Decimal.parse(data["qty"].toString()).toString();
@@ -287,27 +330,71 @@ class GridSettingState extends State<GridSettingPage>{
 
     SharedPreferences prefs =  await SharedPreferences.getInstance();
     String? userId = prefs.getString("uid");
-    (NetClient()).post(Configs.modifyUserGrid,
-        {"user_id":userId,"asset":asset,"low_price":low_price,"high_price":high_price,"qty":qty},
-            (data){
+    var status = 1;
+    if(is_open == false){
+      status = 0;
+    }
 
-          if(data["rc"] == 0){
+    if(gid.length > 0) {
+      (NetClient()).post(Configs.modifyUserGrid,
+          {
+            "user_id": userId,
+            "symbol": asset,
+            "low_price": low_price,
+            "high_price": high_price,
+            "qty": qty,
+            "status": status
+          },
+              (data) {
+            if (data["rc"] == 0) {
+              showSimpleNotification(
+                  Text("更新成功"),
+                  duration: Duration(seconds: 1, milliseconds: 800),
+                  leading: Icon(Icons.check, color: Colors.white),
+                  background: Color(0xff48ABFD));
+            } else {
+              showSimpleNotification(
+                  Text("更新失败，请重新登录后再设置"),
+                  duration: Duration(seconds: 1, milliseconds: 800),
+                  leading: Icon(Icons.error_outline, color: Colors.white),
+                  background: Color(0xffE95555));
+            }
+          });
+    }else{
 
-            showSimpleNotification(
-                Text("更新成功"),
-                duration: Duration(seconds: 1,milliseconds: 800),
-                leading: Icon(Icons.check,color:Colors.white),
-                background: Color(0xff48ABFD));
+      (NetClient()).post(Configs.createUserGrid,
+          {
+            "user_id": userId,
+            "symbol": asset,
+            "low_price": low_price,
+            "high_price": high_price,
+            "qty": qty,
+            "status": status
+          },
+              (data) {
+            if (data["rc"] == 0) {
+              showSimpleNotification(
+                  Text("创建成功"),
+                  duration: Duration(seconds: 1, milliseconds: 800),
+                  leading: Icon(Icons.check, color: Colors.white),
+                  background: Color(0xff48ABFD));
+            }else if(data["rc"] == -1) {
+              showSimpleNotification(
+                  Text("创建失败，与"+asset+"其它网格发生冲突"),
+                  subtitle: Text("价格请不要设置在:"+data["conflict_range"][0].toString()+"-"+data["conflict_range"][1].toString()+"范围内"),
+                  duration: Duration(seconds: 4, milliseconds: 200),
+                  leading: Icon(Icons.error_outline, color: Colors.white),
+                  background: Color(0xffE95555));
+            } else {
+              showSimpleNotification(
+                  Text("创建失败，请重新登录后再设置"),
+                  duration: Duration(seconds: 1, milliseconds: 800),
+                  leading: Icon(Icons.error_outline, color: Colors.white),
+                  background: Color(0xffE95555));
+            }
+          });
 
-          }else {
-            showSimpleNotification(
-                Text("更新失败，请重新登录后再设置"),
-                duration: Duration(seconds: 1, milliseconds: 800),
-                leading: Icon(Icons.error_outline, color: Colors.white),
-                background: Color(0xffE95555));
-          }
-
-        });
+    }
   }
 
   @override
@@ -362,6 +449,7 @@ class GridSettingState extends State<GridSettingPage>{
                         showLowPrice(),
                         showHighPrice(),
                         showQtyInput(),
+                        showOpenSwitch(),
                         SizedBox(height: 2)
                       ]
                     )
