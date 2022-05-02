@@ -191,7 +191,7 @@ class GridState extends State<GridPage>{
 
                           Text(
                               item["est_ror"].toString()+"%",
-                              style: TextStyle(fontSize: 13.0,color: item["type_color"],fontWeight: FontWeight.w500)
+                              style: TextStyle(fontSize: 13.0,color: item["type_color"])
 
                           )
                         ])),
@@ -220,7 +220,7 @@ class GridState extends State<GridPage>{
 
                           Text(
                               item["value_u"].toString(),
-                              style: TextStyle(fontSize: 13.0,color: item["type_color"],fontWeight: FontWeight.w500)
+                              style: TextStyle(fontSize: 13.0,color: item["type_color"])
 
                           )
                         ])),
