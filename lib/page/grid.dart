@@ -101,7 +101,7 @@ class GridState extends State<GridPage>{
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                              "低点",
+                              "低点价格",
                               style: TextStyle(fontSize: 13.0)
                           ),
 
@@ -115,7 +115,7 @@ class GridState extends State<GridPage>{
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                              "高点",
+                              "高点价格",
                               style: TextStyle(fontSize: 13.0)
                           ),
 
@@ -129,7 +129,7 @@ class GridState extends State<GridPage>{
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                              "数量",
+                              "投入数量",
                               style: TextStyle(fontSize: 13.0)
                           ),
 
@@ -138,20 +138,49 @@ class GridState extends State<GridPage>{
                               style: TextStyle(fontSize: 13.0)
                           )
                         ])),
-                Padding(padding: EdgeInsets.only(left:14,top:8,right:14,bottom:14),
+                Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
                     child:Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                              "时间",
+                              "预计收益",
                               style: TextStyle(fontSize: 13.0)
                           ),
 
                           Text(
-                              item["update_time_str"].toString(),
+                              item["est_ror"].toString()+"%",
                               style: TextStyle(fontSize: 13.0)
                           )
-                        ]))
+                        ])),
+                Padding(padding: EdgeInsets.only(left:14,top:2,right:14,bottom:14),
+                    child:Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                              "持有增量",
+                              style: TextStyle(fontSize: 11.0,color:Colors.grey)
+                          ),
+
+                          Text(
+                              item["est_value"].toString(),
+                              style: TextStyle(fontSize: 11.0,color:Colors.grey)
+                          )
+                        ])),
+
+                // Padding(padding: EdgeInsets.only(left:14,top:8,right:14,bottom:14),
+                //     child:Row(
+                //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //         children: [
+                //           Text(
+                //               "时间",
+                //               style: TextStyle(fontSize: 13.0)
+                //           ),
+                //
+                //           Text(
+                //               item["update_time_str"].toString(),
+                //               style: TextStyle(fontSize: 13.0)
+                //           )
+                //         ]))
               ]
           )
 

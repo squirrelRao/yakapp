@@ -25,6 +25,8 @@ class GridSettingState extends State<GridSettingPage>{
   var high_price = 0.0;
   var qty = 0.0;
   var is_open = true;
+  var est_ror = "";
+  var est_value = "";
 
   GridSettingState({required this.gid});
 
@@ -160,7 +162,7 @@ class GridSettingState extends State<GridSettingPage>{
               Row(
 
                 children: [
-                  Text("高点价格",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
+                  Text("高点价格 「 预计收益: "+this.est_ror+"% 」",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
                 ],
               ),
               SizedBox(height: 5),
@@ -202,6 +204,9 @@ class GridSettingState extends State<GridSettingPage>{
                   if(double.tryParse(value)! <= low_price){
                     return "高点价格须高于低点价格";
                   }
+
+                  this.est_ror = ((double.tryParse(value)! - low_price)/low_price * 100).toString();
+
                 },
               ),
             ]));
@@ -216,7 +221,7 @@ class GridSettingState extends State<GridSettingPage>{
       Row(
 
           children: [
-            Text("条件达成买入卖出量",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
+            Text("投入数量 「 预计增量: "+this.est_value+" 」",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
           ]),
        SizedBox(height: 5),
       new TextFormField(
@@ -258,6 +263,7 @@ class GridSettingState extends State<GridSettingPage>{
        if(double.parse(value) < 0){
             return "须大于0";
           }
+
         },
       ),
     ]));
@@ -321,6 +327,8 @@ class GridSettingState extends State<GridSettingPage>{
           lowPriceController.text = Decimal.parse(data["low_price"].toString()).toString();
           highPriceController.text = Decimal.parse(data["high_price"].toString()).toString();
           qtyController.text = Decimal.parse(data["qty"].toString()).toString();
+          this.est_ror = data["est_ror"].toString();
+          this.est_value = data["est_value"].toString();
 
         });
       }else{
@@ -466,10 +474,39 @@ class GridSettingState extends State<GridSettingPage>{
                     )
                   )
             ),
-
               Container(
                 height: 60,
                 padding: const EdgeInsets.fromLTRB(32, 22, 32, 0),
+                child: TextButton(
+                  child: Text('预计收益',style:TextStyle(color:Color(0xff48ABFD),fontWeight: FontWeight.w500)),
+                  style: ButtonStyle(
+                      textStyle:MaterialStateProperty.all(TextStyle(color:Color(0xff48ABFD),fontWeight: FontWeight.w400)),
+                      backgroundColor: MaterialStateProperty.all(Color(0xffF3F5F7)),
+                      foregroundColor: MaterialStateProperty.all(Color(0xff48ABFD)),
+                      shape: MaterialStateProperty.all(
+                          RoundedRectangleBorder(
+                              borderRadius:
+                              BorderRadius.circular(
+                                  40)))
+                  ),
+                  onPressed: () {
+                    FocusScope.of(context).requestFocus(FocusNode());
+
+                    if(!_formKey.currentState!.validate()){
+
+                      return;
+                    }
+
+                    _formKey.currentState!.save();
+                    this.est_ror = ((high_price - low_price)/low_price * 100).toStringAsFixed(2);
+                    this.est_value = (this.qty  * (high_price - low_price)/low_price).toStringAsFixed(2);
+
+                  },
+                ),
+              ),
+              Container(
+                height: 60,
+                padding: const EdgeInsets.fromLTRB(32, 18, 32, 0),
                 child: TextButton(
                   child: Text('提交设置',style:TextStyle(color:Colors.white,fontWeight: FontWeight.w500)),
                   style: ButtonStyle(
