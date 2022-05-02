@@ -40,7 +40,6 @@ class GridState extends State<GridPage>{
         for(var item in datas){
 
           item["symbol"] = item["symbol"].replaceAll("USDT","");
-          item["side"] = "运行中";
           item["type_color"] = Color(0xff48ABFD);
         }
       }
@@ -62,7 +61,7 @@ class GridState extends State<GridPage>{
   void initState() {
     super.initState();
 
-    WidgetsBinding.instance!.addPostFrameCallback( (timestamp)=> getUserGrids());
+    WidgetsBinding.instance!.addPostFrameCallback( (timestamp)=> RefreshDataPeriodic());
 
 
   }
@@ -71,7 +70,7 @@ class GridState extends State<GridPage>{
   void dispose(){
 
     super.dispose();
-    // _timer.cancel();
+    _timer.cancel();
 
   }
 
@@ -105,7 +104,7 @@ class GridState extends State<GridPage>{
                               Padding(
                                   padding: EdgeInsets.fromLTRB(8, 2, 8, 2),
                                   child:Text(
-                                      item["side"],
+                                      item["position"],
                                       style: TextStyle(fontSize: 12.0,color: Colors.white,fontWeight: FontWeight.w500)
                                   )
                               ))
@@ -115,7 +114,7 @@ class GridState extends State<GridPage>{
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                              "最近价格",
+                              "当前价格",
                               style: TextStyle(fontSize: 13.0)
                           ),
 
@@ -124,20 +123,20 @@ class GridState extends State<GridPage>{
                               style: TextStyle(fontSize: 13.0)
                           )
                         ])),
-                Padding(padding: EdgeInsets.only(left:14,top:2,right:14),
-                    child:Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                              "收盘时间",
-                              style: TextStyle(fontSize: 11.0,color:Colors.grey)
-                          ),
-
-                          Text(
-                              item["price_time"],
-                              style: TextStyle(fontSize: 11.0,color:Colors.grey)
-                          )
-                        ])),
+                // Padding(padding: EdgeInsets.only(left:14,top:2,right:14),
+                //     child:Row(
+                //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //         children: [
+                //           Text(
+                //               "价格时间",
+                //               style: TextStyle(fontSize: 11.0,color:Colors.grey)
+                //           ),
+                //
+                //           Text(
+                //               item["price_time"],
+                //               style: TextStyle(fontSize: 11.0,color:Colors.grey)
+                //           )
+                //         ])),
                 Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
                     child:Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
