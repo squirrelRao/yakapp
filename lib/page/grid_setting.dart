@@ -499,7 +499,7 @@ class GridSettingState extends State<GridSettingPage>{
 
                     _formKey.currentState!.save();
                     this.est_ror = ((high_price - low_price)/low_price * 100).toStringAsFixed(2);
-                    this.est_value = (this.qty  * (high_price - low_price)/low_price).toStringAsFixed(2);
+                    this.est_value = (this.qty  * (high_price - low_price)/low_price).toStringAsFixed(6);
 
                   },
                 ),

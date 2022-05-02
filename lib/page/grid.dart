@@ -153,18 +153,33 @@ class GridState extends State<GridPage>{
 
                           )
                         ])),
-                Padding(padding: EdgeInsets.only(left:14,top:2,right:14,bottom:14),
+                Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
                     child:Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                              "持有增量",
-                              style: TextStyle(fontSize: 11.0,color:Colors.grey)
+                              "收益增量",
+                              style: TextStyle(fontSize: 13.0)
                           ),
 
                           Text(
                               item["est_value"].toString(),
-                              style: TextStyle(fontSize: 11.0,color:Colors.grey)
+                              style: TextStyle(fontSize: 13)
+                          )
+                        ])),
+                Padding(padding: EdgeInsets.only(left:14,top:8,right:14,bottom:14),
+                    child:Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                              "收益估值",
+                              style: TextStyle(fontSize: 13.0)
+                          ),
+
+                          Text(
+                              item["value_u"].toString(),
+                              style: TextStyle(fontSize: 13.0,color: item["type_color"],fontWeight: FontWeight.w500)
+
                           )
                         ])),
 
