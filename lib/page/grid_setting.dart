@@ -38,7 +38,7 @@ class GridSettingState extends State<GridSettingPage>{
 
 
   Widget showAssetInput() {
-    return asset.length > 0  ?
+    return gid.length > 0  ?
     Padding(
       padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
         child: Column(
