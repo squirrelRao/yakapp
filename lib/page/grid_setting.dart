@@ -130,6 +130,9 @@ class GridSettingState extends State<GridSettingPage>{
         ),
         onSaved: (value) => low_price = double.parse(value!.trim()),
         onChanged: (value){
+          if(double.tryParse(value) != null){
+            low_price = double.parse(value!.trim());
+          }
         },
         validator: (value){
           if(value!.trim()==""){
@@ -138,6 +141,10 @@ class GridSettingState extends State<GridSettingPage>{
 
           if(double.tryParse(value) == null){
             return "格式错误";
+          }
+
+          if(double.tryParse(value)! <= 0){
+            return "低点价格须大于0";
           }
         },
       ),
@@ -190,6 +197,10 @@ class GridSettingState extends State<GridSettingPage>{
 
                   if(double.tryParse(value) == null){
                     return "格式错误";
+                  }
+
+                  if(double.tryParse(value)! <= low_price){
+                    return "高点价格须高于低点价格";
                   }
                 },
               ),
@@ -422,7 +433,7 @@ class GridSettingState extends State<GridSettingPage>{
                   image: AssetImage("images/back.png"),
                 ),
                 onPressed: () async {
-                    Navigator.pop(context);
+                    Navigator.of(context).pop("refresh");
                 },
               )
           ),

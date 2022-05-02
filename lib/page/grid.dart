@@ -158,7 +158,16 @@ class GridState extends State<GridPage>{
       ),
       onTap: (){
         setState(() {
-           Navigator.push(context, MaterialPageRoute(builder: (content){return GridSettingPage(gid : item["_id"]);}));
+          Navigator.push(context, MaterialPageRoute(builder: (content){return GridSettingPage(gid : item["_id"]);}))
+          .then((data) =>
+            {
+              if(data == "refresh"){
+                getUserGrids()
+              }
+
+            }
+          )
+          ;
 
         });
       },
