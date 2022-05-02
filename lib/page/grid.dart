@@ -37,7 +37,7 @@ class GridState extends State<GridPage>{
         for(var item in datas){
 
           item["symbol"] = item["symbol"].replaceAll("USDT","");
-          item["side"] = "GRID";
+          item["side"] = "运行中";
           item["type_color"] = Color(0xff48ABFD);
         }
       }
@@ -149,7 +149,8 @@ class GridState extends State<GridPage>{
 
                           Text(
                               item["est_ror"].toString()+"%",
-                              style: TextStyle(fontSize: 13.0)
+                              style: TextStyle(fontSize: 13.0,color: item["type_color"],fontWeight: FontWeight.w500)
+
                           )
                         ])),
                 Padding(padding: EdgeInsets.only(left:14,top:2,right:14,bottom:14),

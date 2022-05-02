@@ -207,7 +207,19 @@ class NoticeState extends State<NoticePage>{
                   onPressed: () async {
                     Navigator.pop(context);
                   },
-                )
+                ),
+                actions: [
+                  IconButton(
+                      icon: Icon(Icons.wifi_tethering_rounded,size: 22,color: Colors.white),
+                      onPressed: () {
+                        showSimpleNotification(
+                            Text("正在为您实时监测新币上市信息 ..."),
+                            duration: Duration(seconds: 3,milliseconds: 600),
+                            leading: Icon(Icons.wifi_tethering_rounded,color:Colors.white),
+                            background: Color(0xff48ABFD));
+                      }
+                  )
+                ]
             ),
             body:
             RefreshIndicator(

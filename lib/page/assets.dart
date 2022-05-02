@@ -493,24 +493,26 @@ class AssetsState extends State<AssetsPage>{
               title: const Text('资产',style:TextStyle(color:Colors.white,fontSize:17)),
               backgroundColor:Color(0xff48ABFD),
               elevation: 0,
-              leading: IconButton(
-                  icon: Icon(Icons.fiber_new_rounded,size: 22,color: Colors.white),
-                  onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (content){return NoticePage();}));
-                  }
+              leading: (
+                  IconButton(
+                      icon: Icon(Icons.info_outline_rounded,size: 22,color: Colors.white),
+                      onPressed: () {
+                        showSimpleNotification(
+                            Text("环比时刻: "+last_snapshot_time_str),
+                            subtitle: Text("实时汇率: 1USDT = "+exchange.toString()+"CNY"),
+                            duration: Duration(seconds: 3,milliseconds: 500),
+                            leading: Icon(Icons.info_outline_rounded,color:Colors.white),
+                            background: Color(0xff48ABFD));
+                      }
+                  )
               ),
               actions: [
-                IconButton(
-                    icon: Icon(Icons.info_outline_rounded,size: 22,color: Colors.white),
-                    onPressed: () {
-                      showSimpleNotification(
-                          Text("环比时刻: "+last_snapshot_time_str),
-                          subtitle: Text("实时汇率: 1USDT = "+exchange.toString()+"CNY"),
-                          duration: Duration(seconds: 3,milliseconds: 500),
-                          leading: Icon(Icons.info_outline_rounded,color:Colors.white),
-                          background: Color(0xff48ABFD));
-                    }
-                )
+                  IconButton(
+                  icon: Icon(Icons.fiber_new_rounded,size: 22,color: Colors.white),
+                  onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (content){return NoticePage();}));
+                  })
+
               ],
             ),
             body:
