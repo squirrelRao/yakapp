@@ -5,6 +5,8 @@ import 'package:yakapp/util/configs.dart';
 import 'package:yakapp/util/net_util.dart';
 import 'package:overlay_support/overlay_support.dart';
 
+import 'grid_setting.dart';
+
 
 class GridPage extends StatefulWidget{
 
@@ -156,7 +158,8 @@ class GridState extends State<GridPage>{
       ),
       onTap: (){
         setState(() {
-          // Navigator.push(context, MaterialPageRoute(builder: (content){return AssetSettingPage(asset : item["asset"]);}));
+           Navigator.push(context, MaterialPageRoute(builder: (content){return GridSettingPage(gid : item["_id"]);}));
+
         });
       },
     );
@@ -175,6 +178,7 @@ class GridState extends State<GridPage>{
                   IconButton(
                       icon: Icon(Icons.add,size: 22,color: Colors.white),
                       onPressed: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (content){return GridSettingPage(gid : "");}));
 
                       }
                   )

@@ -148,7 +148,7 @@ class CommonSettingState extends State<CommonSettingPage>{
         Row(
           children:[
             SizedBox(width: 0),
-            Text("目标涨幅达成时:",textAlign: TextAlign.left,style:TextStyle(color:Color(0xff999999),fontSize: 14))
+            Text("目标涨幅/网格高点达成时:",textAlign: TextAlign.left,style:TextStyle(color:Color(0xff999999),fontSize: 14))
           ],
         ),
       Card(
@@ -230,7 +230,7 @@ class CommonSettingState extends State<CommonSettingPage>{
         Row(
           children:[
             SizedBox(width: 0),
-            Text("加仓涨幅达成时:",textAlign: TextAlign.left,style:TextStyle(color:Color(0xff999999),fontSize: 14))
+            Text("加仓涨幅/网格低点达成时:",textAlign: TextAlign.left,style:TextStyle(color:Color(0xff999999),fontSize: 14))
           ],
         ),
     Card(

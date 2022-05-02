@@ -29,6 +29,8 @@ class Configs {
   static const String updateMarketTarget = baseUrl +"/v1/market/target/update";
   static const String getPredictDetail = baseUrl +"/v1/market/predict/detail";
   static const String getUserGrids = baseUrl +"/v1/grid/query";
+  static const String getUserGridDetail = baseUrl +"/v1/grid/query/detail";
+  static const String modifyUserGrid = baseUrl +"/v1/grid/modify";
 
 
 
