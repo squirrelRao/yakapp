@@ -345,7 +345,7 @@ class GridSettingState extends State<GridSettingPage>{
 
   }
 
-  void submitGrid(asset,low_price,high_price,qty) async {
+  void submitGrid(asset,low_price,high_price,qty,gid) async {
 
     SharedPreferences prefs =  await SharedPreferences.getInstance();
     String? userId = prefs.getString("uid");
@@ -362,7 +362,8 @@ class GridSettingState extends State<GridSettingPage>{
             "low_price": low_price,
             "high_price": high_price,
             "qty": qty,
-            "status": status
+            "status": status,
+            "gid":gid
           },
               (data) {
             if (data["rc"] == 0) {
@@ -528,7 +529,10 @@ class GridSettingState extends State<GridSettingPage>{
                     }
 
                     _formKey.currentState!.save();
-                    submitGrid(asset,low_price,high_price,qty);
+                    this.est_ror = ((high_price - low_price)/low_price * 100).toStringAsFixed(2);
+                    this.est_value = (this.qty  * (high_price - low_price)/low_price).toStringAsFixed(6);
+
+                    submitGrid(asset,low_price,high_price,qty,gid);
                   },
                 ),
               )
