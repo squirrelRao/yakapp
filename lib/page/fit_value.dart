@@ -58,6 +58,8 @@ class FitValueState extends State<FitValuePage>{
             item["fit_value_color"] = Color(0xff02AC8F);
           }
 
+          item["type_color"] = Color(0xff48ABFD);
+
           if(double.parse(item["priceChangePercent"]) < 0){
             item["priceChangePercent_color"] = Color(0xffE95555);
           }else{
@@ -114,6 +116,7 @@ class FitValueState extends State<FitValuePage>{
       if (predict["price_change"] < 0) {
         _color = Color(0xffE95555);
       }
+      item["type_color"] = Color(0xff48ABFD);
 
       var tip = predict["predict_hour_time"];
 
@@ -350,7 +353,7 @@ class FitValueState extends State<FitValuePage>{
                           ),
                           Text(
                               Decimal.parse(item["cur_price"].toString()).toString(),
-                              style: TextStyle(fontSize: 14)
+                              style: TextStyle(fontSize: 14,color:item["type_color"])
                           )
                         ])),
                 Padding(padding: EdgeInsets.only(left:14,top:2,right:14,bottom:0),

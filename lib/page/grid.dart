@@ -41,6 +41,12 @@ class GridState extends State<GridPage>{
 
           item["symbol"] = item["symbol"].replaceAll("USDT","");
           item["type_color"] = Color(0xff48ABFD);
+
+          item["value_u_color"] = Color(0xff02AC8F);
+          if(item["value_u"] < 0){
+            item["value_u_color"] = Color(0xffE95555);
+          }
+
         }
       }
 
@@ -184,7 +190,7 @@ class GridState extends State<GridPage>{
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                              "预计收益",
+                              "达成收益",
                               style: TextStyle(fontSize: 13.0)
                           ),
 
@@ -199,7 +205,7 @@ class GridState extends State<GridPage>{
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                              "收益增量",
+                              "达成增量",
                               style: TextStyle(fontSize: 13.0)
                           ),
 
@@ -213,13 +219,13 @@ class GridState extends State<GridPage>{
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                              "收益估值",
+                              "当前收益",
                               style: TextStyle(fontSize: 13.0)
                           ),
 
                           Text(
                               item["value_u"].toString(),
-                              style: TextStyle(fontSize: 13.0,color: item["type_color"])
+                              style: TextStyle(fontSize: 13.0,color: item["value_u_color"])
 
                           )
                         ])),

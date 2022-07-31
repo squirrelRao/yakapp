@@ -62,7 +62,7 @@ class AboutState extends State<AboutPage> {
                         children:[
                           Image(image:AssetImage("images/logo.png"),width:70,height:70),
                           SizedBox(height:15),
-                          Text("v1.3.1",style:TextStyle(fontSize:15,color:Color(0xff6F7781))),
+                          Text("v1.3.2",style:TextStyle(fontSize:15,color:Color(0xff6F7781))),
                         ])
                       ]
                   )

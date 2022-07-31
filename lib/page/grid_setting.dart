@@ -221,7 +221,7 @@ class GridSettingState extends State<GridSettingPage>{
       Row(
 
           children: [
-            Text("投入数量 「 收益增量: "+this.est_value+" 」",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
+            Text("投入数量 「 达成增量: "+this.est_value+" 」",style:TextStyle(fontSize: 14,color:Color(0xff999999)))
           ]),
        SizedBox(height: 5),
       new TextFormField(
