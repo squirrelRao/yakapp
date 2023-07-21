@@ -120,6 +120,20 @@ class GridState extends State<GridPage>{
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
+                              "低点价格",
+                              style: TextStyle(fontSize: 13.0)
+                          ),
+
+                          Text(
+                              Decimal.parse(item["low_price"].toString()).toString(),
+                              style: TextStyle(fontSize: 13.0)
+                          )
+                        ])),
+                Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
+                    child:Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
                               "当前价格",
                               style: TextStyle(fontSize: 13.0)
                           ),
@@ -143,20 +157,7 @@ class GridState extends State<GridPage>{
                 //               style: TextStyle(fontSize: 11.0,color:Colors.grey)
                 //           )
                 //         ])),
-                Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
-                    child:Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                              "低点价格",
-                              style: TextStyle(fontSize: 13.0)
-                          ),
 
-                          Text(
-                              Decimal.parse(item["low_price"].toString()).toString(),
-                              style: TextStyle(fontSize: 13.0)
-                          )
-                        ])),
                 Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
                     child:Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -185,21 +186,21 @@ class GridState extends State<GridPage>{
                               style: TextStyle(fontSize: 13.0)
                           )
                         ])),
-                Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
-                    child:Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                              "达成收益",
-                              style: TextStyle(fontSize: 13.0)
-                          ),
-
-                          Text(
-                              item["est_ror"].toString()+"%",
-                              style: TextStyle(fontSize: 13.0,color: item["type_color"])
-
-                          )
-                        ])),
+                // Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
+                //     child:Row(
+                //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //         children: [
+                //           Text(
+                //               "达成收益",
+                //               style: TextStyle(fontSize: 13.0)
+                //           ),
+                //
+                //           Text(
+                //               item["est_ror"].toString()+"%",
+                //               style: TextStyle(fontSize: 13.0,color: item["type_color"])
+                //
+                //           )
+                //         ])),
                 Padding(padding: EdgeInsets.only(left:14,top:8,right:14),
                     child:Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -219,7 +220,7 @@ class GridState extends State<GridPage>{
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                              "当前收益",
+                              "当前收益(USDT)",
                               style: TextStyle(fontSize: 13.0)
                           ),
 

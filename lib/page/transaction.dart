@@ -165,7 +165,7 @@ class TransactionState extends State<TransactionPage>{
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                              "估值",
+                              "估值(USDT)",
                               style: TextStyle(fontSize: 13.0)
                           ),
 

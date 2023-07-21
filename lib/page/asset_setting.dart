@@ -497,10 +497,10 @@ class AssetSettingState extends State<AssetSettingPage>{
 
           this.buy_price = lowest_price;
 
-          this.latest_buy_value = data["latest_buy_value"];
+          this.latest_buy_value = data["latest_buy_value"]*1.0;
           order_count = data["latest_buy_count"];
 
-          this.latest_buy_qty = data["latest_buy_qty"];
+          this.latest_buy_qty = data["latest_buy_qty"]*1.0;
 
           this._return = this.sell_usdt - this.buy_usdt;
           this.order_return = this.sell_usdt - latest_buy_value;
