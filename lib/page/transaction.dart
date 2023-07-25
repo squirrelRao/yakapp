@@ -17,6 +17,9 @@ class TransactionState extends State<TransactionPage>{
 
   List datas = [];
   int listCount = 0;
+  double buy = 0;
+  double sell = 0;
+  double ror = 0;
 
   void getUserTransactions() async {
 
@@ -33,6 +36,10 @@ class TransactionState extends State<TransactionPage>{
       if(data["rc"] == 0) {
         listCount = data["data"].length;
         datas = data["data"];
+
+        ror = data["ror"];
+        buy = data["buy"];
+        sell = data["sell"];
 
         for(var item in datas){
 
@@ -222,6 +229,19 @@ class TransactionState extends State<TransactionPage>{
               title: const Text('交易',style:TextStyle(color: Colors.white,fontSize: 17)),
               backgroundColor:Color(0xff48ABFD),
               elevation: 0  ,
+              actions: [
+                IconButton(
+                    icon: Icon(Icons.insert_chart_outlined_rounded,size: 22,color: Colors.white),
+                    onPressed: () {
+                      showSimpleNotification(
+                          Text("交易对收益: "+ror.toString() + " USDT"),
+                          subtitle:Text("买入: "+buy.toString()+""+"\n卖出: "+sell.toString()),
+                          duration: Duration(seconds: 6,milliseconds: 500),
+                          leading: Icon(Icons.insert_chart_outlined_rounded,color:Colors.white),
+                          background: Color(0xff48ABFD));
+                    }
+                )
+              ],
             ),
             body:
             RefreshIndicator(
