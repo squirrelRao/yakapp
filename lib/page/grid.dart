@@ -140,7 +140,7 @@ class GridState extends State<GridPage>{
 
                           Text(
                               Decimal.parse(item["price"].toString()).toString(),
-                              style: TextStyle(fontSize: 13.0)
+                              style: TextStyle(fontSize: 13.0,color: item["value_u_color"])
                           )
                         ])),
                 // Padding(padding: EdgeInsets.only(left:14,top:2,right:14),
